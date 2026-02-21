@@ -169,23 +169,37 @@ export default function Blog() {
         "name": "SageStone Inc",
         "url": "https://sagestoneinc.com",
       },
-      "blogPost": blogPosts.map((post) => ({
-        "@type": "BlogPosting",
-        "headline": post.title,
-        "description": post.excerpt,
-        "datePublished": post.date,
-        "image": post.image,
-        "author": {
-          "@type": "Organization",
-          "name": "SageStone Inc",
-        },
-      })),
+      "blogPost": blogPosts.map((post) => {
+        const parsedDate = new Date(post.date);
+        const isoDate =
+          isNaN(parsedDate.getTime()) ? undefined : parsedDate.toISOString().split("T")[0];
+
+        return {
+          "@type": "BlogPosting",
+          "headline": post.title,
+          "description": post.excerpt,
+          // Use ISO 8601 date for structured data; keep human-readable date for UI.
+          ...(isoDate ? { "datePublished": isoDate } : {}),
+          "image": post.image,
+          "author": {
+            "@type": "Organization",
+            "name": "SageStone Inc",
+          },
+        };
+      }),
     };
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.text = JSON.stringify(blogJsonLd);
-    script.id = "blog-jsonld";
-    document.head.appendChild(script);
+    const existing = document.getElementById("blog-jsonld");
+    if (existing && existing.tagName === "SCRIPT") {
+      const script = existing as HTMLScriptElement;
+      script.type = "application/ld+json";
+      script.text = JSON.stringify(blogJsonLd);
+    } else {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.text = JSON.stringify(blogJsonLd);
+      script.id = "blog-jsonld";
+      document.head.appendChild(script);
+    }
     return () => {
       const el = document.getElementById("blog-jsonld");
       if (el) el.remove();

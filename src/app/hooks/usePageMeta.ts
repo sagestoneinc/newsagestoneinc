@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router";
 
 interface PageMetaOptions {
   title: string;
@@ -7,8 +8,11 @@ interface PageMetaOptions {
 }
 
 const SITE_NAME = "SageStone Inc";
+const SITE_BASE_URL = "https://sagestoneinc.com";
 
 export function usePageMeta({ title, description, keywords }: PageMetaOptions) {
+  const location = useLocation();
+
   useEffect(() => {
     document.title = `${title} | ${SITE_NAME}`;
 
@@ -18,8 +22,20 @@ export function usePageMeta({ title, description, keywords }: PageMetaOptions) {
     }
 
     let metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords && keywords) {
-      metaKeywords.setAttribute("content", keywords);
+    if (metaKeywords) {
+      metaKeywords.setAttribute("content", keywords || "");
+    }
+
+    const canonicalUrl = `${SITE_BASE_URL}${location.pathname}`;
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute("href", canonicalUrl);
+    }
+
+    let ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) {
+      ogUrl.setAttribute("content", canonicalUrl);
     }
 
     let ogTitle = document.querySelector('meta[property="og:title"]');
@@ -41,5 +57,5 @@ export function usePageMeta({ title, description, keywords }: PageMetaOptions) {
     if (twitterDescription) {
       twitterDescription.setAttribute("content", description);
     }
-  }, [title, description, keywords]);
+  }, [title, description, keywords, location.pathname]);
 }

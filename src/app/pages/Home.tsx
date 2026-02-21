@@ -164,11 +164,18 @@ export default function Home() {
       "email": "hello@sagestoneinc.com",
       "telephone": "+1-214-945-2234",
     };
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.text = JSON.stringify(orgJsonLd);
-    script.id = "org-jsonld";
-    document.head.appendChild(script);
+    const existing = document.getElementById("org-jsonld");
+    if (existing && existing.tagName === "SCRIPT") {
+      const script = existing as HTMLScriptElement;
+      script.type = "application/ld+json";
+      script.text = JSON.stringify(orgJsonLd);
+    } else {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.text = JSON.stringify(orgJsonLd);
+      script.id = "org-jsonld";
+      document.head.appendChild(script);
+    }
     return () => {
       const el = document.getElementById("org-jsonld");
       if (el) el.remove();
