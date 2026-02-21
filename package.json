@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "deploy": "wrangler pages deploy dist",
     "dev": "vite"
   },
   "dependencies": {
