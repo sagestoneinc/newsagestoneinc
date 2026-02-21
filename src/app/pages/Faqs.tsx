@@ -143,6 +143,7 @@ export default function Faqs() {
   usePageMeta({
     title: "FAQs",
     description: "Find answers to frequently asked questions about SageStone Inc's virtual assistant services, pricing, onboarding process, and how we support your business.",
+    keywords: "virtual assistant FAQ, SageStone pricing, VA onboarding, virtual assistant questions, remote support FAQ",
   });
 
   const toggleItem = (key: string) => {

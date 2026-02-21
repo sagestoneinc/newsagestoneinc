@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { ArrowRight, Clock, Tag } from "lucide-react";
@@ -148,6 +148,7 @@ export default function Blog() {
   usePageMeta({
     title: "Blog",
     description: "Read the latest insights from SageStone Inc on virtual assistance, remote work, operations management, real estate, marketing, and business productivity tips.",
+    keywords: "virtual assistant blog, remote work tips, business productivity, operations management, real estate VA, marketing strategies, SageStone blog",
   });
 
   const filteredPosts = activeCategory === "All"
@@ -155,6 +156,41 @@ export default function Blog() {
     : blogPosts.filter((p) => p.category === activeCategory);
 
   const featuredPosts = blogPosts.filter((p) => p.featured);
+
+  useEffect(() => {
+    const blogJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "SageStone Inc Blog",
+      "description": "Insights and resources on virtual assistance, remote work, and business productivity.",
+      "url": "https://sagestoneinc.com/blog",
+      "publisher": {
+        "@type": "Organization",
+        "name": "SageStone Inc",
+        "url": "https://sagestoneinc.com",
+      },
+      "blogPost": blogPosts.map((post) => ({
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "description": post.excerpt,
+        "datePublished": post.date,
+        "image": post.image,
+        "author": {
+          "@type": "Organization",
+          "name": "SageStone Inc",
+        },
+      })),
+    };
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(blogJsonLd);
+    script.id = "blog-jsonld";
+    document.head.appendChild(script);
+    return () => {
+      const el = document.getElementById("blog-jsonld");
+      if (el) el.remove();
+    };
+  }, []);
 
   return (
     <>

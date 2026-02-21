@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { useEffect } from "react";
 import { usePageMeta } from "../hooks/usePageMeta";
 import {
   ArrowRight,
@@ -150,7 +151,30 @@ export default function Home() {
   usePageMeta({
     title: "Virtual Assistant Services for Growing Businesses",
     description: "SageStone Inc provides expert virtual assistant services including admin support, bookkeeping, social media marketing, lead generation, and real estate VA services.",
+    keywords: "virtual assistant services, VA services, remote assistant, bookkeeping support, social media marketing, lead generation, real estate virtual assistant, admin support, SageStone Inc",
   });
+
+  useEffect(() => {
+    const orgJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SageStone Inc",
+      "url": "https://sagestoneinc.com",
+      "description": "SageStone Inc provides remote virtual assistant services worldwide, helping businesses streamline operations, boost marketing, and scale efficiently.",
+      "email": "hello@sagestoneinc.com",
+      "telephone": "+1-214-945-2234",
+      "sameAs": [],
+    };
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(orgJsonLd);
+    script.id = "org-jsonld";
+    document.head.appendChild(script);
+    return () => {
+      const el = document.getElementById("org-jsonld");
+      if (el) el.remove();
+    };
+  }, []);
 
   return (
     <>

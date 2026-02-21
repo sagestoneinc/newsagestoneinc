@@ -3,17 +3,23 @@ import { useEffect } from "react";
 interface PageMetaOptions {
   title: string;
   description: string;
+  keywords?: string;
 }
 
 const SITE_NAME = "SageStone Inc";
 
-export function usePageMeta({ title, description }: PageMetaOptions) {
+export function usePageMeta({ title, description, keywords }: PageMetaOptions) {
   useEffect(() => {
     document.title = `${title} | ${SITE_NAME}`;
 
     let metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", description);
+    }
+
+    let metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords && keywords) {
+      metaKeywords.setAttribute("content", keywords);
     }
 
     let ogTitle = document.querySelector('meta[property="og:title"]');
@@ -35,5 +41,5 @@ export function usePageMeta({ title, description }: PageMetaOptions) {
     if (twitterDescription) {
       twitterDescription.setAttribute("content", description);
     }
-  }, [title, description]);
+  }, [title, description, keywords]);
 }
