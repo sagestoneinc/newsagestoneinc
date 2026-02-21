@@ -4,6 +4,7 @@ export default function Terms() {
   usePageMeta({
     title: "Terms of Service",
     description: "Review SageStone Inc's terms of service. Understand the terms and conditions governing the use of our virtual assistant services.",
+    keywords: "terms of service, SageStone Inc terms, virtual assistant service agreement, VA service terms, client obligations",
   });
 
   return (

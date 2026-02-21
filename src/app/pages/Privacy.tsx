@@ -4,6 +4,7 @@ export default function Privacy() {
   usePageMeta({
     title: "Privacy Policy",
     description: "Read SageStone Inc's privacy policy. Learn how we collect, use, and protect your personal information when you use our virtual assistant services.",
+    keywords: "privacy policy, SageStone Inc privacy, data protection, personal information, virtual assistant data security",
   });
 
   return (
