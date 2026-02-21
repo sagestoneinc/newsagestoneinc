@@ -52,6 +52,27 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const subject = encodeURIComponent(
+      `New Inquiry from ${formData.name}${formData.business ? ` – ${formData.business}` : ""}`
+    );
+
+    const bodyParts = [
+      `Name: ${formData.name}`,
+      formData.business ? `Business: ${formData.business}` : "",
+      `Email: ${formData.email}`,
+      formData.phone ? `Phone: ${formData.phone}` : "",
+      formData.service ? `Service Needed: ${formData.service}` : "",
+      formData.workload ? `Expected Workload: ${formData.workload}` : "",
+      formData.tools ? `Current Tools: ${formData.tools}` : "",
+      `\nMessage:\n${formData.message}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const body = encodeURIComponent(bodyParts);
+
+    window.location.href = `mailto:hello@sagestoneinc.com?subject=${subject}&body=${body}`;
     setSubmitted(true);
   };
 
