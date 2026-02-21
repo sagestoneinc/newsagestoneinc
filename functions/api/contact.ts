@@ -48,7 +48,13 @@ function sanitize(input: string): string {
 }
 
 function stripTags(input: string): string {
-  return input.replace(/<[^>]*>/g, "");
+  let result = input;
+  let previous;
+  do {
+    previous = result;
+    result = result.replace(/<[^>]*>/g, "");
+  } while (result !== previous);
+  return result;
 }
 
 function isValidEmail(email: string): boolean {
