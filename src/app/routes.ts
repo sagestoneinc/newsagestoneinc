@@ -6,6 +6,7 @@ import WhySageStone from "./pages/WhySageStone";
 import Solutions from "./pages/Solutions";
 import Faqs from "./pages/Faqs";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: "solutions", Component: Solutions },
       { path: "faqs", Component: Faqs },
       { path: "blog", Component: Blog },
+      { path: "blog/:id", Component: BlogPost },
       { path: "contact", Component: Contact },
       { path: "terms", Component: Terms },
       { path: "privacy", Component: Privacy },
