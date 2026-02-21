@@ -8,4 +8,10 @@
   Run `npm i` to install the dependencies.
 
   Run `npm run dev` to start the development server.
+
+  ## Build and Deploy
+
+  **Build command:** `npm run build`
+
+  **Deploy command:** `npm run deploy`
   

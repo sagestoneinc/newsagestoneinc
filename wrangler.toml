@@ -1,6 +1,7 @@
 name = "newsagestoneinc"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "dist"
+build_command = "npm run build"
 
 [vars]
 NODE_VERSION = "20"
