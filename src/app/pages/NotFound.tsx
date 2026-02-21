@@ -6,6 +6,7 @@ export default function NotFound() {
   usePageMeta({
     title: "Page Not Found",
     description: "The page you are looking for does not exist. Return to SageStone Inc's homepage to explore our virtual assistant services.",
+    keywords: "404, page not found, SageStone Inc",
   });
 
   return (

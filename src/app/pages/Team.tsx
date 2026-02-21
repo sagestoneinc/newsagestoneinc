@@ -2,6 +2,7 @@ import { CheckCircle2, Award, BookOpen, BarChart3, Shield } from "lucide-react";
 import { SectionHeading } from "../components/SectionHeading";
 import { CTABanner } from "../components/CTABanner";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const teamMembers = [
   {
@@ -66,6 +67,12 @@ const qualityPoints = [
 ];
 
 export default function Team() {
+  usePageMeta({
+    title: "Meet Our Team",
+    description: "Meet the SageStone Inc leadership and VA specialists who ensure quality virtual assistant service delivery for growing businesses.",
+    keywords: "SageStone team, virtual assistant experts, VA management, leadership team, quality assurance",
+  });
+
   return (
     <>
       {/* Hero */}
