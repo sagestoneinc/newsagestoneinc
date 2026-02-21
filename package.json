@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "deploy": "wrangler pages deploy dist",
+    "deploy": "npx wrangler pages deploy dist",
     "dev": "vite"
   },
   "dependencies": {
