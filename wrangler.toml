@@ -5,3 +5,5 @@ build_command = "npm run build"
 
 [vars]
 NODE_VERSION = "20"
+MAILGUN_DOMAIN = "sagestoneinc.com"
+MAILGUN_FROM_EMAIL = "postmaster@sagestoneinc.com"

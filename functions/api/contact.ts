@@ -196,7 +196,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     );
   }
 
-  const fromEmail = env.MAILGUN_FROM_EMAIL || "hello@sagestoneinc.com";
+  const fromEmail = env.MAILGUN_FROM_EMAIL || "postmaster@sagestoneinc.com";
   const mailgunBase = `https://api.mailgun.net/v3/${env.MAILGUN_DOMAIN}`;
   const mailgunAuth = "Basic " + btoa(`api:${env.MAILGUN_API_KEY}`);
 
