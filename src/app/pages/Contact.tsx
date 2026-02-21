@@ -217,7 +217,7 @@ export default function Contact() {
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Honeypot — hidden from real users, catches bots */}
-                <div className="absolute opacity-0 -z-10" aria-hidden="true">
+                <div style={{ position: "absolute", left: "-9999px", opacity: 0 }} aria-hidden="true">
                   <label htmlFor="_honeypot">Leave this empty</label>
                   <input
                     type="text"

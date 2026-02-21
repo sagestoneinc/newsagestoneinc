@@ -79,8 +79,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return jsonResponse({ error: "Invalid JSON body" }, 400);
   }
 
-  // Honeypot check — if this field is filled, it's likely a bot
-  if (body._honeypot) {
+  // Honeypot check — if this field has any content, it's likely a bot
+  if (body._honeypot && body._honeypot.trim()) {
     // Return success to not reveal detection
     return jsonResponse({ success: true, message: "Message sent successfully." }, 200);
   }
@@ -94,7 +94,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   if (!name || name.length > 200) {
     return jsonResponse({ error: "Please provide a valid name (max 200 characters)." }, 400);
   }
-  if (!email || !isValidEmail(email) || email.length > 254) {
+  if (!email || email.length > 254) {
+    return jsonResponse({ error: "Please provide a valid email address (max 254 characters)." }, 400);
+  }
+  if (!isValidEmail(email)) {
     return jsonResponse({ error: "Please provide a valid email address." }, 400);
   }
   if (!service || !ALLOWED_SERVICES.includes(service)) {
@@ -238,7 +241,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         from: { email: fromEmail, name: "SageStone Inc" },
         reply_to: { email: RECIPIENT_EMAIL, name: "SageStone Inc" },
         content: [
-          { type: "text/plain", value: `Hi ${name},\n\nThank you for reaching out to SageStone Inc. We've received your message and will get back to you within 24 hours.\n\nService: ${service}\n\nYour message:\n${message}\n\nIf you have urgent questions, reply to this email or call us at +1 214-945-2234.\n\n— The SageStone Inc Team\nhttps://sagestoneinc.com` },
+          { type: "text/plain", value: `Hi ${stripTags(name)},\n\nThank you for reaching out to SageStone Inc. We've received your message and will get back to you within 24 hours.\n\nService: ${stripTags(service)}\n\nYour message:\n${stripTags(message)}\n\nIf you have urgent questions, reply to this email or call us at +1 214-945-2234.\n\n— The SageStone Inc Team\nhttps://sagestoneinc.com` },
           { type: "text/html", value: confirmationHtml },
         ],
       }),
