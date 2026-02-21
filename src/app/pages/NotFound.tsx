@@ -1,7 +1,13 @@
 import { Link } from "react-router";
 import { ArrowLeft, Home } from "lucide-react";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function NotFound() {
+  usePageMeta({
+    title: "Page Not Found",
+    description: "The page you are looking for does not exist. Return to SageStone Inc's homepage to explore our virtual assistant services.",
+  });
+
   return (
     <section className="py-32 lg:py-40 bg-gradient-to-br from-sage-50 via-white to-stone-50">
       <div className="max-w-xl mx-auto px-4 text-center">

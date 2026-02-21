@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePageMeta } from "../hooks/usePageMeta";
 import { Mail, Phone, Globe, MapPin, Clock, ArrowRight, CheckCircle2 } from "lucide-react";
 
 const serviceOptions = [
@@ -21,6 +22,12 @@ const workloadOptions = [
 ];
 
 export default function Contact() {
+  usePageMeta({
+    title: "Contact Us",
+    description: "Get in touch with SageStone Inc. Book a free discovery call to discuss how our virtual assistant services can support your business goals.",
+    keywords: "contact SageStone Inc, book discovery call, virtual assistant consultation, get in touch, business support inquiry",
+  });
+
   const [formData, setFormData] = useState({
     name: "",
     business: "",

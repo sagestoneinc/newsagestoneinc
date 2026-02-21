@@ -4,7 +4,7 @@ import { Leaf, Mail, Phone, Globe, ArrowUpRight } from "lucide-react";
 const quickLinks = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about" },
-  { label: "Our Team", path: "/team" },
+  // { label: "Our Team", path: "/team" }, // Temporarily disabled
   { label: "Why SageStone?", path: "/why-sagestone" },
   { label: "Blog", path: "/blog" },
   { label: "Contact Us", path: "/contact" },

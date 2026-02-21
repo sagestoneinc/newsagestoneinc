@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, MessageCircle, ArrowRight } from "lucide-react";
 import { Link } from "react-router";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 interface FaqItem {
   question: string;
@@ -138,6 +139,12 @@ function AccordionItem({ item, isOpen, onToggle }: { item: FaqItem; isOpen: bool
 export default function Faqs() {
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({});
   const [activeCategory, setActiveCategory] = useState(faqCategories[0].name);
+
+  usePageMeta({
+    title: "FAQs",
+    description: "Find answers to frequently asked questions about SageStone Inc's virtual assistant services, pricing, onboarding process, and how we support your business.",
+    keywords: "virtual assistant FAQ, SageStone pricing, VA onboarding, virtual assistant questions, remote support FAQ",
+  });
 
   const toggleItem = (key: string) => {
     setOpenItems((prev) => ({ ...prev, [key]: !prev[key] }));

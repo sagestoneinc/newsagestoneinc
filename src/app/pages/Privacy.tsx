@@ -1,4 +1,11 @@
+import { usePageMeta } from "../hooks/usePageMeta";
+
 export default function Privacy() {
+  usePageMeta({
+    title: "Privacy Policy",
+    description: "Read SageStone Inc's privacy policy. Learn how we collect, use, and protect your personal information when you use our virtual assistant services.",
+  });
+
   return (
     <>
       <section className="bg-gradient-to-br from-sage-50 via-white to-stone-50 py-20 lg:py-28">

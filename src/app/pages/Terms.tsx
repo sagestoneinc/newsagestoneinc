@@ -1,4 +1,11 @@
+import { usePageMeta } from "../hooks/usePageMeta";
+
 export default function Terms() {
+  usePageMeta({
+    title: "Terms of Service",
+    description: "Review SageStone Inc's terms of service. Understand the terms and conditions governing the use of our virtual assistant services.",
+  });
+
   return (
     <>
       <section className="bg-gradient-to-br from-sage-50 via-white to-stone-50 py-20 lg:py-28">
