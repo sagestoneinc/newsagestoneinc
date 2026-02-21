@@ -1,0 +1,119 @@
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router";
+import { Menu, X, Leaf } from "lucide-react";
+
+const navLinks = [
+  { label: "Home", path: "/" },
+  { label: "About Us", path: "/about" },
+  { label: "Our Team", path: "/team" },
+  { label: "Why SageStone?", path: "/why-sagestone" },
+  { label: "Solutions", path: "/solutions" },
+  { label: "FAQs", path: "/faqs" },
+  { label: "Blog", path: "/blog" },
+  { label: "Contact Us", path: "/contact" },
+];
+
+export function Header() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/95 backdrop-blur-md shadow-sm"
+          : "bg-white"
+      }`}
+    >
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-[72px]">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 shrink-0">
+            <div className="w-9 h-9 bg-sage-500 rounded-lg flex items-center justify-center">
+              <Leaf className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-stone-900 tracking-tight" style={{ fontSize: '1.25rem', fontWeight: 700 }}>
+              SageStone <span className="text-sage-500">Inc</span>
+            </span>
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden xl:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`px-3 py-2 rounded-lg text-[0.875rem] transition-colors duration-200 ${
+                  location.pathname === link.path
+                    ? "text-sage-600 bg-sage-50"
+                    : "text-stone-600 hover:text-sage-600 hover:bg-sage-50/60"
+                }`}
+                style={{ fontWeight: location.pathname === link.path ? 500 : 400 }}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTA + Mobile Toggle */}
+          <div className="flex items-center gap-3">
+            <Link
+              to="/contact"
+              className="hidden sm:inline-flex items-center px-5 py-2.5 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors duration-200 text-[0.875rem] shadow-sm"
+              style={{ fontWeight: 500 }}
+            >
+              Book a Discovery Call
+            </Link>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="xl:hidden p-2 text-stone-600 hover:text-stone-900 rounded-lg hover:bg-stone-100 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="xl:hidden bg-white border-t border-stone-200 shadow-lg">
+          <nav className="max-w-[1440px] mx-auto px-4 py-4 space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`block px-4 py-3 rounded-lg text-[0.9375rem] transition-colors ${
+                  location.pathname === link.path
+                    ? "text-sage-600 bg-sage-50"
+                    : "text-stone-700 hover:bg-stone-50"
+                }`}
+                style={{ fontWeight: location.pathname === link.path ? 500 : 400 }}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              to="/contact"
+              className="block text-center mt-3 px-5 py-3 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors text-[0.9375rem]"
+              style={{ fontWeight: 500 }}
+            >
+              Book a Discovery Call
+            </Link>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+}

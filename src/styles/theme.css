@@ -1,0 +1,190 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Sage + Stone Palette */
+  --sage-50: #F0F5F1;
+  --sage-100: #DCE8DE;
+  --sage-200: #B8D1BC;
+  --sage-300: #8FB896;
+  --sage-400: #6B9F73;
+  --sage-500: #5A8A63;
+  --sage-600: #4A7352;
+  --sage-700: #3D5E44;
+  --sage-800: #334D39;
+  --sage-900: #2A3F2F;
+
+  --stone-50: #FAFBFB;
+  --stone-100: #F1F3F4;
+  --stone-200: #E4E7E9;
+  --stone-300: #CED4D7;
+  --stone-400: #A3ADB2;
+  --stone-500: #7A858B;
+  --stone-600: #5B6770;
+  --stone-700: #404B52;
+  --stone-800: #2D3640;
+  --stone-900: #1A2028;
+
+  /* Core tokens mapped to sage + stone */
+  --background: #FFFFFF;
+  --foreground: #1A2028;
+  --card: #FFFFFF;
+  --card-foreground: #1A2028;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A2028;
+  --primary: #5A8A63;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F0F5F1;
+  --secondary-foreground: #2A3F2F;
+  --muted: #F1F3F4;
+  --muted-foreground: #5B6770;
+  --accent: #E4E7E9;
+  --accent-foreground: #1A2028;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: #E4E7E9;
+  --input: transparent;
+  --input-background: #F1F3F4;
+  --switch-background: #CED4D7;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #5A8A63;
+  --chart-1: #5A8A63;
+  --chart-2: #6B9F73;
+  --chart-3: #8FB896;
+  --chart-4: #B8D1BC;
+  --chart-5: #DCE8DE;
+  --radius: 0.625rem;
+  --sidebar: #FAFBFB;
+  --sidebar-foreground: #1A2028;
+  --sidebar-primary: #5A8A63;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F0F5F1;
+  --sidebar-accent-foreground: #1A2028;
+  --sidebar-border: #E4E7E9;
+  --sidebar-ring: #5A8A63;
+}
+
+@theme inline {
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Custom sage + stone colors */
+  --color-sage-50: var(--sage-50);
+  --color-sage-100: var(--sage-100);
+  --color-sage-200: var(--sage-200);
+  --color-sage-300: var(--sage-300);
+  --color-sage-400: var(--sage-400);
+  --color-sage-500: var(--sage-500);
+  --color-sage-600: var(--sage-600);
+  --color-sage-700: var(--sage-700);
+  --color-sage-800: var(--sage-800);
+  --color-sage-900: var(--sage-900);
+  --color-stone-50: var(--stone-50);
+  --color-stone-100: var(--stone-100);
+  --color-stone-200: var(--stone-200);
+  --color-stone-300: var(--stone-300);
+  --color-stone-400: var(--stone-400);
+  --color-stone-500: var(--stone-500);
+  --color-stone-600: var(--stone-600);
+  --color-stone-700: var(--stone-700);
+  --color-stone-800: var(--stone-800);
+  --color-stone-900: var(--stone-900);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  html {
+    font-size: var(--font-size);
+    scroll-behavior: smooth;
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+}
