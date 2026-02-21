@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /team
+
+Sitemap: https://sagestoneinc.com/sitemap.xml

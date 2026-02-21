@@ -5,7 +5,7 @@ import { Menu, X, Leaf } from "lucide-react";
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about" },
-  { label: "Our Team", path: "/team" },
+  // { label: "Our Team", path: "/team" }, // Temporarily disabled
   { label: "Why SageStone?", path: "/why-sagestone" },
   { label: "Solutions", path: "/solutions" },
   { label: "FAQs", path: "/faqs" },

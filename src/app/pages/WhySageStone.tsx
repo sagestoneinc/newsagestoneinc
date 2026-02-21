@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { usePageMeta } from "../hooks/usePageMeta";
 import {
   ArrowRight,
   CheckCircle2,
@@ -68,6 +69,11 @@ const results = [
 ];
 
 export default function WhySageStone() {
+  usePageMeta({
+    title: "Why SageStone?",
+    description: "Discover why businesses choose SageStone Inc for virtual assistant services. Learn about our dedicated support, proven processes, and commitment to helping you scale.",
+  });
+
   return (
     <>
       {/* Hero */}

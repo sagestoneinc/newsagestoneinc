@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { usePageMeta } from "../hooks/usePageMeta";
 import {
   ArrowRight,
   Settings,
@@ -146,6 +147,11 @@ const blogPosts = [
 ];
 
 export default function Home() {
+  usePageMeta({
+    title: "Virtual Assistant Services for Growing Businesses",
+    description: "SageStone Inc provides expert virtual assistant services including admin support, bookkeeping, social media marketing, lead generation, and real estate VA services.",
+  });
+
   return (
     <>
       {/* ========== HERO ========== */}

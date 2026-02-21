@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { usePageMeta } from "../hooks/usePageMeta";
 import { ArrowRight, Target, Eye, Heart, Users, Globe, Shield, Award, Zap } from "lucide-react";
 import { SectionHeading } from "../components/SectionHeading";
 import { CTABanner } from "../components/CTABanner";
@@ -21,6 +22,11 @@ const stats = [
 ];
 
 export default function About() {
+  usePageMeta({
+    title: "About Us",
+    description: "Learn about SageStone Inc, our mission to empower businesses with dedicated virtual assistant services, and how we help companies streamline operations and scale efficiently.",
+  });
+
   return (
     <>
       {/* Hero */}

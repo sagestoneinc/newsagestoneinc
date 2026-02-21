@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { usePageMeta } from "../hooks/usePageMeta";
 import { ArrowRight, Clock, Tag } from "lucide-react";
 import { SectionHeading } from "../components/SectionHeading";
 import { CTABanner } from "../components/CTABanner";
@@ -143,6 +144,11 @@ function BlogCard({ post }: { post: (typeof blogPosts)[0] }) {
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("All");
+
+  usePageMeta({
+    title: "Blog",
+    description: "Read the latest insights from SageStone Inc on virtual assistance, remote work, operations management, real estate, marketing, and business productivity tips.",
+  });
 
   const filteredPosts = activeCategory === "All"
     ? blogPosts

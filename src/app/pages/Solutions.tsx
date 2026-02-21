@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { usePageMeta } from "../hooks/usePageMeta";
 import {
   ArrowRight,
   ClipboardList,
@@ -168,6 +169,11 @@ const solutionsData: SolutionData[] = [
 ];
 
 export default function Solutions() {
+  usePageMeta({
+    title: "Solutions",
+    description: "Explore SageStone Inc's virtual assistant solutions: operations & admin, real estate VA, bookkeeping, social media marketing, lead generation, graphic design, and data entry services.",
+  });
+
   return (
     <>
       {/* Hero */}

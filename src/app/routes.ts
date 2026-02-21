@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "about", Component: About },
-      { path: "team", Component: Team },
+      // { path: "team", Component: Team }, // Temporarily disabled
       { path: "why-sagestone", Component: WhySageStone },
       { path: "solutions", Component: Solutions },
       { path: "faqs", Component: Faqs },
