@@ -71,7 +71,17 @@ function jsonResponse(body: Record<string, unknown>, status: number): Response {
 }
 
 function encodeUtf8Base64(str: string): string {
-  return btoa(unescape(encodeURIComponent(str)));
+  const bytes = new TextEncoder().encode(str);
+  let binary = "";
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+  return btoa(binary);
+}
+
+/** Convert a string to a ReadableStream (required by EmailMessage). */
+function toReadableStream(str: string): ReadableStream {
+  return new Response(str).body!;
 }
 
 function encodeHeaderValue(str: string): string {
@@ -267,7 +277,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         html: notificationHtml,
       });
 
-      const notificationMsg = new EmailMessage(fromEmail, RECIPIENT_EMAIL, new Response(notificationMime).body!);
+      const notificationMsg = new EmailMessage(fromEmail, RECIPIENT_EMAIL, toReadableStream(notificationMime));
       await env.SEND_EMAIL.send(notificationMsg);
     } catch (err) {
       console.error("Email notification send error:", err);
@@ -306,7 +316,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         html: confirmationHtml,
       });
 
-      const confirmMsg = new EmailMessage(fromEmail, email, new Response(confirmMime).body!);
+      const confirmMsg = new EmailMessage(fromEmail, email, toReadableStream(confirmMime));
       await env.SEND_EMAIL.send(confirmMsg);
     } catch (err) {
       console.error("Email confirmation send error (non-fatal):", err);
