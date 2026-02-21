@@ -188,24 +188,35 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   </div>
 </div>`;
 
+  if (!env.MAILGUN_API_KEY || !env.MAILGUN_DOMAIN) {
+    console.error("Mailgun credentials are not configured.");
+    return jsonResponse(
+      { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
+      502
+    );
+  }
+
   const fromEmail = env.MAILGUN_FROM_EMAIL || "hello@sagestoneinc.com";
   const mailgunBase = `https://api.mailgun.net/v3/${env.MAILGUN_DOMAIN}`;
   const mailgunAuth = "Basic " + btoa(`api:${env.MAILGUN_API_KEY}`);
 
   // Send notification email to SageStone
   try {
-    const form = new FormData();
-    form.append("from", `SageStone Contact Form <${fromEmail}>`);
-    form.append("to", RECIPIENT_EMAIL);
-    form.append("h:Reply-To", `${name} <${email}>`);
-    form.append("subject", `New Inquiry from ${name}${business ? ` – ${business}` : ""}`);
-    form.append("text", notificationText);
-    form.append("html", notificationHtml);
+    const params = new URLSearchParams();
+    params.append("from", `SageStone Contact Form <${fromEmail}>`);
+    params.append("to", RECIPIENT_EMAIL);
+    params.append("h:Reply-To", `${name} <${email}>`);
+    params.append("subject", `New Inquiry from ${name}${business ? ` – ${business}` : ""}`);
+    params.append("text", notificationText);
+    params.append("html", notificationHtml);
 
     const mgResponse = await fetch(`${mailgunBase}/messages`, {
       method: "POST",
-      headers: { Authorization: mailgunAuth },
-      body: form,
+      headers: {
+        Authorization: mailgunAuth,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: params.toString(),
     });
 
     if (!mgResponse.ok) {
@@ -226,18 +237,21 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   // Send confirmation email to the user (best effort — don't fail the request)
   try {
-    const confirmForm = new FormData();
-    confirmForm.append("from", `SageStone Inc <${fromEmail}>`);
-    confirmForm.append("to", `${name} <${email}>`);
-    confirmForm.append("h:Reply-To", `SageStone Inc <${RECIPIENT_EMAIL}>`);
-    confirmForm.append("subject", "We received your message — SageStone Inc");
-    confirmForm.append("text", `Hi ${stripTags(name)},\n\nThank you for reaching out to SageStone Inc. We've received your message and will get back to you within 24 hours.\n\nService: ${stripTags(service)}\n\nYour message:\n${stripTags(message)}\n\nIf you have urgent questions, reply to this email or call us at +1 214-945-2234.\n\n— The SageStone Inc Team\nhttps://sagestoneinc.com`);
-    confirmForm.append("html", confirmationHtml);
+    const confirmParams = new URLSearchParams();
+    confirmParams.append("from", `SageStone Inc <${fromEmail}>`);
+    confirmParams.append("to", `${name} <${email}>`);
+    confirmParams.append("h:Reply-To", `SageStone Inc <${RECIPIENT_EMAIL}>`);
+    confirmParams.append("subject", "We received your message — SageStone Inc");
+    confirmParams.append("text", `Hi ${stripTags(name)},\n\nThank you for reaching out to SageStone Inc. We've received your message and will get back to you within 24 hours.\n\nService: ${stripTags(service)}\n\nYour message:\n${stripTags(message)}\n\nIf you have urgent questions, reply to this email or call us at +1 214-945-2234.\n\n— The SageStone Inc Team\nhttps://sagestoneinc.com`);
+    confirmParams.append("html", confirmationHtml);
 
     await fetch(`${mailgunBase}/messages`, {
       method: "POST",
-      headers: { Authorization: mailgunAuth },
-      body: confirmForm,
+      headers: {
+        Authorization: mailgunAuth,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: confirmParams.toString(),
     });
   } catch (err) {
     console.error("Mailgun confirmation email error (non-fatal):", err);
