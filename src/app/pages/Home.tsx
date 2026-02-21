@@ -163,7 +163,6 @@ export default function Home() {
       "description": "SageStone Inc provides remote virtual assistant services worldwide, helping businesses streamline operations, boost marketing, and scale efficiently.",
       "email": "hello@sagestoneinc.com",
       "telephone": "+1-214-945-2234",
-      "sameAs": [],
     };
     const script = document.createElement("script");
     script.type = "application/ld+json";
