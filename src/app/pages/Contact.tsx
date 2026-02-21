@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { usePageMeta } from "../hooks/usePageMeta";
-import { Mail, Phone, Globe, MapPin, Clock, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, Globe, MapPin, Clock, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 
 const serviceOptions = [
   "Virtual Operations & Admin",
@@ -38,8 +38,11 @@ export default function Contact() {
     tools: "",
     message: "",
     consent: false,
+    _honeypot: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -50,30 +53,30 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, consent: e.target.checked }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    setErrorMessage("");
 
-    const subject = encodeURIComponent(
-      `New Inquiry from ${formData.name}${formData.business ? ` – ${formData.business}` : ""}`
-    );
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    const bodyParts = [
-      `Name: ${formData.name}`,
-      formData.business ? `Business: ${formData.business}` : "",
-      `Email: ${formData.email}`,
-      formData.phone ? `Phone: ${formData.phone}` : "",
-      formData.service ? `Service Needed: ${formData.service}` : "",
-      formData.workload ? `Expected Workload: ${formData.workload}` : "",
-      formData.tools ? `Current Tools: ${formData.tools}` : "",
-      `\nMessage:\n${formData.message}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+      const data = await res.json();
 
-    const body = encodeURIComponent(bodyParts);
-
-    window.location.href = `mailto:hello@sagestoneinc.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+      if (res.ok && data.success) {
+        setSubmitted(true);
+      } else {
+        setErrorMessage(data.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setErrorMessage("Unable to send your message. Please try again or email us at hello@sagestoneinc.com.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -84,11 +87,10 @@ export default function Contact() {
             <CheckCircle2 className="w-10 h-10" />
           </div>
           <h1 className="text-stone-900 tracking-tight mb-4" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", fontWeight: 800, lineHeight: 1.2 }}>
-            Almost There!
+            Message Sent!
           </h1>
           <p className="text-stone-500 text-[1.0625rem] leading-relaxed mb-8">
-            Your email client should have opened with your message pre-filled. Please press send in your email app to deliver it to our team. If your email client didn't open, you can reach us directly at{" "}
-            <a href="mailto:hello@sagestoneinc.com" className="text-sage-600 underline hover:text-sage-700">hello@sagestoneinc.com</a>.
+            Thank you for reaching out! We've received your message and a team member will get back to you within 24 hours. A confirmation email has been sent to your inbox.
           </p>
           <a
             href="/"
@@ -214,6 +216,25 @@ export default function Contact() {
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Honeypot — hidden from real users, catches bots */}
+                <div style={{ position: "absolute", left: "-9999px", opacity: 0 }} aria-hidden="true">
+                  <label htmlFor="_honeypot">Leave this empty</label>
+                  <input
+                    type="text"
+                    id="_honeypot"
+                    name="_honeypot"
+                    value={formData._honeypot || ""}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
+                {errorMessage && (
+                  <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-[0.875rem]">
+                    {errorMessage}
+                  </div>
+                )}
                 {/* Name + Business */}
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
@@ -374,11 +395,21 @@ export default function Contact() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-all duration-200 shadow-lg shadow-sage-500/25 hover:shadow-xl text-[0.9375rem]"
+                  disabled={submitting}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-all duration-200 shadow-lg shadow-sage-500/25 hover:shadow-xl text-[0.9375rem] disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{ fontWeight: 600 }}
                 >
-                  Send Message
-                  <ArrowRight className="w-4 h-4" />
+                  {submitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Sending…
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
                 </button>
               </form>
             </div>
