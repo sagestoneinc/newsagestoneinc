@@ -2,6 +2,7 @@ interface Env {
   MAILGUN_API_KEY: string;
   MAILGUN_DOMAIN: string;
   MAILGUN_FROM_EMAIL: string;
+  MAILGUN_REGION?: string;
 }
 
 interface ContactFormData {
@@ -72,61 +73,62 @@ function jsonResponse(body: Record<string, unknown>, status: number): Response {
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
-  // Validate content type
-  const contentType = request.headers.get("Content-Type") || "";
-  if (!contentType.includes("application/json")) {
-    return jsonResponse({ error: "Invalid content type" }, 400);
-  }
-
-  // Parse body
-  let body: ContactFormData;
   try {
-    body = await request.json();
-  } catch {
-    return jsonResponse({ error: "Invalid JSON body" }, 400);
-  }
+    // Validate content type
+    const contentType = request.headers.get("Content-Type") || "";
+    if (!contentType.includes("application/json")) {
+      return jsonResponse({ error: "Invalid content type" }, 400);
+    }
 
-  // Honeypot check — if this field has any content, it's likely a bot
-  if (body._honeypot && body._honeypot.trim()) {
-    // Return success to not reveal detection
-    return jsonResponse({ success: true, message: "Message sent successfully." }, 200);
-  }
+    // Parse body
+    let body: ContactFormData;
+    try {
+      body = await request.json();
+    } catch {
+      return jsonResponse({ error: "Invalid JSON body" }, 400);
+    }
 
-  // Validate required fields
-  const name = stripTags((body.name || "").trim());
-  const email = stripTags((body.email || "").trim());
-  const service = stripTags((body.service || "").trim());
-  const message = stripTags((body.message || "").trim());
+    // Honeypot check — if this field has any content, it's likely a bot
+    if (body._honeypot && body._honeypot.trim()) {
+      // Return success to not reveal detection
+      return jsonResponse({ success: true, message: "Message sent successfully." }, 200);
+    }
 
-  if (!name || name.length > 200) {
-    return jsonResponse({ error: "Please provide a valid name (max 200 characters)." }, 400);
-  }
-  if (!email || email.length > 254) {
-    return jsonResponse({ error: "Please provide a valid email address (max 254 characters)." }, 400);
-  }
-  if (!isValidEmail(email)) {
-    return jsonResponse({ error: "Please provide a valid email address." }, 400);
-  }
-  if (!service || !ALLOWED_SERVICES.includes(service)) {
-    return jsonResponse({ error: "Please select a valid service." }, 400);
-  }
-  if (!message || message.length < 10 || message.length > 5000) {
-    return jsonResponse({ error: "Please provide a message between 10 and 5000 characters." }, 400);
-  }
-  if (!body.consent) {
-    return jsonResponse({ error: "You must consent to be contacted." }, 400);
-  }
+    // Validate required fields
+    const name = stripTags((body.name || "").trim());
+    const email = stripTags((body.email || "").trim());
+    const service = stripTags((body.service || "").trim());
+    const message = stripTags((body.message || "").trim());
 
-  // Sanitize optional fields
-  const business = sanitize(stripTags((body.business || "").trim())).slice(0, 200);
-  const phone = sanitize(stripTags((body.phone || "").trim())).slice(0, 30);
-  const workload = ALLOWED_WORKLOADS.includes(body.workload || "") ? body.workload || "" : "";
-  const tools = sanitize(stripTags((body.tools || "").trim())).slice(0, 500);
+    if (!name || name.length > 200) {
+      return jsonResponse({ error: "Please provide a valid name (max 200 characters)." }, 400);
+    }
+    if (!email || email.length > 254) {
+      return jsonResponse({ error: "Please provide a valid email address (max 254 characters)." }, 400);
+    }
+    if (!isValidEmail(email)) {
+      return jsonResponse({ error: "Please provide a valid email address." }, 400);
+    }
+    if (!service || !ALLOWED_SERVICES.includes(service)) {
+      return jsonResponse({ error: "Please select a valid service." }, 400);
+    }
+    if (!message || message.length < 10 || message.length > 5000) {
+      return jsonResponse({ error: "Please provide a message between 10 and 5000 characters." }, 400);
+    }
+    if (!body.consent) {
+      return jsonResponse({ error: "You must consent to be contacted." }, 400);
+    }
 
-  const timestamp = new Date().toISOString();
+    // Sanitize optional fields
+    const business = sanitize(stripTags((body.business || "").trim())).slice(0, 200);
+    const phone = sanitize(stripTags((body.phone || "").trim())).slice(0, 30);
+    const workload = ALLOWED_WORKLOADS.includes(body.workload || "") ? body.workload || "" : "";
+    const tools = sanitize(stripTags((body.tools || "").trim())).slice(0, 500);
 
-  // Build notification email HTML for hello@sagestoneinc.com
-  const notificationHtml = `
+    const timestamp = new Date().toISOString();
+
+    // Build notification email HTML for hello@sagestoneinc.com
+    const notificationHtml = `
 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto;">
   <div style="background: #4a7c59; padding: 24px; border-radius: 8px 8px 0 0;">
     <h1 style="color: #fff; margin: 0; font-size: 20px;">New Contact Form Submission</h1>
@@ -149,27 +151,27 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   </div>
 </div>`;
 
-  const notificationText = [
-    `New Contact Form Submission`,
-    ``,
-    `Name: ${name}`,
-    business ? `Business: ${business}` : "",
-    `Email: ${email}`,
-    phone ? `Phone: ${phone}` : "",
-    `Service: ${service}`,
-    workload ? `Workload: ${workload}` : "",
-    tools ? `Tools: ${tools}` : "",
-    ``,
-    `Message:`,
-    message,
-    ``,
-    `Submitted at ${timestamp}`,
-  ]
-    .filter((line) => line !== "")
-    .join("\n");
+    const notificationText = [
+      `New Contact Form Submission`,
+      ``,
+      `Name: ${name}`,
+      business ? `Business: ${business}` : "",
+      `Email: ${email}`,
+      phone ? `Phone: ${phone}` : "",
+      `Service: ${service}`,
+      workload ? `Workload: ${workload}` : "",
+      tools ? `Tools: ${tools}` : "",
+      ``,
+      `Message:`,
+      message,
+      ``,
+      `Submitted at ${timestamp}`,
+    ]
+      .filter((line) => line !== "")
+      .join("\n");
 
-  // Build confirmation email for the user
-  const confirmationHtml = `
+    // Build confirmation email for the user
+    const confirmationHtml = `
 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto;">
   <div style="background: #4a7c59; padding: 24px; border-radius: 8px 8px 0 0;">
     <h1 style="color: #fff; margin: 0; font-size: 20px;">Thanks for reaching out, ${sanitize(name)}!</h1>
@@ -188,74 +190,83 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   </div>
 </div>`;
 
-  if (!env.MAILGUN_API_KEY || !env.MAILGUN_DOMAIN) {
-    console.error("Mailgun credentials are not configured.");
-    return jsonResponse(
-      { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
-      502
-    );
-  }
-
-  const fromEmail = env.MAILGUN_FROM_EMAIL || "postmaster@sagestoneinc.com";
-  const mailgunBase = `https://api.mailgun.net/v3/${env.MAILGUN_DOMAIN}`;
-  const mailgunAuth = "Basic " + btoa(`api:${env.MAILGUN_API_KEY}`);
-
-  // Send notification email to SageStone
-  try {
-    const params = new URLSearchParams();
-    params.append("from", `SageStone Contact Form <${fromEmail}>`);
-    params.append("to", RECIPIENT_EMAIL);
-    params.append("h:Reply-To", `${name} <${email}>`);
-    params.append("subject", `New Inquiry from ${name}${business ? ` – ${business}` : ""}`);
-    params.append("text", notificationText);
-    params.append("html", notificationHtml);
-
-    const mgResponse = await fetch(`${mailgunBase}/messages`, {
-      method: "POST",
-      headers: {
-        Authorization: mailgunAuth,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: params.toString(),
-    });
-
-    if (!mgResponse.ok) {
-      const errorText = await mgResponse.text();
-      console.error("Mailgun notification email failed:", mgResponse.status, errorText);
+    if (!env.MAILGUN_API_KEY || !env.MAILGUN_DOMAIN) {
+      console.error("Mailgun credentials are not configured.");
       return jsonResponse(
         { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
         502
       );
     }
+
+    const fromEmail = env.MAILGUN_FROM_EMAIL || `postmaster@${env.MAILGUN_DOMAIN}`;
+    const region = env.MAILGUN_REGION === "eu" ? "eu" : "us";
+    const mailgunHost = region === "eu" ? "api.eu.mailgun.net" : "api.mailgun.net";
+    const mailgunBase = `https://${mailgunHost}/v3/${env.MAILGUN_DOMAIN}`;
+    const mailgunAuth = "Basic " + btoa(`api:${env.MAILGUN_API_KEY}`);
+
+    // Send notification email to SageStone
+    try {
+      const params = new URLSearchParams();
+      params.append("from", `SageStone Contact Form <${fromEmail}>`);
+      params.append("to", RECIPIENT_EMAIL);
+      params.append("h:Reply-To", `${name} <${email}>`);
+      params.append("subject", `New Inquiry from ${name}${business ? ` – ${business}` : ""}`);
+      params.append("text", notificationText);
+      params.append("html", notificationHtml);
+
+      const mgResponse = await fetch(`${mailgunBase}/messages`, {
+        method: "POST",
+        headers: {
+          Authorization: mailgunAuth,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params.toString(),
+      });
+
+      if (!mgResponse.ok) {
+        const errorText = await mgResponse.text();
+        console.error("Mailgun notification email failed:", mgResponse.status, errorText);
+        return jsonResponse(
+          { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
+          502
+        );
+      }
+    } catch (err) {
+      console.error("Mailgun notification email error:", err);
+      return jsonResponse(
+        { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
+        502
+      );
+    }
+
+    // Send confirmation email to the user (best effort — don't fail the request)
+    try {
+      const confirmParams = new URLSearchParams();
+      confirmParams.append("from", `SageStone Inc <${fromEmail}>`);
+      confirmParams.append("to", `${name} <${email}>`);
+      confirmParams.append("h:Reply-To", `SageStone Inc <${RECIPIENT_EMAIL}>`);
+      confirmParams.append("subject", "We received your message — SageStone Inc");
+      confirmParams.append("text", `Hi ${stripTags(name)},\n\nThank you for reaching out to SageStone Inc. We've received your message and will get back to you within 24 hours.\n\nService: ${stripTags(service)}\n\nYour message:\n${stripTags(message)}\n\nIf you have urgent questions, reply to this email or call us at +1 214-945-2234.\n\n— The SageStone Inc Team\nhttps://sagestoneinc.com`);
+      confirmParams.append("html", confirmationHtml);
+
+      await fetch(`${mailgunBase}/messages`, {
+        method: "POST",
+        headers: {
+          Authorization: mailgunAuth,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: confirmParams.toString(),
+      });
+    } catch (err) {
+      console.error("Mailgun confirmation email error (non-fatal):", err);
+    }
+
+    return jsonResponse({ success: true, message: "Your message has been sent. We'll be in touch within 24 hours!" }, 200);
   } catch (err) {
-    console.error("Mailgun notification email error:", err);
+    console.error("Unhandled error in contact handler:", err);
     return jsonResponse(
       { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
-      502
+      500
     );
   }
-
-  // Send confirmation email to the user (best effort — don't fail the request)
-  try {
-    const confirmParams = new URLSearchParams();
-    confirmParams.append("from", `SageStone Inc <${fromEmail}>`);
-    confirmParams.append("to", `${name} <${email}>`);
-    confirmParams.append("h:Reply-To", `SageStone Inc <${RECIPIENT_EMAIL}>`);
-    confirmParams.append("subject", "We received your message — SageStone Inc");
-    confirmParams.append("text", `Hi ${stripTags(name)},\n\nThank you for reaching out to SageStone Inc. We've received your message and will get back to you within 24 hours.\n\nService: ${stripTags(service)}\n\nYour message:\n${stripTags(message)}\n\nIf you have urgent questions, reply to this email or call us at +1 214-945-2234.\n\n— The SageStone Inc Team\nhttps://sagestoneinc.com`);
-    confirmParams.append("html", confirmationHtml);
-
-    await fetch(`${mailgunBase}/messages`, {
-      method: "POST",
-      headers: {
-        Authorization: mailgunAuth,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: confirmParams.toString(),
-    });
-  } catch (err) {
-    console.error("Mailgun confirmation email error (non-fatal):", err);
-  }
-
-  return jsonResponse({ success: true, message: "Your message has been sent. We'll be in touch within 24 hours!" }, 200);
 };

@@ -65,7 +65,13 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
+      let data: { success?: boolean; error?: string; message?: string };
+      try {
+        data = await res.json();
+      } catch {
+        setErrorMessage(`We couldn't reach the server (HTTP ${res.status}). Please try again or email us at hello@sagestoneinc.com.`);
+        return;
+      }
 
       if (res.ok && data.success) {
         setSubmitted(true);
