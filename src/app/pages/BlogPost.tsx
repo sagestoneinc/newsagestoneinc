@@ -124,7 +124,7 @@ export default function BlogPost() {
               if (block.type === "list") {
                 return (
                   <ul key={index} className="space-y-2 mb-5 ml-4">
-                    {block.items!.map((item, i) => (
+                    {(block.items ?? []).map((item, i) => (
                       <li
                         key={i}
                         className="text-stone-600 text-[1rem] leading-relaxed flex items-start gap-2"

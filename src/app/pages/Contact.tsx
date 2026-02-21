@@ -84,10 +84,11 @@ export default function Contact() {
             <CheckCircle2 className="w-10 h-10" />
           </div>
           <h1 className="text-stone-900 tracking-tight mb-4" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", fontWeight: 800, lineHeight: 1.2 }}>
-            Thank You!
+            Almost There!
           </h1>
           <p className="text-stone-500 text-[1.0625rem] leading-relaxed mb-8">
-            We've received your message and will get back to you within 24 hours. Our team is excited to learn more about how we can support your business.
+            Your email client should have opened with your message pre-filled. Please press send in your email app to deliver it to our team. If your email client didn't open, you can reach us directly at{" "}
+            <a href="mailto:hello@sagestoneinc.com" className="text-sage-600 underline hover:text-sage-700">hello@sagestoneinc.com</a>.
           </p>
           <a
             href="/"
