@@ -1,6 +1,7 @@
 interface Env {
-  SENDGRID_API_KEY: string;
-  SENDGRID_FROM_EMAIL: string;
+  MAILGUN_API_KEY: string;
+  MAILGUN_DOMAIN: string;
+  MAILGUN_FROM_EMAIL: string;
 }
 
 interface ContactFormData {
@@ -187,42 +188,36 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   </div>
 </div>`;
 
-  const fromEmail = env.SENDGRID_FROM_EMAIL || "noreply@sagestoneinc.com";
+  const fromEmail = env.MAILGUN_FROM_EMAIL || "noreply@sagestoneinc.com";
+  const mailgunBase = `https://api.mailgun.net/v3/${env.MAILGUN_DOMAIN}`;
+  const mailgunAuth = "Basic " + btoa(`api:${env.MAILGUN_API_KEY}`);
 
   // Send notification email to SageStone
   try {
-    const sgResponse = await fetch("https://api.sendgrid.com/v3/mail/send", {
+    const form = new FormData();
+    form.append("from", `SageStone Contact Form <${fromEmail}>`);
+    form.append("to", RECIPIENT_EMAIL);
+    form.append("h:Reply-To", `${name} <${email}>`);
+    form.append("subject", `New Inquiry from ${name}${business ? ` – ${business}` : ""}`);
+    form.append("text", notificationText);
+    form.append("html", notificationHtml);
+
+    const mgResponse = await fetch(`${mailgunBase}/messages`, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${env.SENDGRID_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email: RECIPIENT_EMAIL }],
-            subject: `New Inquiry from ${name}${business ? ` – ${business}` : ""}`,
-          },
-        ],
-        from: { email: fromEmail, name: "SageStone Contact Form" },
-        reply_to: { email, name },
-        content: [
-          { type: "text/plain", value: notificationText },
-          { type: "text/html", value: notificationHtml },
-        ],
-      }),
+      headers: { Authorization: mailgunAuth },
+      body: form,
     });
 
-    if (!sgResponse.ok) {
-      const errorText = await sgResponse.text();
-      console.error("SendGrid notification email failed:", sgResponse.status, errorText);
+    if (!mgResponse.ok) {
+      const errorText = await mgResponse.text();
+      console.error("Mailgun notification email failed:", mgResponse.status, errorText);
       return jsonResponse(
         { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
         502
       );
     }
   } catch (err) {
-    console.error("SendGrid notification email error:", err);
+    console.error("Mailgun notification email error:", err);
     return jsonResponse(
       { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
       502
@@ -231,29 +226,21 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   // Send confirmation email to the user (best effort — don't fail the request)
   try {
-    await fetch("https://api.sendgrid.com/v3/mail/send", {
+    const confirmForm = new FormData();
+    confirmForm.append("from", `SageStone Inc <${fromEmail}>`);
+    confirmForm.append("to", `${name} <${email}>`);
+    confirmForm.append("h:Reply-To", `SageStone Inc <${RECIPIENT_EMAIL}>`);
+    confirmForm.append("subject", "We received your message — SageStone Inc");
+    confirmForm.append("text", `Hi ${stripTags(name)},\n\nThank you for reaching out to SageStone Inc. We've received your message and will get back to you within 24 hours.\n\nService: ${stripTags(service)}\n\nYour message:\n${stripTags(message)}\n\nIf you have urgent questions, reply to this email or call us at +1 214-945-2234.\n\n— The SageStone Inc Team\nhttps://sagestoneinc.com`);
+    confirmForm.append("html", confirmationHtml);
+
+    await fetch(`${mailgunBase}/messages`, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${env.SENDGRID_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email, name }],
-            subject: "We received your message — SageStone Inc",
-          },
-        ],
-        from: { email: fromEmail, name: "SageStone Inc" },
-        reply_to: { email: RECIPIENT_EMAIL, name: "SageStone Inc" },
-        content: [
-          { type: "text/plain", value: `Hi ${stripTags(name)},\n\nThank you for reaching out to SageStone Inc. We've received your message and will get back to you within 24 hours.\n\nService: ${stripTags(service)}\n\nYour message:\n${stripTags(message)}\n\nIf you have urgent questions, reply to this email or call us at +1 214-945-2234.\n\n— The SageStone Inc Team\nhttps://sagestoneinc.com` },
-          { type: "text/html", value: confirmationHtml },
-        ],
-      }),
+      headers: { Authorization: mailgunAuth },
+      body: confirmForm,
     });
   } catch (err) {
-    console.error("SendGrid confirmation email error (non-fatal):", err);
+    console.error("Mailgun confirmation email error (non-fatal):", err);
   }
 
   return jsonResponse({ success: true, message: "Your message has been sent. We'll be in touch within 24 hours!" }, 200);
