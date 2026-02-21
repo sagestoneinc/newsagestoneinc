@@ -1,8 +1,8 @@
+import { EmailMessage } from "cloudflare:email";
+
 interface Env {
-  MAILGUN_API_KEY: string;
-  MAILGUN_DOMAIN: string;
-  MAILGUN_FROM_EMAIL: string;
-  MAILGUN_REGION?: string;
+  SEND_EMAIL: { send(message: EmailMessage): Promise<void> };
+  FROM_EMAIL?: string;
 }
 
 interface ContactFormData {
@@ -68,6 +68,71 @@ function jsonResponse(body: Record<string, unknown>, status: number): Response {
     status,
     headers: { "Content-Type": "application/json" },
   });
+}
+
+function encodeUtf8Base64(str: string): string {
+  const bytes = new TextEncoder().encode(str);
+  let binary = "";
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+  return btoa(binary);
+}
+
+/** Convert a string to a ReadableStream (required by EmailMessage). */
+function toReadableStream(str: string): ReadableStream {
+  return new Response(str).body!;
+}
+
+function encodeHeaderValue(str: string): string {
+  if (/^[\x20-\x7E]*$/.test(str)) return str;
+  return `=?UTF-8?B?${encodeUtf8Base64(str)}?=`;
+}
+
+function formatMailbox(name: string, email: string): string {
+  if (!name) return email;
+  return `${encodeHeaderValue(name)} <${email}>`;
+}
+
+function buildMimeMessage(options: {
+  from: string;
+  fromName: string;
+  to: string;
+  toName?: string;
+  replyTo?: string;
+  subject: string;
+  text: string;
+  html: string;
+}): string {
+  const boundary = `----=_Part_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+  const msgId = `<${Date.now()}.${Math.random().toString(36).slice(2)}@sagestoneinc.com>`;
+
+  const lines = [
+    `From: ${formatMailbox(options.fromName, options.from)}`,
+    `To: ${options.toName ? formatMailbox(options.toName, options.to) : options.to}`,
+    ...(options.replyTo ? [`Reply-To: ${options.replyTo}`] : []),
+    `Subject: ${encodeHeaderValue(options.subject)}`,
+    `MIME-Version: 1.0`,
+    `Message-ID: ${msgId}`,
+    `Date: ${new Date().toUTCString()}`,
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    ``,
+    `--${boundary}`,
+    `Content-Type: text/plain; charset=utf-8`,
+    `Content-Transfer-Encoding: 8bit`,
+    ``,
+    options.text,
+    ``,
+    `--${boundary}`,
+    `Content-Type: text/html; charset=utf-8`,
+    `Content-Transfer-Encoding: 8bit`,
+    ``,
+    options.html,
+    ``,
+    `--${boundary}--`,
+  ];
+
+  return lines.join("\r\n");
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
@@ -190,49 +255,32 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   </div>
 </div>`;
 
-    if (!env.MAILGUN_API_KEY || !env.MAILGUN_DOMAIN) {
-      console.error("Mailgun credentials are not configured.");
+    if (!env.SEND_EMAIL) {
+      console.error("Email binding (SEND_EMAIL) is not configured.");
       return jsonResponse(
         { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
         502
       );
     }
 
-    const fromEmail = env.MAILGUN_FROM_EMAIL || `postmaster@${env.MAILGUN_DOMAIN}`;
-    const region = env.MAILGUN_REGION === "eu" ? "eu" : "us";
-    const mailgunHost = region === "eu" ? "api.eu.mailgun.net" : "api.mailgun.net";
-    const mailgunBase = `https://${mailgunHost}/v3/${env.MAILGUN_DOMAIN}`;
-    const mailgunAuth = "Basic " + btoa(`api:${env.MAILGUN_API_KEY}`);
+    const fromEmail = env.FROM_EMAIL || "noreply@sagestoneinc.com";
 
     // Send notification email to SageStone
     try {
-      const params = new URLSearchParams();
-      params.append("from", `SageStone Contact Form <${fromEmail}>`);
-      params.append("to", RECIPIENT_EMAIL);
-      params.append("h:Reply-To", `${name} <${email}>`);
-      params.append("subject", `New Inquiry from ${name}${business ? ` – ${business}` : ""}`);
-      params.append("text", notificationText);
-      params.append("html", notificationHtml);
-
-      const mgResponse = await fetch(`${mailgunBase}/messages`, {
-        method: "POST",
-        headers: {
-          Authorization: mailgunAuth,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: params.toString(),
+      const notificationMime = buildMimeMessage({
+        from: fromEmail,
+        fromName: "SageStone Contact Form",
+        to: RECIPIENT_EMAIL,
+        replyTo: formatMailbox(name, email),
+        subject: `New Inquiry from ${name}${business ? ` – ${business}` : ""}`,
+        text: notificationText,
+        html: notificationHtml,
       });
 
-      if (!mgResponse.ok) {
-        const errorText = await mgResponse.text();
-        console.error("Mailgun notification email failed:", mgResponse.status, errorText);
-        return jsonResponse(
-          { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
-          502
-        );
-      }
+      const notificationMsg = new EmailMessage(fromEmail, RECIPIENT_EMAIL, toReadableStream(notificationMime));
+      await env.SEND_EMAIL.send(notificationMsg);
     } catch (err) {
-      console.error("Mailgun notification email error:", err);
+      console.error("Email notification send error:", err);
       return jsonResponse(
         { error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com." },
         502
@@ -241,24 +289,37 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     // Send confirmation email to the user (best effort — don't fail the request)
     try {
-      const confirmParams = new URLSearchParams();
-      confirmParams.append("from", `SageStone Inc <${fromEmail}>`);
-      confirmParams.append("to", `${name} <${email}>`);
-      confirmParams.append("h:Reply-To", `SageStone Inc <${RECIPIENT_EMAIL}>`);
-      confirmParams.append("subject", "We received your message — SageStone Inc");
-      confirmParams.append("text", `Hi ${stripTags(name)},\n\nThank you for reaching out to SageStone Inc. We've received your message and will get back to you within 24 hours.\n\nService: ${stripTags(service)}\n\nYour message:\n${stripTags(message)}\n\nIf you have urgent questions, reply to this email or call us at +1 214-945-2234.\n\n— The SageStone Inc Team\nhttps://sagestoneinc.com`);
-      confirmParams.append("html", confirmationHtml);
+      const confirmationText = [
+        `Hi ${stripTags(name)},`,
+        ``,
+        `Thank you for reaching out to SageStone Inc. We've received your message and will get back to you within 24 hours.`,
+        ``,
+        `Service: ${stripTags(service)}`,
+        ``,
+        `Your message:`,
+        stripTags(message),
+        ``,
+        `If you have urgent questions, reply to this email or call us at +1 214-945-2234.`,
+        ``,
+        `— The SageStone Inc Team`,
+        `https://sagestoneinc.com`,
+      ].join("\n");
 
-      await fetch(`${mailgunBase}/messages`, {
-        method: "POST",
-        headers: {
-          Authorization: mailgunAuth,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: confirmParams.toString(),
+      const confirmMime = buildMimeMessage({
+        from: fromEmail,
+        fromName: "SageStone Inc",
+        to: email,
+        toName: name,
+        replyTo: formatMailbox("SageStone Inc", RECIPIENT_EMAIL),
+        subject: "We received your message — SageStone Inc",
+        text: confirmationText,
+        html: confirmationHtml,
       });
+
+      const confirmMsg = new EmailMessage(fromEmail, email, toReadableStream(confirmMime));
+      await env.SEND_EMAIL.send(confirmMsg);
     } catch (err) {
-      console.error("Mailgun confirmation email error (non-fatal):", err);
+      console.error("Email confirmation send error (non-fatal):", err);
     }
 
     return jsonResponse({ success: true, message: "Your message has been sent. We'll be in touch within 24 hours!" }, 200);
