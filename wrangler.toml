@@ -7,3 +7,6 @@ build_command = "npm run build"
 NODE_VERSION = "20"
 MAILGUN_DOMAIN = "sagestoneinc.com"
 MAILGUN_FROM_EMAIL = "postmaster@sagestoneinc.com"
+# Set MAILGUN_REGION to "eu" if your Mailgun account/domain is in the EU region.
+# Omit or set to "us" for the default US region.
+# MAILGUN_REGION = "us"
