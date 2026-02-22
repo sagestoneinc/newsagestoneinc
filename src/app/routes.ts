@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import WhySageStone from "./pages/WhySageStone";
 import Solutions from "./pages/Solutions";
+import SolutionPage from "./pages/SolutionPage";
 import Faqs from "./pages/Faqs";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
       // { path: "team", Component: Team }, // Temporarily disabled
       { path: "why-sagestone", Component: WhySageStone },
       { path: "solutions", Component: Solutions },
+      { path: "solutions/:slug", Component: SolutionPage },
       { path: "faqs", Component: Faqs },
       { path: "blog", Component: Blog },
       { path: "blog/:id", Component: BlogPost },

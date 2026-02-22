@@ -11,13 +11,13 @@ const quickLinks = [
 ];
 
 const solutionLinks = [
-  { label: "Virtual Operations & Admin", path: "/solutions#operations" },
-  { label: "Real Estate VA", path: "/solutions#real-estate" },
-  { label: "Bookkeeping Support", path: "/solutions#bookkeeping" },
-  { label: "Social Media Marketing", path: "/solutions#social-media" },
-  { label: "Lead Generation", path: "/solutions#lead-gen" },
-  { label: "Graphic Design", path: "/solutions#design" },
-  { label: "Data Entry & Research", path: "/solutions#data-entry" },
+  { label: "Virtual Operations & Admin", path: "/solutions/virtual-operations-admin" },
+  { label: "Real Estate VA", path: "/solutions/real-estate-virtual-assistant" },
+  { label: "Bookkeeping Support", path: "/solutions/bookkeeping-support" },
+  { label: "Social Media Marketing", path: "/solutions/social-media-marketing-support" },
+  { label: "Lead Generation", path: "/solutions/lead-generation-support" },
+  { label: "Graphic Design", path: "/solutions/graphic-design-support" },
+  { label: "Data Entry & Research", path: "/solutions/data-entry-web-research" },
 ];
 
 const legalLinks = [
