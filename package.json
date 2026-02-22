@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "deploy": "npm run build && node -e \"if (process.env.CLOUDFLARE_API_TOKEN) { require('child_process').execSync('npx wrangler pages deploy dist', { stdio: 'inherit' }); } else { console.log('Skipping Wrangler deploy: CLOUDFLARE_API_TOKEN not set'); }\"",
+    "deploy": "npm run build && node -e \"if (process.env.CLOUDFLARE_API_TOKEN && process.env.CLOUDFLARE_ACCOUNT_ID) { require('child_process').execSync('npx wrangler pages deploy dist --project-name newsagestoneinc', { stdio: 'inherit' }); } else { console.log('Skipping Wrangler deploy: CLOUDFLARE_API_TOKEN/CLOUDFLARE_ACCOUNT_ID not set'); }\"",
     "dev": "vite",
     "postinstall": "node scripts/setup-run.cjs"
   },
