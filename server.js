@@ -2,12 +2,14 @@ import express from "express";
 import nodemailer from "nodemailer";
 import { fileURLToPath } from "url";
 import path from "path";
-import crypto from "crypto";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Trust the first proxy (Railway / reverse proxy) so req.ip reflects the real client
+app.set("trust proxy", 1);
 
 app.use(express.json());
 
@@ -60,15 +62,32 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-// ── SMTP transporter (configured via env vars) ────────────────────
+function stripControlChars(str) {
+  return str.replace(/[\x00-\x1f\x7f]/g, "");
+}
 
-function createTransporter() {
+// ── SMTP transporter (singleton, configured via env vars) ─────────
+
+const smtpTransporter = (() => {
   const host = process.env.SMTP_HOST;
-  const port = parseInt(process.env.SMTP_PORT || "587", 10);
+  const portEnv = process.env.SMTP_PORT;
+  const defaultPort = 587;
+  let port = defaultPort;
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
 
+  if (portEnv) {
+    const parsedPort = parseInt(portEnv, 10);
+    if (Number.isNaN(parsedPort)) {
+      console.warn(
+        `Invalid SMTP_PORT value "${portEnv}". Falling back to default port ${defaultPort}.`
+      );
+    } else {
+      port = parsedPort;
+    }
+  }
   if (!host || !user || !pass) {
+    console.warn("SMTP is not configured. Set SMTP_HOST, SMTP_USER, and SMTP_PASS.");
     return null;
   }
 
@@ -78,7 +97,7 @@ function createTransporter() {
     secure: port === 465,
     auth: { user, pass },
   });
-}
+})();
 
 // ── Simple rate limiter (per-IP, in-memory) ───────────────────────
 
@@ -126,8 +145,8 @@ app.post("/api/contact", rateLimit, async (req, res) => {
     }
 
     // Validate required fields
-    const name = stripTags((body.name || "").trim());
-    const email = stripTags((body.email || "").trim());
+    const name = stripControlChars(stripTags((body.name || "").trim()));
+    const email = stripControlChars(stripTags((body.email || "").trim()));
     const service = stripTags((body.service || "").trim());
     const message = stripTags((body.message || "").trim());
 
@@ -150,11 +169,11 @@ app.post("/api/contact", rateLimit, async (req, res) => {
       return res.status(400).json({ error: "You must consent to be contacted." });
     }
 
-    // Sanitize optional fields
-    const business = sanitize(stripTags((body.business || "").trim())).slice(0, 200);
-    const phone = sanitize(stripTags((body.phone || "").trim())).slice(0, 30);
+    // Sanitize optional fields (strip HTML tags and limit length; avoid HTML-escaping to keep text clean)
+    const business = stripControlChars(stripTags((body.business || "").trim())).slice(0, 200);
+    const phone = stripTags((body.phone || "").trim()).slice(0, 30);
     const workload = ALLOWED_WORKLOADS.includes(body.workload || "") ? body.workload || "" : "";
-    const tools = sanitize(stripTags((body.tools || "").trim())).slice(0, 500);
+    const tools = stripTags((body.tools || "").trim()).slice(0, 500);
 
     const timestamp = new Date().toISOString();
     const fromEmail = process.env.FROM_EMAIL || "hello@sagestoneinc.com";
@@ -168,12 +187,12 @@ app.post("/api/contact", rateLimit, async (req, res) => {
   <div style="background: #f9fafb; padding: 24px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px;">
     <table style="width: 100%; border-collapse: collapse;">
       <tr><td style="padding: 8px 0; color: #6b7280; width: 140px; vertical-align: top;">Name</td><td style="padding: 8px 0; color: #111827; font-weight: 500;">${sanitize(name)}</td></tr>
-      ${business ? `<tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;">Business</td><td style="padding: 8px 0; color: #111827;">${business}</td></tr>` : ""}
+      ${business ? `<tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;">Business</td><td style="padding: 8px 0; color: #111827;">${sanitize(business)}</td></tr>` : ""}
       <tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;">Email</td><td style="padding: 8px 0; color: #111827;"><a href="mailto:${sanitize(email)}" style="color: #4a7c59;">${sanitize(email)}</a></td></tr>
-      ${phone ? `<tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;">Phone</td><td style="padding: 8px 0; color: #111827;">${phone}</td></tr>` : ""}
+      ${phone ? `<tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;">Phone</td><td style="padding: 8px 0; color: #111827;">${sanitize(phone)}</td></tr>` : ""}
       <tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;">Service</td><td style="padding: 8px 0; color: #111827;">${sanitize(service)}</td></tr>
       ${workload ? `<tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;">Workload</td><td style="padding: 8px 0; color: #111827;">${sanitize(workload)}</td></tr>` : ""}
-      ${tools ? `<tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;">Tools</td><td style="padding: 8px 0; color: #111827;">${tools}</td></tr>` : ""}
+      ${tools ? `<tr><td style="padding: 8px 0; color: #6b7280; vertical-align: top;">Tools</td><td style="padding: 8px 0; color: #111827;">${sanitize(tools)}</td></tr>` : ""}
     </table>
     <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
       <p style="color: #6b7280; margin: 0 0 8px;">Message</p>
@@ -202,9 +221,7 @@ app.post("/api/contact", rateLimit, async (req, res) => {
       .filter((line) => line !== "")
       .join("\n");
 
-    const transporter = createTransporter();
-    if (!transporter) {
-      console.error("SMTP is not configured. Set SMTP_HOST, SMTP_USER, and SMTP_PASS.");
+    if (!smtpTransporter) {
       return res.status(502).json({
         error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com.",
       });
@@ -212,7 +229,7 @@ app.post("/api/contact", rateLimit, async (req, res) => {
 
     // Send notification email to SageStone
     try {
-      await transporter.sendMail({
+      await smtpTransporter.sendMail({
         from: `"SageStone Contact Form" <${fromEmail}>`,
         to: RECIPIENT_EMAIL,
         replyTo: email,
@@ -264,7 +281,7 @@ app.post("/api/contact", rateLimit, async (req, res) => {
         "https://sagestoneinc.com",
       ].join("\n");
 
-      await transporter.sendMail({
+      await smtpTransporter.sendMail({
         from: `"SageStone Inc" <${fromEmail}>`,
         to: `"${name}" <${email}>`,
         replyTo: RECIPIENT_EMAIL,
@@ -288,6 +305,11 @@ app.post("/api/contact", rateLimit, async (req, res) => {
 // ── Serve static files from Vite build ────────────────────────────
 
 app.use(express.static(path.join(__dirname, "dist")));
+
+// ── Explicit /api 404 — prevent SPA fallback from masking API errors
+app.use("/api", (_req, res) => {
+  res.status(404).json({ error: "Not found" });
+});
 
 // SPA fallback — serve index.html for all non-API routes
 app.get("/{*splat}", (_req, res) => {
