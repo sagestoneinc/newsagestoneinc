@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "deploy": "npx wrangler pages deploy dist",
+    "deploy": "npm run build && node -e \"if (process.env.CLOUDFLARE_API_TOKEN) { require('child_process').execSync('npx wrangler pages deploy dist', { stdio: 'inherit' }); } else { console.log('Skipping Wrangler deploy: CLOUDFLARE_API_TOKEN not set'); }\"",
     "dev": "vite",
     "postinstall": "node scripts/setup-run.cjs"
   },
