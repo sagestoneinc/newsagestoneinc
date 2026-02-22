@@ -21,4 +21,4 @@ const runScript = [
 const runPath = join(binDir, 'run');
 writeFileSync(runPath, runScript);
 chmodSync(runPath, 0o755);
-console.log('Created node_modules/.bin/run proxy (npm run <script> wrapper)');
+console.log('Created node_modules/.bin/run proxy (npm run SCRIPT wrapper)');
