@@ -71,27 +71,48 @@ function jsonResponse(body: Record<string, unknown>, status: number): Response {
 }
 
 function encodeUtf8Base64(str: string): string {
+  // Prefer native base64 encoding when available (e.g., Node.js / Cloudflare Workers with node_compat)
+  const globalAny = globalThis as any;
+  if (typeof globalAny.Buffer !== "undefined") {
+    return globalAny.Buffer.from(str, "utf-8").toString("base64");
+  }
+
+  // Fallback for environments without Buffer: encode to UTF-8 bytes and base64-encode via btoa
   const bytes = new TextEncoder().encode(str);
   let binary = "";
-  for (const byte of bytes) {
-    binary += String.fromCharCode(byte);
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
   }
   return btoa(binary);
 }
 
 /** Convert a string to a ReadableStream (required by EmailMessage). */
 function toReadableStream(str: string): ReadableStream {
-  return new Response(str).body!;
+  const response = new Response(str);
+  return response.body ?? new ReadableStream();
 }
 
 function encodeHeaderValue(str: string): string {
-  if (/^[\x20-\x7E]*$/.test(str)) return str;
-  return `=?UTF-8?B?${encodeUtf8Base64(str)}?=`;
+  // Strip CR and LF to prevent header injection
+  const safe = str.replace(/[\r\n]/g, "");
+  if (/^[\x20-\x7E]*$/.test(safe)) return safe;
+  return `=?UTF-8?B?${encodeUtf8Base64(safe)}?=`;
+}
+
+function sanitizeEmailForHeader(email: string): string {
+  if (!isValidEmail(email)) {
+    throw new Error("Invalid email address");
+  }
+  if (/[\r\n\x00-\x1F\x7F]/.test(email)) {
+    throw new Error("Email address contains invalid control characters");
+  }
+  return email;
 }
 
 function formatMailbox(name: string, email: string): string {
-  if (!name) return email;
-  return `${encodeHeaderValue(name)} <${email}>`;
+  const safeEmail = sanitizeEmailForHeader(email);
+  if (!name) return safeEmail;
+  return `${encodeHeaderValue(name)} <${safeEmail}>`;
 }
 
 function buildMimeMessage(options: {
@@ -104,8 +125,8 @@ function buildMimeMessage(options: {
   text: string;
   html: string;
 }): string {
-  const boundary = `----=_Part_${Date.now()}_${Math.random().toString(36).slice(2)}`;
-  const msgId = `<${Date.now()}.${Math.random().toString(36).slice(2)}@sagestoneinc.com>`;
+  const boundary = `----=_Part_${crypto.randomUUID()}`;
+  const msgId = `<${crypto.randomUUID()}@sagestoneinc.com>`;
 
   const lines = [
     `From: ${formatMailbox(options.fromName, options.from)}`,
@@ -271,7 +292,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         from: fromEmail,
         fromName: "SageStone Contact Form",
         to: RECIPIENT_EMAIL,
-        replyTo: formatMailbox(name, email),
+        replyTo: email,
         subject: `New Inquiry from ${name}${business ? ` – ${business}` : ""}`,
         text: notificationText,
         html: notificationHtml,
@@ -310,7 +331,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         fromName: "SageStone Inc",
         to: email,
         toName: name,
-        replyTo: formatMailbox("SageStone Inc", RECIPIENT_EMAIL),
+        replyTo: RECIPIENT_EMAIL,
         subject: "We received your message — SageStone Inc",
         text: confirmationText,
         html: confirmationHtml,
