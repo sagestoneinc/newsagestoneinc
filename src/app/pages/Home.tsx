@@ -255,42 +255,18 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const areaServed = "Worldwide";
-    const orgJsonLd = {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "SageStone Inc",
-      "url": "https://sagestoneinc.com",
-      "description": "SageStone Inc provides remote virtual assistant services worldwide, helping businesses streamline operations, boost marketing, and scale efficiently.",
-      "email": "hello@sagestoneinc.com",
-      "telephone": "+1-214-945-2234",
-      "areaServed": areaServed,
-      "serviceType": "Virtual Assistant Services",
-    };
-    const existing = document.getElementById("org-jsonld");
-    if (existing && existing.tagName === "SCRIPT") {
-      const script = existing as HTMLScriptElement;
-      script.type = "application/ld+json";
-      script.text = JSON.stringify(orgJsonLd);
-    } else {
-      const script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.text = JSON.stringify(orgJsonLd);
-      script.id = "org-jsonld";
-      document.head.appendChild(script);
-    }
-
     const serviceJsonLd = {
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "Virtual Assistant Services",
       "description": "Remote virtual assistant services for growing businesses worldwide, including operations & admin support, real estate VA, bookkeeping support, social media marketing, lead generation, graphic design, and data entry.",
+      "url": "https://sagestoneinc.com/solutions",
       "provider": {
         "@type": "Organization",
         "name": "SageStone Inc",
         "url": "https://sagestoneinc.com",
       },
-      "areaServed": areaServed,
+      "areaServed": "Worldwide",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Virtual Assistant Services",
@@ -317,8 +293,6 @@ export default function Home() {
     }
 
     return () => {
-      const el = document.getElementById("org-jsonld");
-      if (el) el.remove();
       const svcEl = document.getElementById("home-service-jsonld");
       if (svcEl) svcEl.remove();
     };
