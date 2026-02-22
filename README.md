@@ -28,7 +28,7 @@
 
 2. **Set required environment variable**
    - In Pages project settings, go to **Settings** → **Environment variables**.
-   - Add `FROM_EMAIL` (for example: `hello@sagestoneinc.com`).
+   - Add `FROM_EMAIL` (for example: `contact@yourdomain.com`; SageStone uses `hello@sagestoneinc.com`).
    - This value must be an email address on your verified domain.
 
 3. **Enable Cloudflare Email Routing**
@@ -48,6 +48,6 @@
    - Open the deployed site and submit the Contact form (`/contact`).
    - Confirm:
      - You get a success message in the UI.
-     - `hello@sagestoneinc.com` receives the notification email.
+     - Your configured inbox receives the notification email (`hello@sagestoneinc.com` by default in this repo).
      - The submitter email receives the confirmation email.
   
