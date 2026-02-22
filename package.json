@@ -6,7 +6,8 @@
   "scripts": {
     "build": "vite build",
     "deploy": "npx wrangler pages deploy dist",
-    "dev": "vite"
+    "dev": "vite",
+    "postinstall": "node scripts/setup-run.cjs"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
