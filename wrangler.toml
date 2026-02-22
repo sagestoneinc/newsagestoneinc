@@ -4,5 +4,8 @@ pages_build_output_dir = "dist"
 
 [vars]
 NODE_VERSION = "20"
-FROM_EMAIL = "noreply@sagestoneinc.com"
-CLOUDFLARE_API_TOKEN = "v1.0-1db49ee7119e35b7207c9264-0f3bf34d15f27f2ef6fdb0437f207f590aeffad6a1b40c06ff239ab07d3de1f17794cec4b24b73560b3633c6d6a62c0d6956181005117192b6fd62fde5d1e4ecec472e30033d81c8e4"
+FROM_EMAIL = "hello@sagestoneinc.com"
+
+[[send_email]]
+name = "SEND_EMAIL"
+destination_address = "hello@sagestoneinc.com"
