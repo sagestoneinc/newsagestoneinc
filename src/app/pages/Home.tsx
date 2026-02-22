@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePageMeta } from "../hooks/usePageMeta";
 import {
   ArrowRight,
@@ -17,11 +17,8 @@ import {
   Star,
   Quote,
   Building2,
-  ShoppingBag,
-  Stethoscope,
   Briefcase,
-  GraduationCap,
-  Scale,
+  ChevronDown,
 } from "lucide-react";
 import { SectionHeading } from "../components/SectionHeading";
 import { CTABanner } from "../components/CTABanner";
@@ -91,15 +88,75 @@ const whyBullets = [
   "Industry-specific expertise across 10+ verticals",
 ];
 
-const industries = [
-  { icon: Building2, label: "Real Estate" },
-  { icon: ShoppingBag, label: "E-Commerce" },
-  { icon: Stethoscope, label: "Healthcare" },
-  { icon: Briefcase, label: "Consulting" },
-  { icon: GraduationCap, label: "Education" },
-  { icon: Scale, label: "Legal" },
-  { icon: BarChart3, label: "Finance" },
-  { icon: Rocket, label: "Startups" },
+const whoWeHelp = [
+  {
+    icon: Briefcase,
+    title: "Small Business Owners",
+    desc: "Reclaim your time by delegating admin, bookkeeping, and marketing tasks so you can focus on growing your business instead of running it.",
+  },
+  {
+    icon: HomeIcon,
+    title: "Real Estate Professionals",
+    desc: "Agents, brokers, and property managers trust our real estate virtual assistants to handle MLS updates, CRM follow-ups, and transaction coordination.",
+  },
+  {
+    icon: Rocket,
+    title: "Entrepreneurs & Startups",
+    desc: "Move fast without burning out. Our remote virtual assistant services give early-stage teams operational leverage from day one.",
+  },
+  {
+    icon: Building2,
+    title: "Agencies & Consultants",
+    desc: "Scale client delivery without scaling headcount. Our VAs integrate seamlessly into your team for design, research, lead gen, and social media support.",
+  },
+  {
+    icon: BarChart3,
+    title: "Finance & Professional Services",
+    desc: "Get accurate bookkeeping support, data management, and outsourced administrative support that keeps your practice efficient and client-ready.",
+  },
+];
+
+const homeFaqs = [
+  {
+    q: "How much do virtual assistant services cost?",
+    a: "Pricing depends on the service type, required hours, and skill level. We offer flexible hourly and monthly packages with no hidden fees. Most clients start with a part-time plan and scale as they see results. Contact us for a custom quote—we're fully transparent from day one.",
+  },
+  {
+    q: "How quickly can I get started with a virtual assistant?",
+    a: "Most clients are matched and fully onboarded within five to seven business days after an initial discovery call. We work quickly to find the right VA for your industry and needs, ensuring a smooth transition so you start seeing value in the first week.",
+  },
+  {
+    q: "Can your virtual assistants work in my time zone?",
+    a: "Yes. Our remote virtual assistant services cover all major time zones—EST, CST, PST, and international. Schedules are agreed upon during onboarding so your assistant is available when you need them, including evenings or weekends for specific tasks.",
+  },
+  {
+    q: "What tools and software do your VAs use?",
+    a: "Our virtual assistants are proficient in 50+ business tools including Google Workspace, Microsoft Office, Asana, Trello, HubSpot, Salesforce, QuickBooks, Xero, Canva, Adobe Creative Suite, Hootsuite, and many more. If you rely on a specific platform, chances are we already know it.",
+  },
+  {
+    q: "How do you protect my confidential business information?",
+    a: "Every VA signs a comprehensive NDA and data-protection agreement before starting. We use encrypted communication channels and secure password management tools. For roles involving financial or sensitive data, we conduct enhanced background screening to safeguard your information.",
+  },
+  {
+    q: "Is your bookkeeping support the same as hiring a CPA?",
+    a: "No. Our bookkeeping support covers day-to-day transaction management, reconciliation, invoicing, and financial reporting in QuickBooks, Xero, or FreshBooks. We do not provide licensed accounting advice, tax filing, or audit services. We recommend pairing our support with a CPA for advisory needs.",
+  },
+  {
+    q: "How do you handle revisions for graphic design work?",
+    a: "We offer unlimited revisions on all graphic design deliverables until you are fully satisfied. Each revision round is typically turned around within 24 to 48 business hours. We follow your brand guidelines closely to minimize back-and-forth and deliver polished assets faster.",
+  },
+  {
+    q: "How is lead generation outreach kept compliant?",
+    a: "All outreach campaigns comply with CAN-SPAM, GDPR, and applicable data-privacy regulations. We use opt-out mechanisms, maintain suppression lists, and follow platform-specific guidelines for LinkedIn and email. Our processes are reviewed regularly to align with current best practices.",
+  },
+  {
+    q: "How will I receive updates and progress reports?",
+    a: "You'll receive regular updates through your preferred communication channel—email, Slack, or a shared project board. Most clients get daily task summaries, weekly progress reports, and monthly performance reviews. Your dedicated account manager is always available for questions.",
+  },
+  {
+    q: "Can I scale my virtual assistant support up or down?",
+    a: "Absolutely. We operate on a flexible month-to-month basis with no long-term contracts. You can add hours, bring on additional VAs for different service areas, or scale down with 30 days' notice. Our model is designed to grow—and flex—with your business.",
+  },
 ];
 
 const testimonials = [
@@ -147,38 +204,97 @@ const blogPosts = [
   },
 ];
 
+function HomeFaq() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  return (
+    <section className="py-20 lg:py-24 bg-stone-50">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          badge="FAQ"
+          title="Frequently Asked Questions About Virtual Assistant Services"
+          subtitle="Everything you need to know before getting started with SageStone."
+        />
+        <div className="max-w-3xl mx-auto space-y-3">
+          {homeFaqs.map((item, i) => (
+            <div key={i} className="border border-stone-200 rounded-xl overflow-hidden bg-white hover:border-sage-200 transition-colors">
+              <button
+                onClick={() => setOpenIdx(openIdx === i ? null : i)}
+                className="w-full flex items-center justify-between gap-4 p-5 text-left"
+              >
+                <span className="text-stone-900 text-[0.9375rem]" style={{ fontWeight: 500 }}>{item.q}</span>
+                <ChevronDown className={`w-5 h-5 text-stone-400 shrink-0 transition-transform duration-200 ${openIdx === i ? "rotate-180" : ""}`} />
+              </button>
+              {openIdx === i && (
+                <div className="px-5 pb-5 pt-0">
+                  <p className="text-stone-500 text-[0.875rem] leading-relaxed">{item.a}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-10">
+          <Link
+            to="/faqs"
+            className="inline-flex items-center gap-2 text-sage-600 hover:text-sage-700 text-[0.9375rem] transition-colors"
+            style={{ fontWeight: 500 }}
+          >
+            View All FAQs
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   usePageMeta({
     title: "Virtual Assistant Services for Growing Businesses",
-    description: "SageStone Inc provides expert virtual assistant services including admin support, bookkeeping, social media marketing, lead generation, and real estate VA services.",
-    keywords: "virtual assistant services, VA services, remote assistant, bookkeeping support, social media marketing, lead generation, real estate virtual assistant, admin support, SageStone Inc",
+    description: "SageStone: expert virtual assistant services worldwide—admin, real estate VA, bookkeeping, lead generation & social media support. Book a free discovery call.",
+    keywords: "virtual assistant services, virtual assistant services for small business, outsourced administrative support, remote virtual assistant services, real estate virtual assistant, lead generation virtual assistant, bookkeeping support, SageStone Inc",
   });
 
   useEffect(() => {
-    const orgJsonLd = {
+    const serviceJsonLd = {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "SageStone Inc",
-      "url": "https://sagestoneinc.com",
-      "description": "SageStone Inc provides remote virtual assistant services worldwide, helping businesses streamline operations, boost marketing, and scale efficiently.",
-      "email": "hello@sagestoneinc.com",
-      "telephone": "+1-214-945-2234",
+      "@type": "Service",
+      "name": "Virtual Assistant Services",
+      "description": "Remote virtual assistant services for growing businesses worldwide, including operations & admin support, real estate VA, bookkeeping support, social media marketing, lead generation, graphic design, and data entry.",
+      "url": "https://sagestoneinc.com/solutions",
+      "provider": {
+        "@type": "Organization",
+        "name": "SageStone Inc",
+        "url": "https://sagestoneinc.com",
+      },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Virtual Assistant Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Virtual Operations & Admin" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Real Estate Virtual Assistant" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bookkeeping Support" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Marketing Support" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lead Generation Support" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Graphic Design Support" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Data Entry & Web Research" } },
+        ],
+      },
     };
-    const existing = document.getElementById("org-jsonld");
-    if (existing && existing.tagName === "SCRIPT") {
-      const script = existing as HTMLScriptElement;
-      script.type = "application/ld+json";
-      script.text = JSON.stringify(orgJsonLd);
+    const existingSvc = document.getElementById("home-service-jsonld");
+    if (existingSvc && existingSvc.tagName === "SCRIPT") {
+      (existingSvc as HTMLScriptElement).text = JSON.stringify(serviceJsonLd);
     } else {
-      const script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.text = JSON.stringify(orgJsonLd);
-      script.id = "org-jsonld";
-      document.head.appendChild(script);
+      const svcScript = document.createElement("script");
+      svcScript.type = "application/ld+json";
+      svcScript.text = JSON.stringify(serviceJsonLd);
+      svcScript.id = "home-service-jsonld";
+      document.head.appendChild(svcScript);
     }
+
     return () => {
-      const el = document.getElementById("org-jsonld");
-      if (el) el.remove();
+      const svcEl = document.getElementById("home-service-jsonld");
+      if (svcEl) svcEl.remove();
     };
   }, []);
 
@@ -398,28 +514,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ========== INDUSTRIES ========== */}
+      {/* ========== WHO WE HELP ========== */}
       <section className="py-20 lg:py-24 bg-white">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            badge="Industries We Serve"
-            title="Trusted Across Diverse Sectors"
-            subtitle="Our virtual assistants bring industry-specific expertise to every engagement."
+            badge="Who We Help"
+            title="Virtual Assistant Services for Every Growing Business"
+            subtitle="From solo entrepreneurs to scaling agencies, our remote virtual assistant services adapt to your workflows, tools, and goals."
           />
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
-            {industries.map((ind) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whoWeHelp.map((w) => (
               <div
-                key={ind.label}
-                className="flex flex-col items-center gap-3 p-5 rounded-xl border border-stone-200 hover:border-sage-200 hover:bg-sage-50/50 transition-all duration-300"
+                key={w.title}
+                className="p-7 rounded-2xl border border-stone-200 hover:border-sage-200 hover:shadow-md transition-all duration-300 bg-white"
               >
-                <div className="w-11 h-11 rounded-lg bg-stone-100 text-stone-600 flex items-center justify-center">
-                  <ind.icon className="w-5 h-5" />
+                <div className="w-11 h-11 rounded-xl bg-sage-50 text-sage-600 flex items-center justify-center mb-4">
+                  <w.icon className="w-5 h-5" />
                 </div>
-                <span className="text-stone-700 text-[0.8125rem] text-center" style={{ fontWeight: 500 }}>
-                  {ind.label}
-                </span>
+                <h3 className="text-stone-900 mb-2" style={{ fontSize: '1rem', fontWeight: 600 }}>{w.title}</h3>
+                <p className="text-stone-500 text-[0.875rem] leading-relaxed">{w.desc}</p>
               </div>
             ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-all duration-200 shadow-lg shadow-sage-500/25 text-[0.9375rem]"
+              style={{ fontWeight: 600 }}
+            >
+              Book a Discovery Call
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -513,6 +638,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ========== FAQ ========== */}
+      <HomeFaq />
 
       {/* ========== FINAL CTA ========== */}
       <CTABanner
