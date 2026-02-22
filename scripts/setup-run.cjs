@@ -27,12 +27,15 @@ const wranglerScript = [
   '#!/usr/bin/env node',
   "'use strict';",
   "const { spawnSync } = require('child_process');",
-  "if (process.env.CF_PAGES === '1' && process.argv[2] === 'pages' && process.argv[3] === 'deploy') {",
+  "const args = process.argv.slice(2);",
+  "const nonFlagArgs = args.filter((arg) => !arg.startsWith('-'));",
+  "if (process.env.CF_PAGES === '1' && nonFlagArgs.length >= 2 && nonFlagArgs[0] === 'pages' && nonFlagArgs[1] === 'deploy') {",
   "  console.log('Skipping Wrangler deploy: already running inside Cloudflare Pages build environment');",
   "  process.exit(0);",
   "}",
   "const wranglerCli = require.resolve('wrangler/bin/wrangler.js');",
-  "const result = spawnSync(process.execPath, [wranglerCli].concat(process.argv.slice(2)), { stdio: 'inherit' });",
+  "const result = spawnSync(process.execPath, [wranglerCli].concat(args), { stdio: 'inherit' });",
+  "if (result.error) process.exit(1);",
   "process.exit(result.status ?? (result.signal ? 1 : 0));",
 ].join('\n');
 
