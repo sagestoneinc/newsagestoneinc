@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "deploy": "npx wrangler pages deploy dist",
+    "deploy": "npm run build && if [ -n \"$CLOUDFLARE_API_TOKEN\" ]; then npx wrangler pages deploy dist; else echo \"Skipping Wrangler deploy: CLOUDFLARE_API_TOKEN not set\"; fi",
     "dev": "vite",
     "postinstall": "node scripts/setup-run.cjs"
   },
