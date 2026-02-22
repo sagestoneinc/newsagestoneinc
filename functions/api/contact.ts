@@ -284,7 +284,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       );
     }
 
-    const fromEmail = env.FROM_EMAIL || "noreply@sagestoneinc.com";
+    const fromEmail = env.FROM_EMAIL || "hello@sagestoneinc.com";
 
     // Send notification email to SageStone
     try {
