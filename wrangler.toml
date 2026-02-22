@@ -5,7 +5,3 @@ pages_build_output_dir = "dist"
 [vars]
 NODE_VERSION = "20"
 FROM_EMAIL = "hello@sagestoneinc.com"
-
-[[send_email]]
-name = "SEND_EMAIL"
-destination_address = "hello@sagestoneinc.com"
