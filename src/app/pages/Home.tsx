@@ -55,13 +55,13 @@ const pillars = [
 ];
 
 const solutions = [
-  { icon: ClipboardList, title: "Virtual Operations & Admin", desc: "Calendar, email, project management, and workflow automation." },
-  { icon: HomeIcon, title: "Real Estate Virtual Assistant", desc: "Listing coordination, CRM updates, transaction support." },
-  { icon: Calculator, title: "Bookkeeping Support", desc: "Invoicing, expense tracking, reconciliation, and reports." },
-  { icon: Share2, title: "Social Media Marketing", desc: "Content scheduling, community management, analytics reporting." },
-  { icon: Target, title: "Lead Generation Support", desc: "Prospect research, outreach campaigns, list building." },
-  { icon: Palette, title: "Graphic Design Support", desc: "Brand assets, social graphics, presentations, and collateral." },
-  { icon: Database, title: "Data Entry & Web Research", desc: "Accurate data management, market research, competitive analysis." },
+  { icon: ClipboardList, title: "Virtual Operations & Admin", desc: "Calendar, email, project management, and workflow automation.", slug: "virtual-operations-admin" },
+  { icon: HomeIcon, title: "Real Estate Virtual Assistant", desc: "Listing coordination, CRM updates, transaction support.", slug: "real-estate-virtual-assistant" },
+  { icon: Calculator, title: "Bookkeeping Support", desc: "Invoicing, expense tracking, reconciliation, and reports.", slug: "bookkeeping-support" },
+  { icon: Share2, title: "Social Media Marketing", desc: "Content scheduling, community management, analytics reporting.", slug: "social-media-marketing-support" },
+  { icon: Target, title: "Lead Generation Support", desc: "Prospect research, outreach campaigns, list building.", slug: "lead-generation-support" },
+  { icon: Palette, title: "Graphic Design Support", desc: "Brand assets, social graphics, presentations, and collateral.", slug: "graphic-design-support" },
+  { icon: Database, title: "Data Entry & Web Research", desc: "Accurate data management, market research, competitive analysis.", slug: "data-entry-web-research" },
 ];
 
 const steps = [
@@ -296,7 +296,7 @@ export default function Home() {
             {solutions.map((s) => (
               <Link
                 key={s.title}
-                to="/solutions"
+                to={`/solutions/${s.slug}`}
                 className="group p-6 rounded-xl bg-white border border-stone-200 hover:border-sage-300 hover:shadow-md transition-all duration-300"
               >
                 <div className="w-10 h-10 rounded-lg bg-sage-50 text-sage-600 flex items-center justify-center mb-4 group-hover:bg-sage-500 group-hover:text-white transition-colors duration-300">

@@ -202,7 +202,7 @@ export default function SolutionPage() {
       provider: {
         "@type": "Organization",
         name: "SageStone Inc",
-        url: "https://www.newsagestoneinc.com",
+        url: "https://sagestoneinc.com",
       },
     });
     document.head.appendChild(script);
@@ -262,7 +262,7 @@ export default function SolutionPage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              to="/solutions"
+              to="/contact"
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-stone-700 border border-stone-200 rounded-lg hover:border-sage-200 hover:text-sage-600 transition-all duration-200 text-[0.9375rem]"
               style={{ fontWeight: 600 }}
             >

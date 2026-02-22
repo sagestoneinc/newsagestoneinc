@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { usePageMeta } from "../hooks/usePageMeta";
 import {
@@ -19,6 +19,7 @@ import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 interface SolutionData {
   id: string;
+  slug: string;
   icon: React.ComponentType<{ className?: string }>;
   title: string;
   description: string;
@@ -30,6 +31,7 @@ interface SolutionData {
 const solutionsData: SolutionData[] = [
   {
     id: "operations",
+    slug: "virtual-operations-admin",
     icon: ClipboardList,
     title: "Virtual Operations & Admin",
     description: "Keep your business running like clockwork with dedicated virtual assistant services for day-to-day operations. Our operations and admin VAs manage your inbox, coordinate calendars, and track projects so nothing slips through the cracks. From travel bookings and expense reports to meeting agendas and minutes, we handle the operational heavy lifting that consumes your time. Need a workflow automation setup in tools like Zapier or Make? We do that too. By offloading outsourced administrative support to SageStone, you reclaim hours every week—time better spent on revenue-generating activities, strategic planning, and building client relationships.",
@@ -50,6 +52,7 @@ const solutionsData: SolutionData[] = [
   },
   {
     id: "real-estate",
+    slug: "real-estate-virtual-assistant",
     icon: HomeIcon,
     title: "Real Estate Virtual Assistant",
     description: "Purpose-built support for agents, brokers, and property managers who need to stay ahead in a competitive market. Our real estate virtual assistant professionals understand the industry inside and out—from MLS listing updates and CRM management to transaction coordination and compliance tracking. We handle open house scheduling, showing feedback follow-ups, and comparative market analysis so you can focus on closing deals. Whether you are a solo agent or lead a brokerage team, our real estate VAs keep your pipeline organized and your clients impressed with prompt, professional communication around the clock.",
@@ -70,6 +73,7 @@ const solutionsData: SolutionData[] = [
   },
   {
     id: "bookkeeping",
+    slug: "bookkeeping-support",
     icon: Calculator,
     title: "Bookkeeping Support",
     description: "Accurate, timely bookkeeping support without the overhead of a full-time hire. Our bookkeeping VAs are trained in QuickBooks, Xero, FreshBooks, and other popular platforms, delivering reliable financial record-keeping for growing businesses. We manage invoicing, expense tracking, bank and credit-card reconciliation, accounts payable and receivable, and monthly financial reports. Need payroll preparation assistance? We handle that as well. Please note that our bookkeeping support services are not a substitute for licensed CPA or accounting advisory—we focus on day-to-day transaction management and accurate record-keeping so you are always tax-season ready.",
@@ -90,6 +94,7 @@ const solutionsData: SolutionData[] = [
   },
   {
     id: "social-media",
+    slug: "social-media-marketing-support",
     icon: Share2,
     title: "Social Media Marketing Support",
     description: "Build your brand presence and engage your audience with a dedicated social media virtual assistant from SageStone. We plan content calendars, design eye-catching posts, write compelling copy, and schedule across every major platform—Instagram, LinkedIn, Facebook, X, and TikTok. Our social media marketing support extends to community management, hashtag research, analytics reporting, and influencer outreach coordination. Instead of scrambling to post consistently, you get a data-driven strategy executed by professionals who understand algorithms and engagement. The result? A cohesive brand voice, a growing follower base, and more time for you to run your business.",
@@ -110,6 +115,7 @@ const solutionsData: SolutionData[] = [
   },
   {
     id: "lead-gen",
+    slug: "lead-generation-support",
     icon: Target,
     title: "Lead Generation Support",
     description: "Fill your sales pipeline with qualified prospects through systematic outreach powered by a lead generation virtual assistant. Our lead gen VAs combine technology with a personal touch—conducting prospect research, building targeted lists, managing cold email campaigns, and executing LinkedIn outreach. We enter data into your CRM, maintain pipeline hygiene, score and qualify leads, and set appointments directly on your calendar. All outreach is conducted in compliance with CAN-SPAM and applicable data-privacy regulations. By outsourcing lead generation support to SageStone, you reduce cost-per-lead compared to paid advertising while keeping your sales team focused on closing.",
@@ -130,6 +136,7 @@ const solutionsData: SolutionData[] = [
   },
   {
     id: "design",
+    slug: "graphic-design-support",
     icon: Palette,
     title: "Graphic Design Support",
     description: "Professional visual content that elevates your brand—delivered by a graphic design support team that works as an extension of yours. Our design VAs create social media graphics, branded templates, pitch decks, infographics, data visualizations, and email newsletter layouts. Need print-ready marketing collateral? We produce that too. Every asset follows your brand guidelines for fonts, colors, and tone, ensuring a cohesive visual identity across all channels. Unlike agencies with long turnaround times, our designers deliver fast iterations with unlimited revisions until you are satisfied. Elevate your brand without the agency price tag.",
@@ -150,6 +157,7 @@ const solutionsData: SolutionData[] = [
   },
   {
     id: "data-entry",
+    slug: "data-entry-web-research",
     icon: Database,
     title: "Data Entry & Web Research",
     description: "Accurate, efficient data management and research that powers better business decisions. Our data entry virtual assistant professionals are meticulous with details and fast with delivery—handling everything from database management and data cleansing to deduplication and spreadsheet formatting. On the research side, we conduct market analysis, competitive intelligence gathering, product research, pricing comparisons, and web scraping for data compilation. Whether you need a one-time data migration or ongoing research support, our VAs deliver 99.9 percent accuracy with clear documentation. Clean data and actionable insights give your team the confidence to make informed, strategic choices.",
@@ -222,6 +230,35 @@ export default function Solutions() {
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  useEffect(() => {
+    const serviceJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Virtual Assistant Services",
+      description:
+        "Professional virtual assistant services for growing businesses including operations support, real estate VA, bookkeeping, social media marketing, lead generation, graphic design, and data entry.",
+      provider: {
+        "@type": "Organization",
+        name: "SageStone Inc",
+        url: "https://sagestoneinc.com",
+      },
+    };
+    const existing = document.getElementById("solutions-jsonld");
+    if (existing && existing.tagName === "SCRIPT") {
+      (existing as HTMLScriptElement).text = JSON.stringify(serviceJsonLd);
+    } else {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = "solutions-jsonld";
+      script.text = JSON.stringify(serviceJsonLd);
+      document.head.appendChild(script);
+    }
+    return () => {
+      const el = document.getElementById("solutions-jsonld");
+      if (el) el.remove();
+    };
+  }, []);
+
   return (
     <>
       {/* Hero */}
@@ -253,7 +290,9 @@ export default function Solutions() {
                   <solution.icon className="w-6 h-6" />
                 </div>
                 <h2 className="text-stone-900 tracking-tight mb-4" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 700, lineHeight: 1.2 }}>
-                  {solution.title}
+                  <Link to={`/solutions/${solution.slug}`} className="hover:text-sage-600 transition-colors">
+                    {solution.title}
+                  </Link>
                 </h2>
                 <p className="text-stone-500 text-[0.9375rem] leading-relaxed mb-6">
                   {solution.description}
@@ -282,6 +321,14 @@ export default function Solutions() {
                     ))}
                   </div>
                 </div>
+                <Link
+                  to={`/solutions/${solution.slug}`}
+                  className="inline-flex items-center gap-2 mt-6 text-sage-600 hover:text-sage-700 text-[0.9375rem] transition-colors"
+                  style={{ fontWeight: 500 }}
+                >
+                  Learn More
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
               <div className={`relative ${idx % 2 === 1 ? "lg:[direction:ltr]" : ""}`}>
                 <div className={`absolute -inset-3 bg-sage-100/40 rounded-2xl ${idx % 2 === 0 ? "rotate-2" : "-rotate-2"}`} />
