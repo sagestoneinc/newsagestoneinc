@@ -66,6 +66,29 @@ function stripControlChars(str) {
   return str.replace(/[\x00-\x1f\x7f]/g, "");
 }
 
+// ── Retry helper for transient SMTP errors ────────────────────────
+
+const TRANSIENT_CODES = new Set(["ECONNECTION", "ETIMEDOUT", "ECONNRESET", "ECONNREFUSED", "ESOCKET"]);
+const MAX_RETRIES = 2;
+
+async function sendMailWithRetry(transporter, mailOptions) {
+  let lastError;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await transporter.sendMail(mailOptions);
+    } catch (err) {
+      lastError = err;
+      const isTransient = TRANSIENT_CODES.has(err.code) || /timeout/i.test(err.message);
+      if (!isTransient || attempt === MAX_RETRIES) {
+        throw err;
+      }
+      const delay = 1000 * 2 ** attempt; // 1 s, 2 s
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
+  throw lastError;
+}
+
 // ── SMTP transporter (singleton, configured via env vars) ─────────
 
 const smtpTransporter = (() => {
@@ -96,6 +119,10 @@ const smtpTransporter = (() => {
     port,
     secure: port === 465,
     auth: { user, pass },
+    pool: true,
+    connectionTimeout: 30_000,
+    greetingTimeout: 15_000,
+    socketTimeout: 60_000,
   });
 })();
 
@@ -229,7 +256,7 @@ app.post("/api/contact", rateLimit, async (req, res) => {
 
     // Send notification email to SageStone
     try {
-      await smtpTransporter.sendMail({
+      await sendMailWithRetry(smtpTransporter, {
         from: `"SageStone Contact Form" <${fromEmail}>`,
         to: RECIPIENT_EMAIL,
         replyTo: email,
@@ -281,7 +308,7 @@ app.post("/api/contact", rateLimit, async (req, res) => {
         "https://sagestoneinc.com",
       ].join("\n");
 
-      await smtpTransporter.sendMail({
+      await sendMailWithRetry(smtpTransporter, {
         from: `"SageStone Inc" <${fromEmail}>`,
         to: `"${name}" <${email}>`,
         replyTo: RECIPIENT_EMAIL,
