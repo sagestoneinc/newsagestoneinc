@@ -80,9 +80,43 @@ function createTransporter() {
   });
 }
 
+// ── Simple rate limiter (per-IP, in-memory) ───────────────────────
+
+const rateLimitMap = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX = 5; // max requests per window
+
+function rateLimit(req, res, next) {
+  const ip = req.ip;
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  if (!entry || now - entry.start > RATE_LIMIT_WINDOW_MS) {
+    rateLimitMap.set(ip, { start: now, count: 1 });
+    return next();
+  }
+
+  entry.count++;
+  if (entry.count > RATE_LIMIT_MAX) {
+    return res.status(429).json({ error: "Too many requests. Please try again in a minute." });
+  }
+
+  return next();
+}
+
+// Clean up stale entries every 5 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, entry] of rateLimitMap) {
+    if (now - entry.start > RATE_LIMIT_WINDOW_MS) {
+      rateLimitMap.delete(ip);
+    }
+  }
+}, 5 * 60 * 1000).unref();
+
 // ── POST /api/contact ─────────────────────────────────────────────
 
-app.post("/api/contact", async (req, res) => {
+app.post("/api/contact", rateLimit, async (req, res) => {
   try {
     const body = req.body;
 
