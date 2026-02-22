@@ -410,7 +410,7 @@ export const solutionPagesData: SolutionPageData[] = [
       {
         question: "What accuracy rate do you guarantee for data entry?",
         answer:
-          "We maintain a 99 percent or higher accuracy rate through double-entry verification and automated validation checks. Every batch is reviewed before delivery, and we provide error logs so you have full transparency into our quality-control process.",
+          "We maintain a 99.9 percent accuracy rate through double-entry verification and automated validation checks. Every batch is reviewed before delivery, and we provide error logs so you have full transparency into our quality-control process.",
       },
       {
         question: "How do you keep our data secure?",

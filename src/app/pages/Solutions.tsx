@@ -245,12 +245,12 @@ export default function Solutions() {
     };
     const existing = document.getElementById("solutions-jsonld");
     if (existing && existing.tagName === "SCRIPT") {
-      (existing as HTMLScriptElement).text = JSON.stringify(serviceJsonLd);
+      (existing as HTMLScriptElement).textContent = JSON.stringify(serviceJsonLd);
     } else {
       const script = document.createElement("script");
       script.type = "application/ld+json";
       script.id = "solutions-jsonld";
-      script.text = JSON.stringify(serviceJsonLd);
+      script.textContent = JSON.stringify(serviceJsonLd);
       document.head.appendChild(script);
     }
     return () => {
