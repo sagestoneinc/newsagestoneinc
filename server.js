@@ -210,7 +210,6 @@ app.post("/api/contact", rateLimit, async (req, res) => {
       .join("\n");
 
     if (!smtpTransporter) {
-      console.error("SMTP is not configured. Set SMTP_HOST, SMTP_USER, and SMTP_PASS.");
       return res.status(502).json({
         error: "We couldn't send your message right now. Please try again later or email us directly at hello@sagestoneinc.com.",
       });
