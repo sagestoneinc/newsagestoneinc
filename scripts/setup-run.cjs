@@ -22,3 +22,24 @@ const runPath = join(binDir, 'run');
 writeFileSync(runPath, runScript);
 chmodSync(runPath, 0o755);
 console.log('Created node_modules/.bin/run proxy (npm run SCRIPT wrapper)');
+
+const wranglerScript = [
+  '#!/usr/bin/env node',
+  "'use strict';",
+  "const { spawnSync } = require('child_process');",
+  "const args = process.argv.slice(2);",
+  "const nonFlagArgs = args.filter((arg) => !arg.startsWith('-'));",
+  "if (process.env.CF_PAGES === '1' && nonFlagArgs.length >= 2 && nonFlagArgs[0] === 'pages' && nonFlagArgs[1] === 'deploy') {",
+  "  console.log('Skipping Wrangler deploy: already running inside Cloudflare Pages build environment');",
+  "  process.exit(0);",
+  "}",
+  "const wranglerCli = require.resolve('wrangler/bin/wrangler.js');",
+  "const result = spawnSync(process.execPath, [wranglerCli].concat(args), { stdio: 'inherit' });",
+  "if (result.error) process.exit(1);",
+  "process.exit(result.status ?? (result.signal ? 1 : 0));",
+].join('\n');
+
+const wranglerPath = join(binDir, 'wrangler');
+writeFileSync(wranglerPath, wranglerScript);
+chmodSync(wranglerPath, 0o755);
+console.log('Created node_modules/.bin/wrangler proxy (skip deploy in CF_PAGES)');
