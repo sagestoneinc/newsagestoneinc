@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "deploy": "npm run build && node -e \"const missing = []; if (!process.env.CLOUDFLARE_API_TOKEN) missing.push('CLOUDFLARE_API_TOKEN'); if (!process.env.CLOUDFLARE_ACCOUNT_ID) missing.push('CLOUDFLARE_ACCOUNT_ID'); if (missing.length === 0) { require('child_process').execSync('npx wrangler pages deploy dist --project-name newsagestoneinc', { stdio: 'inherit' }); } else { console.log('Skipping Wrangler deploy: ' + missing.join(', ') + ' not set'); }\"",
+    "deploy": "npm run build && node -e \"const missing = []; if (!process.env.CLOUDFLARE_API_TOKEN) missing.push('CLOUDFLARE_API_TOKEN'); if (!process.env.CLOUDFLARE_ACCOUNT_ID) missing.push('CLOUDFLARE_ACCOUNT_ID'); if (missing.length === 0) { require('child_process').execSync('npx wrangler pages deploy dist', { stdio: 'inherit' }); } else { console.log('Skipping Wrangler deploy: ' + missing.join(', ') + ' not set'); }\"",
     "dev": "vite",
     "postinstall": "node scripts/setup-run.cjs"
   },
