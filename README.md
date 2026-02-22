@@ -15,7 +15,7 @@
 
 **Deploy command:** `npm run deploy`
 
-> Note: When this command runs inside Cloudflare Pages (`CF_PAGES=1`), it only builds and skips `wrangler pages deploy` to avoid recursive/self-deploy failures.
+> Note: When this command runs inside Cloudflare Pages (`CF_PAGES=1`), it only builds and skips `wrangler pages deploy` to avoid recursive/self-deploy failures. Direct `npx wrangler pages deploy` calls are also safely skipped in that environment.
 
 ## Cloudflare setup (step-by-step, including contact form)
 
