@@ -6,6 +6,7 @@
   "scripts": {
     "build": "vite build",
     "deploy": "npm run build && node -e \"if (process.env.CF_PAGES === '1') { console.log('Skipping Wrangler deploy: already running inside Cloudflare Pages build environment'); process.exit(0); } const missing = []; if (!process.env.CLOUDFLARE_API_TOKEN) missing.push('CLOUDFLARE_API_TOKEN'); if (!process.env.CLOUDFLARE_ACCOUNT_ID) missing.push('CLOUDFLARE_ACCOUNT_ID'); if (missing.length === 0) { require('child_process').execSync('npx wrangler pages deploy dist', { stdio: 'inherit' }); } else { console.log('Skipping Wrangler deploy: ' + missing.join(', ') + ' not set'); }\"",
+    "start": "node server.js",
     "dev": "vite",
     "postinstall": "node scripts/setup-run.cjs"
   },
@@ -46,10 +47,12 @@
     "cmdk": "1.1.1",
     "date-fns": "3.6.0",
     "embla-carousel-react": "8.6.0",
+    "express": "^5.2.1",
     "input-otp": "1.4.2",
     "lucide-react": "0.487.0",
     "motion": "12.23.24",
     "next-themes": "0.4.6",
+    "nodemailer": "^8.0.1",
     "react": "18.3.1",
     "react-day-picker": "8.10.1",
     "react-dnd": "16.0.1",
