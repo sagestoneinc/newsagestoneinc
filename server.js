@@ -70,10 +70,22 @@ function stripControlChars(str) {
 
 const smtpTransporter = (() => {
   const host = process.env.SMTP_HOST;
-  const port = parseInt(process.env.SMTP_PORT || "587", 10);
+  const portEnv = process.env.SMTP_PORT;
+  const defaultPort = 587;
+  let port = defaultPort;
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
 
+  if (portEnv) {
+    const parsedPort = parseInt(portEnv, 10);
+    if (Number.isNaN(parsedPort)) {
+      console.warn(
+        `Invalid SMTP_PORT value "${portEnv}". Falling back to default port ${defaultPort}.`
+      );
+    } else {
+      port = parsedPort;
+    }
+  }
   if (!host || !user || !pass) {
     console.warn("SMTP is not configured. Set SMTP_HOST, SMTP_USER, and SMTP_PASS.");
     return null;
