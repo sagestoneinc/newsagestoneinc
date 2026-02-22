@@ -5,4 +5,4 @@ pages_build_output_dir = "dist"
 [vars]
 NODE_VERSION = "20"
 FROM_EMAIL = "noreply@sagestoneinc.com"
-CLOUDFLARE_API_TOKEN = "9a531f4ca166300e9aa59a88c77c329ce039c"
+CLOUDFLARE_API_TOKEN = "erXtQ7e4D-aPCS4lDZa0hrXP0UVv3kJrNjHfYuH-"
