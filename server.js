@@ -114,16 +114,29 @@ const smtpTransporter = (() => {
     return null;
   }
 
-  return nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     host,
     port,
     secure: port === 465,
     auth: { user, pass },
-    pool: true,
     connectionTimeout: 30_000,
     greetingTimeout: 15_000,
     socketTimeout: 60_000,
   });
+
+  // Log SMTP connection errors instead of crashing the process
+  transporter.on("error", (err) => {
+    console.error("SMTP transporter error:", err);
+  });
+
+  // Verify connection on startup (non-blocking)
+  transporter.verify().then(() => {
+    console.log("SMTP connection verified successfully.");
+  }).catch((err) => {
+    console.warn("SMTP connection verification failed:", err.code || "", err.message);
+  });
+
+  return transporter;
 })();
 
 // ── Simple rate limiter (per-IP, in-memory) ───────────────────────
