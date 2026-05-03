@@ -1,3 +1,9 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+body {
+  background-image:
+    radial-gradient(rgba(46, 46, 46, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
