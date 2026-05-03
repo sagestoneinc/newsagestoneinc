@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
-import { Menu, X, Leaf } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -40,9 +40,13 @@ export function Header() {
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-9 h-9 bg-sage-500 rounded-lg flex items-center justify-center">
-              <Leaf className="w-5 h-5 text-white" />
-            </div>
+            <img
+              src="/logo-mark.svg"
+              alt="SageStone Inc"
+              className="w-9 h-9"
+              loading="eager"
+              decoding="async"
+            />
             <span className="text-stone-900 tracking-tight" style={{ fontSize: '1.25rem', fontWeight: 700 }}>
               SageStone <span className="text-sage-500">Inc</span>
             </span>

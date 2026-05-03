@@ -32,9 +32,12 @@ export function BrandFooter() {
         <div className="grid gap-10 lg:gap-8 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Link to="/" className="inline-flex items-center gap-3">
-              <div
-                className="w-10 h-10 rounded-2xl border border-[color:var(--brand-stone-taupe)]/55 bg-[color:var(--brand-cloud)]/70"
-                aria-hidden="true"
+              <img
+                src="/logo-mark.svg"
+                alt="SageStone Inc"
+                className="w-10 h-10"
+                loading="lazy"
+                decoding="async"
               />
               <div>
                 <p style={{ fontSize: "1.25rem", fontWeight: 750, lineHeight: 1.1 }}>
@@ -112,4 +115,3 @@ export function BrandFooter() {
     </footer>
   );
 }
-
