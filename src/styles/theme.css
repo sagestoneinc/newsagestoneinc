@@ -3,6 +3,17 @@
 :root {
   --font-size: 16px;
   --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-heading: 'Playfair Display', ui-serif, Georgia, serif;
+
+  /* Premium Brand Palette */
+  --brand-ivory: #F3EFE7;
+  --brand-cloud: #FAF8F3;
+  --brand-sage-mist: #D8DED2;
+  --brand-olive-sage: #8F987A;
+  --brand-stone-taupe: #C7BDB1;
+  --brand-soft-beige: #E6DFD2;
+  --brand-charcoal: #2E2E2E;
+  --brand-deep-sage: #6F7F67;
 
   /* Sage + Stone Palette */
   --sage-50: #F0F5F1;
@@ -27,48 +38,49 @@
   --stone-800: #2D3640;
   --stone-900: #1A2028;
 
-  /* Core tokens mapped to sage + stone */
-  --background: #FFFFFF;
-  --foreground: #1A2028;
-  --card: #FFFFFF;
-  --card-foreground: #1A2028;
-  --popover: #FFFFFF;
-  --popover-foreground: #1A2028;
-  --primary: #5A8A63;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F0F5F1;
-  --secondary-foreground: #2A3F2F;
-  --muted: #F1F3F4;
-  --muted-foreground: #5B6770;
-  --accent: #E4E7E9;
-  --accent-foreground: #1A2028;
+  /* Core tokens mapped to premium kit */
+  --background: var(--brand-ivory);
+  --foreground: var(--brand-charcoal);
+  --card: rgba(250, 248, 243, 0.75);
+  --card-foreground: var(--brand-charcoal);
+  --popover: var(--brand-cloud);
+  --popover-foreground: var(--brand-charcoal);
+  --primary: var(--brand-olive-sage);
+  --primary-foreground: var(--brand-cloud);
+  --secondary: var(--brand-sage-mist);
+  --secondary-foreground: var(--brand-charcoal);
+  --muted: var(--brand-soft-beige);
+  --muted-foreground: #5A5A5A;
+  --accent: var(--brand-sage-mist);
+  --accent-foreground: var(--brand-charcoal);
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: #E4E7E9;
+  --border: rgba(199, 189, 177, 0.55);
   --input: transparent;
-  --input-background: #F1F3F4;
-  --switch-background: #CED4D7;
+  --input-background: rgba(230, 223, 210, 0.75);
+  --switch-background: rgba(199, 189, 177, 0.75);
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #5A8A63;
-  --chart-1: #5A8A63;
-  --chart-2: #6B9F73;
-  --chart-3: #8FB896;
-  --chart-4: #B8D1BC;
-  --chart-5: #DCE8DE;
-  --radius: 0.625rem;
-  --sidebar: #FAFBFB;
-  --sidebar-foreground: #1A2028;
-  --sidebar-primary: #5A8A63;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F0F5F1;
-  --sidebar-accent-foreground: #1A2028;
-  --sidebar-border: #E4E7E9;
-  --sidebar-ring: #5A8A63;
+  --ring: var(--brand-olive-sage);
+  --chart-1: var(--brand-olive-sage);
+  --chart-2: var(--brand-deep-sage);
+  --chart-3: var(--brand-stone-taupe);
+  --chart-4: var(--brand-sage-mist);
+  --chart-5: var(--brand-soft-beige);
+  --radius: 1.25rem;
+  --sidebar: var(--brand-cloud);
+  --sidebar-foreground: var(--brand-charcoal);
+  --sidebar-primary: var(--brand-olive-sage);
+  --sidebar-primary-foreground: var(--brand-cloud);
+  --sidebar-accent: var(--brand-sage-mist);
+  --sidebar-accent-foreground: var(--brand-charcoal);
+  --sidebar-border: rgba(199, 189, 177, 0.55);
+  --sidebar-ring: var(--brand-olive-sage);
 }
 
 @theme inline {
   --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-heading: var(--font-family-heading);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -109,6 +121,16 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* Premium brand colors */
+  --color-brand-ivory: var(--brand-ivory);
+  --color-brand-cloud: var(--brand-cloud);
+  --color-brand-sage-mist: var(--brand-sage-mist);
+  --color-brand-olive-sage: var(--brand-olive-sage);
+  --color-brand-stone-taupe: var(--brand-stone-taupe);
+  --color-brand-soft-beige: var(--brand-soft-beige);
+  --color-brand-charcoal: var(--brand-charcoal);
+  --color-brand-deep-sage: var(--brand-deep-sage);
+
   /* Custom sage + stone colors */
   --color-sage-50: var(--sage-50);
   --color-sage-100: var(--sage-100);
@@ -139,6 +161,14 @@
 
   body {
     @apply bg-background text-foreground font-sans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-family-heading);
+    letter-spacing: -0.01em;
   }
 
   html {
