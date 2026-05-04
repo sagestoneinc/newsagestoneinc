@@ -1,14 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="16" fill="#5A8A63" />
-  <path
-    d="M33 14C33 14 19 24 19 37C19 45 25 50 33 50C41 50 47 45 47 37C47 29 41 22 33 14Z"
-    stroke="white"
-    stroke-width="4"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    fill="none"
-  />
-  <path d="M33 50V28" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M33 36L25 28" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M33 42L41 34" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 160 160" fill="none">
+  <defs>
+    <linearGradient id="green" x1="22" y1="24" x2="101" y2="127" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9AA081"/>
+      <stop offset="1" stop-color="#6F765C"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="104" y1="42" x2="60" y2="139" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9D0C4"/>
+      <stop offset="1" stop-color="#AFA599"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="32" fill="#F5EFE7"/>
+  <path d="M29.5 128V67.7C29.5 57 34.4 46.8 42.7 40L80 9.5L128.5 43.6L116.7 58.5L80.8 33.5L55.2 54.8C49.9 59.2 46.9 65.8 46.9 72.7V128C39.8 126 34.1 126 29.5 128Z" fill="url(#green)"/>
+  <path d="M49.4 121.3C53.2 90.9 70.9 62.4 102.1 42.7V84.3C95.4 106.4 75.7 122.4 49.4 137.2V121.3Z" fill="url(#green)"/>
+  <path d="M47.8 121.4C57.8 94.4 74 72.4 96.4 55.4" stroke="#F8F5EF" stroke-width="6.5" stroke-linecap="round"/>
+  <path d="M108.2 47.7L133.2 62.9V93.6L106.8 76.4L92.8 85.5L133.5 111.7V131.3L83 150.5L48.6 130L65.7 118.3L84.8 129.8L113.9 118.6L73.5 92.3V72.6L108.2 47.7Z" fill="url(#stone)" stroke="#948C82" stroke-opacity="0.25" stroke-width="2"/>
 </svg>

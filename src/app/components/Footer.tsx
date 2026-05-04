@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { Mail, Phone, Globe, ArrowUpRight } from "lucide-react";
+import { BrandLogo } from "./BrandLogo";
 
 const quickLinks = [
   { label: "Home", path: "/" },
@@ -34,16 +35,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-4">
             <Link to="/" className="flex items-center gap-2 mb-5">
-              <img
-                src="/logo-mark.svg"
-                alt="SageStone Inc"
-                className="w-9 h-9"
-                loading="lazy"
-                decoding="async"
-              />
-              <span className="tracking-tight text-white" style={{ fontSize: '1.25rem', fontWeight: 700 }}>
-                SageStone <span className="text-sage-400">Inc</span>
-              </span>
+              <BrandLogo variant="light" />
             </Link>
             <p className="text-stone-400 text-[0.9375rem] leading-relaxed mb-6 max-w-sm">
               SageStone Inc provides remote virtual assistant services worldwide, helping businesses

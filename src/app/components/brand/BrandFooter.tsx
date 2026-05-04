@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { BrandLogo } from "../BrandLogo";
 
 const services = [
   { label: "Virtual Operations & Admin", path: "/solutions/virtual-operations-admin" },
@@ -31,18 +32,9 @@ export function BrandFooter() {
       <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-20 pb-10">
         <div className="grid gap-10 lg:gap-8 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Link to="/" className="inline-flex items-center gap-3">
-              <img
-                src="/logo-mark.svg"
-                alt="SageStone Inc"
-                className="w-10 h-10"
-                loading="lazy"
-                decoding="async"
-              />
+            <Link to="/" className="inline-flex flex-col items-start gap-2">
+              <BrandLogo />
               <div>
-                <p style={{ fontSize: "1.25rem", fontWeight: 750, lineHeight: 1.1 }}>
-                  SageStone Inc.
-                </p>
                 <p className="text-black/65 text-[0.875rem]">Remote Support. Real Business Momentum.</p>
               </div>
             </Link>

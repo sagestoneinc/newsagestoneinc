@@ -1,16 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 114" fill="none">
-  <!-- Left half of top arch (sage green) -->
-  <polygon points="10,34 50,11 50,24 21,41" fill="#7A8B6A"/>
-  <!-- Left side strip (sage green) -->
-  <polygon points="10,80 10,34 21,41 21,73" fill="#7A8B6A"/>
-  <!-- Right half of top arch (stone tan) -->
-  <polygon points="50,11 90,34 79,41 50,24" fill="#B8AA90"/>
-  <!-- Bottom V (stone tan) -->
-  <polygon points="90,80 50,103 10,80 21,73 50,90 79,73" fill="#B8AA90"/>
-  <!-- Leaf (sage green) -->
-  <path d="M34,29 C47,44 48,68 34,86 C22,70 21,45 34,29 Z" fill="#7A8B6A"/>
-  <path d="M34,29 C33,53 32,69 34,86" stroke="#EFE9DF" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-  <!-- S letterform (stone tan), angular stroke connecting arch to bottom V -->
-  <path d="M78,42 L57,42 L52,48 L52,56 L58,61 L72,61 L78,67 L78,74 L57,74 L52,68"
-        stroke="#B8AA90" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+  <defs>
+    <linearGradient id="green" x1="22" y1="24" x2="101" y2="127" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9AA081"/>
+      <stop offset="1" stop-color="#6F765C"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="104" y1="42" x2="60" y2="139" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9D0C4"/>
+      <stop offset="1" stop-color="#AFA599"/>
+    </linearGradient>
+    <filter id="shadow" x="8" y="8" width="144" height="144" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#2E2E2E" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path d="M29.5 128V67.7C29.5 57 34.4 46.8 42.7 40L80 9.5L128.5 43.6L116.7 58.5L80.8 33.5L55.2 54.8C49.9 59.2 46.9 65.8 46.9 72.7V128C39.8 126 34.1 126 29.5 128Z" fill="url(#green)"/>
+    <path d="M49.4 121.3C53.2 90.9 70.9 62.4 102.1 42.7V84.3C95.4 106.4 75.7 122.4 49.4 137.2V121.3Z" fill="url(#green)"/>
+    <path d="M47.8 121.4C57.8 94.4 74 72.4 96.4 55.4" stroke="#F8F5EF" stroke-width="6.5" stroke-linecap="round"/>
+    <path d="M108.2 47.7L133.2 62.9V93.6L106.8 76.4L92.8 85.5L133.5 111.7V131.3L83 150.5L48.6 130L65.7 118.3L84.8 129.8L113.9 118.6L73.5 92.3V72.6L108.2 47.7Z" fill="url(#stone)" stroke="#948C82" stroke-opacity="0.25" stroke-width="2"/>
+  </g>
 </svg>
