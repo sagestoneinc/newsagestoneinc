@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Leaf, Mail, Phone, Globe, ArrowUpRight } from "lucide-react";
+import { Mail, Phone, Globe, ArrowUpRight } from "lucide-react";
 
 const quickLinks = [
   { label: "Home", path: "/" },
@@ -34,9 +34,13 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-4">
             <Link to="/" className="flex items-center gap-2 mb-5">
-              <div className="w-9 h-9 bg-sage-500 rounded-lg flex items-center justify-center">
-                <Leaf className="w-5 h-5 text-white" />
-              </div>
+              <img
+                src="/logo-mark.svg"
+                alt="SageStone Inc"
+                className="w-9 h-9"
+                loading="lazy"
+                decoding="async"
+              />
               <span className="tracking-tight text-white" style={{ fontSize: '1.25rem', fontWeight: 700 }}>
                 SageStone <span className="text-sage-400">Inc</span>
               </span>
