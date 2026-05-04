@@ -1,14 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="16" fill="#5A8A63" />
-  <path
-    d="M33 14C33 14 19 24 19 37C19 45 25 50 33 50C41 50 47 45 47 37C47 29 41 22 33 14Z"
-    stroke="white"
-    stroke-width="4"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    fill="none"
-  />
-  <path d="M33 50V28" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M33 36L25 28" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M33 42L41 34" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 114" fill="none">
+  <!-- Left half of top arch (sage green) -->
+  <polygon points="10,34 50,11 50,24 21,41" fill="#7A8B6A"/>
+  <!-- Left side strip (sage green) -->
+  <polygon points="10,80 10,34 21,41 21,73" fill="#7A8B6A"/>
+  <!-- Right half of top arch (stone tan) -->
+  <polygon points="50,11 90,34 79,41 50,24" fill="#B8AA90"/>
+  <!-- Bottom V (stone tan) -->
+  <polygon points="90,80 50,103 10,80 21,73 50,90 79,73" fill="#B8AA90"/>
+  <!-- Leaf (sage green) -->
+  <path d="M34,29 C47,44 48,68 34,86 C22,70 21,45 34,29 Z" fill="#7A8B6A"/>
+  <path d="M34,29 C33,53 32,69 34,86" stroke="#EFE9DF" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <!-- S letterform (stone tan), angular stroke connecting arch to bottom V -->
+  <path d="M78,42 L57,42 L52,48 L52,56 L58,61 L72,61 L78,67 L78,74 L57,74 L52,68"
+        stroke="#B8AA90" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
 </svg>
