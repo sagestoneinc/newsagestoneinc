@@ -8,14 +8,26 @@ import { Badge } from "../components/brand/Badge";
 import { PrimaryButton } from "../components/brand/PrimaryButton";
 import { SecondaryButton } from "../components/brand/SecondaryButton";
 import { CTASection } from "../components/brand/CTASection";
+import { trackInternalLinkClick } from "../lib/analytics";
 
 const SITE_URL = "https://www.sagestoneinc.com";
 
 
+const serviceCtaLabels: Record<string, string> = {
+  "virtual-assistant-services": "Get Virtual Assistant Support",
+  "customer-support-outsourcing": "Get Customer Support Help",
+  "ecommerce-virtual-assistant": "Plan Your E-Commerce Support Workflow",
+  "real-estate-virtual-assistant": "Discuss Real Estate VA Support",
+  "social-media-management-services": "Plan Your Social Media Support",
+  "business-operations-support": "Improve Your Operations Workflow",
+  "web-design-maintenance": "Discuss Website Support",
+};
+
 const serviceResourceLinks: Record<string, Array<{ label: string; path: string; description: string }>> = {
   "virtual-assistant-services": [
     { label: "How to hire a virtual assistant", path: "/blog/how-to-hire-a-virtual-assistant", description: "Plan the tasks, support model, and onboarding steps before you delegate." },
-    { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "See how admin, reporting, and SOP support can strengthen daily operations." },
+    { label: "Virtual assistant vs in-house admin", path: "/virtual-assistant-vs-in-house-admin", description: "Compare support models before choosing your next admin capacity." },
+    { label: "Outsourced support for small businesses", path: "/outsourced-support-for-small-businesses", description: "See how smaller teams can delegate admin and operations work responsibly." },
   ],
   "customer-support-outsourcing": [
     { label: "When to outsource customer support", path: "/blog/when-to-outsource-customer-support", description: "Review the signals, workflows, quality controls, and support metrics to prepare." },
@@ -31,7 +43,8 @@ const serviceResourceLinks: Record<string, Array<{ label: string; path: string; 
   ],
   "business-operations-support": [
     { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "Learn what operations support includes and when a growing team needs it." },
-    { label: "Real estate operations support case study", path: "/case-studies/real-estate-operations-support", description: "Review a workflow example for CRM, scheduling, and administrative coordination." },
+    { label: "Outsourced support for small businesses", path: "/outsourced-support-for-small-businesses", description: "Review buyer-intent guidance for delegating admin, reporting, and daily operations." },
+    { label: "Virtual assistant vs in-house admin", path: "/virtual-assistant-vs-in-house-admin", description: "Compare flexible support and internal hiring considerations." },
   ],
   "web-design-maintenance": [
     { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "Connect website maintenance requests with broader operational follow-through." },
@@ -131,6 +144,7 @@ export default function SeoServicePage() {
 
   const otherServices = seoServicePages.filter((service) => service.slug !== page.slug).slice(0, 3);
   const resourceLinks = serviceResourceLinks[page.slug] ?? [];
+  const serviceCtaLabel = serviceCtaLabels[page.slug] ?? "Discuss Your Support Needs";
 
   return (
     <>
@@ -156,8 +170,8 @@ export default function SeoServicePage() {
               </h1>
               <p className="text-black/65 text-[1.125rem] leading-relaxed mb-8 max-w-2xl">{page.heroSummary}</p>
               <div className="flex flex-wrap gap-4">
-                <PrimaryButton to="/contact">Book a Free Operations Consultation</PrimaryButton>
-                <SecondaryButton to="/contact">Discuss Your Support Needs</SecondaryButton>
+                <PrimaryButton to="/contact" tracking={{ event_name: "service_cta_click", location: "service_hero", service: page.slug }}>Book a Free Operations Consultation</PrimaryButton>
+                <SecondaryButton to="/contact" tracking={{ event_name: "service_cta_click", location: "service_hero_secondary", service: page.slug }}>Discuss Your Support Needs</SecondaryButton>
               </div>
             </div>
             <div className="lg:col-span-5">
@@ -184,6 +198,9 @@ export default function SeoServicePage() {
               Practical support built around your workflow
             </h2>
             <p className="text-black/65 text-[1.0625rem] leading-relaxed">{page.intro}</p>
+            <div className="mt-8">
+              <PrimaryButton to="/contact" tracking={{ event_name: "service_cta_click", location: "service_intro", service: page.slug }}>{serviceCtaLabel}</PrimaryButton>
+            </div>
           </div>
         </section>
 
@@ -242,7 +259,7 @@ export default function SeoServicePage() {
               </div>
               <div className="grid md:grid-cols-2 gap-6">
                 {resourceLinks.map((resource) => (
-                  <Link key={resource.path} to={resource.path} className="group rounded-[18px] border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:border-[color:var(--brand-olive-sage)] transition-colors">
+                  <Link key={resource.path} to={resource.path} onClick={() => trackInternalLinkClick({ location: "service_resources", service: page.slug, content_title: resource.label, target_url: resource.path })} className="group rounded-[18px] border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:border-[color:var(--brand-olive-sage)] transition-colors">
                     <span className="text-[color:var(--brand-charcoal)]" style={{ fontWeight: 650 }}>{resource.label}</span>
                     <p className="text-black/65 text-[0.9375rem] leading-relaxed mt-3">{resource.description}</p>
                     <ArrowRight className="w-4 h-4 mt-4 text-[color:var(--brand-deep-sage)] group-hover:translate-x-1 transition-transform" aria-hidden="true" />
@@ -287,8 +304,9 @@ export default function SeoServicePage() {
       <CTASection
         title="Ready to Build Your Support Team?"
         subtitle="Tell SageStone Inc where your team needs support, and we will help you shape a practical next step."
-        buttonText="Discuss Your Support Needs"
+        buttonText={serviceCtaLabel}
         buttonTo="/contact"
+        tracking={{ event_name: "service_cta_click", location: "service_bottom", service: page.slug }}
         footerNote="Virtual Support. Real Results."
       />
     </>

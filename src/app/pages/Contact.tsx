@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { Mail, Phone, Globe, MapPin, Clock, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { trackEvent, trackLead } from "../lib/analytics";
 
 const serviceOptions = [
   "Virtual Assistant Services",
@@ -76,6 +77,7 @@ export default function Contact() {
       }
 
       if (res.ok && data.success) {
+        trackLead({ location: "contact_page", form_name: "contact" });
         setSubmitted(true);
       } else {
         setErrorMessage(data.error || "Something went wrong. Please try again.");
@@ -144,7 +146,7 @@ export default function Contact() {
               </p>
 
               <div className="space-y-5 mb-10">
-                <a href="mailto:hello@sagestoneinc.com" className="flex items-start gap-4 group">
+                <a href="mailto:hello@sagestoneinc.com" onClick={() => trackEvent("email_click", { location: "contact_page", target_url: "mailto:hello@sagestoneinc.com" })} className="flex items-start gap-4 group">
                   <div className="w-11 h-11 rounded-lg bg-sage-50 text-sage-600 flex items-center justify-center shrink-0 group-hover:bg-sage-100 transition-colors">
                     <Mail className="w-5 h-5" />
                   </div>
@@ -153,7 +155,7 @@ export default function Contact() {
                     <p className="text-stone-500 text-[0.875rem]">hello@sagestoneinc.com</p>
                   </div>
                 </a>
-                <a href="tel:+12149452234" className="flex items-start gap-4 group">
+                <a href="tel:+12149452234" onClick={() => trackEvent("phone_click", { location: "contact_page", target_url: "tel:+12149452234" })} className="flex items-start gap-4 group">
                   <div className="w-11 h-11 rounded-lg bg-sage-50 text-sage-600 flex items-center justify-center shrink-0 group-hover:bg-sage-100 transition-colors">
                     <Phone className="w-5 h-5" />
                   </div>

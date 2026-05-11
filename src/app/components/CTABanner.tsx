@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
+import { trackCtaClick } from "../lib/analytics";
 
 interface CTABannerProps {
   title?: string;
@@ -7,6 +8,7 @@ interface CTABannerProps {
   buttonText?: string;
   buttonLink?: string;
   variant?: "sage" | "dark";
+  tracking?: Record<string, string | number | boolean | undefined>;
 }
 
 export function CTABanner({
@@ -15,6 +17,7 @@ export function CTABanner({
   buttonText = "Contact Us",
   buttonLink = "/contact",
   variant = "sage",
+  tracking,
 }: CTABannerProps) {
   const isDark = variant === "dark";
   return (
@@ -43,6 +46,7 @@ export function CTABanner({
               : "bg-white text-sage-700 hover:bg-stone-50"
           }`}
           style={{ fontWeight: 600 }}
+          onClick={() => trackCtaClick({ location: "cta_banner", cta_text: buttonText, target_url: buttonLink, ...tracking })}
         >
           {buttonText}
           <ArrowRight className="w-4 h-4" />

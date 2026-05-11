@@ -99,7 +99,7 @@ export default function CaseStudy() {
           <p className="text-stone-500 text-[1.0625rem] leading-relaxed max-w-3xl">{study.summary}</p>
           <div className="flex flex-wrap gap-3 mt-8">
             {study.services.map((service) => (
-              <Link key={service.path} to={service.path} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-stone-200 text-stone-700 hover:text-sage-700 hover:border-sage-200 transition-colors text-[0.875rem]">
+              <Link key={service.path} to={service.path} onClick={() => trackInternalLinkClick({ event_name: "case_study_to_service_click", location: "case_study_hero", content_type: "case_study", content_title: study.title, target_url: service.path })} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-stone-200 text-stone-700 hover:text-sage-700 hover:border-sage-200 transition-colors text-[0.875rem]">
                 {service.label}
                 <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
               </Link>
@@ -139,6 +139,7 @@ export default function CaseStudy() {
         buttonText="Start the Conversation"
         buttonLink="/contact"
         variant="sage"
+        tracking={{ location: "case_study_end", content_type: "case_study", content_title: study.title }}
       />
     </>
   );

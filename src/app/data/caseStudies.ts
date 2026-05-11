@@ -24,6 +24,7 @@ export const caseStudies: CaseStudy[] = [
     services: [
       { label: "e-commerce virtual assistant services", path: "/ecommerce-virtual-assistant/" },
       { label: "customer support outsourcing", path: "/customer-support-outsourcing/" },
+      { label: "outsourced support for small businesses", path: "/outsourced-support-for-small-businesses/" },
     ],
     sections: [
       {
@@ -69,6 +70,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "real estate virtual assistant support", path: "/real-estate-virtual-assistant/" },
       { label: "business operations support", path: "/business-operations-support/" },
       { label: "virtual assistant services", path: "/virtual-assistant-services/" },
+      { label: "outsourced support for small businesses", path: "/outsourced-support-for-small-businesses/" },
     ],
     sections: [
       {

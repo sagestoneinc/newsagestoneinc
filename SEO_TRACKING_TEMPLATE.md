@@ -19,6 +19,13 @@ Use this template to track keyword movement for SageStone Inc service pages, blo
 |  | outsourced customer support for small business | https://www.sagestoneinc.com/blog/when-to-outsource-customer-support/ |  |  |  |  |
 |  | ecommerce support assistant | https://www.sagestoneinc.com/blog/what-does-an-ecommerce-virtual-assistant-do/ |  |  |  |  |
 |  | real estate admin virtual assistant | https://www.sagestoneinc.com/real-estate-virtual-assistant/ |  |  |  |  |
+|  | virtual assistant vs in-house admin | https://www.sagestoneinc.com/virtual-assistant-vs-in-house-admin/ |  |  |  |  |
+|  | virtual assistant vs employee | https://www.sagestoneinc.com/virtual-assistant-vs-in-house-admin/ |  |  |  |  |
+|  | outsourced support for small businesses | https://www.sagestoneinc.com/outsourced-support-for-small-businesses/ |  |  |  |  |
+|  | small business outsourcing support | https://www.sagestoneinc.com/outsourced-support-for-small-businesses/ |  |  |  |  |
+|  | outsourced customer support for small business | https://www.sagestoneinc.com/outsourced-support-for-small-businesses/ |  |  |  |  |
+|  | outsourced admin support | https://www.sagestoneinc.com/outsourced-support-for-small-businesses/ |  |  |  |  |
+|  | business support services for small business | https://www.sagestoneinc.com/outsourced-support-for-small-businesses/ |  |  |  |  |
 
 ## Tracking Instructions
 

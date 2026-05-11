@@ -312,8 +312,8 @@ export default function Home() {
                 social media support, web maintenance, and business operations services.
               </p>
               <div className="flex flex-wrap gap-4">
-                <PrimaryButton to="/contact">Book a Free Operations Consultation</PrimaryButton>
-                <SecondaryButton to="/virtual-assistant-services">Get Virtual Assistant Support</SecondaryButton>
+                <PrimaryButton to="/contact" tracking={{ location: "homepage_hero", cta_text: "Book a Free Operations Consultation" }}>Book a Free Operations Consultation</PrimaryButton>
+                <SecondaryButton to="/virtual-assistant-services" tracking={{ location: "homepage_hero", cta_text: "Get Virtual Assistant Support", service: "virtual-assistant-services" }}>Get Virtual Assistant Support</SecondaryButton>
               </div>
               <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-black/55 text-[0.875rem]">
                 <div className="flex items-center gap-2">
@@ -371,6 +371,10 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[0.9375rem] text-black/60">
+            <Link to="/virtual-assistant-vs-in-house-admin" className="text-[color:var(--brand-deep-sage)] underline underline-offset-4">Virtual assistant vs in-house admin</Link>
+            <Link to="/outsourced-support-for-small-businesses" className="text-[color:var(--brand-deep-sage)] underline underline-offset-4">Outsourced support for small businesses</Link>
+          </div>
         </div>
       </section>
 
@@ -403,7 +407,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-10 text-center">
-            <PrimaryButton to="/contact">Build Your Support Team</PrimaryButton>
+            <PrimaryButton to="/contact" tracking={{ location: "homepage_services", cta_text: "Build Your Support Team" }}>Build Your Support Team</PrimaryButton>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[0.9375rem] text-black/60">
             {seoServicePages.map((service) => (
@@ -472,6 +476,7 @@ export default function Home() {
         subtitle="Start building reliable remote support for your business today."
         buttonText="Discuss Your Support Needs"
         buttonTo="/contact"
+        tracking={{ location: "homepage_bottom", cta_text: "Discuss Your Support Needs" }}
         footerNote="Virtual Support. Real Results."
       />
     </>

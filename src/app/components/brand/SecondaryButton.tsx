@@ -1,13 +1,16 @@
 import { Link } from "react-router";
 import type React from "react";
+import { trackCtaClick } from "../../lib/analytics";
 
 interface SecondaryButtonProps {
   to: string;
   children: React.ReactNode;
   className?: string;
+  tracking?: Record<string, string | number | boolean | undefined>;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-export function SecondaryButton({ to, children, className = "" }: SecondaryButtonProps) {
+export function SecondaryButton({ to, children, className = "", tracking, onClick }: SecondaryButtonProps) {
   return (
     <Link
       to={to}
@@ -19,6 +22,10 @@ export function SecondaryButton({ to, children, className = "" }: SecondaryButto
         className
       }
       style={{ fontWeight: 500 }}
+      onClick={(event) => {
+        trackCtaClick({ cta_text: typeof children === "string" ? children : undefined, target_url: to, ...tracking });
+        onClick?.(event);
+      }}
     >
       {children}
     </Link>
