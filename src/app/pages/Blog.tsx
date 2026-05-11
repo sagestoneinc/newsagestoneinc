@@ -6,7 +6,7 @@ import { CTABanner } from "../components/CTABanner";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { blogPosts } from "../data/blogPosts";
 
-const categories = ["All", "Operations", "Remote Work", "Real Estate", "Marketing", "Productivity", "Growth"];
+const categories = ["All", "Virtual Assistant", "Customer Support", "E-Commerce Support", "Operations", "Remote Work", "Real Estate", "Marketing", "Productivity", "Growth"];
 
 function getPostPath(post: (typeof blogPosts)[0]) {
   return `/blog/${post.slug ?? post.id}`;

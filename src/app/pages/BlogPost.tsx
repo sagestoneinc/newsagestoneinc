@@ -100,9 +100,27 @@ export default function BlogPost() {
     setJsonLd("blog-post-jsonld", articleJsonLd);
     setJsonLd("blog-post-breadcrumb-jsonld", breadcrumbJsonLd);
 
+    if (post.faqs?.length) {
+      setJsonLd("blog-post-faq-jsonld", {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": post.faqs.map((faq) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer,
+          },
+        })),
+      });
+    } else {
+      document.getElementById("blog-post-faq-jsonld")?.remove();
+    }
+
     return () => {
       document.getElementById("blog-post-jsonld")?.remove();
       document.getElementById("blog-post-breadcrumb-jsonld")?.remove();
+      document.getElementById("blog-post-faq-jsonld")?.remove();
     };
   }, [canonicalUrl, description, post]);
 
@@ -225,6 +243,27 @@ export default function BlogPost() {
               return null;
             })}
           </div>
+          {post.faqs?.length ? (
+            <section className="mt-14" aria-labelledby="blog-faq-heading">
+              <h2
+                id="blog-faq-heading"
+                className="text-stone-900 mb-6"
+                style={{ fontSize: "1.5rem", fontWeight: 700, lineHeight: 1.3 }}
+              >
+                Frequently Asked Questions
+              </h2>
+              <div className="space-y-4">
+                {post.faqs.map((faq) => (
+                  <article key={faq.question} className="rounded-2xl border border-stone-200 bg-stone-50 p-6">
+                    <h3 className="text-stone-900 mb-2" style={{ fontSize: "1.0625rem", fontWeight: 650 }}>
+                      {faq.question}
+                    </h3>
+                    <p className="text-stone-600 text-[1rem] leading-relaxed mb-0">{faq.answer}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ) : null}
         </div>
       </section>
 
