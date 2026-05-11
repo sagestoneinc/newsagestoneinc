@@ -3,12 +3,14 @@ import { usePageMeta } from "../hooks/usePageMeta";
 import { Mail, Phone, Globe, MapPin, Clock, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 
 const serviceOptions = [
-  "Virtual Operations & Admin",
-  "Real Estate Virtual Assistant",
+  "Virtual Assistant Services",
+  "Customer Support Outsourcing",
+  "E-Commerce Virtual Assistant Services",
+  "Real Estate Virtual Assistant Services",
+  "Social Media Management Services",
+  "Business Operations Support",
+  "Web Design and Website Maintenance",
   "Bookkeeping Support",
-  "Social Media Marketing Support",
-  "Lead Generation Support",
-  "Graphic Design Support",
   "Data Entry & Web Research",
   "Multiple Services",
   "Not Sure Yet",
@@ -24,7 +26,7 @@ const workloadOptions = [
 export default function Contact() {
   usePageMeta({
     title: "Contact Us",
-    description: "Book a SageStone discovery call to discuss dedicated virtual assistant support for operations, admin, marketing, bookkeeping, lead generation, or customer service.",
+    description: "Book a free operations consultation with SageStone Inc to discuss virtual assistants, customer support, e-commerce support, web maintenance, or business operations support.",
     keywords: "contact SageStone Inc, book discovery call, virtual assistant consultation, managed VA support, business support inquiry",
   });
 
@@ -120,10 +122,10 @@ export default function Contact() {
             Get In Touch
           </span>
           <h1 className="text-stone-900 tracking-tight mb-5 max-w-3xl mx-auto" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 800, lineHeight: 1.15 }}>
-            Let's Talk About Your <span className="text-sage-500">Support Needs</span>
+            Discuss Your <span className="text-sage-500">Support Needs</span>
           </h1>
           <p className="text-stone-500 text-[1.0625rem] max-w-2xl mx-auto leading-relaxed">
-            Ready to get started or just have questions? Fill out the form below and we'll reach out within 24 hours to schedule your free discovery call.
+            Ready to get started or just have questions? Fill out the form below and we'll reach out within 24 hours to schedule your free operations consultation.
           </p>
         </div>
       </section>
@@ -198,7 +200,7 @@ export default function Contact() {
                   {[
                     "We review your submission within 24 hours",
                     "A team member reaches out to schedule a call",
-                    "We discuss your needs on a free discovery call",
+                    "We discuss your needs on a free operations consultation",
                     "We create a custom support proposal for you",
                   ].map((step, i) => (
                     <li key={step} className="flex items-start gap-2.5">
@@ -254,7 +256,7 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="John Smith"
+                      placeholder="Your name"
                       className="w-full px-4 py-3 rounded-lg border border-stone-200 bg-stone-50 text-stone-900 placeholder:text-stone-400 focus:border-sage-400 focus:ring-2 focus:ring-sage-100 focus:outline-none transition-all text-[0.875rem]"
                     />
                   </div>
@@ -268,7 +270,7 @@ export default function Contact() {
                       name="business"
                       value={formData.business}
                       onChange={handleChange}
-                      placeholder="Your Company LLC"
+                      placeholder="Your business name"
                       className="w-full px-4 py-3 rounded-lg border border-stone-200 bg-stone-50 text-stone-900 placeholder:text-stone-400 focus:border-sage-400 focus:ring-2 focus:ring-sage-100 focus:outline-none transition-all text-[0.875rem]"
                     />
                   </div>
@@ -287,7 +289,7 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="john@company.com"
+                      placeholder="you@company.com"
                       className="w-full px-4 py-3 rounded-lg border border-stone-200 bg-stone-50 text-stone-900 placeholder:text-stone-400 focus:border-sage-400 focus:ring-2 focus:ring-sage-100 focus:outline-none transition-all text-[0.875rem]"
                     />
                   </div>
@@ -301,7 +303,7 @@ export default function Contact() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="Your phone number"
                       className="w-full px-4 py-3 rounded-lg border border-stone-200 bg-stone-50 text-stone-900 placeholder:text-stone-400 focus:border-sage-400 focus:ring-2 focus:ring-sage-100 focus:outline-none transition-all text-[0.875rem]"
                     />
                   </div>

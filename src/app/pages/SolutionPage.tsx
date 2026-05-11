@@ -202,7 +202,7 @@ export default function SolutionPage() {
       provider: {
         "@type": "Organization",
         name: "SageStone Inc",
-        url: "https://sagestoneinc.com",
+        url: "https://www.sagestoneinc.com",
       },
     });
     document.head.appendChild(script);

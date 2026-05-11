@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+import SeoServicePage from "./pages/SeoServicePage";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,13 @@ export const router = createBrowserRouter([
       { path: "why-sagestone", Component: WhySageStone },
       { path: "solutions", Component: Solutions },
       { path: "solutions/:slug", Component: SolutionPage },
+      { path: "virtual-assistant-services", Component: SeoServicePage },
+      { path: "customer-support-outsourcing", Component: SeoServicePage },
+      { path: "ecommerce-virtual-assistant", Component: SeoServicePage },
+      { path: "real-estate-virtual-assistant", Component: SeoServicePage },
+      { path: "social-media-management-services", Component: SeoServicePage },
+      { path: "business-operations-support", Component: SeoServicePage },
+      { path: "web-design-maintenance", Component: SeoServicePage },
       { path: "faqs", Component: Faqs },
       { path: "blog", Component: Blog },
       { path: "blog/:id", Component: BlogPost },

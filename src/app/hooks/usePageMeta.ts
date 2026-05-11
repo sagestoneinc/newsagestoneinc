@@ -12,9 +12,7 @@ interface PageMetaOptions {
 }
 
 const SITE_NAME = "SageStone Inc";
-const SITE_BASE_URL = "https://sagestoneinc.com";
-const DEFAULT_IMAGE = `${SITE_BASE_URL}/og/home.jpg`;
-const DEFAULT_IMAGE_ALT = "SageStone Inc managed virtual assistant support";
+const SITE_BASE_URL = "https://www.sagestoneinc.com";
 
 function ensureMeta(selector: string, attrs: Record<string, string>) {
   let element = document.querySelector(selector) as HTMLMetaElement | null;
@@ -41,23 +39,24 @@ function ensureLink(selector: string, attrs: Record<string, string>) {
 }
 
 function buildCanonicalUrl(pathname: string) {
-  const normalizedPath = pathname === "/" ? "/" : pathname.replace(/\/$/, "");
-  return `${SITE_BASE_URL}${normalizedPath}`;
+  if (pathname === "/") return `${SITE_BASE_URL}/`;
+  const normalizedPath = pathname.replace(/\/$/, "");
+  return `${SITE_BASE_URL}${normalizedPath}/`;
 }
 
 export function usePageMeta({
   title,
   description,
   keywords,
-  image = DEFAULT_IMAGE,
-  imageAlt = DEFAULT_IMAGE_ALT,
+  image,
+  imageAlt,
   type = "website",
   noindex = false,
 }: PageMetaOptions) {
   const location = useLocation();
 
   useEffect(() => {
-    const pageTitle = `${title} | ${SITE_NAME}`;
+    const pageTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
     const canonicalUrl = buildCanonicalUrl(location.pathname);
     const robots = noindex ? "noindex, follow" : "index, follow, max-image-preview:large";
 
@@ -71,6 +70,8 @@ export function usePageMeta({
 
     if (keywords) {
       ensureMeta('meta[name="keywords"]', { name: "keywords" }).setAttribute("content", keywords);
+    } else {
+      document.querySelector('meta[name="keywords"]')?.remove();
     }
 
     ensureLink('link[rel="canonical"]', { rel: "canonical" }).setAttribute("href", canonicalUrl);
@@ -80,15 +81,33 @@ export function usePageMeta({
     ensureMeta('meta[property="og:title"]', { property: "og:title" }).setAttribute("content", pageTitle);
     ensureMeta('meta[property="og:description"]', { property: "og:description" }).setAttribute("content", description);
     ensureMeta('meta[property="og:site_name"]', { property: "og:site_name" }).setAttribute("content", SITE_NAME);
-    ensureMeta('meta[property="og:image"]', { property: "og:image" }).setAttribute("content", image);
-    ensureMeta('meta[property="og:image:alt"]', { property: "og:image:alt" }).setAttribute("content", imageAlt);
-    ensureMeta('meta[property="og:image:width"]', { property: "og:image:width" }).setAttribute("content", "1200");
-    ensureMeta('meta[property="og:image:height"]', { property: "og:image:height" }).setAttribute("content", "630");
+    const existingOgImage = document.querySelector('meta[property="og:image"]');
+    const existingOgImageAlt = document.querySelector('meta[property="og:image:alt"]');
+    const existingOgImageWidth = document.querySelector('meta[property="og:image:width"]');
+    const existingOgImageHeight = document.querySelector('meta[property="og:image:height"]');
+    const existingTwitterImage = document.querySelector('meta[name="twitter:image"]');
+    const existingTwitterImageAlt = document.querySelector('meta[name="twitter:image:alt"]');
+
+    if (image) {
+      ensureMeta('meta[property="og:image"]', { property: "og:image" }).setAttribute("content", image);
+      ensureMeta('meta[property="og:image:width"]', { property: "og:image:width" }).setAttribute("content", "1200");
+      ensureMeta('meta[property="og:image:height"]', { property: "og:image:height" }).setAttribute("content", "630");
+      ensureMeta('meta[name="twitter:image"]', { name: "twitter:image" }).setAttribute("content", image);
+      if (imageAlt) {
+        ensureMeta('meta[property="og:image:alt"]', { property: "og:image:alt" }).setAttribute("content", imageAlt);
+        ensureMeta('meta[name="twitter:image:alt"]', { name: "twitter:image:alt" }).setAttribute("content", imageAlt);
+      }
+    } else {
+      existingOgImage?.remove();
+      existingOgImageAlt?.remove();
+      existingOgImageWidth?.remove();
+      existingOgImageHeight?.remove();
+      existingTwitterImage?.remove();
+      existingTwitterImageAlt?.remove();
+    }
 
     ensureMeta('meta[name="twitter:card"]', { name: "twitter:card" }).setAttribute("content", "summary_large_image");
     ensureMeta('meta[name="twitter:title"]', { name: "twitter:title" }).setAttribute("content", pageTitle);
     ensureMeta('meta[name="twitter:description"]', { name: "twitter:description" }).setAttribute("content", description);
-    ensureMeta('meta[name="twitter:image"]', { name: "twitter:image" }).setAttribute("content", image);
-    ensureMeta('meta[name="twitter:image:alt"]', { name: "twitter:image:alt" }).setAttribute("content", imageAlt);
   }, [description, image, imageAlt, keywords, location.pathname, noindex, title, type]);
 }

@@ -2,15 +2,14 @@ import { Link } from "react-router";
 import { BrandLogo } from "../BrandLogo";
 
 const services = [
-  { label: "Virtual Operations & Admin", path: "/solutions/virtual-operations-admin" },
-  { label: "Marketing Support", path: "/solutions/social-media-marketing-support" },
-  { label: "Customer Service", path: "/solutions" },
-  { label: "Lead Generation", path: "/solutions/lead-generation-support" },
-  { label: "Executive Assistance", path: "/solutions" },
-  { label: "Bookkeeping Support", path: "/solutions/bookkeeping-support" },
-  { label: "Real Estate VA Support", path: "/solutions/real-estate-virtual-assistant" },
-  { label: "Graphic Design", path: "/solutions/graphic-design-support" },
-  { label: "Data & Web Research", path: "/solutions/data-entry-web-research" },
+  { label: "Virtual Assistant Services", path: "/virtual-assistant-services" },
+  { label: "Customer Support Outsourcing", path: "/customer-support-outsourcing" },
+  { label: "E-Commerce VA Services", path: "/ecommerce-virtual-assistant" },
+  { label: "Real Estate VA Support", path: "/real-estate-virtual-assistant" },
+  { label: "Social Media Management", path: "/social-media-management-services" },
+  { label: "Business Operations Support", path: "/business-operations-support" },
+  { label: "Website Maintenance", path: "/web-design-maintenance" },
+  { label: "All Solutions", path: "/solutions" },
 ];
 
 export function BrandFooter() {
@@ -39,7 +38,7 @@ export function BrandFooter() {
               </div>
             </Link>
             <p className="mt-5 text-black/65 text-[0.9375rem] leading-relaxed max-w-sm">
-              Reliable remote support that keeps business moving—delivered through a managed, calm, and organized virtual operations partnership.
+              SageStone Inc helps businesses scale with virtual assistants, customer support, e-commerce operations, social media support, web maintenance, and business operations services.
             </p>
             <p className="mt-5 text-black/60 text-[0.875rem]">
               <a className="hover:underline" href="https://www.sagestoneinc.com" rel="noreferrer">
@@ -67,7 +66,7 @@ export function BrandFooter() {
             <p className="text-[0.8125rem] uppercase tracking-[0.18em] text-black/60 mb-4">Contact</p>
             <div className="space-y-2.5 text-[0.875rem]">
               <Link to="/contact" className="text-black/70 hover:text-black transition-colors">
-                Book a discovery call
+                Book a free operations consultation
               </Link>
               <a href="mailto:hello@sagestoneinc.com" className="block text-black/70 hover:text-black transition-colors">
                 hello@sagestoneinc.com
@@ -78,15 +77,6 @@ export function BrandFooter() {
               <div className="text-black/65">Remote / Worldwide</div>
             </div>
 
-            <p className="mt-6 text-[0.8125rem] uppercase tracking-[0.18em] text-black/60 mb-3">Social</p>
-            <div className="flex items-center gap-4 text-[0.875rem]">
-              <a className="text-black/70 hover:text-black transition-colors" href="#" aria-label="LinkedIn">
-                LinkedIn
-              </a>
-              <a className="text-black/70 hover:text-black transition-colors" href="#" aria-label="Instagram">
-                Instagram
-              </a>
-            </div>
           </div>
         </div>
 

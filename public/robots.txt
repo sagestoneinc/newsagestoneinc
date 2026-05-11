@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /team
 Disallow: /api/
+Disallow: /team
 
-Sitemap: https://sagestoneinc.com/sitemap.xml
+Sitemap: https://www.sagestoneinc.com/sitemap.xml
