@@ -8,9 +8,13 @@ import { blogPosts } from "../data/blogPosts";
 
 const categories = ["All", "Operations", "Remote Work", "Real Estate", "Marketing", "Productivity", "Growth"];
 
+function getPostPath(post: (typeof blogPosts)[0]) {
+  return `/blog/${post.slug ?? post.id}`;
+}
+
 function BlogCard({ post }: { post: (typeof blogPosts)[0] }) {
   return (
-    <Link to={`/blog/${post.id}`} className="block">
+    <Link to={getPostPath(post)} className="block" aria-label={`Read ${post.title}`}>
       <article className="group rounded-2xl overflow-hidden border border-stone-200 hover:shadow-lg hover:border-sage-200 transition-all duration-300 bg-white">
         <div className="aspect-[16/9] overflow-hidden">
           <ImageWithFallback
@@ -72,7 +76,7 @@ export default function Blog() {
       "@type": "Blog",
       "name": "SageStone Inc Blog",
       "description": "Insights and resources on virtual assistance, remote work, and business productivity.",
-      "url": "https://www.sagestoneinc.com/blog",
+      "url": "https://www.sagestoneinc.com/blog/",
       "publisher": {
         "@type": "Organization",
         "name": "SageStone Inc",
@@ -90,6 +94,7 @@ export default function Blog() {
           // Use ISO 8601 date for structured data; keep human-readable date for UI.
           ...(isoDate ? { "datePublished": isoDate } : {}),
           "image": post.image,
+          "url": `https://www.sagestoneinc.com${getPostPath(post)}/`,
           "author": {
             "@type": "Organization",
             "name": "SageStone Inc",
@@ -148,7 +153,7 @@ export default function Blog() {
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {featuredPosts.map((post) => (
-              <Link key={post.id} to={`/blog/${post.id}`} className="block">
+              <Link key={post.id} to={getPostPath(post)} className="block">
                 <article
                   className="group relative rounded-2xl overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-300"
                 >

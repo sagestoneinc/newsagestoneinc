@@ -8,6 +8,8 @@ import SolutionPage from "./pages/SolutionPage";
 import Faqs from "./pages/Faqs";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import CaseStudies from "./pages/CaseStudies";
+import CaseStudy from "./pages/CaseStudy";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
@@ -35,6 +37,8 @@ export const router = createBrowserRouter([
       { path: "faqs", Component: Faqs },
       { path: "blog", Component: Blog },
       { path: "blog/:id", Component: BlogPost },
+      { path: "case-studies", Component: CaseStudies },
+      { path: "case-studies/:slug", Component: CaseStudy },
       { path: "contact", Component: Contact },
       { path: "terms", Component: Terms },
       { path: "privacy", Component: Privacy },

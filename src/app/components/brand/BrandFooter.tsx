@@ -10,6 +10,7 @@ const services = [
   { label: "Business Operations Support", path: "/business-operations-support" },
   { label: "Website Maintenance", path: "/web-design-maintenance" },
   { label: "All Solutions", path: "/solutions" },
+  { label: "Case Studies", path: "/case-studies" },
 ];
 
 export function BrandFooter() {

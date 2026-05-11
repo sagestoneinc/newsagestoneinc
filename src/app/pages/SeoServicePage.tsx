@@ -11,6 +11,38 @@ import { CTASection } from "../components/brand/CTASection";
 
 const SITE_URL = "https://www.sagestoneinc.com";
 
+
+const serviceResourceLinks: Record<string, Array<{ label: string; path: string; description: string }>> = {
+  "virtual-assistant-services": [
+    { label: "How to hire a virtual assistant", path: "/blog/how-to-hire-a-virtual-assistant", description: "Plan the tasks, support model, and onboarding steps before you delegate." },
+    { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "See how admin, reporting, and SOP support can strengthen daily operations." },
+  ],
+  "customer-support-outsourcing": [
+    { label: "When to outsource customer support", path: "/blog/when-to-outsource-customer-support", description: "Review the signals, workflows, quality controls, and support metrics to prepare." },
+    { label: "E-commerce support response time case study", path: "/case-studies/ecommerce-support-response-times", description: "See a qualitative example of structured customer communication support." },
+  ],
+  "ecommerce-virtual-assistant": [
+    { label: "What does an e-commerce virtual assistant do?", path: "/blog/what-does-an-ecommerce-virtual-assistant-do", description: "Explore order support, customer inquiries, catalog updates, returns, CRM tasks, and reporting." },
+    { label: "E-commerce support response time case study", path: "/case-studies/ecommerce-support-response-times", description: "Review a generic workflow scenario for growing online stores." },
+  ],
+  "real-estate-virtual-assistant": [
+    { label: "Real estate operations support case study", path: "/case-studies/real-estate-operations-support", description: "See how real estate admin, CRM, scheduling, and listing coordination support can be structured." },
+    { label: "How to hire a virtual assistant", path: "/blog/how-to-hire-a-virtual-assistant", description: "Use practical steps to prepare tasks, access, SOPs, and communication routines." },
+  ],
+  "business-operations-support": [
+    { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "Learn what operations support includes and when a growing team needs it." },
+    { label: "Real estate operations support case study", path: "/case-studies/real-estate-operations-support", description: "Review a workflow example for CRM, scheduling, and administrative coordination." },
+  ],
+  "web-design-maintenance": [
+    { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "Connect website maintenance requests with broader operational follow-through." },
+    { label: "What does an e-commerce virtual assistant do?", path: "/blog/what-does-an-ecommerce-virtual-assistant-do", description: "See where catalog, product, and site updates can support store operations." },
+  ],
+  "social-media-management-services": [
+    { label: "How to hire a virtual assistant", path: "/blog/how-to-hire-a-virtual-assistant", description: "Prepare recurring marketing support tasks, approvals, and communication standards." },
+    { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "Use SOPs and reporting to make marketing coordination more repeatable." },
+  ],
+};
+
 function setJsonLd(id: string, data: unknown) {
   const existing = document.getElementById(id);
   if (existing && existing.tagName === "SCRIPT") {
@@ -98,6 +130,7 @@ export default function SeoServicePage() {
   }
 
   const otherServices = seoServicePages.filter((service) => service.slug !== page.slug).slice(0, 3);
+  const resourceLinks = serviceResourceLinks[page.slug] ?? [];
 
   return (
     <>
@@ -194,6 +227,31 @@ export default function SeoServicePage() {
             </div>
           </div>
         </section>
+
+
+        {resourceLinks.length > 0 && (
+          <section className="py-16 lg:py-20" style={{ background: "var(--brand-cloud)" }}>
+            <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-3xl mx-auto text-center mb-10">
+                <h2 className="text-[color:var(--brand-charcoal)] mb-4" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", fontWeight: 700 }}>
+                  Helpful resources
+                </h2>
+                <p className="text-black/65 leading-relaxed">
+                  Learn more about planning, delegating, and measuring support workflows connected to this service.
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                {resourceLinks.map((resource) => (
+                  <Link key={resource.path} to={resource.path} className="group rounded-[18px] border border-[color:var(--border)] bg-[color:var(--card)] p-6 hover:border-[color:var(--brand-olive-sage)] transition-colors">
+                    <span className="text-[color:var(--brand-charcoal)]" style={{ fontWeight: 650 }}>{resource.label}</span>
+                    <p className="text-black/65 text-[0.9375rem] leading-relaxed mt-3">{resource.description}</p>
+                    <ArrowRight className="w-4 h-4 mt-4 text-[color:var(--brand-deep-sage)] group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="py-16 lg:py-20" style={{ background: "var(--brand-ivory)" }}>
           <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8">
