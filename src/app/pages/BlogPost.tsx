@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams, Link } from "react-router";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { ArrowLeft, Clock, Tag, Calendar } from "lucide-react";
@@ -5,19 +6,99 @@ import { CTABanner } from "../components/CTABanner";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { blogPosts } from "../data/blogPosts";
 
+const SITE_URL = "https://www.sagestoneinc.com";
+
+function getPostPath(post: (typeof blogPosts)[0]) {
+  return `/blog/${post.slug ?? post.id}`;
+}
+
+function renderLinkedText(text: string) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return parts.map((part, index) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (!match) return part;
+    return (
+      <Link key={`${match[2]}-${index}`} to={match[2]} className="text-sage-600 underline underline-offset-4 hover:text-sage-700">
+        {match[1]}
+      </Link>
+    );
+  });
+}
+
+function toIsoDate(date: string) {
+  const parsedDate = new Date(date);
+  return isNaN(parsedDate.getTime()) ? undefined : parsedDate.toISOString().split("T")[0];
+}
+
+function setJsonLd(id: string, data: unknown) {
+  const existing = document.getElementById(id);
+  if (existing && existing.tagName === "SCRIPT") {
+    existing.textContent = JSON.stringify(data);
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = id;
+  script.textContent = JSON.stringify(data);
+  document.head.appendChild(script);
+}
+
 export default function BlogPost() {
   const { id } = useParams<{ id: string }>();
-  const post = blogPosts.find((p) => String(p.id) === id);
+  const post = blogPosts.find((p) => String(p.id) === id || p.slug === id);
+  const canonicalPath = post ? getPostPath(post) : "/blog";
+  const canonicalUrl = `${SITE_URL}${canonicalPath}/`;
+  const pageTitle = post?.metaTitle ?? post?.title ?? "Blog Post Not Found";
+  const description = post?.metaDescription ?? post?.excerpt ?? "The blog post you are looking for could not be found.";
 
   usePageMeta({
-    title: post ? post.title : "Blog Post Not Found",
-    description: post ? post.excerpt : "The blog post you are looking for could not be found.",
+    title: pageTitle,
+    description,
     keywords: post
       ? `${post.category}, SageStone blog, virtual assistant, managed remote support, ${post.title}`
       : "SageStone blog",
+    image: post?.image,
+    imageAlt: post?.title,
     type: post ? "article" : "website",
     noindex: !post,
   });
+
+  useEffect(() => {
+    if (!post) return;
+
+    const isoDate = toIsoDate(post.date);
+    const articleJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": post.h1 ?? post.title,
+      "description": description,
+      "image": post.image,
+      "url": canonicalUrl,
+      ...(isoDate ? { "datePublished": isoDate, "dateModified": isoDate } : {}),
+      "author": { "@type": "Organization", "name": "SageStone Inc", "url": SITE_URL },
+      "publisher": { "@type": "Organization", "name": "SageStone Inc", "url": SITE_URL },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalUrl },
+    };
+
+    const breadcrumbJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": `${SITE_URL}/` },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${SITE_URL}/blog/` },
+        { "@type": "ListItem", "position": 3, "name": post.h1 ?? post.title, "item": canonicalUrl },
+      ],
+    };
+
+    setJsonLd("blog-post-jsonld", articleJsonLd);
+    setJsonLd("blog-post-breadcrumb-jsonld", breadcrumbJsonLd);
+
+    return () => {
+      document.getElementById("blog-post-jsonld")?.remove();
+      document.getElementById("blog-post-breadcrumb-jsonld")?.remove();
+    };
+  }, [canonicalUrl, description, post]);
 
   if (!post) {
     return (
@@ -47,7 +128,6 @@ export default function BlogPost() {
 
   return (
     <>
-      {/* Hero */}
       <section className="bg-gradient-to-br from-sage-50 via-white to-stone-50 py-20 lg:py-28">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
@@ -58,7 +138,7 @@ export default function BlogPost() {
             <ArrowLeft className="w-4 h-4" />
             Back to Blog
           </Link>
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex flex-wrap items-center gap-3 mb-4">
             <span className="flex items-center gap-1 px-2.5 py-0.5 bg-sage-50 text-sage-600 rounded-full text-[0.75rem]" style={{ fontWeight: 500 }}>
               <Tag className="w-3 h-3" />
               {post.category}
@@ -76,7 +156,7 @@ export default function BlogPost() {
             className="text-stone-900 tracking-tight mb-5"
             style={{ fontSize: "clamp(2rem, 4vw, 2.75rem)", fontWeight: 800, lineHeight: 1.2 }}
           >
-            {post.title}
+            {post.h1 ?? post.title}
           </h1>
           <p className="text-stone-500 text-[1.0625rem] leading-relaxed">
             {post.excerpt}
@@ -84,7 +164,6 @@ export default function BlogPost() {
         </div>
       </section>
 
-      {/* Featured Image */}
       <section className="bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-2xl overflow-hidden border border-stone-200 -mt-4">
@@ -97,7 +176,6 @@ export default function BlogPost() {
         </div>
       </section>
 
-      {/* Article Content */}
       <section className="py-16 lg:py-20 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-stone prose-lg max-w-none">
@@ -119,7 +197,7 @@ export default function BlogPost() {
                     key={index}
                     className="text-stone-600 text-[1rem] leading-relaxed mb-5"
                   >
-                    {block.text}
+                    {renderLinkedText(block.text ?? "")}
                   </p>
                 );
               }
@@ -132,7 +210,7 @@ export default function BlogPost() {
                         className="text-stone-600 text-[1rem] leading-relaxed flex items-start gap-2"
                       >
                         <span className="text-sage-500 mt-1.5 shrink-0">•</span>
-                        {item}
+                        <span>{renderLinkedText(item)}</span>
                       </li>
                     ))}
                   </ul>
@@ -144,11 +222,10 @@ export default function BlogPost() {
         </div>
       </section>
 
-      {/* CTA */}
       <CTABanner
-        title="Need Help Putting These Ideas Into Action?"
-        subtitle="Our virtual assistants can help you implement the strategies discussed in this article. Book a free discovery call today."
-        buttonText="Get Started"
+        title="Ready to Turn Insight Into Support?"
+        subtitle="Tell SageStone Inc where your team needs more capacity, and we will help you shape a practical next step."
+        buttonText="Discuss Your Support Needs"
         buttonLink="/contact"
         variant="sage"
       />
