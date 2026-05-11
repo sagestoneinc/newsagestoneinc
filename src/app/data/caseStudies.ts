@@ -22,7 +22,7 @@ export const caseStudies: CaseStudy[] = [
     clientType: "E-commerce brand",
     summary: "A growing online store needed a more structured way to handle order questions, customer inquiries, returns, and daily support follow-through.",
     services: [
-      { label: "e-commerce virtual assistant services", path: "/ecommerce-virtual-assistant/" },
+      { label: "e-commerce virtual assistant services", path: "/ecommerce-customer-support-outsourcing/" },
       { label: "customer support outsourcing", path: "/customer-support-outsourcing/" },
       { label: "outsourced support for small businesses", path: "/outsourced-support-for-small-businesses/" },
     ],
@@ -67,7 +67,7 @@ export const caseStudies: CaseStudy[] = [
     clientType: "Real estate operations team",
     summary: "A real estate operations team needed more consistent administrative support for leads, CRM hygiene, listing coordination, scheduling, and routine communication.",
     services: [
-      { label: "real estate virtual assistant support", path: "/real-estate-virtual-assistant/" },
+      { label: "real estate virtual assistant support", path: "/real-estate-virtual-assistant-services/" },
       { label: "business operations support", path: "/business-operations-support/" },
       { label: "virtual assistant services", path: "/virtual-assistant-services/" },
       { label: "outsourced support for small businesses", path: "/outsourced-support-for-small-businesses/" },

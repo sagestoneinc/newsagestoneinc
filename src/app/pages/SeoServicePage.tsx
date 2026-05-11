@@ -16,11 +16,11 @@ const SITE_URL = "https://www.sagestoneinc.com";
 const serviceCtaLabels: Record<string, string> = {
   "virtual-assistant-services": "Get Virtual Assistant Support",
   "customer-support-outsourcing": "Get Customer Support Help",
-  "ecommerce-virtual-assistant": "Plan Your E-Commerce Support Workflow",
-  "real-estate-virtual-assistant": "Discuss Real Estate VA Support",
+  "ecommerce-customer-support-outsourcing": "Plan Your E-Commerce Support Workflow",
+  "real-estate-virtual-assistant-services": "Discuss Real Estate VA Support",
   "social-media-management-services": "Plan Your Social Media Support",
   "business-operations-support": "Improve Your Operations Workflow",
-  "web-design-maintenance": "Discuss Website Support",
+  "web-design-maintenance-services": "Discuss Website Support",
 };
 
 const serviceResourceLinks: Record<string, Array<{ label: string; path: string; description: string }>> = {
@@ -35,11 +35,11 @@ const serviceResourceLinks: Record<string, Array<{ label: string; path: string; 
     { label: "E-commerce customer support best practices", path: "/blog/ecommerce-customer-support-best-practices", description: "Improve order updates, returns, product inquiries, response quality, and reporting." },
     { label: "When to outsource customer support", path: "/blog/when-to-outsource-customer-support", description: "Review the signals, workflows, quality controls, and support metrics to prepare." },
   ],
-  "ecommerce-virtual-assistant": [
+  "ecommerce-customer-support-outsourcing": [
     { label: "E-commerce customer support best practices", path: "/blog/ecommerce-customer-support-best-practices", description: "Improve order updates, returns, product inquiries, response quality, and reporting." },
     { label: "What does an e-commerce virtual assistant do?", path: "/blog/what-does-an-ecommerce-virtual-assistant-do", description: "Explore order support, customer inquiries, catalog updates, returns, CRM tasks, and reporting." },
   ],
-  "real-estate-virtual-assistant": [
+  "real-estate-virtual-assistant-services": [
     { label: "Real estate operations support case study", path: "/case-studies/real-estate-operations-support", description: "See how real estate admin, CRM, scheduling, and listing coordination support can be structured." },
     { label: "How to hire a virtual assistant", path: "/blog/how-to-hire-a-virtual-assistant", description: "Use practical steps to prepare tasks, access, SOPs, and communication routines." },
   ],
@@ -48,7 +48,7 @@ const serviceResourceLinks: Record<string, Array<{ label: string; path: string; 
     { label: "How to create SOPs for virtual assistants", path: "/blog/how-to-create-sops-for-virtual-assistants", description: "Document recurring work with steps, examples, quality standards, and escalation rules." },
     { label: "Outsourced support for small businesses", path: "/outsourced-support-for-small-businesses", description: "Review buyer-intent guidance for delegating admin, reporting, and daily operations." },
   ],
-  "web-design-maintenance": [
+  "web-design-maintenance-services": [
     { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "Connect website maintenance requests with broader operational follow-through." },
     { label: "What does an e-commerce virtual assistant do?", path: "/blog/what-does-an-ecommerce-virtual-assistant-do", description: "See where catalog, product, and site updates can support store operations." },
   ],

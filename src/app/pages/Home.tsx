@@ -62,13 +62,13 @@ const services = [
     icon: Target,
     title: "E-Commerce Virtual Assistant Services",
     description: "Order management, customer inquiries, product updates, CRM tasks, and back-office support.",
-    to: "/ecommerce-virtual-assistant",
+    to: "/ecommerce-customer-support-outsourcing",
   },
   {
     icon: HomeIcon,
     title: "Real Estate Virtual Assistant Support",
     description: "Lead management, CRM updates, listing coordination, calendars, and client communication.",
-    to: "/real-estate-virtual-assistant",
+    to: "/real-estate-virtual-assistant-services",
   },
   {
     icon: Megaphone,
@@ -86,7 +86,7 @@ const services = [
     icon: Palette,
     title: "Website Maintenance Services",
     description: "Website design updates, content changes, landing page support, and ongoing web operations.",
-    to: "/web-design-maintenance",
+    to: "/web-design-maintenance-services",
   },
   {
     icon: Calculator,
@@ -231,42 +231,15 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const homeJsonLd = [
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: "SageStone Inc",
-        url: "https://www.sagestoneinc.com",
-        description:
-          "SageStone Inc helps businesses scale with virtual assistants, customer support, e-commerce operations, social media support, web maintenance, and business operations services.",
-        logo: "https://www.sagestoneinc.com/logo-mark.svg",
-        contactPoint: {
-          "@type": "ContactPoint",
-          email: "hello@sagestoneinc.com",
-          telephone: "+1-214-945-2234",
-          contactType: "customer support",
-          areaServed: "Worldwide",
-          availableLanguage: "English",
-        },
-        areaServed: "Worldwide",
-        sameAs: [],
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        name: "SageStone Inc",
-        url: "https://www.sagestoneinc.com",
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        name: "SageStone Inc",
-        url: "https://www.sagestoneinc.com",
-        description:
-          "SageStone Inc provides virtual assistant services, customer support, e-commerce support, social media management, web maintenance, and business operations support.",
-        areaServed: "Worldwide",
-      },
-    ];
+    const homeJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      name: "SageStone Inc",
+      url: "https://www.sagestoneinc.com",
+      description:
+        "SageStone Inc provides virtual assistant services, customer support, e-commerce support, social media management, web maintenance, and business operations support.",
+      areaServed: "Worldwide",
+    };
 
     const existingSvc = document.getElementById("home-service-jsonld");
     if (existingSvc && existingSvc.tagName === "SCRIPT") {

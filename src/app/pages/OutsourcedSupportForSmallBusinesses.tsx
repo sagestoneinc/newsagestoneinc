@@ -117,7 +117,7 @@ export default function OutsourcedSupportForSmallBusinesses() {
 
           <section>
             <h2 className="text-stone-900 mb-3" style={{ fontSize: "1.5rem", fontWeight: 720 }}>E-commerce and web support</h2>
-            <p className="text-stone-600 leading-relaxed">Online stores and service businesses can delegate product updates, order checks, customer questions, and recurring website changes through <Link to="/ecommerce-virtual-assistant/" className="text-sage-600 underline underline-offset-4">e-commerce virtual assistant</Link> support and <Link to="/web-design-maintenance/" className="text-sage-600 underline underline-offset-4">web design and maintenance</Link> services.</p>
+            <p className="text-stone-600 leading-relaxed">Online stores and service businesses can delegate product updates, order checks, customer questions, and recurring website changes through <Link to="/ecommerce-customer-support-outsourcing/" className="text-sage-600 underline underline-offset-4">e-commerce virtual assistant</Link> support and <Link to="/web-design-maintenance-services/" className="text-sage-600 underline underline-offset-4">web design and maintenance</Link> services.</p>
           </section>
 
           <section>
