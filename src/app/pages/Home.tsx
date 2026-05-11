@@ -212,11 +212,11 @@ function HomeFaq() {
 
 export default function Home() {
   usePageMeta({
-    title: "SageStone Inc. | Managed Virtual Assistant & Business Support Services",
+    title: "Managed Virtual Assistant & Business Support Services",
     description:
-      "SageStone Inc. provides reliable remote virtual assistant and operational support services for growing businesses, including admin, marketing, bookkeeping, lead generation, real estate VA support, and customer service.",
+      "SageStone Inc. delivers calm, U.S.-managed virtual assistant services for growing teams across admin, operations, marketing, bookkeeping, lead generation, and customer care.",
     keywords:
-      "managed virtual assistant services, outsourced business operations, remote support, admin support, marketing support, bookkeeping support, lead generation support, real estate VA support, customer service",
+      "managed virtual assistant services, U.S.-managed VA support, outsourced business operations, remote admin support, marketing support, bookkeeping support, lead generation support, real estate VA support"
   });
 
   useEffect(() => {
@@ -429,7 +429,7 @@ export default function Home() {
         subtitle="Start building reliable remote support for your business today."
         buttonText="Book a Discovery Call"
         buttonTo="/contact"
-        footerNote="Remote Support. Real Business Momentum."
+        footerNote="Virtual Support. Real Results."
       />
     </>
   );

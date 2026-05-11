@@ -55,9 +55,9 @@ export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("All");
 
   usePageMeta({
-    title: "Blog",
-    description: "Read the latest insights from SageStone Inc on virtual assistance, remote work, operations management, real estate, marketing, and business productivity tips.",
-    keywords: "virtual assistant blog, remote work tips, business productivity, operations management, real estate VA, marketing strategies, SageStone blog",
+    title: "Virtual Assistant Blog",
+    description: "Read SageStone insights on virtual assistant services, remote operations, delegation, real estate VA support, marketing workflows, and business productivity.",
+    keywords: "virtual assistant blog, remote operations tips, business productivity, delegation strategy, real estate VA, marketing workflows, SageStone blog",
   });
 
   const filteredPosts = activeCategory === "All"

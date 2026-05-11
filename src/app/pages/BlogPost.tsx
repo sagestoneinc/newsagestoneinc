@@ -13,8 +13,10 @@ export default function BlogPost() {
     title: post ? post.title : "Blog Post Not Found",
     description: post ? post.excerpt : "The blog post you are looking for could not be found.",
     keywords: post
-      ? `${post.category}, SageStone blog, virtual assistant, ${post.title}`
+      ? `${post.category}, SageStone blog, virtual assistant, managed remote support, ${post.title}`
       : "SageStone blog",
+    type: post ? "article" : "website",
+    noindex: !post,
   });
 
   if (!post) {

@@ -224,8 +224,8 @@ const faqItems = [
 export default function Solutions() {
   usePageMeta({
     title: "Virtual Assistant Services",
-    description: "Professional virtual assistant services for growing businesses. Outsourced admin, real estate VA, bookkeeping, social media, lead generation, design & data entry.",
-    keywords: "virtual assistant services, outsourced administrative support, real estate virtual assistant, bookkeeping support, lead generation virtual assistant, social media virtual assistant, data entry virtual assistant, graphic design support",
+    description: "Explore SageStone virtual assistant services for admin, operations, real estate, bookkeeping, social media, lead generation, graphic design, and data research support.",
+    keywords: "virtual assistant services, outsourced administrative support, real estate virtual assistant, bookkeeping support, lead generation virtual assistant, social media VA, data entry VA, graphic design support",
   });
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);

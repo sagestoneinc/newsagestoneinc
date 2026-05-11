@@ -35,7 +35,7 @@ export function BrandFooter() {
             <Link to="/" className="inline-flex flex-col items-start gap-2">
               <BrandLogo />
               <div>
-                <p className="text-black/65 text-[0.875rem]">Remote Support. Real Business Momentum.</p>
+                <p className="text-black/65 text-[0.875rem]">Virtual Support. Real Results.</p>
               </div>
             </Link>
             <p className="mt-5 text-black/65 text-[0.9375rem] leading-relaxed max-w-sm">

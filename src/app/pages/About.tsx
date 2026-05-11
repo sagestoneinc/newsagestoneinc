@@ -23,9 +23,9 @@ const stats = [
 
 export default function About() {
   usePageMeta({
-    title: "About Us",
-    description: "Learn about SageStone Inc, our mission to empower businesses with dedicated virtual assistant services, and how we help companies streamline operations and scale efficiently.",
-    keywords: "about SageStone Inc, virtual assistant company, remote support team, business support services, company mission",
+    title: "About SageStone Virtual Support",
+    description: "Learn how SageStone Inc. provides remote-first, U.S.-managed virtual assistant support that helps businesses streamline operations, protect momentum, and scale with confidence.",
+    keywords: "about SageStone Inc, U.S.-managed virtual assistant company, remote support team, business operations support, SageStone mission",
   });
 
   return (
