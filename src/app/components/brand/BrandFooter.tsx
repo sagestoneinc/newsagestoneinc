@@ -4,11 +4,11 @@ import { BrandLogo } from "../BrandLogo";
 const services = [
   { label: "Virtual Assistant Services", path: "/virtual-assistant-services" },
   { label: "Customer Support Outsourcing", path: "/customer-support-outsourcing" },
-  { label: "E-Commerce VA Services", path: "/ecommerce-virtual-assistant" },
-  { label: "Real Estate VA Support", path: "/real-estate-virtual-assistant" },
+  { label: "E-Commerce Support", path: "/ecommerce-customer-support-outsourcing" },
+  { label: "Real Estate VA Support", path: "/real-estate-virtual-assistant-services" },
   { label: "Social Media Management", path: "/social-media-management-services" },
   { label: "Business Operations Support", path: "/business-operations-support" },
-  { label: "Website Maintenance", path: "/web-design-maintenance" },
+  { label: "Web Design Maintenance", path: "/web-design-maintenance-services" },
   { label: "All Solutions", path: "/solutions" },
   { label: "Case Studies", path: "/case-studies" },
 ];

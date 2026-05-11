@@ -17,13 +17,13 @@ const industries = [
     name: "E-commerce brands",
     pain: "Order questions, returns, product updates, and customer messages can pile up during busy periods.",
     tasks: ["Order and customer inquiry support", "Catalog update assistance", "Support queue organization"],
-    links: [{ label: "E-commerce virtual assistant services", path: "/ecommerce-virtual-assistant/" }, { label: "Customer support outsourcing", path: "/customer-support-outsourcing/" }],
+    links: [{ label: "E-commerce virtual assistant services", path: "/ecommerce-customer-support-outsourcing/" }, { label: "Customer support outsourcing", path: "/customer-support-outsourcing/" }],
   },
   {
     name: "Real estate teams",
     pain: "Lead follow-up, CRM hygiene, scheduling, and listing coordination require timely administrative follow-through.",
     tasks: ["CRM updates", "Listing coordination", "Calendar and client communication support"],
-    links: [{ label: "Real estate virtual assistant support", path: "/real-estate-virtual-assistant/" }],
+    links: [{ label: "Real estate virtual assistant support", path: "/real-estate-virtual-assistant-services/" }],
   },
   {
     name: "Agencies",

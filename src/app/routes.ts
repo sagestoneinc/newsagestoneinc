@@ -1,4 +1,5 @@
-import { createBrowserRouter } from "react-router";
+import { createElement } from "react";
+import { createBrowserRouter, Navigate } from "react-router";
 import { Layout } from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -32,11 +33,14 @@ export const router = createBrowserRouter([
       { path: "solutions/:slug", Component: SolutionPage },
       { path: "virtual-assistant-services", Component: SeoServicePage },
       { path: "customer-support-outsourcing", Component: SeoServicePage },
-      { path: "ecommerce-virtual-assistant", Component: SeoServicePage },
-      { path: "real-estate-virtual-assistant", Component: SeoServicePage },
+      { path: "ecommerce-customer-support-outsourcing", Component: SeoServicePage },
+      { path: "ecommerce-virtual-assistant", element: createElement(Navigate, { to: "/ecommerce-customer-support-outsourcing", replace: true }) },
+      { path: "real-estate-virtual-assistant-services", Component: SeoServicePage },
+      { path: "real-estate-virtual-assistant", element: createElement(Navigate, { to: "/real-estate-virtual-assistant-services", replace: true }) },
       { path: "social-media-management-services", Component: SeoServicePage },
       { path: "business-operations-support", Component: SeoServicePage },
-      { path: "web-design-maintenance", Component: SeoServicePage },
+      { path: "web-design-maintenance-services", Component: SeoServicePage },
+      { path: "web-design-maintenance", element: createElement(Navigate, { to: "/web-design-maintenance-services", replace: true }) },
       { path: "virtual-assistant-vs-in-house-admin", Component: VirtualAssistantVsInHouseAdmin },
       { path: "outsourced-support-for-small-businesses", Component: OutsourcedSupportForSmallBusinesses },
       { path: "industries-we-serve", Component: IndustriesWeServe },
