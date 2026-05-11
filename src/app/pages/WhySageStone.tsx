@@ -70,9 +70,9 @@ const results = [
 
 export default function WhySageStone() {
   usePageMeta({
-    title: "Why SageStone?",
-    description: "Discover why businesses choose SageStone Inc for virtual assistant services. Learn about our dedicated support, proven processes, and commitment to helping you scale.",
-    keywords: "why SageStone, virtual assistant benefits, dedicated VA support, business scaling, remote team advantages",
+    title: "Why Choose SageStone?",
+    description: "See why growing businesses choose SageStone Inc. for dedicated vetted VAs, flexible support plans, calm managed oversight, and reliable remote execution.",
+    keywords: "why choose SageStone, dedicated vetted VAs, managed virtual assistant support, flexible support plans, remote team benefits",
   });
 
   return (

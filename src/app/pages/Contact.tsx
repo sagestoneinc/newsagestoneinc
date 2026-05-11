@@ -24,8 +24,8 @@ const workloadOptions = [
 export default function Contact() {
   usePageMeta({
     title: "Contact Us",
-    description: "Get in touch with SageStone Inc. Book a free discovery call to discuss how our virtual assistant services can support your business goals.",
-    keywords: "contact SageStone Inc, book discovery call, virtual assistant consultation, get in touch, business support inquiry",
+    description: "Book a SageStone discovery call to discuss dedicated virtual assistant support for operations, admin, marketing, bookkeeping, lead generation, or customer service.",
+    keywords: "contact SageStone Inc, book discovery call, virtual assistant consultation, managed VA support, business support inquiry",
   });
 
   const [formData, setFormData] = useState({

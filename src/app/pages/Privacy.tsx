@@ -3,7 +3,7 @@ import { usePageMeta } from "../hooks/usePageMeta";
 export default function Privacy() {
   usePageMeta({
     title: "Privacy Policy",
-    description: "Read SageStone Inc's privacy policy. Learn how we collect, use, and protect your personal information when you use our virtual assistant services.",
+    description: "Read the SageStone Inc. privacy policy to understand how we collect, use, and protect information for clients exploring virtual assistant services.",
     keywords: "privacy policy, SageStone Inc privacy, data protection, personal information, virtual assistant data security",
   });
 

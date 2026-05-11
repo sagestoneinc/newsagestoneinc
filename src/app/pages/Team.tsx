@@ -69,7 +69,7 @@ const qualityPoints = [
 export default function Team() {
   usePageMeta({
     title: "Meet Our Team",
-    description: "Meet the SageStone Inc leadership and VA specialists who ensure quality virtual assistant service delivery for growing businesses.",
+    description: "Meet the SageStone Inc. leadership and vetted virtual assistant specialists behind calm, reliable remote support for growing businesses.",
     keywords: "SageStone team, virtual assistant experts, VA management, leadership team, quality assurance",
   });
 
