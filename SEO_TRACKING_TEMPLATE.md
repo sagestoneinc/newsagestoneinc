@@ -26,6 +26,15 @@ Use this template to track keyword movement for SageStone Inc service pages, blo
 |  | outsourced customer support for small business | https://www.sagestoneinc.com/outsourced-support-for-small-businesses/ |  |  |  |  |
 |  | outsourced admin support | https://www.sagestoneinc.com/outsourced-support-for-small-businesses/ |  |  |  |  |
 |  | business support services for small business | https://www.sagestoneinc.com/outsourced-support-for-small-businesses/ |  |  |  |  |
+|  | virtual assistant tasks to delegate | https://www.sagestoneinc.com/blog/virtual-assistant-tasks-to-delegate/ |  |  |  |  |
+|  | tasks to delegate to a virtual assistant | https://www.sagestoneinc.com/blog/virtual-assistant-tasks-to-delegate/ |  |  |  |  |
+|  | customer support outsourcing checklist | https://www.sagestoneinc.com/blog/customer-support-outsourcing-checklist/ |  |  |  |  |
+|  | outsource customer support checklist | https://www.sagestoneinc.com/blog/customer-support-outsourcing-checklist/ |  |  |  |  |
+|  | ecommerce customer support best practices | https://www.sagestoneinc.com/blog/ecommerce-customer-support-best-practices/ |  |  |  |  |
+|  | e-commerce customer support best practices | https://www.sagestoneinc.com/blog/ecommerce-customer-support-best-practices/ |  |  |  |  |
+|  | how to create SOPs for virtual assistants | https://www.sagestoneinc.com/blog/how-to-create-sops-for-virtual-assistants/ |  |  |  |  |
+|  | virtual assistant SOP template | https://www.sagestoneinc.com/blog/how-to-create-sops-for-virtual-assistants/ |  |  |  |  |
+|  | SOPs for virtual assistants | https://www.sagestoneinc.com/blog/how-to-create-sops-for-virtual-assistants/ |  |  |  |  |
 
 ## Tracking Instructions
 

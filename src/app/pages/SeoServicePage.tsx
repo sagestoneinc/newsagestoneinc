@@ -25,17 +25,19 @@ const serviceCtaLabels: Record<string, string> = {
 
 const serviceResourceLinks: Record<string, Array<{ label: string; path: string; description: string }>> = {
   "virtual-assistant-services": [
+    { label: "Virtual assistant tasks to delegate first", path: "/blog/virtual-assistant-tasks-to-delegate", description: "Choose practical first tasks for inbox, calendar, CRM, reporting, and admin support." },
+    { label: "How to create SOPs for virtual assistants", path: "/blog/how-to-create-sops-for-virtual-assistants", description: "Document recurring work with steps, examples, quality standards, and escalation rules." },
     { label: "How to hire a virtual assistant", path: "/blog/how-to-hire-a-virtual-assistant", description: "Plan the tasks, support model, and onboarding steps before you delegate." },
     { label: "Virtual assistant vs in-house admin", path: "/virtual-assistant-vs-in-house-admin", description: "Compare support models before choosing your next admin capacity." },
-    { label: "Outsourced support for small businesses", path: "/outsourced-support-for-small-businesses", description: "See how smaller teams can delegate admin and operations work responsibly." },
   ],
   "customer-support-outsourcing": [
+    { label: "Customer support outsourcing checklist", path: "/blog/customer-support-outsourcing-checklist", description: "Prepare channels, escalation rules, access, QA standards, reporting, and onboarding." },
+    { label: "E-commerce customer support best practices", path: "/blog/ecommerce-customer-support-best-practices", description: "Improve order updates, returns, product inquiries, response quality, and reporting." },
     { label: "When to outsource customer support", path: "/blog/when-to-outsource-customer-support", description: "Review the signals, workflows, quality controls, and support metrics to prepare." },
-    { label: "E-commerce support response time case study", path: "/case-studies/ecommerce-support-response-times", description: "See a qualitative example of structured customer communication support." },
   ],
   "ecommerce-virtual-assistant": [
+    { label: "E-commerce customer support best practices", path: "/blog/ecommerce-customer-support-best-practices", description: "Improve order updates, returns, product inquiries, response quality, and reporting." },
     { label: "What does an e-commerce virtual assistant do?", path: "/blog/what-does-an-ecommerce-virtual-assistant-do", description: "Explore order support, customer inquiries, catalog updates, returns, CRM tasks, and reporting." },
-    { label: "E-commerce support response time case study", path: "/case-studies/ecommerce-support-response-times", description: "Review a generic workflow scenario for growing online stores." },
   ],
   "real-estate-virtual-assistant": [
     { label: "Real estate operations support case study", path: "/case-studies/real-estate-operations-support", description: "See how real estate admin, CRM, scheduling, and listing coordination support can be structured." },
@@ -43,8 +45,8 @@ const serviceResourceLinks: Record<string, Array<{ label: string; path: string; 
   ],
   "business-operations-support": [
     { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "Learn what operations support includes and when a growing team needs it." },
+    { label: "How to create SOPs for virtual assistants", path: "/blog/how-to-create-sops-for-virtual-assistants", description: "Document recurring work with steps, examples, quality standards, and escalation rules." },
     { label: "Outsourced support for small businesses", path: "/outsourced-support-for-small-businesses", description: "Review buyer-intent guidance for delegating admin, reporting, and daily operations." },
-    { label: "Virtual assistant vs in-house admin", path: "/virtual-assistant-vs-in-house-admin", description: "Compare flexible support and internal hiring considerations." },
   ],
   "web-design-maintenance": [
     { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "Connect website maintenance requests with broader operational follow-through." },
