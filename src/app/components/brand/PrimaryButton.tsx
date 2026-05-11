@@ -1,12 +1,15 @@
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import type React from "react";
+import { trackCtaClick } from "../../lib/analytics";
 
 interface PrimaryButtonProps {
   to: string;
   children: React.ReactNode;
   className?: string;
   withArrow?: boolean;
+  tracking?: Record<string, string | number | boolean | undefined>;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 export function PrimaryButton({
@@ -14,6 +17,8 @@ export function PrimaryButton({
   children,
   className = "",
   withArrow = true,
+  tracking,
+  onClick,
 }: PrimaryButtonProps) {
   return (
     <Link
@@ -27,6 +32,10 @@ export function PrimaryButton({
         className
       }
       style={{ fontWeight: 600 }}
+      onClick={(event) => {
+        trackCtaClick({ cta_text: typeof children === "string" ? children : undefined, target_url: to, ...tracking });
+        onClick?.(event);
+      }}
     >
       <span>{children}</span>
       {withArrow && (

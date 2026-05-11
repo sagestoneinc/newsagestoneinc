@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
+import { trackCtaClick } from "../lib/analytics";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -68,6 +69,7 @@ export function Header() {
               to="/contact"
               className="hidden sm:inline-flex items-center px-5 py-2.5 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors duration-200 text-[0.875rem] shadow-sm"
               style={{ fontWeight: 500 }}
+              onClick={() => trackCtaClick({ event_name: "contact_intent_click", location: "header_desktop", cta_text: "Book a Free Consultation", target_url: "/contact" })}
             >
               Book a Free Consultation
             </Link>
@@ -104,6 +106,7 @@ export function Header() {
               to="/contact"
               className="block text-center mt-3 px-5 py-3 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors text-[0.9375rem]"
               style={{ fontWeight: 500 }}
+              onClick={() => trackCtaClick({ event_name: "contact_intent_click", location: "header_mobile", cta_text: "Book a Free Consultation", target_url: "/contact" })}
             >
               Book a Free Consultation
             </Link>

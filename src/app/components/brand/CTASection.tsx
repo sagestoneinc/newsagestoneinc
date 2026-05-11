@@ -6,6 +6,7 @@ interface CTASectionProps {
   buttonText: string;
   buttonTo: string;
   footerNote?: string;
+  tracking?: Record<string, string | number | boolean | undefined>;
 }
 
 export function CTASection({
@@ -14,6 +15,7 @@ export function CTASection({
   buttonText,
   buttonTo,
   footerNote,
+  tracking,
 }: CTASectionProps) {
   return (
     <section className="relative overflow-hidden py-20 lg:py-24">
@@ -47,7 +49,7 @@ export function CTASection({
             {subtitle}
           </p>
           <div className="mt-9 flex justify-center">
-            <PrimaryButton to={buttonTo}>{buttonText}</PrimaryButton>
+            <PrimaryButton to={buttonTo} tracking={{ location: "bottom_cta", ...tracking }}>{buttonText}</PrimaryButton>
           </div>
           {footerNote && (
             <p className="mt-8 text-[0.875rem] text-black/55">{footerNote}</p>

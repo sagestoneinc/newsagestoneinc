@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { Mail, Phone, Globe, ArrowUpRight } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
+import { trackCtaClick, trackEvent } from "../lib/analytics";
 
 const quickLinks = [
   { label: "Home", path: "/" },
@@ -9,6 +10,9 @@ const quickLinks = [
   { label: "Why SageStone?", path: "/why-sagestone" },
   { label: "Blog", path: "/blog" },
   { label: "Contact Us", path: "/contact" },
+  { label: "VA vs In-House Admin", path: "/virtual-assistant-vs-in-house-admin" },
+  { label: "Small Business Support", path: "/outsourced-support-for-small-businesses" },
+  { label: "Industries We Serve", path: "/industries-we-serve" },
 ];
 
 const solutionLinks = [
@@ -42,11 +46,11 @@ export function Footer() {
               streamline operations, boost marketing, and scale efficiently with dedicated support.
             </p>
             <div className="space-y-3">
-              <a href="mailto:hello@sagestoneinc.com" className="flex items-center gap-3 text-stone-400 hover:text-sage-400 transition-colors text-[0.875rem]">
+              <a href="mailto:hello@sagestoneinc.com" onClick={() => trackEvent("email_click", { location: "footer", target_url: "mailto:hello@sagestoneinc.com" })} className="flex items-center gap-3 text-stone-400 hover:text-sage-400 transition-colors text-[0.875rem]">
                 <Mail className="w-4 h-4 shrink-0" />
                 hello@sagestoneinc.com
               </a>
-              <a href="tel:+12149452234" className="flex items-center gap-3 text-stone-400 hover:text-sage-400 transition-colors text-[0.875rem]">
+              <a href="tel:+12149452234" onClick={() => trackEvent("phone_click", { location: "footer", target_url: "tel:+12149452234" })} className="flex items-center gap-3 text-stone-400 hover:text-sage-400 transition-colors text-[0.875rem]">
                 <Phone className="w-4 h-4 shrink-0" />
                 +1 214-945-2234
               </a>
@@ -95,6 +99,7 @@ export function Footer() {
               to="/contact"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors text-[0.875rem]"
               style={{ fontWeight: 500 }}
+              onClick={() => trackCtaClick({ event_name: "contact_intent_click", location: "footer_cta", cta_text: "Book a Discovery Call", target_url: "/contact" })}
             >
               Book a Discovery Call
               <ArrowUpRight className="w-4 h-4" />

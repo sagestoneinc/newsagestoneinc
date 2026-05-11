@@ -15,6 +15,9 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import SeoServicePage from "./pages/SeoServicePage";
+import VirtualAssistantVsInHouseAdmin from "./pages/VirtualAssistantVsInHouseAdmin";
+import OutsourcedSupportForSmallBusinesses from "./pages/OutsourcedSupportForSmallBusinesses";
+import IndustriesWeServe from "./pages/IndustriesWeServe";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +37,9 @@ export const router = createBrowserRouter([
       { path: "social-media-management-services", Component: SeoServicePage },
       { path: "business-operations-support", Component: SeoServicePage },
       { path: "web-design-maintenance", Component: SeoServicePage },
+      { path: "virtual-assistant-vs-in-house-admin", Component: VirtualAssistantVsInHouseAdmin },
+      { path: "outsourced-support-for-small-businesses", Component: OutsourcedSupportForSmallBusinesses },
+      { path: "industries-we-serve", Component: IndustriesWeServe },
       { path: "faqs", Component: Faqs },
       { path: "blog", Component: Blog },
       { path: "blog/:id", Component: BlogPost },

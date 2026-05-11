@@ -5,6 +5,7 @@ import { ArrowLeft, Clock, Tag, Calendar } from "lucide-react";
 import { CTABanner } from "../components/CTABanner";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { blogPosts } from "../data/blogPosts";
+import { trackInternalLinkClick } from "../lib/analytics";
 
 const SITE_URL = "https://www.sagestoneinc.com";
 
@@ -12,13 +13,18 @@ function getPostPath(post: (typeof blogPosts)[0]) {
   return `/blog/${post.slug ?? post.id}`;
 }
 
-function renderLinkedText(text: string) {
+function renderLinkedText(text: string, postTitle?: string) {
   const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
   return parts.map((part, index) => {
     const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (!match) return part;
     return (
-      <Link key={`${match[2]}-${index}`} to={match[2]} className="text-sage-600 underline underline-offset-4 hover:text-sage-700">
+      <Link
+        key={`${match[2]}-${index}`}
+        to={match[2]}
+        onClick={() => trackInternalLinkClick({ event_name: "blog_to_service_click", location: "blog_body", content_type: "blog", content_title: postTitle, target_url: match[2] })}
+        className="text-sage-600 underline underline-offset-4 hover:text-sage-700"
+      >
         {match[1]}
       </Link>
     );
@@ -197,7 +203,7 @@ export default function BlogPost() {
                     key={index}
                     className="text-stone-600 text-[1rem] leading-relaxed mb-5"
                   >
-                    {renderLinkedText(block.text ?? "")}
+                    {renderLinkedText(block.text ?? "", post.title)}
                   </p>
                 );
               }
@@ -210,7 +216,7 @@ export default function BlogPost() {
                         className="text-stone-600 text-[1rem] leading-relaxed flex items-start gap-2"
                       >
                         <span className="text-sage-500 mt-1.5 shrink-0">•</span>
-                        <span>{renderLinkedText(item)}</span>
+                        <span>{renderLinkedText(item, post.title)}</span>
                       </li>
                     ))}
                   </ul>
@@ -228,6 +234,7 @@ export default function BlogPost() {
         buttonText="Discuss Your Support Needs"
         buttonLink="/contact"
         variant="sage"
+        tracking={{ location: "blog_end", content_type: "blog", content_title: post.title }}
       />
     </>
   );
