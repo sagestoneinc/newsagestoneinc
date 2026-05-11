@@ -8,7 +8,7 @@ const navLinks = [
   { label: "About Us", path: "/about" },
   // { label: "Our Team", path: "/team" }, // Temporarily disabled
   { label: "Why SageStone?", path: "/why-sagestone" },
-  { label: "Solutions", path: "/solutions" },
+  { label: "Services", path: "/virtual-assistant-services" },
   { label: "FAQs", path: "/faqs" },
   { label: "Blog", path: "/blog" },
   { label: "Contact Us", path: "/contact" },
@@ -69,7 +69,7 @@ export function Header() {
               className="hidden sm:inline-flex items-center px-5 py-2.5 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors duration-200 text-[0.875rem] shadow-sm"
               style={{ fontWeight: 500 }}
             >
-              Book a Discovery Call
+              Book a Free Consultation
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -105,7 +105,7 @@ export function Header() {
               className="block text-center mt-3 px-5 py-3 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors text-[0.9375rem]"
               style={{ fontWeight: 500 }}
             >
-              Book a Discovery Call
+              Book a Free Consultation
             </Link>
           </nav>
         </div>

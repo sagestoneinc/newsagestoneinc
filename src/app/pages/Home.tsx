@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import {
   CheckCircle2,
   ChevronDown,
@@ -22,6 +23,7 @@ import { ServiceCard } from "../components/brand/ServiceCard";
 import { FeatureCard } from "../components/brand/FeatureCard";
 import { ProcessStep } from "../components/brand/ProcessStep";
 import { CTASection } from "../components/brand/CTASection";
+import { seoServicePages } from "../data/seoServicePages";
 
 const heroBadges = ["Remote-First", "Managed Support", "Worldwide Talent", "Flexible Plans"];
 
@@ -46,48 +48,57 @@ const whyFeatures = [
 const services = [
   {
     icon: ClipboardList,
-    title: "Virtual Operations & Admin",
-    description: "Calendar, inbox, documentation, project coordination, and workflow follow-through.",
-  },
-  {
-    icon: Megaphone,
-    title: "Marketing Support",
-    description: "Content coordination, scheduling, reporting, and campaign execution support.",
+    title: "Virtual Assistant Services",
+    description: "Administrative, operational, customer support, e-commerce, and marketing task support.",
+    to: "/virtual-assistant-services",
   },
   {
     icon: Headset,
-    title: "Customer Service",
-    description: "Inbox management, ticket support, and customer follow-ups that feel professional.",
+    title: "Customer Support Outsourcing",
+    description: "Inbox management, ticket support, escalation workflows, and customer follow-ups.",
+    to: "/customer-support-outsourcing",
   },
   {
     icon: Target,
-    title: "Lead Generation",
-    description: "Prospect research, list building, and outreach support—kept consistent and organized.",
+    title: "E-Commerce Virtual Assistant Services",
+    description: "Order management, customer inquiries, product updates, CRM tasks, and back-office support.",
+    to: "/ecommerce-virtual-assistant",
+  },
+  {
+    icon: HomeIcon,
+    title: "Real Estate Virtual Assistant Support",
+    description: "Lead management, CRM updates, listing coordination, calendars, and client communication.",
+    to: "/real-estate-virtual-assistant",
+  },
+  {
+    icon: Megaphone,
+    title: "Social Media Management Services",
+    description: "Content scheduling, community engagement support, reporting, and marketing coordination.",
+    to: "/social-media-management-services",
   },
   {
     icon: Briefcase,
-    title: "Executive Assistance",
-    description: "Proactive scheduling, travel coordination, task tracking, and priorities management.",
+    title: "Business Operations Support",
+    description: "Back-office workflows, documentation, reporting, process coordination, and team support.",
+    to: "/business-operations-support",
+  },
+  {
+    icon: Palette,
+    title: "Website Maintenance Services",
+    description: "Website design updates, content changes, landing page support, and ongoing web operations.",
+    to: "/web-design-maintenance",
   },
   {
     icon: Calculator,
     title: "Bookkeeping Support",
     description: "Invoicing, expense tracking, reconciliations, and clean monthly reporting support.",
-  },
-  {
-    icon: HomeIcon,
-    title: "Real Estate VA Support",
-    description: "Listing coordination, CRM updates, transaction coordination, and client follow-ups.",
-  },
-  {
-    icon: Palette,
-    title: "Graphic Design",
-    description: "On-brand social graphics, templates, presentations, and marketing collateral.",
+    to: "/solutions/bookkeeping-support",
   },
   {
     icon: Search,
     title: "Data & Web Research",
     description: "Accurate data entry, market research, competitor tracking, and list cleanup.",
+    to: "/solutions/data-entry-web-research",
   },
 ];
 
@@ -212,36 +223,58 @@ function HomeFaq() {
 
 export default function Home() {
   usePageMeta({
-    title: "Managed Virtual Assistant & Business Support Services",
+    title: "Virtual Assistant Services, Customer Support & Business Operations | SageStone Inc",
     description:
-      "SageStone Inc. delivers calm, U.S.-managed virtual assistant services for growing teams across admin, operations, marketing, bookkeeping, lead generation, and customer care.",
+      "SageStone Inc helps businesses scale with virtual assistants, customer support, e-commerce operations, social media support, web maintenance, and business operations services.",
     keywords:
-      "managed virtual assistant services, U.S.-managed VA support, outsourced business operations, remote admin support, marketing support, bookkeeping support, lead generation support, real estate VA support"
+      "virtual assistant services, customer support outsourcing, e-commerce operations support, social media support, web maintenance, business operations services"
   });
 
   useEffect(() => {
-    const serviceJsonLd = {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      name: "Managed Virtual Assistant & Business Support Services",
-      description:
-        "Managed remote virtual assistant and operational support services for growing businesses, including admin, marketing, bookkeeping, lead generation, real estate VA support, and customer service.",
-      url: "https://sagestoneinc.com/solutions",
-      provider: {
+    const homeJsonLd = [
+      {
+        "@context": "https://schema.org",
         "@type": "Organization",
         name: "SageStone Inc",
-        url: "https://sagestoneinc.com",
+        url: "https://www.sagestoneinc.com",
+        description:
+          "SageStone Inc helps businesses scale with virtual assistants, customer support, e-commerce operations, social media support, web maintenance, and business operations services.",
+        logo: "https://www.sagestoneinc.com/logo-mark.svg",
+        contactPoint: {
+          "@type": "ContactPoint",
+          email: "hello@sagestoneinc.com",
+          telephone: "+1-214-945-2234",
+          contactType: "customer support",
+          areaServed: "Worldwide",
+          availableLanguage: "English",
+        },
+        areaServed: "Worldwide",
+        sameAs: [],
       },
-      areaServed: "Worldwide",
-    };
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "SageStone Inc",
+        url: "https://www.sagestoneinc.com",
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        name: "SageStone Inc",
+        url: "https://www.sagestoneinc.com",
+        description:
+          "SageStone Inc provides virtual assistant services, customer support, e-commerce support, social media management, web maintenance, and business operations support.",
+        areaServed: "Worldwide",
+      },
+    ];
 
     const existingSvc = document.getElementById("home-service-jsonld");
     if (existingSvc && existingSvc.tagName === "SCRIPT") {
-      (existingSvc as HTMLScriptElement).text = JSON.stringify(serviceJsonLd);
+      (existingSvc as HTMLScriptElement).text = JSON.stringify(homeJsonLd);
     } else {
       const svcScript = document.createElement("script");
       svcScript.type = "application/ld+json";
-      svcScript.text = JSON.stringify(serviceJsonLd);
+      svcScript.text = JSON.stringify(homeJsonLd);
       svcScript.id = "home-service-jsonld";
       document.head.appendChild(svcScript);
     }
@@ -272,15 +305,15 @@ export default function Home() {
                 className="text-[color:var(--brand-charcoal)] tracking-tight mb-6"
                 style={{ fontSize: "clamp(2.25rem, 4.6vw, 3.6rem)", fontWeight: 780, lineHeight: 1.05 }}
               >
-                Virtual Support That Keeps Your Business Moving
+                Virtual Assistant Services and Business Operations Support for Growing Companies
               </h1>
               <p className="text-black/65 text-[1.125rem] leading-relaxed mb-9 max-w-xl">
-                Managed virtual assistant services for admin, marketing, bookkeeping, lead generation, real estate support,
-                and business operations.
+                SageStone Inc helps businesses scale with virtual assistants, customer support, e-commerce operations,
+                social media support, web maintenance, and business operations services.
               </p>
               <div className="flex flex-wrap gap-4">
-                <PrimaryButton to="/contact">Book a Discovery Call</PrimaryButton>
-                <SecondaryButton to="/solutions">Explore Services</SecondaryButton>
+                <PrimaryButton to="/contact">Book a Free Operations Consultation</PrimaryButton>
+                <SecondaryButton to="/virtual-assistant-services">Get Virtual Assistant Support</SecondaryButton>
               </div>
               <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-black/55 text-[0.875rem]">
                 <div className="flex items-center gap-2">
@@ -366,7 +399,17 @@ export default function Home() {
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s) => (
-              <ServiceCard key={s.title} icon={s.icon} title={s.title} description={s.description} />
+              <ServiceCard key={s.title} icon={s.icon} title={s.title} description={s.description} to={s.to} />
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <PrimaryButton to="/contact">Build Your Support Team</PrimaryButton>
+          </div>
+          <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[0.9375rem] text-black/60">
+            {seoServicePages.map((service) => (
+              <Link key={service.slug} to={`/${service.slug}`} className="text-[color:var(--brand-deep-sage)] underline underline-offset-4">
+                {service.h1}
+              </Link>
             ))}
           </div>
         </div>
@@ -427,7 +470,7 @@ export default function Home() {
       <CTASection
         title="Ready to Delegate Smarter?"
         subtitle="Start building reliable remote support for your business today."
-        buttonText="Book a Discovery Call"
+        buttonText="Discuss Your Support Needs"
         buttonTo="/contact"
         footerNote="Virtual Support. Real Results."
       />

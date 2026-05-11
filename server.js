@@ -13,15 +13,34 @@ app.set("trust proxy", 1);
 
 app.use(express.json());
 
+// ── Canonical host redirects for production SEO hygiene ───────────
+app.use((req, res, next) => {
+  const host = req.get("host")?.split(":")[0];
+  const proto = req.get("x-forwarded-proto") || req.protocol;
+
+  if (host && host !== "www.sagestoneinc.com" && host.endsWith("sagestoneinc.com")) {
+    return res.redirect(301, `https://www.sagestoneinc.com${req.originalUrl}`);
+  }
+
+  if (host === "www.sagestoneinc.com" && proto !== "https") {
+    return res.redirect(301, `https://www.sagestoneinc.com${req.originalUrl}`);
+  }
+
+  return next();
+});
+
+
 // ── Contact form constants ─────────────────────────────────────────
 
 const ALLOWED_SERVICES = [
-  "Virtual Operations & Admin",
-  "Real Estate Virtual Assistant",
+  "Virtual Assistant Services",
+  "Customer Support Outsourcing",
+  "E-Commerce Virtual Assistant Services",
+  "Real Estate Virtual Assistant Services",
+  "Social Media Management Services",
+  "Business Operations Support",
+  "Web Design and Website Maintenance",
   "Bookkeeping Support",
-  "Social Media Marketing Support",
-  "Lead Generation Support",
-  "Graphic Design Support",
   "Data Entry & Web Research",
   "Multiple Services",
   "Not Sure Yet",
@@ -301,7 +320,7 @@ app.post("/api/contact", rateLimit, async (req, res) => {
       <p style="margin: 0; color: #111827; white-space: pre-wrap;">${sanitize(message)}</p>
     </div>
     <p style="color: #374151; line-height: 1.6; margin: 0;">If you have any urgent questions, reply to this email or call us at <strong>+1 214-945-2234</strong>.</p>
-    <p style="color: #9ca3af; font-size: 12px; margin: 24px 0 0;">— The SageStone Inc Team | <a href="https://sagestoneinc.com" style="color: #4a7c59;">sagestoneinc.com</a></p>
+    <p style="color: #9ca3af; font-size: 12px; margin: 24px 0 0;">— The SageStone Inc Team | <a href="https://www.sagestoneinc.com" style="color: #4a7c59;">sagestoneinc.com</a></p>
   </div>
 </div>`;
 
@@ -318,7 +337,7 @@ app.post("/api/contact", rateLimit, async (req, res) => {
         "If you have urgent questions, reply to this email or call us at +1 214-945-2234.",
         "",
         "— The SageStone Inc Team",
-        "https://sagestoneinc.com",
+        "https://www.sagestoneinc.com",
       ].join("\n");
 
       await sendMailWithRetry(smtpTransporter, {

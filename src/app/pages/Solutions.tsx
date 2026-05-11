@@ -240,7 +240,7 @@ export default function Solutions() {
       provider: {
         "@type": "Organization",
         name: "SageStone Inc",
-        url: "https://sagestoneinc.com",
+        url: "https://www.sagestoneinc.com",
       },
     };
     const existing = document.getElementById("solutions-jsonld");

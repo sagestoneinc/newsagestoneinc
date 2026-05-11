@@ -72,11 +72,11 @@ export default function Blog() {
       "@type": "Blog",
       "name": "SageStone Inc Blog",
       "description": "Insights and resources on virtual assistance, remote work, and business productivity.",
-      "url": "https://sagestoneinc.com/blog",
+      "url": "https://www.sagestoneinc.com/blog",
       "publisher": {
         "@type": "Organization",
         "name": "SageStone Inc",
-        "url": "https://sagestoneinc.com",
+        "url": "https://www.sagestoneinc.com",
       },
       "blogPost": blogPosts.map((post) => {
         const parsedDate = new Date(post.date);

@@ -1,127 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sagestoneinc.com/</loc>
+    <loc>https://www.sagestoneinc.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://sagestoneinc.com/why-sagestone</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://sagestoneinc.com/solutions</loc>
+    <loc>https://www.sagestoneinc.com/virtual-assistant-services/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/solutions/virtual-operations-admin</loc>
+    <loc>https://www.sagestoneinc.com/customer-support-outsourcing/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sagestoneinc.com/ecommerce-virtual-assistant/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sagestoneinc.com/real-estate-virtual-assistant/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sagestoneinc.com/social-media-management-services/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sagestoneinc.com/business-operations-support/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sagestoneinc.com/web-design-maintenance/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.sagestoneinc.com/about/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/solutions/real-estate-virtual-assistant</loc>
+    <loc>https://www.sagestoneinc.com/why-sagestone/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/solutions/bookkeeping-support</loc>
+    <loc>https://www.sagestoneinc.com/solutions/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/solutions/social-media-marketing-support</loc>
+    <loc>https://www.sagestoneinc.com/solutions/virtual-operations-admin/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/solutions/lead-generation-support</loc>
+    <loc>https://www.sagestoneinc.com/solutions/real-estate-virtual-assistant/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/solutions/graphic-design-support</loc>
+    <loc>https://www.sagestoneinc.com/solutions/bookkeeping-support/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/solutions/data-entry-web-research</loc>
+    <loc>https://www.sagestoneinc.com/solutions/social-media-marketing-support/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/faqs</loc>
+    <loc>https://www.sagestoneinc.com/solutions/lead-generation-support/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sagestoneinc.com/solutions/graphic-design-support/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sagestoneinc.com/solutions/data-entry-web-research/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.sagestoneinc.com/faqs/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/blog</loc>
+    <loc>https://www.sagestoneinc.com/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/blog/1</loc>
+    <loc>https://www.sagestoneinc.com/blog/1/</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/blog/2</loc>
+    <loc>https://www.sagestoneinc.com/blog/2/</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/blog/3</loc>
+    <loc>https://www.sagestoneinc.com/blog/3/</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/blog/4</loc>
+    <loc>https://www.sagestoneinc.com/blog/4/</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/blog/5</loc>
+    <loc>https://www.sagestoneinc.com/blog/5/</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/blog/6</loc>
+    <loc>https://www.sagestoneinc.com/blog/6/</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/blog/7</loc>
+    <loc>https://www.sagestoneinc.com/blog/7/</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/blog/8</loc>
+    <loc>https://www.sagestoneinc.com/blog/8/</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/blog/9</loc>
+    <loc>https://www.sagestoneinc.com/blog/9/</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/contact</loc>
+    <loc>https://www.sagestoneinc.com/contact/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/terms</loc>
+    <loc>https://www.sagestoneinc.com/terms/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://sagestoneinc.com/privacy</loc>
+    <loc>https://www.sagestoneinc.com/privacy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
