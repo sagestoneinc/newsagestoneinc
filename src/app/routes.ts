@@ -20,6 +20,7 @@ import SeoServicePage from "./pages/SeoServicePage";
 import VirtualAssistantVsInHouseAdmin from "./pages/VirtualAssistantVsInHouseAdmin";
 import OutsourcedSupportForSmallBusinesses from "./pages/OutsourcedSupportForSmallBusinesses";
 import IndustriesWeServe from "./pages/IndustriesWeServe";
+import WorkflowAssessment from "./pages/WorkflowAssessment";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       { path: "blog/:id", Component: BlogPost },
       { path: "case-studies", Component: CaseStudies },
       { path: "case-studies/:slug", Component: CaseStudy },
+      { path: "free-workflow-assessment", Component: WorkflowAssessment },
       { path: "contact", Component: Contact },
       { path: "thank-you", Component: ThankYou },
       { path: "terms", Component: Terms },
