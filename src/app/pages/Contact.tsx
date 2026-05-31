@@ -17,6 +17,8 @@ const serviceOptions = [
   "Not Sure Yet",
 ];
 
+const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
+
 const workloadOptions = [
   "Part-Time (10–20 hrs/week)",
   "Full-Time (40 hrs/week)",
@@ -127,13 +129,53 @@ export default function Contact() {
             Discuss Your <span className="text-sage-500">Support Needs</span>
           </h1>
           <p className="text-stone-500 text-[1.0625rem] max-w-2xl mx-auto leading-relaxed">
-            Ready to get started or just have questions? Fill out the form below and we'll reach out within 24 hours to schedule your free operations consultation.
+            Ready to reclaim time and reduce operational friction? Book directly, or request a free workflow assessment below.
           </p>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackEvent("booking_intent_click", { location: "contact_hero", cta_text: "Book a Discovery Call", target_url: CALENDLY_URL })}
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-sage-500 text-white rounded-xl hover:bg-sage-600 transition-colors text-[0.9375rem] shadow-sm"
+              style={{ fontWeight: 700 }}
+            >
+              Book a Discovery Call
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <a href="#workflow-assessment" className="inline-flex items-center px-7 py-3.5 border border-sage-300 text-stone-800 rounded-xl hover:bg-sage-50 transition-colors text-[0.9375rem]" style={{ fontWeight: 600 }}>
+              Get a Free Workflow Assessment
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 lg:py-24 bg-stone-50">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="inline-block px-4 py-1.5 bg-sage-50 text-sage-600 border border-sage-200 rounded-full text-[0.8125rem] mb-5" style={{ fontWeight: 600 }}>
+              Schedule Now
+            </span>
+            <h2 className="text-stone-900 tracking-tight mb-4" style={{ fontSize: "clamp(1.875rem, 4vw, 3rem)", fontWeight: 800, lineHeight: 1.15 }}>
+              Schedule Your Complimentary Discovery Call
+            </h2>
+            <p className="text-stone-500 text-[1.0625rem] leading-relaxed">
+              Pick a time that works for you. We will discuss your current operational challenges, delegation opportunities, and the best next step for your team.
+            </p>
+          </div>
+          <div className="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-xl shadow-stone-900/5">
+            <iframe
+              title="Schedule a SageStone discovery call"
+              src={`${CALENDLY_URL}?hide_gdpr_banner=1&background_color=f3efe7&text_color=2e2e2e&primary_color=8f987a`}
+              className="h-[760px] w-full border-0"
+              loading="lazy"
+            />
+          </div>
         </div>
       </section>
 
       {/* Contact Content */}
-      <section className="py-20 lg:py-24 bg-white">
+      <section id="workflow-assessment" className="py-20 lg:py-24 bg-white">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[380px_1fr] gap-12 lg:gap-16">
             {/* Contact Info */}
@@ -196,14 +238,14 @@ export default function Contact() {
               {/* Quick Info Card */}
               <div className="p-6 rounded-2xl bg-sage-50 border border-sage-100">
                 <h3 className="text-stone-900 mb-3" style={{ fontSize: "0.9375rem", fontWeight: 600 }}>
-                  What happens after you submit?
+                  Your free workflow assessment includes
                 </h3>
                 <ol className="space-y-2.5">
                   {[
-                    "We review your submission within 24 hours",
-                    "A team member reaches out to schedule a call",
-                    "We discuss your needs on a free operations consultation",
-                    "We create a custom support proposal for you",
+                    "A review of your highest-friction admin and operations workflows",
+                    "Recommendations for what to delegate first",
+                    "A discussion of tools, communication rhythm, and reporting needs",
+                    "A custom support proposal when SageStone is the right fit",
                   ].map((step, i) => (
                     <li key={step} className="flex items-start gap-2.5">
                       <span className="w-5 h-5 rounded-full bg-sage-200 text-sage-700 flex items-center justify-center text-[0.6875rem] shrink-0 mt-0.5" style={{ fontWeight: 600 }}>
@@ -219,10 +261,10 @@ export default function Contact() {
             {/* Contact Form */}
             <div className="bg-white rounded-2xl border border-stone-200 p-8 lg:p-10">
               <h2 className="text-stone-900 mb-2" style={{ fontSize: "1.375rem", fontWeight: 700 }}>
-                Send Us a Message
+                Request a Free Workflow Assessment
               </h2>
               <p className="text-stone-500 text-[0.875rem] mb-8">
-                Fields marked with <span className="text-red-500">*</span> are required.
+                Tell us where operations feel heavy. Fields marked with <span className="text-red-500">*</span> are required.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -416,7 +458,7 @@ export default function Contact() {
                     </>
                   ) : (
                     <>
-                      Send Message
+                      Request Assessment
                       <ArrowRight className="w-4 h-4" />
                     </>
                   )}

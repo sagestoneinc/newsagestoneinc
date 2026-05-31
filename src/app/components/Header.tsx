@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
-import { Menu, X } from "lucide-react";
+import { CalendarCheck, Menu, X } from "lucide-react";
 import { BrandLogo } from "./BrandLogo";
 import { trackCtaClick } from "../lib/analytics";
 
+const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
+
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "About Us", path: "/about" },
-  // { label: "Our Team", path: "/team" }, // Temporarily disabled
   { label: "Why SageStone?", path: "/why-sagestone" },
   { label: "Services", path: "/virtual-assistant-services" },
   { label: "FAQs", path: "/faqs" },
   { label: "Blog", path: "/blog" },
-  { label: "Contact Us", path: "/contact" },
+  { label: "Contact", path: "/contact" },
 ];
 
 export function Header() {
@@ -65,14 +65,17 @@ export function Header() {
 
           {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-3">
-            <Link
-              to="/contact"
-              className="hidden sm:inline-flex items-center px-5 py-2.5 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors duration-200 text-[0.875rem] shadow-sm"
-              style={{ fontWeight: 500 }}
-              onClick={() => trackCtaClick({ event_name: "contact_intent_click", location: "header_desktop", cta_text: "Book a Free Consultation", target_url: "/contact" })}
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors duration-200 text-[0.875rem] shadow-sm"
+              style={{ fontWeight: 600 }}
+              onClick={() => trackCtaClick({ event_name: "booking_intent_click", location: "header_desktop", cta_text: "Book a Discovery Call", target_url: CALENDLY_URL })}
             >
-              Book a Free Consultation
-            </Link>
+              <CalendarCheck className="w-4 h-4" />
+              Book a Discovery Call
+            </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="xl:hidden p-2 text-stone-600 hover:text-stone-900 rounded-lg hover:bg-stone-100 transition-colors"
@@ -102,14 +105,16 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/contact"
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noreferrer"
               className="block text-center mt-3 px-5 py-3 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors text-[0.9375rem]"
-              style={{ fontWeight: 500 }}
-              onClick={() => trackCtaClick({ event_name: "contact_intent_click", location: "header_mobile", cta_text: "Book a Free Consultation", target_url: "/contact" })}
+              style={{ fontWeight: 600 }}
+              onClick={() => trackCtaClick({ event_name: "booking_intent_click", location: "header_mobile", cta_text: "Book a Discovery Call", target_url: CALENDLY_URL })}
             >
-              Book a Free Consultation
-            </Link>
+              Book a Discovery Call
+            </a>
           </nav>
         </div>
       )}

@@ -1,216 +1,221 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import {
+  ArrowRight,
+  BarChart3,
+  CalendarCheck,
   CheckCircle2,
   ChevronDown,
-  ClipboardList,
-  Megaphone,
+  ClipboardCheck,
+  Clock3,
   Headset,
-  Target,
-  Briefcase,
-  Calculator,
-  Home as HomeIcon,
-  Palette,
-  Search,
+  Inbox,
+  Layers3,
+  MessageSquareText,
   Settings,
+  ShieldCheck,
+  Sparkles,
+  UserCheck,
 } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
-import { Badge } from "../components/brand/Badge";
-import { PrimaryButton } from "../components/brand/PrimaryButton";
-import { SecondaryButton } from "../components/brand/SecondaryButton";
-import { SectionHeader } from "../components/brand/SectionHeader";
-import { ServiceCard } from "../components/brand/ServiceCard";
-import { FeatureCard } from "../components/brand/FeatureCard";
-import { ProcessStep } from "../components/brand/ProcessStep";
-import { CTASection } from "../components/brand/CTASection";
-import { seoServicePages } from "../data/seoServicePages";
+import { trackCtaClick } from "../lib/analytics";
 
-const heroBadges = ["Remote-First", "Managed Support", "Worldwide Talent", "Flexible Plans"];
+const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
 
-const whyFeatures = [
+const trustIndicators = ["Dedicated Vetted VAs", "Flexible Support Plans", "Reliable Communication", "Managed Support"];
+
+const painPoints = [
   {
-    icon: CheckCircle2,
-    title: "Dedicated vetted VAs",
-    description: "Consistent support with a trusted assistant who learns your workflow and tools.",
+    icon: Inbox,
+    title: "Your inbox dictates the day",
+    description: "Client messages, vendor follow-ups, and internal requests interrupt the strategic work only you can do.",
   },
   {
-    icon: Settings,
-    title: "Flexible support plans",
-    description: "Right-size coverage for your workload—then scale up as momentum grows.",
-  },
-  {
-    icon: Briefcase,
-    title: "U.S.-managed support",
-    description: "Structured onboarding and ongoing oversight for reliable execution and quality.",
-  },
-];
-
-const services = [
-  {
-    icon: ClipboardList,
-    title: "Virtual Assistant Services",
-    description: "Administrative, operational, customer support, e-commerce, and marketing task support.",
-    to: "/virtual-assistant-services",
+    icon: Clock3,
+    title: "Admin work keeps expanding",
+    description: "Scheduling, documentation, reminders, and recurring tasks quietly consume hours that should drive revenue.",
   },
   {
     icon: Headset,
-    title: "Customer Support Outsourcing",
-    description: "Inbox management, ticket support, escalation workflows, and customer follow-ups.",
-    to: "/customer-support-outsourcing",
+    title: "Customer response times slip",
+    description: "When support demands spike, missed replies and delayed follow-ups can weaken client trust.",
   },
   {
-    icon: Target,
-    title: "E-Commerce Virtual Assistant Services",
-    description: "Order management, customer inquiries, product updates, CRM tasks, and back-office support.",
-    to: "/ecommerce-customer-support-outsourcing",
-  },
-  {
-    icon: HomeIcon,
-    title: "Real Estate Virtual Assistant Support",
-    description: "Lead management, CRM updates, listing coordination, calendars, and client communication.",
-    to: "/real-estate-virtual-assistant-services",
-  },
-  {
-    icon: Megaphone,
-    title: "Social Media Management Services",
-    description: "Content scheduling, community engagement support, reporting, and marketing coordination.",
-    to: "/social-media-management-services",
-  },
-  {
-    icon: Briefcase,
-    title: "Business Operations Support",
-    description: "Back-office workflows, documentation, reporting, process coordination, and team support.",
-    to: "/business-operations-support",
-  },
-  {
-    icon: Palette,
-    title: "Website Maintenance Services",
-    description: "Website design updates, content changes, landing page support, and ongoing web operations.",
-    to: "/web-design-maintenance-services",
-  },
-  {
-    icon: Calculator,
-    title: "Bookkeeping Support",
-    description: "Invoicing, expense tracking, reconciliations, and clean monthly reporting support.",
-    to: "/solutions/bookkeeping-support",
-  },
-  {
-    icon: Search,
-    title: "Data & Web Research",
-    description: "Accurate data entry, market research, competitor tracking, and list cleanup.",
-    to: "/solutions/data-entry-web-research",
+    icon: Layers3,
+    title: "Operations live in your head",
+    description: "Processes, handoffs, and priorities are not clear enough to scale without creating more bottlenecks.",
   },
 ];
 
-const opsFeatures = [
+const supportCategories = [
   {
-    icon: ClipboardList,
-    title: "Calendar & email management",
-    description: "Keep schedules, inboxes, and follow-ups organized and moving.",
+    icon: UserCheck,
+    title: "Executive Assistance",
+    description: "Protect leadership time with proactive scheduling, follow-up management, travel coordination, and priority support.",
   },
   {
-    icon: Briefcase,
-    title: "Project coordination",
-    description: "Stay on top of tasks, owners, timelines, and deliverables.",
+    icon: ClipboardCheck,
+    title: "Administrative Support",
+    description: "Keep routine work moving with dependable documentation, file organization, data entry, and task coordination.",
+  },
+  {
+    icon: MessageSquareText,
+    title: "Customer Service",
+    description: "Improve responsiveness with inbox triage, customer follow-ups, ticket support, and escalation workflows.",
+  },
+  {
+    icon: CalendarCheck,
+    title: "Calendar & Email Management",
+    description: "Create calm, organized days through calendar control, inbox prioritization, reminders, and meeting prep.",
+  },
+  {
+    icon: BarChart3,
+    title: "CRM Management",
+    description: "Maintain clean pipelines, accurate records, lead follow-ups, activity notes, and reporting visibility.",
   },
   {
     icon: Settings,
-    title: "Workflow automation",
-    description: "Reduce manual work with simple, reliable process improvements.",
-  },
-  {
-    icon: Target,
-    title: "CRM updates",
-    description: "Maintain pipeline accuracy with clean notes, tasks, and statuses.",
-  },
-  {
-    icon: ClipboardList,
-    title: "Document organization",
-    description: "Create order across folders, templates, and recurring documents.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Team follow-ups",
-    description: "Proactive check-ins that keep projects from stalling.",
+    title: "Operations Support",
+    description: "Document workflows, coordinate projects, manage recurring processes, and reduce owner-dependent execution.",
   },
 ];
 
-const process = [
+const benefits = [
   {
-    title: "Book a Discovery Call",
-    description: "We learn your goals, workload, and support needs.",
+    title: "More Time",
+    description: "Reclaim 10–20 hours every week by moving recurring work to a reliable support system.",
   },
   {
-    title: "Match & Onboard",
-    description: "We align you with the right support structure and workflow.",
+    title: "Better Organization",
+    description: "Bring order to inboxes, calendars, CRMs, files, and follow-ups so nothing important gets buried.",
   },
   {
-    title: "Execute & Scale",
-    description: "Your SageStone support team helps you move faster with consistent execution.",
+    title: "Faster Response Times",
+    description: "Strengthen client confidence with consistent communication and proactive follow-through.",
+  },
+  {
+    title: "Improved Client Experience",
+    description: "Create a more polished, responsive operation from first inquiry through ongoing service delivery.",
+  },
+  {
+    title: "Scalable Operations",
+    description: "Build repeatable support rhythms that grow with your workload instead of adding pressure to your team.",
   },
 ];
 
 const industries = [
-  "Small businesses",
-  "Real estate professionals",
-  "Startups",
-  "Agencies",
-  "Consultants",
-  "Finance teams",
-  "Professional services",
+  "Marketing Agencies",
+  "Real Estate",
+  "Property Management",
+  "Insurance",
+  "Consulting Firms",
+  "Professional Services",
 ];
 
-const homeFaqs = [
+const process = [
   {
-    q: "How do your managed virtual assistant services work?",
-    a: "We start with a discovery call, then match you with the right support structure and onboarding plan. You get consistent execution with clear workflows, regular check-ins, and U.S.-managed oversight.",
+    title: "Book Discovery Call",
+    description: "We clarify your goals, constraints, workload, and the operational friction costing you time.",
   },
   {
-    q: "What kinds of tasks can I delegate?",
-    a: "Most clients start with admin and operations tasks like scheduling, inbox triage, documentation, CRM updates, and project coordination. We also support marketing execution, lead generation, customer service, bookkeeping support, and real estate coordination.",
+    title: "Workflow Assessment",
+    description: "We identify what to delegate first, where handoffs need structure, and which outcomes matter most.",
+  },
+  {
+    title: "Match With Support Team",
+    description: "You receive managed support aligned to your tools, cadence, communication style, and business priorities.",
+  },
+  {
+    title: "Scale Efficiently",
+    description: "We refine workflows, expand coverage, and help your team operate with less owner dependency.",
+  },
+];
+
+const faqs = [
+  {
+    q: "How quickly can we start?",
+    a: "Most clients can begin shortly after the discovery call and workflow assessment. Timing depends on the complexity of your tools, documentation, and support scope, but the onboarding process is designed to move efficiently without sacrificing quality.",
+  },
+  {
+    q: "Are assistants dedicated?",
+    a: "Yes. SageStone is built around dependable, consistent support. We match you with vetted assistance and managed oversight so your support team can learn your business, communication preferences, and recurring workflows.",
+  },
+  {
+    q: "What tasks can be delegated?",
+    a: "Common delegations include executive assistance, inbox and calendar management, CRM updates, client follow-ups, administrative coordination, customer service, reporting, research, documentation, and operations support.",
   },
   {
     q: "Do you offer flexible plans?",
-    a: "Yes. We offer support plans that adapt to your workload so you can scale coverage up or down as needs change—without long-term complexity.",
+    a: "Yes. Support can be structured around your current workload and adjusted as your business grows, making SageStone a strong fit for teams that need premium support without immediately hiring full-time operations staff.",
   },
   {
-    q: "How quickly can we get started?",
-    a: "After your discovery call, onboarding is typically quick. The timeline depends on scope and tools, but our goal is to get support in motion efficiently with clear expectations and processes.",
+    q: "How do communication and reporting work?",
+    a: "We establish clear communication channels, response expectations, recurring check-ins, and reporting rhythms during onboarding so you always know what is being handled, what needs review, and where work stands.",
   },
 ];
 
+function CalendlyButton({ children, location, className = "" }: { children: string; location: string; className?: string }) {
+  return (
+    <a
+      href={CALENDLY_URL}
+      target="_blank"
+      rel="noreferrer"
+      onClick={() => trackCtaClick({ location, cta_text: children, target_url: CALENDLY_URL })}
+      className={`inline-flex items-center justify-center gap-2 rounded-[18px] bg-[color:var(--brand-olive-sage)] px-7 py-3.5 text-[0.9375rem] font-semibold text-[color:var(--brand-cloud)] shadow-[0_12px_28px_rgba(111,127,103,0.22)] transition-all duration-200 hover:bg-[color:var(--brand-deep-sage)] hover:shadow-[0_16px_34px_rgba(111,127,103,0.26)] ${className}`}
+    >
+      {children}
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15">
+        <ArrowRight className="h-4 w-4" />
+      </span>
+    </a>
+  );
+}
+
+function SecondaryAssessmentButton({ location, className = "" }: { location: string; className?: string }) {
+  return (
+    <Link
+      to="/contact#workflow-assessment"
+      onClick={() => trackCtaClick({ location, cta_text: "Get a Free Workflow Assessment", target_url: "/contact#workflow-assessment" })}
+      className={`inline-flex items-center justify-center rounded-[18px] border border-[color:var(--brand-olive-sage)] bg-white/40 px-7 py-3.5 text-[0.9375rem] font-medium text-[color:var(--brand-charcoal)] transition-colors duration-200 hover:bg-[color:var(--brand-sage-mist)]/70 ${className}`}
+    >
+      Get a Free Workflow Assessment
+    </Link>
+  );
+}
+
+function SectionIntro({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle: string }) {
+  return (
+    <div className="mx-auto mb-12 max-w-3xl text-center">
+      <p className="mb-3 text-[0.8125rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-olive-sage)]">{eyebrow}</p>
+      <h2 className="text-[color:var(--brand-charcoal)]" style={{ fontSize: "clamp(2rem, 4vw, 3.1rem)", fontWeight: 750, lineHeight: 1.08 }}>
+        {title}
+      </h2>
+      <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-black/65">{subtitle}</p>
+    </div>
+  );
+}
+
 function HomeFaq() {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
+
   return (
     <section className="py-20 lg:py-24" style={{ background: "var(--brand-cloud)" }}>
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+        <SectionIntro
           eyebrow="FAQ"
-          title="Frequently Asked Questions"
-          subtitle="Everything you need to know before getting started with SageStone."
+          title="Questions Before You Delegate"
+          subtitle="Clear answers for leaders evaluating premium virtual assistant services and managed business operations support."
         />
-        <div className="max-w-3xl mx-auto space-y-3">
-          {homeFaqs.map((item, i) => (
-            <div
-              key={i}
-              className="border border-[color:var(--border)] rounded-[18px] overflow-hidden bg-[color:var(--brand-cloud)]/70 hover:border-[color:var(--brand-olive-sage)] transition-colors"
-            >
-              <button
-                onClick={() => setOpenIdx(openIdx === i ? null : i)}
-                className="w-full flex items-center justify-between gap-4 p-5 text-left"
-              >
-                <span className="text-[color:var(--brand-charcoal)] text-[0.9375rem]" style={{ fontWeight: 600 }}>
-                  {item.q}
-                </span>
-                <ChevronDown
-                  className={`w-5 h-5 text-black/45 shrink-0 transition-transform duration-200 ${
-                    openIdx === i ? "rotate-180" : ""
-                  }`}
-                />
+        <div className="mx-auto max-w-3xl space-y-3">
+          {faqs.map((item, i) => (
+            <div key={item.q} className="overflow-hidden rounded-[18px] border border-[color:var(--border)] bg-white/55 transition-colors hover:border-[color:var(--brand-olive-sage)]">
+              <button onClick={() => setOpenIdx(openIdx === i ? null : i)} className="flex w-full items-center justify-between gap-4 p-5 text-left">
+                <span className="text-[0.9375rem] font-semibold text-[color:var(--brand-charcoal)]">{item.q}</span>
+                <ChevronDown className={`h-5 w-5 shrink-0 text-black/45 transition-transform duration-200 ${openIdx === i ? "rotate-180" : ""}`} />
               </button>
               {openIdx === i && (
                 <div className="px-5 pb-5 pt-0">
-                  <p className="text-black/65 text-[0.875rem] leading-relaxed">{item.a}</p>
+                  <p className="text-[0.875rem] leading-relaxed text-black/65">{item.a}</p>
                 </div>
               )}
             </div>
@@ -223,11 +228,11 @@ function HomeFaq() {
 
 export default function Home() {
   usePageMeta({
-    title: "Virtual Assistant Services, Customer Support & Business Operations | SageStone Inc",
+    title: "Premium Virtual Assistant Services & Business Operations Support | SageStone Inc",
     description:
-      "SageStone Inc helps businesses scale with virtual assistants, customer support, e-commerce operations, social media support, web maintenance, and business operations services.",
+      "SageStone Inc helps overwhelmed business owners reclaim time with managed virtual assistant services, executive assistant services, remote administrative support, and business operations support.",
     keywords:
-      "virtual assistant services, customer support outsourcing, e-commerce operations support, social media support, web maintenance, business operations services"
+      "Virtual Assistant Services, Executive Assistant Services, Remote Administrative Support, Business Operations Support, Virtual Operations Manager, Outsourced Administrative Services, Managed Virtual Support",
   });
 
   useEffect(() => {
@@ -237,24 +242,25 @@ export default function Home() {
       name: "SageStone Inc",
       url: "https://www.sagestoneinc.com",
       description:
-        "SageStone Inc provides virtual assistant services, customer support, e-commerce support, social media management, web maintenance, and business operations support.",
+        "Premium managed virtual support for business owners and growing companies that need executive assistance, remote administrative support, CRM management, customer service, and business operations support.",
       areaServed: "Worldwide",
+      serviceType: [
+        "Virtual Assistant Services",
+        "Executive Assistant Services",
+        "Remote Administrative Support",
+        "Business Operations Support",
+        "Managed Virtual Support",
+      ],
     };
 
-    const existingSvc = document.getElementById("home-service-jsonld");
-    if (existingSvc && existingSvc.tagName === "SCRIPT") {
-      (existingSvc as HTMLScriptElement).text = JSON.stringify(homeJsonLd);
-    } else {
-      const svcScript = document.createElement("script");
-      svcScript.type = "application/ld+json";
-      svcScript.text = JSON.stringify(homeJsonLd);
-      svcScript.id = "home-service-jsonld";
-      document.head.appendChild(svcScript);
-    }
+    const svcScript = document.createElement("script");
+    svcScript.type = "application/ld+json";
+    svcScript.text = JSON.stringify(homeJsonLd);
+    svcScript.id = "home-service-jsonld";
+    document.head.appendChild(svcScript);
 
     return () => {
-      const svcEl = document.getElementById("home-service-jsonld");
-      if (svcEl) svcEl.remove();
+      document.getElementById("home-service-jsonld")?.remove();
     };
   }, []);
 
@@ -262,180 +268,190 @@ export default function Home() {
     <>
       <section className="relative overflow-hidden" style={{ background: "var(--brand-ivory)" }}>
         <div aria-hidden="true" className="absolute inset-0">
-          <div className="absolute -top-40 -right-40 w-[560px] h-[560px] rounded-full bg-[color:var(--brand-sage-mist)]/45 blur-3xl" />
-          <div className="absolute -bottom-48 -left-48 w-[620px] h-[620px] rounded-full bg-[color:var(--brand-soft-beige)]/55 blur-3xl" />
+          <div className="absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-[color:var(--brand-sage-mist)]/55 blur-3xl" />
+          <div className="absolute -bottom-48 -left-48 h-[620px] w-[620px] rounded-full bg-[color:var(--brand-soft-beige)]/65 blur-3xl" />
         </div>
 
-        <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7">
-              <div className="flex flex-wrap gap-2.5 mb-6">
-                {heroBadges.map((b) => (
-                  <Badge key={b}>{b}</Badge>
+        <div className="relative mx-auto grid max-w-[1440px] items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-24">
+          <div>
+            <p className="mb-5 inline-flex rounded-full border border-[color:var(--brand-stone-taupe)]/70 bg-white/45 px-4 py-2 text-[0.8125rem] font-semibold uppercase tracking-[0.18em] text-[color:var(--brand-olive-sage)]">
+              Virtual Support. Real Results.
+            </p>
+            <h1 className="max-w-4xl text-[color:var(--brand-charcoal)]" style={{ fontSize: "clamp(2.75rem, 7vw, 6rem)", fontWeight: 760, lineHeight: 0.96 }}>
+              Virtual Support That Keeps Your Business Moving
+            </h1>
+            <p className="mt-7 max-w-2xl text-[1.125rem] leading-8 text-black/68 lg:text-[1.25rem]">
+              SageStone helps overwhelmed business owners and growing teams reclaim 10–20 hours every week with dependable virtual assistant services, managed remote administrative support, and operations systems built for scale.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <CalendlyButton location="homepage_hero">Book a Discovery Call</CalendlyButton>
+              <SecondaryAssessmentButton location="homepage_hero" />
+            </div>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:max-w-2xl">
+              {trustIndicators.map((item) => (
+                <div key={item} className="flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-white/45 px-4 py-2 text-[0.875rem] text-black/70">
+                  <CheckCircle2 className="h-4 w-4 text-[color:var(--brand-olive-sage)]" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-[34px] border border-[color:var(--brand-stone-taupe)]/60 bg-white/55 p-5 shadow-[0_24px_70px_rgba(46,46,46,0.10)] backdrop-blur">
+            <div className="rounded-[28px] bg-[color:var(--brand-cloud)] p-6 sm:p-8">
+              <div className="mb-6 flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.18em] text-[color:var(--brand-olive-sage)]">Operational clarity</p>
+                  <h2 className="mt-2 text-2xl font-semibold text-[color:var(--brand-charcoal)]">From reactive to reliable</h2>
+                </div>
+                <ShieldCheck className="h-10 w-10 text-[color:var(--brand-olive-sage)]" />
+              </div>
+              <div className="space-y-4">
+                {[
+                  ["Inbox and calendar controlled", "Daily triage, scheduling, reminders, and priority follow-ups."],
+                  ["CRM and client records current", "Clean pipelines, accurate notes, and next-step visibility."],
+                  ["Recurring work delegated", "Documented processes that reduce interruptions and owner dependency."],
+                ].map(([title, copy]) => (
+                  <div key={title} className="rounded-2xl border border-[color:var(--border)] bg-white/65 p-4">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[color:var(--brand-olive-sage)]" />
+                      <div>
+                        <h3 className="text-base font-semibold text-[color:var(--brand-charcoal)]">{title}</h3>
+                        <p className="mt-1 text-[0.875rem] leading-relaxed text-black/60">{copy}</p>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
-              <h1
-                className="text-[color:var(--brand-charcoal)] tracking-tight mb-6"
-                style={{ fontSize: "clamp(2.25rem, 4.6vw, 3.6rem)", fontWeight: 780, lineHeight: 1.05 }}
-              >
-                Virtual Assistant Services and Business Operations Support for Growing Companies
-              </h1>
-              <p className="text-black/65 text-[1.125rem] leading-relaxed mb-9 max-w-xl">
-                SageStone Inc helps businesses scale with virtual assistants, customer support, e-commerce operations,
-                social media support, web maintenance, and business operations services.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <PrimaryButton to="/contact" tracking={{ location: "homepage_hero", cta_text: "Book a Free Operations Consultation" }}>Book a Free Operations Consultation</PrimaryButton>
-                <SecondaryButton to="/virtual-assistant-services" tracking={{ location: "homepage_hero", cta_text: "Get Virtual Assistant Support", service: "virtual-assistant-services" }}>Get Virtual Assistant Support</SecondaryButton>
-              </div>
-              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-black/55 text-[0.875rem]">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[color:var(--brand-deep-sage)]" />
-                  <span>Reliable support without long-term complexity</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[color:var(--brand-deep-sage)]" />
-                  <span>Built for growing businesses</span>
-                </div>
+              <div className="mt-6 rounded-2xl bg-[color:var(--brand-olive-sage)] p-5 text-[color:var(--brand-cloud)]">
+                <p className="text-[0.875rem] uppercase tracking-[0.18em] text-white/70">Outcome</p>
+                <p className="mt-2 text-2xl font-semibold">More focus, cleaner execution, fewer missed opportunities.</p>
               </div>
             </div>
-
-            <div className="lg:col-span-5">
-              <div className="relative">
-                <div aria-hidden="true" className="absolute inset-0 rounded-[28px] shadow-[0_24px_70px_rgba(46,46,46,0.10)]" />
-                <div
-                  className={
-                    "relative rounded-[28px] border border-[color:var(--brand-stone-taupe)]/55 " +
-                    "bg-[color:var(--brand-cloud)]/70 backdrop-blur overflow-hidden p-10"
-                  }
-                >
-                  <div aria-hidden="true" className="absolute -top-10 -right-10 w-56 h-56 rounded-full border border-black/10" />
-                  <div aria-hidden="true" className="absolute -bottom-14 -left-14 w-72 h-72 rounded-full border border-black/10" />
-
-                  <div className="relative">
-                    <p className="text-[0.8125rem] uppercase tracking-[0.18em] text-black/55 mb-6">SageStone Inc.</p>
-                    <div
-                      className="mx-auto w-[220px] h-[220px] rounded-full flex items-center justify-center"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(250,248,243,0.85) 0%, rgba(230,223,210,0.65) 100%)",
-                        boxShadow: "inset 0 2px 0 rgba(255,255,255,0.55)",
-                        border: "1px solid rgba(199,189,177,0.65)",
-                      }}
-                    >
-                      <span
-                        aria-hidden="true"
-                        style={{
-                          fontFamily: "var(--font-family-heading)",
-                          fontSize: "6.2rem",
-                          lineHeight: 1,
-                          color: "var(--brand-olive-sage)",
-                          textShadow: "0 2px 0 rgba(255,255,255,0.5)",
-                        }}
-                      >
-                        S
-                      </span>
-                    </div>
-                    <p className="mt-8 text-black/65 text-[0.9375rem] leading-relaxed">
-                      A calm, managed operations partner—designed to keep execution consistent.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[0.9375rem] text-black/60">
-            <Link to="/virtual-assistant-vs-in-house-admin" className="text-[color:var(--brand-deep-sage)] underline underline-offset-4">Virtual assistant vs in-house admin</Link>
-            <Link to="/outsourced-support-for-small-businesses" className="text-[color:var(--brand-deep-sage)] underline underline-offset-4">Outsourced support for small businesses</Link>
           </div>
         </div>
       </section>
 
       <section className="py-20 lg:py-24" style={{ background: "var(--brand-cloud)" }}>
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            eyebrow="Why SageStone"
-            title="Why Choose SageStone?"
-            subtitle="A smarter way to scale support without adding full-time overhead."
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <SectionIntro
+            eyebrow="The Bottleneck"
+            title="Why Business Owners Feel Stuck"
+            subtitle="Growth should create opportunity—not constant interruptions, inbox overload, scheduling issues, and operational work that pulls you away from leadership."
           />
-          <div className="grid md:grid-cols-3 gap-6">
-            {whyFeatures.map((f) => (
-              <FeatureCard key={f.title} icon={f.icon} title={f.title} description={f.description} />
-            ))}
-          </div>
-          <p className="mt-8 text-center text-black/60 text-[0.9375rem]">Worldwide remote talent for growing businesses.</p>
-        </div>
-      </section>
-
-      <section className="py-20 lg:py-24" style={{ background: "var(--brand-ivory)" }}>
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            eyebrow="Services"
-            title="Services That Keep Work Moving"
-            subtitle="Clean, reliable support across operations, marketing, customer service, and growth."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((s) => (
-              <ServiceCard key={s.title} icon={s.icon} title={s.title} description={s.description} to={s.to} />
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <PrimaryButton to="/contact" tracking={{ location: "homepage_services", cta_text: "Build Your Support Team" }}>Build Your Support Team</PrimaryButton>
-          </div>
-          <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[0.9375rem] text-black/60">
-            {seoServicePages.map((service) => (
-              <Link key={service.slug} to={`/${service.slug}`} className="text-[color:var(--brand-deep-sage)] underline underline-offset-4">
-                {service.h1}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 lg:py-24" style={{ background: "var(--brand-cloud)" }}>
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            eyebrow="Virtual Operations & Admin"
-            title="Virtual Operations & Admin"
-            subtitle="Delegate the daily work so your team can focus on strategy and growth."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {opsFeatures.map((f) => (
-              <FeatureCard key={f.title} icon={f.icon} title={f.title} description={f.description} />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {painPoints.map((item) => (
+              <div key={item.title} className="rounded-[24px] border border-[color:var(--border)] bg-white/55 p-6 shadow-[0_14px_34px_rgba(46,46,46,0.05)]">
+                <item.icon className="mb-5 h-9 w-9 text-[color:var(--brand-olive-sage)]" />
+                <h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{item.title}</h3>
+                <p className="mt-3 text-[0.9375rem] leading-relaxed text-black/62">{item.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       <section className="py-20 lg:py-24" style={{ background: "var(--brand-ivory)" }}>
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            eyebrow="Process"
-            title="Simple Support, Built Around Your Business"
-            subtitle="A clear 3-step process designed for calm, consistent execution."
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <SectionIntro
+            eyebrow="The SageStone Solution"
+            title="How SageStone Helps"
+            subtitle="We combine vetted virtual support with managed operations structure, helping you delegate outcomes—not just isolated tasks."
           />
-          <div className="grid md:grid-cols-3 gap-6">
-            {process.map((s, idx) => (
-              <ProcessStep key={s.title} step={idx + 1} title={s.title} description={s.description} />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {supportCategories.map((item) => (
+              <div key={item.title} className="rounded-[24px] border border-[color:var(--border)] bg-white/50 p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(46,46,46,0.08)]">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--brand-sage-mist)] text-[color:var(--brand-deep-sage)]">
+                  <item.icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{item.title}</h3>
+                <p className="mt-3 text-[0.9375rem] leading-relaxed text-black/62">{item.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       <section className="py-20 lg:py-24" style={{ background: "var(--brand-cloud)" }}>
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <SectionIntro
+            eyebrow="Business Outcomes"
+            title="What You Gain"
+            subtitle="The right managed virtual support gives your business more than task completion—it creates capacity, confidence, and operational momentum."
+          />
+          <div className="grid gap-5 lg:grid-cols-5">
+            {benefits.map((benefit) => (
+              <div key={benefit.title} className="rounded-[22px] border border-[color:var(--border)] bg-white/60 p-6">
+                <Sparkles className="mb-4 h-7 w-7 text-[color:var(--brand-olive-sage)]" />
+                <h3 className="text-lg font-semibold text-[color:var(--brand-charcoal)]">{benefit.title}</h3>
+                <p className="mt-3 text-[0.875rem] leading-relaxed text-black/62">{benefit.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-12 sm:px-6 lg:px-8" style={{ background: "var(--brand-ivory)" }}>
+        <div className="mx-auto max-w-[1180px] rounded-[30px] border border-[color:var(--brand-stone-taupe)]/60 bg-[color:var(--brand-charcoal)] p-8 text-center text-white shadow-[0_18px_48px_rgba(46,46,46,0.16)] sm:p-12">
+          <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-sage-mist)]">Mid-page decision point</p>
+          <h2 className="mt-3 text-white" style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", fontWeight: 750, lineHeight: 1.08 }}>Ready to Reclaim Your Time?</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-[1.0625rem] leading-relaxed text-white/72">Book a complimentary discovery call and leave with a clearer view of what to delegate first.</p>
+          <div className="mt-8">
+            <CalendlyButton location="homepage_midpage" className="bg-[color:var(--brand-sage-mist)] text-[color:var(--brand-charcoal)] hover:bg-white">Book a Discovery Call</CalendlyButton>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 lg:py-24" style={{ background: "var(--brand-cloud)" }}>
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <SectionIntro
             eyebrow="Industries"
-            title="Support for Growing Teams Across Industries"
-            subtitle="Reliable remote support that adapts to your tools, pace, and priorities."
+            title="Who We Support"
+            subtitle="SageStone adapts to the pace, tools, and client expectations of service-led companies that need reliable execution."
           />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {industries.map((i) => (
-              <div
-                key={i}
-                className="rounded-[18px] border border-[color:var(--border)] bg-[color:var(--card)] px-5 py-4 text-[0.9375rem] text-black/70"
-              >
-                {i}
+          <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {industries.map((industry) => (
+              <div key={industry} className="rounded-[20px] border border-[color:var(--border)] bg-white/58 p-5 text-[1rem] font-semibold text-[color:var(--brand-charcoal)]">
+                {industry}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 lg:py-24" style={{ background: "var(--brand-ivory)" }}>
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <SectionIntro
+            eyebrow="Process"
+            title="Getting Started Is Simple"
+            subtitle="A premium support relationship should feel clear from the first conversation. Here is how we move from discovery to dependable execution."
+          />
+          <div className="grid gap-6 lg:grid-cols-4">
+            {process.map((step, index) => (
+              <div key={step.title} className="rounded-[24px] border border-[color:var(--border)] bg-white/55 p-6">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-[color:var(--brand-olive-sage)] text-lg font-semibold text-white">{index + 1}</div>
+                <h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{step.title}</h3>
+                <p className="mt-3 text-[0.9375rem] leading-relaxed text-black/62">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 lg:py-24" style={{ background: "var(--brand-cloud)" }}>
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <SectionIntro
+            eyebrow="Client Results"
+            title="Trusted Support Stories Coming Soon"
+            subtitle="This section is prepared for future testimonials from leaders who have improved response times, reclaimed focus, and scaled with SageStone support."
+          />
+          <div className="grid gap-6 md:grid-cols-3">
+            {["Operational clarity", "More leadership capacity", "Consistent client follow-through"].map((quote) => (
+              <div key={quote} className="rounded-[24px] border border-dashed border-[color:var(--brand-stone-taupe)] bg-white/45 p-7">
+                <p className="text-[0.875rem] uppercase tracking-[0.18em] text-[color:var(--brand-olive-sage)]">Future testimonial</p>
+                <p className="mt-5 text-xl font-semibold leading-snug text-[color:var(--brand-charcoal)]">“Placeholder for a client story about {quote.toLowerCase()}.”</p>
+                <div className="mt-8 h-px bg-[color:var(--border)]" />
+                <p className="mt-5 text-[0.875rem] text-black/55">Client name, title, and company</p>
               </div>
             ))}
           </div>
@@ -444,15 +460,42 @@ export default function Home() {
 
       <HomeFaq />
 
-      <CTASection
-        title="Ready to Delegate Smarter?"
-        subtitle="Start building reliable remote support for your business today."
-        buttonText="Discuss Your Support Needs"
-        buttonTo="/contact"
-        tracking={{ location: "homepage_bottom", cta_text: "Discuss Your Support Needs" }}
-        footerNote="Virtual Support. Real Results."
-      />
+      <section id="schedule" className="py-20 lg:py-24" style={{ background: "var(--brand-ivory)" }}>
+        <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
+          <SectionIntro
+            eyebrow="Book Now"
+            title="Schedule Your Complimentary Discovery Call"
+            subtitle="Choose a time that works for you. In the call, we will discuss your current operational challenges, identify delegation opportunities, and recommend next steps."
+          />
+          <div className="overflow-hidden rounded-[28px] border border-[color:var(--border)] bg-white shadow-[0_18px_48px_rgba(46,46,46,0.08)]">
+            <iframe
+              title="Schedule a SageStone discovery call"
+              src={`${CALENDLY_URL}?hide_gdpr_banner=1&background_color=f3efe7&text_color=2e2e2e&primary_color=8f987a`}
+              className="h-[760px] w-full border-0"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden py-20 lg:py-24" style={{ background: "var(--brand-cloud)" }}>
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+          <div className="rounded-[32px] border border-[color:var(--brand-stone-taupe)]/55 bg-white/60 px-8 py-14 text-center shadow-[0_18px_48px_rgba(46,46,46,0.10)] backdrop-blur sm:px-12">
+            <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-olive-sage)]">Next Step</p>
+            <h2 className="mx-auto mt-3 max-w-3xl text-[color:var(--brand-charcoal)]" style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)", fontWeight: 760, lineHeight: 1.08 }}>
+              Let’s Build a More Efficient Business Together
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-black/65">
+              Discover how SageStone can help streamline your operations and free your team to focus on growth.
+            </p>
+            <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+              <CalendlyButton location="homepage_final">Book a Discovery Call</CalendlyButton>
+              <SecondaryAssessmentButton location="homepage_final" />
+            </div>
+            <p className="mt-8 text-[0.875rem] text-black/55">Premium managed virtual support for calm, consistent execution.</p>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
-
