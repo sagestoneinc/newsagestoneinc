@@ -29,6 +29,7 @@
 2. **Set required environment variable**
    - In Pages project settings, go to **Settings** → **Environment variables**.
    - Add `FROM_EMAIL` (for example: `contact@yourdomain.com`; SageStone uses `hello@sagestoneinc.com`).
+   - Optional for the Workflow Assessment landing page CRM handoff: add `CRM_WEBHOOK_URL` and, if your CRM requires bearer authentication, `CRM_WEBHOOK_TOKEN`.
    - This value must be an email address on your verified domain.
 
 3. **Enable Cloudflare Email Routing**
