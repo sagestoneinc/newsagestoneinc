@@ -12,6 +12,7 @@ import BlogPost from "./pages/BlogPost";
 import CaseStudies from "./pages/CaseStudies";
 import CaseStudy from "./pages/CaseStudy";
 import Contact from "./pages/Contact";
+import ThankYou from "./pages/ThankYou";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       { path: "case-studies", Component: CaseStudies },
       { path: "case-studies/:slug", Component: CaseStudy },
       { path: "contact", Component: Contact },
+      { path: "thank-you", Component: ThankYou },
       { path: "terms", Component: Terms },
       { path: "privacy", Component: Privacy },
       { path: "*", Component: NotFound },
