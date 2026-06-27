@@ -497,6 +497,68 @@ export const seoServicePages: SeoServicePage[] = [
   },
 ];
 
+
+const servicePageAliases: Array<{ from: string; to: string; title: string; metaDescription: string; h1: string; eyebrow: string }> = [
+  {
+    from: "customer-support",
+    to: "customer-support-outsourcing",
+    title: "Customer Support Services | SageStone Inc",
+    metaDescription: "Customer support services for email, chat, helpdesk tickets, follow-ups, order questions, and customer communication.",
+    h1: "Customer Support Services for Growing Teams",
+    eyebrow: "Customer Support",
+  },
+  {
+    from: "ecommerce-operations-support",
+    to: "ecommerce-customer-support-outsourcing",
+    title: "E-commerce Operations Support | SageStone Inc",
+    metaDescription: "E-commerce operations support for order questions, product updates, inventory coordination, backend store tasks, and customer inquiries.",
+    h1: "E-commerce Operations Support",
+    eyebrow: "E-commerce Operations",
+  },
+  {
+    from: "crm-admin-support",
+    to: "business-operations-support",
+    title: "CRM & Admin Support | SageStone Inc",
+    metaDescription: "CRM and admin support for cleanup, lead updates, pipeline tracking, reporting, contact management, and daily operations.",
+    h1: "CRM & Admin Support",
+    eyebrow: "CRM & Admin Support",
+  },
+  {
+    from: "social-media-support",
+    to: "social-media-management-services",
+    title: "Social Media Support | SageStone Inc",
+    metaDescription: "Social media support for scheduling, content organization, engagement tracking, reporting, and creative coordination.",
+    h1: "Social Media Support",
+    eyebrow: "Social Media Support",
+  },
+  {
+    from: "web-maintenance-support",
+    to: "web-design-maintenance-services",
+    title: "Web Maintenance Support | SageStone Inc",
+    metaDescription: "Web maintenance support for website updates, content edits, page checks, links, forms, and routine maintenance.",
+    h1: "Web Maintenance Support",
+    eyebrow: "Web Maintenance Support",
+  },
+];
+
+servicePageAliases.forEach((alias) => {
+  const source = seoServicePages.find((page) => page.slug === alias.to);
+  if (source && !seoServicePages.some((page) => page.slug === alias.from)) {
+    seoServicePages.push({
+      ...source,
+      slug: alias.from,
+      title: alias.title,
+      metaDescription: alias.metaDescription,
+      h1: alias.h1,
+      eyebrow: alias.eyebrow,
+      related: source.related.map((item) => ({ ...item })),
+      sections: source.sections.map((section) => ({ ...section, bullets: section.bullets ? [...section.bullets] : undefined })),
+      faqs: source.faqs.map((faq) => ({ ...faq })),
+      highlights: [...source.highlights],
+    });
+  }
+});
+
 export function getSeoServicePage(slug: string | undefined) {
   return seoServicePages.find((page) => page.slug === slug);
 }
