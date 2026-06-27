@@ -33,8 +33,8 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/82 backdrop-blur-xl shadow-[0_10px_34px_rgba(46,46,46,0.08)]"
-          : "bg-white/72 backdrop-blur-xl"
+          ? "border-b border-[color:var(--border)] bg-[color:var(--brand-cloud)]/88 shadow-[0_18px_50px_rgba(23,28,24,0.08)] backdrop-blur-2xl"
+          : "bg-[color:var(--brand-cloud)]/70 backdrop-blur-2xl"
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,7 +50,7 @@ export function Header() {
               <Link
                 key={link.path}
                 to={link.path}
-                className="rounded-full px-3 py-2 text-[0.875rem] font-medium text-stone-600 transition-colors duration-200 hover:bg-sage-50/80 hover:text-sage-700"
+                className="rounded-full px-3.5 py-2 text-[0.875rem] font-semibold text-[color:var(--brand-charcoal)]/72 transition-all duration-200 hover:bg-[color:var(--brand-sage-mist)]/70 hover:text-[color:var(--brand-deep-sage)]"
               >
                 {link.label}
               </Link>
@@ -63,7 +63,7 @@ export function Header() {
               href={CALENDLY_URL}
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-[color:var(--brand-charcoal)] text-white rounded-full hover:bg-[color:var(--brand-deep-sage)] transition-colors duration-200 text-[0.875rem] shadow-sm"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-deep-sage)] px-5 py-2.5 text-[0.875rem] text-white shadow-[0_14px_34px_rgba(35,81,59,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color:var(--brand-charcoal)]"
               style={{ fontWeight: 600 }}
               onClick={() => trackCtaClick({ event_name: "booking_intent_click", location: "header_desktop", cta_text: "Book a Discovery Call", target_url: CALENDLY_URL })}
             >
@@ -72,7 +72,7 @@ export function Header() {
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="xl:hidden p-2 text-stone-600 hover:text-stone-900 rounded-lg hover:bg-stone-100 transition-colors"
+              className="xl:hidden rounded-full p-2 text-[color:var(--brand-charcoal)]/72 transition-colors hover:bg-[color:var(--brand-sage-mist)]/70 hover:text-[color:var(--brand-deep-sage)]"
               aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -83,13 +83,13 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="xl:hidden bg-white border-t border-stone-200 shadow-lg">
+        <div className="xl:hidden border-t border-[color:var(--border)] bg-[color:var(--brand-cloud)]/96 shadow-[0_24px_60px_rgba(23,28,24,0.12)] backdrop-blur-2xl">
           <nav className="max-w-[1440px] mx-auto px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className="block rounded-lg px-4 py-3 text-[0.9375rem] text-stone-700 transition-colors hover:bg-stone-50"
+                className="block rounded-2xl px-4 py-3 text-[0.9375rem] text-[color:var(--brand-charcoal)]/78 transition-colors hover:bg-[color:var(--brand-sage-mist)]/60"
                 style={{ fontWeight: 500 }}
               >
                 {link.label}
@@ -99,7 +99,7 @@ export function Header() {
               href={CALENDLY_URL}
               target="_blank"
               rel="noreferrer"
-              className="block text-center mt-3 px-5 py-3 bg-[color:var(--brand-charcoal)] text-white rounded-full hover:bg-[color:var(--brand-deep-sage)] transition-colors text-[0.9375rem]"
+              className="mt-3 block rounded-full bg-[color:var(--brand-deep-sage)] px-5 py-3 text-center text-[0.9375rem] text-white shadow-[0_14px_34px_rgba(35,81,59,0.22)] transition-colors hover:bg-[color:var(--brand-charcoal)]"
               style={{ fontWeight: 600 }}
               onClick={() => trackCtaClick({ event_name: "booking_intent_click", location: "header_mobile", cta_text: "Book a Discovery Call", target_url: CALENDLY_URL })}
             >
