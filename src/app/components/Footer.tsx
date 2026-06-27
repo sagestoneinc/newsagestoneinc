@@ -5,24 +5,20 @@ import { trackCtaClick, trackEvent } from "../lib/analytics";
 
 const quickLinks = [
   { label: "Home", path: "/" },
-  { label: "About Us", path: "/about" },
-  // { label: "Our Team", path: "/team" }, // Temporarily disabled
-  { label: "Why SageStone?", path: "/why-sagestone" },
-  { label: "Blog", path: "/blog" },
-  { label: "Contact Us", path: "/contact" },
-  { label: "VA vs In-House Admin", path: "/virtual-assistant-vs-in-house-admin" },
-  { label: "Small Business Support", path: "/outsourced-support-for-small-businesses" },
-  { label: "Industries We Serve", path: "/industries-we-serve" },
+  { label: "Services", path: "/#services" },
+  { label: "How It Works", path: "/#how-it-works" },
+  { label: "Who We Help", path: "/#who-we-help" },
+  { label: "FAQ", path: "/#faq" },
+  { label: "Contact", path: "/#contact" },
 ];
 
 const solutionLinks = [
-  { label: "Virtual Operations & Admin", path: "/solutions/virtual-operations-admin" },
-  { label: "Real Estate VA", path: "/solutions/real-estate-virtual-assistant" },
-  { label: "Bookkeeping Support", path: "/solutions/bookkeeping-support" },
-  { label: "Social Media Marketing", path: "/solutions/social-media-marketing-support" },
-  { label: "Lead Generation", path: "/solutions/lead-generation-support" },
-  { label: "Graphic Design", path: "/solutions/graphic-design-support" },
-  { label: "Data Entry & Research", path: "/solutions/data-entry-web-research" },
+  { label: "Virtual Assistant Services", path: "/virtual-assistant-services" },
+  { label: "Customer Support", path: "/customer-support" },
+  { label: "E-commerce Operations", path: "/ecommerce-operations-support" },
+  { label: "CRM & Admin Support", path: "/crm-admin-support" },
+  { label: "Social Media Support", path: "/social-media-support" },
+  { label: "Web Maintenance Support", path: "/web-maintenance-support" },
 ];
 
 const legalLinks = [
@@ -32,7 +28,7 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-stone-900 text-white">
+    <footer className="bg-[color:var(--brand-charcoal)] text-white">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
         <div className="py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
@@ -42,8 +38,7 @@ export function Footer() {
               <BrandLogo variant="light" />
             </Link>
             <p className="text-stone-400 text-[0.9375rem] leading-relaxed mb-6 max-w-sm">
-              SageStone Inc provides remote virtual assistant services worldwide, helping businesses
-              streamline operations, boost marketing, and scale efficiently with dedicated support.
+              Reliable virtual assistant, customer support, and business operations support for growing teams.
             </p>
             <div className="space-y-3">
               <a href="mailto:hello@sagestoneinc.com" onClick={() => trackEvent("email_click", { location: "footer", target_url: "mailto:hello@sagestoneinc.com" })} className="flex items-center gap-3 text-stone-400 hover:text-sage-400 transition-colors text-[0.875rem]">
@@ -93,7 +88,7 @@ export function Footer() {
           <div className="lg:col-span-3">
             <h4 className="text-white mb-4 text-[0.9375rem]" style={{ fontWeight: 600 }}>Ready to Get Started?</h4>
             <p className="text-stone-400 text-[0.875rem] leading-relaxed mb-5">
-              Book a free discovery call to discuss how SageStone can support your business goals.
+              Book a discovery call or request a workflow audit to identify what your team can delegate first.
             </p>
             <Link
               to="/contact"

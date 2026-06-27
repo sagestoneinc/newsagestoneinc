@@ -241,3 +241,81 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-up {
+    animation: reveal-up 720ms cubic-bezier(.2,.8,.2,1) both;
+  }
+
+  .ambient-orb {
+    animation: ambient-drift 12s ease-in-out infinite alternate;
+  }
+
+  .ambient-orb-delayed {
+    animation-delay: -5s;
+  }
+
+  .float-card {
+    animation: float-card 5.5s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  .trust-marquee span {
+    animation: soft-pulse 4.5s ease-in-out infinite;
+  }
+
+  .premium-card {
+    transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease, background 260ms ease;
+  }
+
+  .premium-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(111, 127, 103, 0.38);
+    box-shadow: 0 24px 70px rgba(46, 46, 46, 0.11);
+  }
+
+  .workflow-line::after {
+    content: "";
+    display: block;
+    width: 34%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--brand-deep-sage), transparent);
+    animation: workflow-scan 4.8s ease-in-out infinite;
+  }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ambient-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(28px, -18px, 0) scale(1.06); }
+}
+
+@keyframes float-card {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+@keyframes soft-pulse {
+  0%, 100% { transform: translateY(0); opacity: .86; }
+  50% { transform: translateY(-2px); opacity: 1; }
+}
+
+@keyframes workflow-scan {
+  0% { transform: translateX(0); opacity: 0; }
+  20%, 80% { opacity: 1; }
+  100% { transform: translateX(290%); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
