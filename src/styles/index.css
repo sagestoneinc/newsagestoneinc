@@ -80,3 +80,31 @@ svg {
     transition-duration: 0.001ms !important;
   }
 }
+
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .trust-marquee {
+    animation: marquee-slide 34s linear infinite;
+  }
+
+  .operation-beam {
+    animation: beam-pulse 4s ease-in-out infinite;
+  }
+
+  .operation-beam-delay {
+    animation-delay: -2s;
+  }
+}
+
+@keyframes marquee-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes beam-pulse {
+  0%, 100% { opacity: .22; filter: blur(0); }
+  50% { opacity: .88; filter: blur(1px); }
+}

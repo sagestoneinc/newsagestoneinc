@@ -17,12 +17,12 @@ const services = [
 ];
 
 const navigation = [
-  { label: "Services", path: "/#services" },
-  { label: "How It Works", path: "/#how-it-works" },
-  { label: "Why SageStone", path: "/#why-sagestone" },
-  { label: "Tools", path: "/#tools" },
-  { label: "FAQ", path: "/#faq" },
-  { label: "Contact", path: "/#contact" },
+  { label: "Home", path: "/" },
+  { label: "Industries", path: "/#industries" },
+  { label: "Case Studies", path: "/case-studies" },
+  { label: "Resources", path: "/blog" },
+  { label: "Company", path: "/about" },
+  { label: "Contact", path: "/contact" },
 ];
 
 export function BrandFooter() {
@@ -39,7 +39,7 @@ export function BrandFooter() {
               <BrandLogo variant="light" />
             </Link>
             <p className="mt-5 max-w-sm text-[0.95rem] leading-7 text-white/62">
-              Reliable virtual assistant, customer support, and business operations support for growing teams.
+              Premium operations support for founders, agencies, property management companies, and growing teams that need scalable capacity without growing payroll.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -47,24 +47,24 @@ export function BrandFooter() {
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-mint)] px-5 py-2.5 text-sm font-semibold text-[color:var(--brand-ink)] transition-colors hover:bg-white"
-                onClick={() => trackCtaClick({ location: "footer_primary", cta_text: "Book a Discovery Call", target_url: CALENDLY_URL })}
+                onClick={() => trackCtaClick({ location: "footer_primary", cta_text: "Schedule Strategy Call", target_url: CALENDLY_URL })}
               >
                 <CalendarCheck className="h-4 w-4" />
-                Book a Discovery Call
+                Schedule Strategy Call
               </a>
               <Link
-                to="/free-workflow-assessment"
+                to="/solutions"
                 className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/[0.12]"
-                onClick={() => trackCtaClick({ location: "footer_secondary", cta_text: "Get a Free Workflow Audit", target_url: "/free-workflow-assessment" })}
+                onClick={() => trackCtaClick({ location: "footer_secondary", cta_text: "Explore Solutions", target_url: "/solutions" })}
               >
-                Get a Free Workflow Audit
+                Explore Solutions
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
 
           <div className="lg:col-span-3 lg:col-start-6">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/42">Main services</p>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/42">Solutions</p>
             <ul className="grid gap-2.5">
               {services.map((service) => (
                 <li key={service.path}>
@@ -77,7 +77,7 @@ export function BrandFooter() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/42">Navigation</p>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/42">Company</p>
             <ul className="grid gap-2.5">
               {navigation.map((item) => (
                 <li key={item.path}>

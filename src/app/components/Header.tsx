@@ -7,12 +7,14 @@ import { trackCtaClick } from "../lib/analytics";
 const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
 
 const navLinks = [
-  { label: "Services", path: "/#services" },
-  { label: "How It Works", path: "/#how-it-works" },
-  { label: "Why SageStone", path: "/#why-sagestone" },
-  { label: "Tools", path: "/#tools" },
-  { label: "FAQ", path: "/#faq" },
-  { label: "Contact", path: "/#contact" },
+  { label: "Home", path: "/" },
+  { label: "Solutions", path: "/#solutions" },
+  { label: "Industries", path: "/#industries" },
+  { label: "Case Studies", path: "/case-studies" },
+  { label: "Resources", path: "/blog" },
+  { label: "Company", path: "/about" },
+  { label: "Careers", path: "/#contact" },
+  { label: "Contact", path: "/contact" },
 ];
 
 export function Header() {
@@ -66,10 +68,10 @@ export function Header() {
               rel="noreferrer"
               className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-deep-sage)] px-5 py-2.5 text-[0.875rem] text-white shadow-[0_14px_34px_rgba(35,81,59,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color:var(--brand-charcoal)]"
               style={{ fontWeight: 600 }}
-              onClick={() => trackCtaClick({ event_name: "booking_intent_click", location: "header_desktop", cta_text: "Book a Discovery Call", target_url: CALENDLY_URL })}
+              onClick={() => trackCtaClick({ event_name: "booking_intent_click", location: "header_desktop", cta_text: "Schedule Strategy Call", target_url: CALENDLY_URL })}
             >
               <CalendarCheck className="w-4 h-4" />
-              Book a Discovery Call
+              Schedule Strategy Call
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -104,9 +106,9 @@ export function Header() {
               rel="noreferrer"
               className="mt-3 block rounded-full bg-[color:var(--brand-deep-sage)] px-5 py-3 text-center text-[0.9375rem] text-white shadow-[0_14px_34px_rgba(35,81,59,0.22)] transition-colors hover:bg-[color:var(--brand-charcoal)]"
               style={{ fontWeight: 600 }}
-              onClick={() => trackCtaClick({ event_name: "booking_intent_click", location: "header_mobile", cta_text: "Book a Discovery Call", target_url: CALENDLY_URL })}
+              onClick={() => trackCtaClick({ event_name: "booking_intent_click", location: "header_mobile", cta_text: "Schedule Strategy Call", target_url: CALENDLY_URL })}
             >
-              Book a Discovery Call
+              Schedule Strategy Call
             </a>
           </nav>
         </div>

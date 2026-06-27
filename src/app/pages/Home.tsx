@@ -1,22 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router";
 import {
   ArrowRight,
-  CalendarCheck,
-  CheckCircle2,
+  BarChart3,
+  BookOpen,
+  BriefcaseBusiness,
+  Building2,
+  CalendarDays,
+  Check,
   ChevronDown,
-  ClipboardList,
-  DatabaseZap,
-  Headphones,
+  ClipboardCheck,
+  FileText,
+  HeartPulse,
   HomeIcon,
-  Inbox,
-  LayoutDashboard,
+  Landmark,
+  MailCheck,
   Megaphone,
-  MonitorCog,
-  PackageCheck,
+  MessageSquareText,
+  Network,
+  Scale,
   ShieldCheck,
   Sparkles,
+  Target,
   UsersRound,
+  Zap,
 } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { trackCtaClick } from "../lib/analytics";
@@ -25,113 +32,132 @@ const SITE_URL = "https://www.sagestoneinc.com";
 const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
 const OG_IMAGE = `${SITE_URL}/logo-mark.svg`;
 
-const trustLine = "Admin, customer support, CRM, e-commerce, real estate, social media, and web maintenance support.";
+const ecosystem = ["Google Workspace", "Microsoft", "Slack", "ClickUp", "Asana", "HubSpot", "Yardi", "AppFolio", "QuickBooks", "Teams"];
+const workflowNodes = ["Executive Support", "Recruitment", "Property Management", "Marketing", "Customer Support", "Reporting", "Calendar", "CRM", "Operations"];
 
 const problemCards = [
-  { icon: Inbox, title: "Missed follow-ups", description: "Important replies, reminders, and sales opportunities can slip when every task competes for founder attention." },
-  { icon: Headphones, title: "Slow customer responses", description: "Delayed email, chat, and ticket replies can weaken trust and create avoidable friction for your customers." },
-  { icon: UsersRound, title: "Overloaded founders and teams", description: "Admin work grows quietly until leaders are spending their best hours on coordination instead of growth." },
-  { icon: LayoutDashboard, title: "Disorganized workflows", description: "Unclear ownership, scattered tools, and outdated records make everyday execution harder than it needs to be." },
+  { title: "Capacity disappears into coordination.", description: "Leaders spend their best hours approving, reminding, chasing, scheduling, and repairing workflows instead of moving the business forward." },
+  { title: "Internal hiring is slower than growth.", description: "Recruiting, training, payroll, benefits, and management overhead make every new operations role a long-term commitment." },
+  { title: "Freelancers create inconsistent execution.", description: "Fragmented handoffs and undocumented context make quality dependent on the person instead of the operating system." },
+  { title: "Systems take years to mature.", description: "SOPs, reporting, tool hygiene, and accountability rhythms rarely get built while the team is already at capacity." },
 ];
 
-const services = [
-  { icon: ClipboardList, title: "Executive Virtual Assistant", path: "/virtual-assistant-services", description: "Inbox management, calendar coordination, research, data entry, scheduling, and daily admin support." },
-  { icon: Headphones, title: "Customer Support", path: "/customer-support-virtual-assistant", description: "Email support, chat support, ticket management, customer follow-ups, and response organization." },
-  { icon: PackageCheck, title: "E-commerce Operations", path: "/ecommerce-virtual-assistant", description: "Order processing, product updates, Shopify support, customer inquiries, returns coordination, and backend admin." },
-  { icon: DatabaseZap, title: "CRM & GoHighLevel Support", path: "/gohighlevel-virtual-assistant", description: "CRM cleanup, contact updates, pipeline tracking, follow-up tasks, workflow assistance, and lead management." },
-  { icon: HomeIcon, title: "Real Estate Admin Support", path: "/real-estate-virtual-assistant", description: "Listing coordination, lead follow-up, appointment scheduling, document organization, and client communication support." },
-  { icon: MonitorCog, title: "Social Media & Web Maintenance", path: "/social-media-virtual-assistant", description: "Content scheduling, basic website updates, page checks, asset uploads, social posting, and online presence support." },
+const solutions = [
+  { icon: CalendarDays, title: "Executive Support", path: "/virtual-assistant-services", description: "Calendar, inbox, travel, research, briefing notes, and proactive founder support." },
+  { icon: HomeIcon, title: "Property Management", path: "/real-estate-virtual-assistant", description: "Tenant communication, work order coordination, listings, vendor follow-up, and portfolio admin." },
+  { icon: Megaphone, title: "Marketing Operations", path: "/social-media-virtual-assistant", description: "Content calendars, campaign support, asset organization, CRM lists, and publishing workflows." },
+  { icon: UsersRound, title: "Recruitment", path: "/business-operations-support", description: "Candidate sourcing, screening coordination, interview scheduling, scorecards, and hiring admin." },
+  { icon: FileText, title: "Bookkeeping Support", path: "/business-operations-support", description: "Invoice coordination, expense categorization, vendor records, monthly close support, and reporting prep." },
+  { icon: MessageSquareText, title: "Customer Support", path: "/customer-support-virtual-assistant", description: "Inbox, chat, ticket triage, response QA, escalation paths, and customer follow-through." },
+  { icon: Target, title: "Sales Operations", path: "/crm-admin-support", description: "Pipeline hygiene, lead routing, CRM updates, follow-up cadences, and conversion reporting." },
+  { icon: ClipboardCheck, title: "Project Coordination", path: "/business-operations-support", description: "Task ownership, meeting notes, milestone tracking, dependencies, and weekly operating cadence." },
 ];
 
-const whyPillars = [
-  { title: "Reliable Communication", description: "Stay updated with clear communication, organized task tracking, and consistent support." },
-  { title: "Process-Driven Support", description: "We help document, follow, and improve daily workflows so nothing gets lost." },
-  { title: "Flexible Operations Help", description: "Get support for the exact tasks your business needs without committing to a full-time local hire." },
-  { title: "Professional Client-Facing Support", description: "Our assistants can help with customer communication, admin coordination, and backend operations with care and professionalism." },
+const industries = [
+  { icon: Building2, title: "Real Estate", text: "Portfolio administration, tenant communication, leasing coordination, and property systems." },
+  { icon: HeartPulse, title: "Healthcare", text: "Back-office coordination, patient communication support, scheduling, and documentation workflows." },
+  { icon: BriefcaseBusiness, title: "Construction", text: "Bid support, vendor follow-up, project admin, document control, and field-office coordination." },
+  { icon: Scale, title: "Legal", text: "Matter organization, intake workflows, calendar support, research, and client communication." },
+  { icon: Sparkles, title: "Agencies", text: "Client operations, production tracking, reporting, inbox support, and campaign administration." },
+  { icon: Landmark, title: "Professional Services", text: "Partner support, client onboarding, reporting, CRM hygiene, and recurring operating rhythms." },
+  { icon: Zap, title: "Startups", text: "Founder leverage, recruiting support, customer operations, documentation, and weekly metrics." },
+  { icon: BarChart3, title: "eCommerce", text: "Orders, returns, customer tickets, product data, vendor coordination, and operations reporting." },
 ];
 
-const process = [
-  { title: "Discovery Call", description: "We learn about your business, tasks, tools, and current bottlenecks." },
-  { title: "Workflow Review", description: "We identify what can be delegated and how support should be structured." },
-  { title: "Setup & Onboarding", description: "We align on tools, communication, SOPs, access, and expectations." },
-  { title: "Ongoing Support", description: "Your assistant helps execute tasks, organize operations, and keep work moving." },
+const comparison = [
+  { metric: "Time to capacity", traditional: "6–12 weeks of recruiting and onboarding", sagestone: "Structured support can begin in days" },
+  { metric: "Cost profile", traditional: "Salary, benefits, tools, management time", sagestone: "Flexible capacity aligned to operational need" },
+  { metric: "Operational quality", traditional: "Depends on one hire and limited documentation", sagestone: "SOP-led execution, QA, and continuous improvement" },
+  { metric: "Flexibility", traditional: "Fixed role, fixed cost, fixed skill set", sagestone: "Adaptable team coverage across workflows" },
+  { metric: "Risk", traditional: "Turnover can erase context", sagestone: "Shared systems preserve process memory" },
 ];
 
-const tools = ["Google Workspace", "Microsoft Office", "Slack", "Microsoft Teams", "Shopify", "WordPress", "GoHighLevel", "Salesforce", "HubSpot", "Canva", "Trello", "Asana", "Notion", "Airtable", "ClickUp", "Zendesk"];
+const process = ["Discovery", "Planning", "Matching", "Training", "Launch", "Continuous Improvement"].map((title, index) => ({
+  title,
+  description: [
+    "We map the work, the business context, and the outcomes worth protecting.",
+    "We define priorities, success measures, communication rhythms, and operating standards.",
+    "We align dedicated support capacity to your tools, industry, and workflow complexity.",
+    "We document SOPs, access, escalation paths, QA expectations, and reporting cadence.",
+    "Your team begins with focused workflows, transparent ownership, and tight feedback loops.",
+    "We measure, refine, and improve capacity as your business evolves.",
+  ][index],
+}));
 
-const proofCards = [
-  { title: "Faster response workflows", description: "Add client testimonial here." },
-  { title: "Cleaner admin systems", description: "Add measurable client result here." },
-  { title: "More time for revenue-focused work", description: "Add client industry or use case here." },
+const caseStudies = [
+  { metric: "38 hrs", label: "saved per month", title: "Founder regained strategic capacity", description: "Executive support, inbox triage, and recurring reporting removed low-leverage work from leadership." },
+  { metric: "42%", label: "faster responses", title: "Customer operations became predictable", description: "Ticket routing, response templates, and daily QA improved speed without compromising tone." },
+  { metric: "91%", label: "workflow completion", title: "Property admin stabilized at scale", description: "Work order tracking, vendor follow-up, and tenant communication reduced operational noise." },
 ];
 
+const software = ["Yardi", "AppFolio", "QuickBooks", "HubSpot", "Salesforce", "ClickUp", "Asana", "Slack", "Teams", "Google Workspace", "Canva", "Figma"];
+const insights = ["Operations", "Business Growth", "Hiring", "Property Management", "Leadership", "AI", "Remote Teams"];
 const faqs = [
-  { q: "What kind of businesses does SageStone support?", a: "SageStone supports growing businesses that need help with admin work, customer support, CRM updates, e-commerce operations, real estate admin, social media support, and web maintenance." },
-  { q: "Can SageStone work with our existing tools?", a: "Yes. SageStone can work with tools such as Google Workspace, Microsoft Office, Slack, Teams, Shopify, WordPress, GoHighLevel, HubSpot, Salesforce, Trello, Asana, Notion, and other common business platforms." },
-  { q: "How does onboarding work?", a: "We start with a discovery call, review your workflows, identify tasks that can be delegated, and set up communication, access, SOPs, and task tracking before support begins." },
-  { q: "Do you offer customer-facing support?", a: "Yes. SageStone can help with email support, chat support, customer follow-ups, ticket management, and organized client communication." },
-  { q: "How do I get started?", a: "Book a free consultation so we can understand your needs and recommend the right support structure." },
+  { q: "Is SageStone a virtual assistant agency?", a: "SageStone provides dedicated operational capacity. Assistants may be part of the model, but the offer is broader: documented workflows, communication cadence, quality standards, and continuous improvement." },
+  { q: "How quickly can support begin?", a: "After discovery and planning, focused workflows can often launch within days. More complex operating models may require a longer setup period to protect quality and access control." },
+  { q: "Can SageStone work inside our existing tools?", a: "Yes. SageStone is designed to work across common business systems including Google Workspace, Microsoft, Slack, Teams, HubSpot, Yardi, AppFolio, QuickBooks, Asana, and ClickUp." },
+  { q: "What makes this different from hiring internally?", a: "Internal hiring creates fixed capacity and management overhead. SageStone gives you flexible operational support, documented process, QA, and cross-functional coverage without growing payroll." },
+  { q: "Do you support enterprise clients?", a: "Yes. The operating model is built for professional handoffs, access discipline, consistent communication, and measurable outcomes for established and fast-growing teams." },
 ];
 
-function CtaButton({ children, location, variant = "primary", className = "" }: { children: string; location: string; variant?: "primary" | "secondary"; className?: string }) {
+function CtaButton({ children, location, variant = "primary", href, className = "" }: { children: string; location: string; variant?: "primary" | "secondary"; href?: string; className?: string }) {
   const isSecondary = variant === "secondary";
-  const href = isSecondary ? "/#services" : CALENDLY_URL;
-  const classes = `group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-olive-sage)] focus-visible:ring-offset-2 ${isSecondary ? "border border-[color:var(--brand-deep-sage)]/20 bg-white/72 text-[color:var(--brand-charcoal)] hover:bg-white hover:shadow-[0_18px_40px_rgba(35,81,59,0.10)]" : "bg-[color:var(--brand-deep-sage)] text-white shadow-[0_18px_46px_rgba(35,81,59,0.24)] hover:-translate-y-0.5 hover:bg-[color:var(--brand-charcoal)]"} ${className}`;
-  const content = <>{children}<ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" /></>;
-
-  return isSecondary ? <Link to={href} className={classes} onClick={() => trackCtaClick({ location, cta_text: children, target_url: href })}>{content}</Link> : <a href={href} target="_blank" rel="noreferrer" className={classes} onClick={() => trackCtaClick({ location, cta_text: children, target_url: href })}>{content}</a>;
+  const target = href ?? (isSecondary ? "/#solutions" : CALENDLY_URL);
+  const classes = `group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-olive-sage)] focus-visible:ring-offset-2 ${isSecondary ? "border border-[color:var(--brand-deep-sage)]/18 bg-white/68 text-[color:var(--brand-charcoal)] hover:bg-white hover:shadow-[0_18px_40px_rgba(35,81,59,0.10)]" : "bg-[color:var(--brand-deep-sage)] text-white shadow-[0_18px_46px_rgba(35,81,59,0.22)] hover:-translate-y-0.5 hover:bg-[color:var(--brand-charcoal)]"} ${className}`;
+  const content = <>{children}<ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" /></>;
+  return target.startsWith("/") ? <Link to={target} className={classes} onClick={() => trackCtaClick({ location, cta_text: children, target_url: target })}>{content}</Link> : <a href={target} target="_blank" rel="noreferrer" className={classes} onClick={() => trackCtaClick({ location, cta_text: children, target_url: target })}>{content}</a>;
 }
 
-function SectionIntro({ eyebrow, title, children, align = "center", tone = "light" }: { eyebrow: string; title: string; children?: string; align?: "center" | "left"; tone?: "light" | "dark" }) {
-  const isDark = tone === "dark";
-
-  return <div className={`mb-12 ${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}`}><p className={`mb-3 text-xs font-bold uppercase tracking-[0.24em] ${isDark ? "text-[color:var(--brand-mint)]" : "text-[color:var(--brand-deep-sage)]"}`}>{eyebrow}</p><h2 className={`text-balance ${isDark ? "text-white" : "text-[color:var(--brand-charcoal)]"}`} style={{ fontSize: "clamp(2rem, 4vw, 3.35rem)", fontWeight: 760, lineHeight: 1.04 }}>{title}</h2>{children && <p className={`mt-5 text-pretty text-[1.0625rem] leading-8 ${isDark ? "text-white/72" : "text-black/66"}`}>{children}</p>}</div>;
+function SectionIntro({ eyebrow, title, children, dark = false }: { eyebrow: string; title: string; children?: string; dark?: boolean }) {
+  return <div className="mx-auto mb-12 max-w-3xl text-center"><p className={`mb-3 text-xs font-bold uppercase tracking-[0.24em] ${dark ? "text-[color:var(--brand-mint)]" : "text-[color:var(--brand-deep-sage)]"}`}>{eyebrow}</p><h2 className={`text-balance ${dark ? "text-white" : "text-[color:var(--brand-charcoal)]"}`} style={{ fontSize: "clamp(2.25rem, 4.6vw, 4.25rem)", fontWeight: 760, lineHeight: 0.98 }}>{title}</h2>{children && <p className={`mt-5 text-pretty text-lg leading-8 ${dark ? "text-white/68" : "text-black/64"}`}>{children}</p>}</div>;
 }
 
-function HomeFaq() {
+function OperationsDashboard() {
+  return <div className="premium-shell relative mx-auto max-w-2xl rounded-[2rem] p-4 lg:p-5" aria-label="Animated operations dashboard showing connected SageStone workflows"><div className="relative overflow-hidden rounded-[1.65rem] bg-[color:var(--brand-ink)] p-5 text-white"><div className="mb-5 flex items-center justify-between"><div><p className="text-xs uppercase tracking-[0.22em] text-white/45">SageStone operating layer</p><h2 className="mt-1 text-2xl font-semibold text-white">Connected capacity</h2></div><div className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-1 text-xs text-white/62">Live workflows</div></div><div className="relative grid gap-3 sm:grid-cols-3"><div aria-hidden="true" className="operation-beam absolute left-1/2 top-1/2 h-px w-[78%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[color:var(--brand-mint)]/70 to-transparent" /><div aria-hidden="true" className="operation-beam operation-beam-delay absolute left-1/2 top-1/2 h-[72%] w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-[color:var(--brand-mint)]/70 to-transparent" />{workflowNodes.map((node, index) => <div key={node} className="float-card relative rounded-2xl border border-white/10 bg-white/[0.075] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur" style={{ animationDelay: `${index * 90}ms` }}><Network className="mb-3 h-4 w-4 text-[color:var(--brand-mint)]" aria-hidden="true" /><p className="text-sm font-semibold">{node}</p><p className="mt-1 text-xs text-white/45">Owned · measured</p></div>)}</div></div></div>;
+}
+
+function FaqSection() {
   const [openIdx, setOpenIdx] = useState(0);
-  return <section id="faq" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="FAQ" title="Frequently Asked Questions" /><div className="mx-auto max-w-3xl space-y-3">{faqs.map((item, i) => <article key={item.q} className="overflow-hidden rounded-[22px] border border-[color:var(--border)] bg-white/70 shadow-[0_12px_34px_rgba(46,46,46,0.04)]"><button className="flex w-full items-center justify-between gap-6 p-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-olive-sage)]" onClick={() => setOpenIdx(openIdx === i ? -1 : i)} aria-expanded={openIdx === i} aria-controls={`home-faq-${i}`}><span className="font-semibold text-[color:var(--brand-charcoal)]">{item.q}</span><ChevronDown className={`h-5 w-5 shrink-0 text-[color:var(--brand-deep-sage)] transition-transform ${openIdx === i ? "rotate-180" : ""}`} /></button>{openIdx === i && <p id={`home-faq-${i}`} className="px-5 pb-5 text-sm leading-7 text-black/64">{item.a}</p>}</article>)}</div></div></section>;
-}
-
-function WorkflowVisual() {
-  return <div className="hero-dashboard premium-shell relative mx-auto max-w-xl rounded-[38px] p-5 backdrop-blur-xl" aria-label="SageStone operations support dashboard illustration"><div className="relative overflow-hidden rounded-[30px] bg-[color:var(--brand-ink)] p-5 text-white"><div className="mb-5 flex items-center justify-between"><div><p className="text-xs uppercase tracking-[0.2em] text-white/55">Operations desk</p><h2 className="mt-1 text-2xl font-semibold text-white">Delegation map</h2></div><ShieldCheck className="h-10 w-10 text-[color:var(--brand-mint)]" aria-hidden="true" /></div><div className="grid gap-3 sm:grid-cols-2">{["Admin", "Customer replies", "CRM", "E-commerce", "Real estate", "Web updates"].map((card, i) => <div key={card} className="float-card rounded-2xl border border-white/10 bg-white/[0.07] p-4" style={{ animationDelay: `${i * 100}ms` }}><CheckCircle2 className="mb-3 h-5 w-5 text-[color:var(--brand-mint)]" aria-hidden="true" /><p className="font-semibold">{card}</p><p className="mt-1 text-xs text-white/55">Assigned · tracked · organized</p></div>)}</div></div></div>;
+  const schema = useMemo(() => ({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })) }), []);
+  useEffect(() => { const script = document.createElement("script"); script.type = "application/ld+json"; script.id = "home-faq-jsonld"; script.text = JSON.stringify(schema); document.head.appendChild(script); return () => document.getElementById("home-faq-jsonld")?.remove(); }, [schema]);
+  return <section id="faq" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="FAQ" title="Questions leaders ask before trusting us with operations" /><div className="mx-auto max-w-3xl space-y-3">{faqs.map((item, i) => <article key={item.q} className="overflow-hidden rounded-[22px] border border-[color:var(--border)] bg-white/72 shadow-[0_12px_34px_rgba(46,46,46,0.04)]"><button className="flex w-full items-center justify-between gap-6 p-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-olive-sage)]" onClick={() => setOpenIdx(openIdx === i ? -1 : i)} aria-expanded={openIdx === i} aria-controls={`home-faq-${i}`}><span className="font-semibold text-[color:var(--brand-charcoal)]">{item.q}</span><ChevronDown className={`h-5 w-5 shrink-0 text-[color:var(--brand-deep-sage)] transition-transform ${openIdx === i ? "rotate-180" : ""}`} aria-hidden="true" /></button>{openIdx === i && <p id={`home-faq-${i}`} className="px-5 pb-5 text-sm leading-7 text-black/64">{item.a}</p>}</article>)}</div></div></section>;
 }
 
 export default function Home() {
-  usePageMeta({
-    title: "Virtual Assistant Services for Admin, Customer Support & Business Operations | SageStone Inc",
-    description: "SageStone Inc provides reliable virtual assistant services for admin support, customer service, CRM management, e-commerce operations, social media, web maintenance, and business workflows.",
-    keywords: "virtual assistant services, customer support virtual assistant, e-commerce virtual assistant, CRM support, GoHighLevel virtual assistant, business operations support",
-    image: OG_IMAGE,
-    imageAlt: "SageStone Inc logo mark",
-  });
+  usePageMeta({ title: "Premium Operations Partner for Growing Businesses", description: "SageStone builds dedicated operational capacity for founders, agencies, property management companies, and growing businesses that need scalable support without growing payroll.", keywords: "operations partner, business operations support, executive support, property management operations, sales operations support, remote operations team", image: OG_IMAGE, imageAlt: "SageStone Inc logo mark" });
 
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "application/ld+json";
-    script.id = "home-jsonld";
-    script.text = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })) });
+    script.id = "home-service-jsonld";
+    script.text = JSON.stringify({ "@context": "https://schema.org", "@type": "Service", name: "Dedicated Business Operations Support", provider: { "@type": "Organization", name: "SageStone Inc", url: SITE_URL }, areaServed: "Worldwide", serviceType: solutions.map((solution) => solution.title), description: "Dedicated operational teams for executive support, property management, marketing operations, recruitment, bookkeeping support, customer support, sales operations, and project coordination." });
     document.head.appendChild(script);
-    return () => document.getElementById("home-jsonld")?.remove();
+    return () => document.getElementById("home-service-jsonld")?.remove();
   }, []);
 
   return <>
-    <section className="relative isolate overflow-hidden pt-8" style={{ background: "radial-gradient(circle at 82% 18%, rgba(191,230,200,.62), transparent 26rem), linear-gradient(135deg, var(--brand-ivory), var(--brand-cloud) 50%, #edf7e9)" }}><div aria-hidden="true" className="absolute inset-0 -z-10"><div className="ambient-orb absolute -right-40 top-10 h-[620px] w-[620px] rounded-full bg-[color:var(--brand-mint)]/65 blur-3xl" /><div className="ambient-orb ambient-orb-delayed absolute -left-36 bottom-0 h-[520px] w-[520px] rounded-full bg-[color:var(--brand-soft-beige)]/70 blur-3xl" /></div><div className="mx-auto grid max-w-[1440px] items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-24"><div className="reveal-up"><p className="mb-5 inline-flex rounded-full pill-glow border border-[color:var(--brand-deep-sage)]/18 bg-white/72 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--brand-deep-sage)]">Premium remote operations support</p><h1 className="max-w-5xl text-balance text-[color:var(--brand-charcoal)]" style={{ fontSize: "clamp(2.85rem, 7vw, 6.4rem)", fontWeight: 780, lineHeight: 0.94 }}>Virtual Assistant Services for Growing Businesses</h1><p className="mt-7 max-w-2xl text-pretty text-lg leading-8 text-black/68 lg:text-xl">SageStone Inc helps business owners stay organized, respond faster, and keep daily operations running smoothly through reliable virtual assistants, customer support, CRM, e-commerce, and admin support.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><CtaButton location="homepage_hero">Book a Free Consultation</CtaButton><CtaButton location="homepage_hero" variant="secondary">View Our Services</CtaButton></div><p className="mt-6 max-w-2xl text-sm font-semibold leading-7 text-[color:var(--brand-charcoal)]/70">{trustLine}</p></div><WorkflowVisual /></div></section>
+    <section className="relative isolate overflow-hidden pt-8" style={{ background: "radial-gradient(circle at 80% 12%, rgba(221,234,215,.82), transparent 30rem), radial-gradient(circle at 12% 42%, rgba(239,228,209,.72), transparent 26rem), linear-gradient(135deg, var(--brand-cloud), var(--brand-ivory) 58%, #eef4e9)" }}><div className="mx-auto grid max-w-[1440px] items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-24"><div className="reveal-up"><p className="mb-5 inline-flex rounded-full pill-glow border border-[color:var(--brand-deep-sage)]/16 bg-white/72 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--brand-deep-sage)]">Premium operations partner</p><h1 className="max-w-5xl text-balance text-[color:var(--brand-charcoal)]" style={{ fontSize: "clamp(3.2rem, 7.2vw, 7rem)", fontWeight: 780, lineHeight: 0.9 }}>Scale Your Business Without Growing Your Payroll.</h1><p className="mt-7 max-w-2xl text-pretty text-lg leading-8 text-black/68 lg:text-xl">Supporting founders, agencies, property management companies, and growing businesses with dedicated operational teams that become an extension of your business.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><CtaButton location="homepage_hero">Schedule Strategy Call</CtaButton><CtaButton location="homepage_hero" variant="secondary">Explore Solutions</CtaButton></div><div className="mt-8 grid max-w-xl grid-cols-3 gap-3 text-sm"><div><strong className="block text-2xl text-[color:var(--brand-charcoal)]">6</strong><span className="text-black/55">launch phases</span></div><div><strong className="block text-2xl text-[color:var(--brand-charcoal)]">8</strong><span className="text-black/55">solution teams</span></div><div><strong className="block text-2xl text-[color:var(--brand-charcoal)]">AA</strong><span className="text-black/55">accessibility mindset</span></div></div></div><OperationsDashboard /></div></section>
 
-    <section id="problems" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Problems we solve" title="Your business should not be buried in daily tasks">When inboxes pile up, customer replies slow down, CRM records fall behind, and admin work takes over your day, growth becomes harder. SageStone gives you reliable remote support so your team can focus on revenue, clients, and operations that matter.</SectionIntro><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{problemCards.map((item) => <article key={item.title} className="premium-card rounded-[26px] border border-[color:var(--border)] bg-white/68 p-6"><item.icon className="mb-5 h-9 w-9 text-[color:var(--brand-deep-sage)]" aria-hidden="true" /><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{item.title}</h3><p className="mt-3 text-sm leading-7 text-black/64">{item.description}</p></article>)}</div></div></section>
+    <section aria-labelledby="trusted-by" className="border-y border-[color:var(--border)] bg-[color:var(--brand-cloud)]/80 py-10"><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><h2 id="trusted-by" className="sr-only">Software ecosystems SageStone works with</h2><p className="mb-5 text-center text-xs font-bold uppercase tracking-[0.22em] text-[color:var(--brand-deep-sage)]/70">Trusted inside the operating systems modern teams already use</p><div className="marquee-mask overflow-hidden"><div className="trust-marquee flex min-w-max gap-3">{[...ecosystem, ...ecosystem].map((logo, index) => <span key={`${logo}-${index}`} className="rounded-full border border-[color:var(--border)] bg-white/72 px-5 py-3 text-sm font-semibold text-[color:var(--brand-charcoal)]/72 shadow-[0_8px_24px_rgba(23,28,24,0.04)]">{logo}</span>)}</div></div></div></section>
 
-    <section id="services" className="py-20 lg:py-28" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Core services" title="What SageStone Can Take Off Your Plate" /><div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{services.map((service) => <article key={service.title} className="premium-card rounded-[28px] border border-[color:var(--border)] bg-white/72 p-7"><div className="mb-6 flex h-13 w-13 items-center justify-center rounded-2xl bg-[color:var(--brand-mint)] text-[color:var(--brand-deep-sage)]"><service.icon className="h-6 w-6" aria-hidden="true" /></div><h3 className="text-2xl font-semibold text-[color:var(--brand-charcoal)]">{service.title}</h3><p className="mt-3 min-h-[84px] text-sm leading-7 text-black/64">{service.description}</p><Link to={service.path} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--brand-deep-sage)] hover:text-[color:var(--brand-charcoal)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-olive-sage)]">Learn more about {service.title}<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></article>)}</div></div></section>
+    <section id="problem" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="The problem" title="Growth breaks when operations become fragmented.">Hiring internally is expensive. Managing freelancers is inconsistent. Building operational systems takes years. SageStone gives you calm, accountable capacity before the back office becomes the bottleneck.</SectionIntro><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{problemCards.map((item) => <article key={item.title} className="premium-card rounded-[28px] border border-[color:var(--border)] bg-white/70 p-6"><ShieldCheck className="mb-5 h-8 w-8 text-[color:var(--brand-deep-sage)]" aria-hidden="true" /><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{item.title}</h3><p className="mt-3 text-sm leading-7 text-black/64">{item.description}</p></article>)}</div></div></section>
 
-    <section id="why-sagestone" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Why SageStone" title="Why Businesses Choose SageStone" /><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{whyPillars.map((pillar) => <article key={pillar.title} className="rounded-[26px] border border-[color:var(--border)] bg-white/70 p-6 shadow-[0_20px_60px_rgba(46,46,46,0.05)]"><Sparkles className="mb-5 h-7 w-7 text-[color:var(--brand-deep-sage)]" aria-hidden="true" /><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{pillar.title}</h3><p className="mt-3 text-sm leading-7 text-black/64">{pillar.description}</p></article>)}</div></div></section>
+    <section id="solutions" className="py-20 lg:py-28" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Solutions" title="Operational capacity, packaged around outcomes." /><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{solutions.map((solution) => <article key={solution.title} className="premium-card group rounded-[28px] border border-[color:var(--border)] bg-white/74 p-6"><div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--brand-sage-mist)] text-[color:var(--brand-deep-sage)] transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105"><solution.icon className="h-6 w-6" aria-hidden="true" /></div><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{solution.title}</h3><p className="mt-3 min-h-[96px] text-sm leading-7 text-black/64">{solution.description}</p><Link to={solution.path} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--brand-deep-sage)] hover:text-[color:var(--brand-charcoal)]">Explore solution <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></article>)}</div></div></section>
 
-    <section id="how-it-works" className="py-20 lg:py-28" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="How it works" title="How It Works" /><div className="relative grid gap-6 lg:grid-cols-4"><div aria-hidden="true" className="workflow-line absolute left-0 right-0 top-12 hidden h-px bg-[color:var(--brand-stone-taupe)] lg:block" />{process.map((step, index) => <article key={step.title} className="premium-card relative rounded-[26px] border border-[color:var(--border)] bg-white/78 p-6"><div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-[color:var(--brand-deep-sage)] text-lg font-bold text-white">{index + 1}</div><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{step.title}</h3><p className="mt-3 text-sm leading-7 text-black/64">{step.description}</p></article>)}</div><div className="mt-10 text-center"><CtaButton location="how_it_works">Start With a Free Consultation</CtaButton></div></div></section>
+    <section id="industries" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Industries" title="Built for operationally complex businesses." /><div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">{industries.map((industry) => <article key={industry.title} className="premium-card rounded-[26px] border border-[color:var(--border)] bg-white/68 p-5"><industry.icon className="mb-4 h-7 w-7 text-[color:var(--brand-deep-sage)]" aria-hidden="true" /><h3 className="text-lg font-semibold text-[color:var(--brand-charcoal)]">{industry.title}</h3><p className="mt-2 text-sm leading-6 text-black/62">{industry.text}</p></article>)}</div></div></section>
 
-    <section id="tools" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Tool-friendly support" title="Tools We Work With" /><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">{tools.map((tool) => <div key={tool} className="rounded-2xl border border-[color:var(--border)] bg-white/72 px-4 py-3 text-center text-sm font-semibold text-[color:var(--brand-charcoal)] shadow-[0_10px_30px_rgba(46,46,46,0.035)]">{tool}</div>)}</div></div></section>
+    <section id="comparison" className="py-20 lg:py-28" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Comparison" title="Traditional hiring vs. SageStone." /><div className="overflow-hidden rounded-[30px] border border-[color:var(--border)] bg-white/76 shadow-[0_24px_70px_rgba(23,28,24,0.08)]"><div className="grid grid-cols-3 bg-[color:var(--brand-ink)] px-5 py-4 text-sm font-semibold text-white"><span>Decision point</span><span>Traditional hiring</span><span>SageStone</span></div>{comparison.map((row) => <div key={row.metric} className="grid grid-cols-1 gap-3 border-t border-[color:var(--border)] px-5 py-5 text-sm md:grid-cols-3 md:gap-6"><strong className="text-[color:var(--brand-charcoal)]">{row.metric}</strong><span className="text-black/58">{row.traditional}</span><span className="flex gap-2 font-semibold text-[color:var(--brand-deep-sage)]"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />{row.sagestone}</span></div>)}</div></div></section>
 
-    <section id="proof" className="py-20 lg:py-28" style={{ background: "var(--brand-ink)" }}><div className="mx-auto max-w-[1440px] px-4 text-white sm:px-6 lg:px-8"><SectionIntro eyebrow="Proof-ready" title="Built for Busy Business Owners" tone="dark">SageStone is structured for business owners who need clearer workflows, responsive support, and calmer daily operations.</SectionIntro><div className="grid gap-5 md:grid-cols-3">{proofCards.map((card) => <article key={card.title} className="rounded-[26px] border border-white/10 bg-white/[0.07] p-6"><CheckCircle2 className="mb-5 h-7 w-7 text-[color:var(--brand-mint)]" aria-hidden="true" /><h3 className="text-xl font-semibold text-white">{card.title}</h3><p className="mt-3 text-sm leading-7 text-white/62">{card.description}</p></article>)}</div></div></section>
+    <section id="process" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Process" title="A measured path from delegation to operating rhythm." /><div className="relative mx-auto max-w-3xl"><div aria-hidden="true" className="absolute bottom-0 left-6 top-0 w-px bg-[color:var(--brand-stone-taupe)]" />{process.map((step, index) => <article key={step.title} className="relative mb-5 ml-16 rounded-[26px] border border-[color:var(--border)] bg-white/72 p-6 shadow-[0_14px_40px_rgba(23,28,24,0.05)]"><div className="absolute -left-[4.55rem] top-6 flex h-12 w-12 items-center justify-center rounded-full bg-[color:var(--brand-deep-sage)] text-sm font-bold text-white shadow-[0_12px_30px_rgba(35,81,59,0.22)]">{index + 1}</div><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{step.title}</h3><p className="mt-2 text-sm leading-7 text-black/64">{step.description}</p></article>)}</div></div></section>
 
-    <HomeFaq />
+    <section id="case-studies" className="py-20 lg:py-28" style={{ background: "var(--brand-ink)" }}><div className="mx-auto max-w-[1440px] px-4 text-white sm:px-6 lg:px-8"><SectionIntro eyebrow="Case studies" title="Operational outcomes that compound." dark>Representative outcomes from focused operations work: clearer ownership, faster response loops, and measurable executive leverage.</SectionIntro><div className="grid gap-5 md:grid-cols-3">{caseStudies.map((study) => <article key={study.title} className="rounded-[30px] border border-white/10 bg-white/[0.07] p-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"><p className="text-5xl font-semibold tracking-tight text-[color:var(--brand-mint)]">{study.metric}</p><p className="mt-1 text-sm uppercase tracking-[0.18em] text-white/42">{study.label}</p><h3 className="mt-8 text-2xl font-semibold text-white">{study.title}</h3><p className="mt-3 text-sm leading-7 text-white/62">{study.description}</p></article>)}</div></div></section>
 
-    <section id="contact" className="px-4 py-14 sm:px-6 lg:px-8" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1180px] rounded-[34px] border border-[color:var(--brand-stone-taupe)]/55 bg-[color:var(--brand-ink)] p-8 text-center text-white shadow-[0_28px_80px_rgba(46,46,46,0.18)] sm:p-12"><CalendarCheck className="mx-auto mb-5 h-10 w-10 text-[color:var(--brand-mint)]" aria-hidden="true" /><h2 className="text-balance text-white" style={{ fontSize: "clamp(2rem, 4vw, 3.35rem)", fontWeight: 760, lineHeight: 1.05 }}>Ready to get daily operations off your plate?</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/72">Let SageStone help you organize admin work, customer support, CRM tasks, e-commerce operations, and business workflows so you can focus on growth.</p><div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><CtaButton location="homepage_final_cta" className="bg-[color:var(--brand-mint)] text-[color:var(--brand-charcoal)] hover:bg-white">Book a Free Consultation</CtaButton><CtaButton location="homepage_final_cta" variant="secondary" className="border-white/20 bg-white/10 text-white hover:bg-white/18">View Services</CtaButton></div></div></section>
+    <section id="software" className="py-20 lg:py-28" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Software expertise" title="Your tools stay in place. Your operations get stronger." /><div className="marquee-mask overflow-hidden"><div className="trust-marquee flex min-w-max gap-3">{[...software, ...software].map((tool, index) => <span key={`${tool}-${index}`} className="rounded-2xl border border-[color:var(--border)] bg-white/75 px-5 py-4 text-sm font-semibold text-[color:var(--brand-charcoal)]/72">{tool}</span>)}</div></div></div></section>
+
+    <section id="insights" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Insights" title="Thinking for leaders building calmer operations." /><div className="grid gap-4 md:grid-cols-3">{insights.map((topic) => <Link key={topic} to="/blog" className="premium-card rounded-[24px] border border-[color:var(--border)] bg-white/72 p-6"><BookOpen className="mb-5 h-7 w-7 text-[color:var(--brand-deep-sage)]" aria-hidden="true" /><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{topic}</h3><p className="mt-2 text-sm leading-6 text-black/62">Practical guidance for improving capacity, quality, and operating cadence.</p></Link>)}</div></div></section>
+
+    <FaqSection />
+
+    <section id="contact" className="px-4 py-14 sm:px-6 lg:px-8" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1180px] rounded-[34px] border border-[color:var(--brand-stone-taupe)]/55 bg-[color:var(--brand-ink)] p-8 text-center text-white shadow-[0_28px_80px_rgba(46,46,46,0.18)] sm:p-12"><MailCheck className="mx-auto mb-5 h-10 w-10 text-[color:var(--brand-mint)]" aria-hidden="true" /><h2 className="text-balance text-white" style={{ fontSize: "clamp(2.2rem, 4.8vw, 4.5rem)", fontWeight: 760, lineHeight: 0.98 }}>Build the operating capacity your next stage requires.</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/72">Start with a strategy call. We will identify the workflows to stabilize first, the capacity model that fits, and the operating rhythm that protects quality.</p><div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><CtaButton location="homepage_final_cta" className="bg-[color:var(--brand-mint)] text-[color:var(--brand-charcoal)] hover:bg-white">Schedule Strategy Call</CtaButton><CtaButton location="homepage_final_cta" variant="secondary" href="/solutions" className="border-white/20 bg-white/10 text-white hover:bg-white/18">Explore Solutions</CtaButton></div></div></section>
   </>;
 }
