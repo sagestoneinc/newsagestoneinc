@@ -25,7 +25,7 @@ svg {
   shape-rendering: geometricPrecision;
 }
 
-.revaya-shell {
+.premium-shell {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(35, 81, 59, 0.14);
@@ -35,7 +35,7 @@ svg {
   box-shadow: 0 32px 90px rgba(23, 28, 24, 0.12);
 }
 
-.revaya-shell::before {
+.premium-shell::before {
   content: "";
   position: absolute;
   inset: 0;

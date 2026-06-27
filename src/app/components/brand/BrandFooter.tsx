@@ -1,97 +1,111 @@
 import { Link } from "react-router";
+import { ArrowUpRight, CalendarCheck, Globe, Mail } from "lucide-react";
 import { BrandLogo } from "../BrandLogo";
+import { trackCtaClick, trackEvent } from "../../lib/analytics";
+
+const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
 
 const services = [
   { label: "Virtual Assistant Services", path: "/virtual-assistant-services" },
-  { label: "Customer Support Outsourcing", path: "/customer-support-outsourcing" },
-  { label: "E-Commerce Support", path: "/ecommerce-customer-support-outsourcing" },
-  { label: "Real Estate VA Support", path: "/real-estate-virtual-assistant-services" },
-  { label: "Social Media Management", path: "/social-media-management-services" },
-  { label: "Business Operations Support", path: "/business-operations-support" },
-  { label: "Web Design Maintenance", path: "/web-design-maintenance-services" },
-  { label: "All Solutions", path: "/solutions" },
-  { label: "Case Studies", path: "/case-studies" },
+  { label: "Customer Support", path: "/customer-support" },
+  { label: "E-commerce Operations", path: "/ecommerce-operations-support" },
+  { label: "CRM & Admin Support", path: "/crm-admin-support" },
+  { label: "Social Media Support", path: "/social-media-support" },
+  { label: "Web Maintenance Support", path: "/web-maintenance-support" },
+];
+
+const navigation = [
+  { label: "Services", path: "/#services" },
+  { label: "How It Works", path: "/#how-it-works" },
+  { label: "Who We Help", path: "/#who-we-help" },
+  { label: "FAQ", path: "/#faq" },
+  { label: "Contact", path: "/#contact" },
 ];
 
 export function BrandFooter() {
   return (
-    <footer
-      className="relative overflow-hidden"
-      style={{ background: "linear-gradient(180deg, var(--brand-ivory) 0%, var(--brand-cloud) 100%)" }}
-    >
-      <div aria-hidden="true" className="absolute inset-x-0 top-0">
-        <svg viewBox="0 0 1440 120" className="w-full h-[90px] text-[color:var(--brand-sage-mist)]">
-          <path
-            fill="currentColor"
-            d="M0,96L80,90.7C160,85,320,75,480,74.7C640,75,800,85,960,85.3C1120,85,1280,75,1360,69.3L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
-            opacity="0.55"
-          />
-        </svg>
-      </div>
+    <footer className="relative overflow-hidden bg-[color:var(--brand-ink)] text-white">
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--brand-mint)]/45 to-transparent" />
+      <div aria-hidden="true" className="absolute -right-36 top-10 h-96 w-96 rounded-full bg-[color:var(--brand-deep-sage)]/35 blur-3xl" />
+      <div aria-hidden="true" className="absolute -left-36 bottom-0 h-80 w-80 rounded-full bg-[color:var(--brand-soft-beige)]/10 blur-3xl" />
 
-      <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-20 pb-10">
-        <div className="grid gap-10 lg:gap-8 lg:grid-cols-12">
+      <div className="relative mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
-            <Link to="/" className="inline-flex flex-col items-start gap-2">
-              <BrandLogo />
-              <div>
-                <p className="text-black/65 text-[0.875rem]">Virtual Support. Real Results.</p>
-              </div>
+            <Link to="/" className="inline-flex items-center gap-2" aria-label="SageStone Inc home">
+              <BrandLogo variant="light" />
             </Link>
-            <p className="mt-5 text-black/65 text-[0.9375rem] leading-relaxed max-w-sm">
-              SageStone Inc helps businesses scale with virtual assistants, customer support, e-commerce operations, social media support, web maintenance, and business operations services.
+            <p className="mt-5 max-w-sm text-[0.95rem] leading-7 text-white/62">
+              Reliable virtual assistant, customer support, and business operations support for growing teams.
             </p>
-            <p className="mt-5 text-black/60 text-[0.875rem]">
-              <a className="hover:underline" href="https://www.sagestoneinc.com" rel="noreferrer">
-                www.sagestoneinc.com
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-mint)] px-5 py-2.5 text-sm font-semibold text-[color:var(--brand-ink)] transition-colors hover:bg-white"
+                onClick={() => trackCtaClick({ location: "footer_primary", cta_text: "Book a Discovery Call", target_url: CALENDLY_URL })}
+              >
+                <CalendarCheck className="h-4 w-4" />
+                Book a Discovery Call
               </a>
-            </p>
+              <Link
+                to="/free-workflow-assessment"
+                className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/[0.12]"
+                onClick={() => trackCtaClick({ location: "footer_secondary", cta_text: "Get a Free Workflow Audit", target_url: "/free-workflow-assessment" })}
+              >
+                Get a Free Workflow Audit
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
 
-          <div className="lg:col-span-5">
-            <p className="text-[0.8125rem] uppercase tracking-[0.18em] text-black/60 mb-4">Services</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3">
-              {services.map((s) => (
-                <Link
-                  key={s.label}
-                  to={s.path}
-                  className="text-black/70 hover:text-black transition-colors text-[0.875rem]"
-                >
-                  {s.label}
-                </Link>
+          <div className="lg:col-span-3 lg:col-start-6">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/42">Main services</p>
+            <ul className="grid gap-2.5">
+              {services.map((service) => (
+                <li key={service.path}>
+                  <Link to={service.path} className="text-sm text-white/62 transition-colors hover:text-[color:var(--brand-mint)]">
+                    {service.label}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/42">Navigation</p>
+            <ul className="grid gap-2.5">
+              {navigation.map((item) => (
+                <li key={item.path}>
+                  <Link to={item.path} className="text-sm text-white/62 transition-colors hover:text-[color:var(--brand-mint)]">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="lg:col-span-3">
-            <p className="text-[0.8125rem] uppercase tracking-[0.18em] text-black/60 mb-4">Contact</p>
-            <div className="space-y-2.5 text-[0.875rem]">
-              <Link to="/contact" className="text-black/70 hover:text-black transition-colors">
-                Book a free operations consultation
-              </Link>
-              <a href="mailto:hello@sagestoneinc.com" className="block text-black/70 hover:text-black transition-colors">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/42">Contact</p>
+            <div className="space-y-3 text-sm text-white/62">
+              <a href="mailto:hello@sagestoneinc.com" onClick={() => trackEvent("email_click", { location: "footer", target_url: "mailto:hello@sagestoneinc.com" })} className="flex items-center gap-3 transition-colors hover:text-[color:var(--brand-mint)]">
+                <Mail className="h-4 w-4" />
                 hello@sagestoneinc.com
               </a>
-              <a href="tel:+12149452234" className="block text-black/70 hover:text-black transition-colors">
-                +1 214-945-2234
-              </a>
-              <div className="text-black/65">Remote / Worldwide</div>
+              <div className="flex items-center gap-3">
+                <Globe className="h-4 w-4" />
+                Remote / Worldwide
+              </div>
             </div>
-
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-[color:var(--brand-stone-taupe)]/55 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-black/55 text-[0.8125rem]">
-            &copy; {new Date().getFullYear()} SageStone Inc. All rights reserved.
-          </p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
+          <p className="text-xs text-white/42">&copy; {new Date().getFullYear()} SageStone Inc. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <Link to="/terms" className="text-black/55 hover:text-black/70 transition-colors text-[0.8125rem]">
-              Terms
-            </Link>
-            <Link to="/privacy" className="text-black/55 hover:text-black/70 transition-colors text-[0.8125rem]">
-              Privacy
-            </Link>
+            <Link to="/terms" className="text-xs text-white/42 transition-colors hover:text-white">Terms</Link>
+            <Link to="/privacy" className="text-xs text-white/42 transition-colors hover:text-white">Privacy Policy</Link>
           </div>
         </div>
       </div>
