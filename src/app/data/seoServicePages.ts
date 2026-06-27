@@ -508,12 +508,28 @@ const servicePageAliases: Array<{ from: string; to: string; title: string; metaD
     eyebrow: "Customer Support",
   },
   {
+    from: "customer-support-virtual-assistant",
+    to: "customer-support-outsourcing",
+    title: "Customer Support Virtual Assistant | SageStone Inc",
+    metaDescription: "Customer support virtual assistant services for email support, chat support, ticket management, follow-ups, and organized customer communication.",
+    h1: "Customer Support Virtual Assistant Services",
+    eyebrow: "Customer Support VA",
+  },
+  {
     from: "ecommerce-operations-support",
     to: "ecommerce-customer-support-outsourcing",
     title: "E-commerce Operations Support | SageStone Inc",
     metaDescription: "E-commerce operations support for order questions, product updates, inventory coordination, backend store tasks, and customer inquiries.",
     h1: "E-commerce Operations Support",
     eyebrow: "E-commerce Operations",
+  },
+  {
+    from: "ecommerce-virtual-assistant",
+    to: "ecommerce-customer-support-outsourcing",
+    title: "E-commerce Virtual Assistant | SageStone Inc",
+    metaDescription: "E-commerce virtual assistant services for Shopify support, order processing, returns coordination, product updates, and backend store admin.",
+    h1: "E-commerce Virtual Assistant Services",
+    eyebrow: "E-commerce VA",
   },
   {
     from: "crm-admin-support",
@@ -524,6 +540,14 @@ const servicePageAliases: Array<{ from: string; to: string; title: string; metaD
     eyebrow: "CRM & Admin Support",
   },
   {
+    from: "gohighlevel-virtual-assistant",
+    to: "business-operations-support",
+    title: "GoHighLevel Virtual Assistant | SageStone Inc",
+    metaDescription: "GoHighLevel virtual assistant support for CRM cleanup, contact updates, pipeline tracking, workflows, follow-up tasks, and lead management.",
+    h1: "GoHighLevel Virtual Assistant Support",
+    eyebrow: "GoHighLevel Support",
+  },
+  {
     from: "social-media-support",
     to: "social-media-management-services",
     title: "Social Media Support | SageStone Inc",
@@ -532,12 +556,28 @@ const servicePageAliases: Array<{ from: string; to: string; title: string; metaD
     eyebrow: "Social Media Support",
   },
   {
+    from: "social-media-virtual-assistant",
+    to: "social-media-management-services",
+    title: "Social Media Virtual Assistant | SageStone Inc",
+    metaDescription: "Social media virtual assistant services for content scheduling, asset uploads, social posting, and online presence support.",
+    h1: "Social Media Virtual Assistant Services",
+    eyebrow: "Social Media VA",
+  },
+  {
     from: "web-maintenance-support",
     to: "web-design-maintenance-services",
     title: "Web Maintenance Support | SageStone Inc",
     metaDescription: "Web maintenance support for website updates, content edits, page checks, links, forms, and routine maintenance.",
     h1: "Web Maintenance Support",
     eyebrow: "Web Maintenance Support",
+  },
+  {
+    from: "web-maintenance-services",
+    to: "web-design-maintenance-services",
+    title: "Web Maintenance Services | SageStone Inc",
+    metaDescription: "Web maintenance services for website updates, page checks, content edits, forms, links, asset uploads, and routine site support.",
+    h1: "Web Maintenance Services",
+    eyebrow: "Web Maintenance",
   },
 ];
 
