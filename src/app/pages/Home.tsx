@@ -112,11 +112,11 @@ function HomeFaq() {
         <div className="mx-auto max-w-3xl space-y-3">
           {faqs.map((item, i) => (
             <article key={item.q} className="overflow-hidden rounded-[22px] border border-[color:var(--border)] bg-white/65 shadow-[0_12px_34px_rgba(46,46,46,0.04)]">
-              <button className="flex w-full items-center justify-between gap-6 p-5 text-left" onClick={() => setOpenIdx(openIdx === i ? -1 : i)} aria-expanded={openIdx === i}>
+              <button className="flex w-full items-center justify-between gap-6 p-5 text-left" onClick={() => setOpenIdx(openIdx === i ? -1 : i)} aria-expanded={openIdx === i} aria-controls={`home-faq-${i}`}>
                 <span className="font-semibold text-[color:var(--brand-charcoal)]">{item.q}</span>
                 <ChevronDown className={`h-5 w-5 shrink-0 text-[color:var(--brand-deep-sage)] transition-transform ${openIdx === i ? "rotate-180" : ""}`} />
               </button>
-              {openIdx === i && <p className="px-5 pb-5 text-sm leading-7 text-black/64">{item.a}</p>}
+              {openIdx === i && <p id={`home-faq-${i}`} className="px-5 pb-5 text-sm leading-7 text-black/64">{item.a}</p>}
             </article>
           ))}
         </div>
@@ -128,7 +128,7 @@ function HomeFaq() {
 function WorkflowVisual() {
   const cards = ["Customer Support", "CRM Cleanup", "Inbox Management", "Order Support", "Web Updates", "SOP Documentation"];
   return (
-    <div className="hero-dashboard revaya-shell relative mx-auto max-w-xl rounded-[38px] p-5 backdrop-blur-xl">
+    <div className="hero-dashboard premium-shell relative mx-auto max-w-xl rounded-[38px] p-5 backdrop-blur-xl">
       <div className="relative overflow-hidden rounded-[30px] bg-[color:var(--brand-ink)] p-5 text-white">
         <div className="mb-5 flex items-center justify-between">
           <div><p className="text-xs uppercase tracking-[0.2em] text-white/55">Operations desk</p><h2 className="mt-1 text-2xl font-semibold text-white">Delegation map</h2></div>
@@ -182,7 +182,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="overflow-hidden border-y border-[color:var(--border)] bg-[color:var(--brand-ink)] py-7 text-white"><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><p className="mb-5 text-center text-sm text-white/70">Trusted by growing teams that need calmer operations, faster response times, and documented delegation.</p><div className="trust-marquee flex flex-wrap justify-center gap-3">{serviceBadges.map((badge) => <span key={badge} className="rounded-full border border-white/12 bg-white/[0.07] px-4 py-2 text-sm text-white/86">{badge}</span>)}</div></div></section>
+      <section className="overflow-hidden border-y border-[color:var(--border)] bg-[color:var(--brand-ink)] py-7 text-white"><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><p className="mb-5 text-center text-sm text-white/70">Trusted support for founders, small businesses, agencies, consultants, and growing teams.</p><div className="trust-marquee flex flex-wrap justify-center gap-3">{serviceBadges.map((badge) => <span key={badge} className="rounded-full border border-white/12 bg-white/[0.07] px-4 py-2 text-sm text-white/86">{badge}</span>)}</div></div></section>
 
       <section id="problems" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Problems we solve" title="Stop letting operational noise set the agenda">Running a growing business means your time gets pulled into repetitive tasks, inboxes, customer questions, CRM updates, e-commerce admin, and operational follow-ups. SageStone gives you reliable support so your team can focus on revenue, clients, and growth.</SectionIntro><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{problemCards.map((item) => <article key={item.title} className="premium-card rounded-[26px] border border-[color:var(--border)] bg-[color:var(--brand-cloud)]/72 p-6"><item.icon className="mb-5 h-9 w-9 text-[color:var(--brand-deep-sage)]" /><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{item.title}</h3><p className="mt-3 text-sm leading-7 text-black/64">{item.description}</p></article>)}</div></div></section>
 
