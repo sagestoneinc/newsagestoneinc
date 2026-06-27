@@ -28,7 +28,9 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-[color:var(--brand-charcoal)] text-white">
+    <footer className="relative overflow-hidden bg-[color:var(--brand-ink)] text-white">
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--brand-mint)]/50 to-transparent" />
+      <div aria-hidden="true" className="absolute -right-40 top-10 h-80 w-80 rounded-full bg-[color:var(--brand-deep-sage)]/35 blur-3xl" />
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
         <div className="py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
@@ -37,19 +39,19 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-2 mb-5">
               <BrandLogo variant="light" />
             </Link>
-            <p className="text-stone-400 text-[0.9375rem] leading-relaxed mb-6 max-w-sm">
+            <p className="text-white/58 text-[0.9375rem] leading-relaxed mb-6 max-w-sm">
               Reliable virtual assistant, customer support, and business operations support for growing teams.
             </p>
             <div className="space-y-3">
-              <a href="mailto:hello@sagestoneinc.com" onClick={() => trackEvent("email_click", { location: "footer", target_url: "mailto:hello@sagestoneinc.com" })} className="flex items-center gap-3 text-stone-400 hover:text-sage-400 transition-colors text-[0.875rem]">
+              <a href="mailto:hello@sagestoneinc.com" onClick={() => trackEvent("email_click", { location: "footer", target_url: "mailto:hello@sagestoneinc.com" })} className="flex items-center gap-3 text-white/58 hover:text-[color:var(--brand-mint)] transition-colors text-[0.875rem]">
                 <Mail className="w-4 h-4 shrink-0" />
                 hello@sagestoneinc.com
               </a>
-              <a href="tel:+12149452234" onClick={() => trackEvent("phone_click", { location: "footer", target_url: "tel:+12149452234" })} className="flex items-center gap-3 text-stone-400 hover:text-sage-400 transition-colors text-[0.875rem]">
+              <a href="tel:+12149452234" onClick={() => trackEvent("phone_click", { location: "footer", target_url: "tel:+12149452234" })} className="flex items-center gap-3 text-white/58 hover:text-[color:var(--brand-mint)] transition-colors text-[0.875rem]">
                 <Phone className="w-4 h-4 shrink-0" />
                 +1 214-945-2234
               </a>
-              <div className="flex items-center gap-3 text-stone-400 text-[0.875rem]">
+              <div className="flex items-center gap-3 text-white/58 text-[0.875rem]">
                 <Globe className="w-4 h-4 shrink-0" />
                 Remote / Worldwide
               </div>
@@ -62,7 +64,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
                 <li key={link.path}>
-                  <Link to={link.path} className="text-stone-400 hover:text-sage-400 transition-colors text-[0.875rem]">
+                  <Link to={link.path} className="text-white/58 hover:text-[color:var(--brand-mint)] transition-colors text-[0.875rem]">
                     {link.label}
                   </Link>
                 </li>
@@ -76,7 +78,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               {solutionLinks.map((link) => (
                 <li key={link.path}>
-                  <Link to={link.path} className="text-stone-400 hover:text-sage-400 transition-colors text-[0.875rem]">
+                  <Link to={link.path} className="text-white/58 hover:text-[color:var(--brand-mint)] transition-colors text-[0.875rem]">
                     {link.label}
                   </Link>
                 </li>
@@ -87,12 +89,12 @@ export function Footer() {
           {/* CTA Column */}
           <div className="lg:col-span-3">
             <h4 className="text-white mb-4 text-[0.9375rem]" style={{ fontWeight: 600 }}>Ready to Get Started?</h4>
-            <p className="text-stone-400 text-[0.875rem] leading-relaxed mb-5">
+            <p className="text-white/58 text-[0.875rem] leading-relaxed mb-5">
               Book a discovery call or request a workflow audit to identify what your team can delegate first.
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-sage-500 text-white rounded-lg hover:bg-sage-600 transition-colors text-[0.875rem]"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[color:var(--brand-mint)] text-[color:var(--brand-ink)] shadow-[0_18px_44px_rgba(191,230,200,0.18)] hover:bg-white transition-colors text-[0.875rem]"
               style={{ fontWeight: 500 }}
               onClick={() => trackCtaClick({ event_name: "contact_intent_click", location: "footer_cta", cta_text: "Book a Discovery Call", target_url: "/contact" })}
             >
@@ -103,8 +105,8 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-stone-800 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-stone-500 text-[0.8125rem]">
+        <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-white/42 text-[0.8125rem]">
             &copy; {new Date().getFullYear()} SageStone Inc. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
@@ -112,7 +114,7 @@ export function Footer() {
               <Link
                 key={link.path}
                 to={link.path}
-                className="text-stone-500 hover:text-stone-300 transition-colors text-[0.8125rem]"
+                className="text-white/42 hover:text-white transition-colors text-[0.8125rem]"
               >
                 {link.label}
               </Link>

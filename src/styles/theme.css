@@ -5,77 +5,78 @@
   --font-family: 'Lato', system-ui, -apple-system, sans-serif;
   --font-family-heading: 'Playfair Display', ui-serif, Georgia, serif;
 
-  /* Premium Brand Palette */
-  --brand-ivory: #F3EFE7;
-  --brand-cloud: #FAF8F3;
-  --brand-sage-mist: #D8DED2;
-  --brand-olive-sage: #8F987A;
-  --brand-stone-taupe: #C7BDB1;
-  --brand-soft-beige: #E6DFD2;
-  --brand-charcoal: #2E2E2E;
-  --brand-deep-sage: #6F7F67;
+  /* Revaya-inspired editorial operating-system palette */
+  --brand-ivory: #F7F2E8;
+  --brand-cloud: #FFFCF6;
+  --brand-sage-mist: #DDEAD7;
+  --brand-olive-sage: #4F7A58;
+  --brand-stone-taupe: #D9CBB8;
+  --brand-soft-beige: #EFE4D1;
+  --brand-charcoal: #171C18;
+  --brand-deep-sage: #23513B;
+  --brand-mint: #BFE6C8;
+  --brand-apricot: #F4B36B;
+  --brand-ink: #0D130F;
 
-  /* Sage + Stone Palette */
-  --sage-50: #F3EFE7;
-  --sage-100: #D8DED2;
-  --sage-200: #C7BDB1;
-  --sage-300: #B5BDA5;
-  --sage-400: #A1AA8D;
-  --sage-500: #8F987A;
-  --sage-600: #6F7F67;
-  --sage-700: #5C6855;
-  --sage-800: #444D3F;
-  --sage-900: #33392F;
+  --sage-50: #F3F8EF;
+  --sage-100: #DDEAD7;
+  --sage-200: #BFE6C8;
+  --sage-300: #98C99E;
+  --sage-400: #72A978;
+  --sage-500: #4F7A58;
+  --sage-600: #3D6648;
+  --sage-700: #23513B;
+  --sage-800: #1C3E2F;
+  --sage-900: #102A20;
 
-  --stone-50: #FAF8F3;
-  --stone-100: #F3EFE7;
-  --stone-200: #E6DFD2;
-  --stone-300: #C7BDB1;
-  --stone-400: #AFA599;
-  --stone-500: #6A645C;
-  --stone-600: #5A554E;
-  --stone-700: #46413C;
-  --stone-800: #393633;
-  --stone-900: #2E2E2E;
+  --stone-50: #FFFCF6;
+  --stone-100: #F7F2E8;
+  --stone-200: #EFE4D1;
+  --stone-300: #D9CBB8;
+  --stone-400: #BFAF99;
+  --stone-500: #817464;
+  --stone-600: #62584B;
+  --stone-700: #463E35;
+  --stone-800: #2B2924;
+  --stone-900: #171C18;
 
-  /* Core tokens mapped to premium kit */
   --background: var(--brand-ivory);
   --foreground: var(--brand-charcoal);
-  --card: rgba(250, 248, 243, 0.75);
+  --card: rgba(255, 252, 246, 0.82);
   --card-foreground: var(--brand-charcoal);
   --popover: var(--brand-cloud);
   --popover-foreground: var(--brand-charcoal);
-  --primary: var(--brand-olive-sage);
+  --primary: var(--brand-deep-sage);
   --primary-foreground: var(--brand-cloud);
   --secondary: var(--brand-sage-mist);
   --secondary-foreground: var(--brand-charcoal);
   --muted: var(--brand-soft-beige);
-  --muted-foreground: #5A5A5A;
-  --accent: var(--brand-sage-mist);
-  --accent-foreground: var(--brand-charcoal);
+  --muted-foreground: #5C6259;
+  --accent: var(--brand-mint);
+  --accent-foreground: var(--brand-ink);
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: rgba(199, 189, 177, 0.55);
+  --border: rgba(35, 81, 59, 0.16);
   --input: transparent;
-  --input-background: rgba(230, 223, 210, 0.75);
-  --switch-background: rgba(199, 189, 177, 0.75);
+  --input-background: rgba(255, 252, 246, 0.72);
+  --switch-background: rgba(191, 230, 200, 0.78);
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: var(--brand-olive-sage);
-  --chart-1: var(--brand-olive-sage);
-  --chart-2: var(--brand-deep-sage);
-  --chart-3: var(--brand-stone-taupe);
-  --chart-4: var(--brand-sage-mist);
-  --chart-5: var(--brand-soft-beige);
-  --radius: 1.25rem;
+  --ring: var(--brand-apricot);
+  --chart-1: var(--brand-deep-sage);
+  --chart-2: var(--brand-olive-sage);
+  --chart-3: var(--brand-mint);
+  --chart-4: var(--brand-apricot);
+  --chart-5: var(--brand-stone-taupe);
+  --radius: 1.5rem;
   --sidebar: var(--brand-cloud);
   --sidebar-foreground: var(--brand-charcoal);
-  --sidebar-primary: var(--brand-olive-sage);
+  --sidebar-primary: var(--brand-deep-sage);
   --sidebar-primary-foreground: var(--brand-cloud);
   --sidebar-accent: var(--brand-sage-mist);
   --sidebar-accent-foreground: var(--brand-charcoal);
-  --sidebar-border: rgba(199, 189, 177, 0.55);
-  --sidebar-ring: var(--brand-olive-sage);
+  --sidebar-border: rgba(35, 81, 59, 0.16);
+  --sidebar-ring: var(--brand-apricot);
 }
 
 @theme inline {
@@ -130,6 +131,9 @@
   --color-brand-soft-beige: var(--brand-soft-beige);
   --color-brand-charcoal: var(--brand-charcoal);
   --color-brand-deep-sage: var(--brand-deep-sage);
+  --color-brand-mint: var(--brand-mint);
+  --color-brand-apricot: var(--brand-apricot);
+  --color-brand-ink: var(--brand-ink);
 
   /* Custom sage + stone colors */
   --color-sage-50: var(--sage-50);
@@ -179,13 +183,13 @@
   h1 {
     font-size: var(--text-2xl);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: 1.08;
   }
 
   h2 {
     font-size: var(--text-xl);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: 1.12;
   }
 
   h3 {
@@ -270,8 +274,9 @@
 
   .premium-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(111, 127, 103, 0.38);
-    box-shadow: 0 24px 70px rgba(46, 46, 46, 0.11);
+    border-color: rgba(35, 81, 59, 0.28);
+    box-shadow: 0 30px 80px rgba(23, 28, 24, 0.14);
+    background: rgba(255, 252, 246, 0.92);
   }
 
   .workflow-line::after {
