@@ -1,0 +1,25 @@
+{
+  "redirects": [
+    {
+      "source": "/ecommerce-virtual-assistant",
+      "destination": "/ecommerce-customer-support-outsourcing",
+      "permanent": true
+    },
+    {
+      "source": "/real-estate-virtual-assistant",
+      "destination": "/real-estate-virtual-assistant-services",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-maintenance",
+      "destination": "/web-design-maintenance-services",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}
