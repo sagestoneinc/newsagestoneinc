@@ -82,8 +82,10 @@ function CtaButton({ children, location, variant = "primary", className = "" }: 
   return isSecondary ? <Link to={href} className={classes} onClick={() => trackCtaClick({ location, cta_text: children, target_url: href })}>{content}</Link> : <a href={href} target="_blank" rel="noreferrer" className={classes} onClick={() => trackCtaClick({ location, cta_text: children, target_url: href })}>{content}</a>;
 }
 
-function SectionIntro({ eyebrow, title, children, align = "center" }: { eyebrow: string; title: string; children?: string; align?: "center" | "left" }) {
-  return <div className={`mb-12 ${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}`}><p className="mb-3 text-xs font-bold uppercase tracking-[0.24em] text-[color:var(--brand-deep-sage)]">{eyebrow}</p><h2 className="text-balance text-[color:var(--brand-charcoal)]" style={{ fontSize: "clamp(2rem, 4vw, 3.35rem)", fontWeight: 760, lineHeight: 1.04 }}>{title}</h2>{children && <p className="mt-5 text-pretty text-[1.0625rem] leading-8 text-black/66">{children}</p>}</div>;
+function SectionIntro({ eyebrow, title, children, align = "center", tone = "light" }: { eyebrow: string; title: string; children?: string; align?: "center" | "left"; tone?: "light" | "dark" }) {
+  const isDark = tone === "dark";
+
+  return <div className={`mb-12 ${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}`}><p className={`mb-3 text-xs font-bold uppercase tracking-[0.24em] ${isDark ? "text-[color:var(--brand-mint)]" : "text-[color:var(--brand-deep-sage)]"}`}>{eyebrow}</p><h2 className={`text-balance ${isDark ? "text-white" : "text-[color:var(--brand-charcoal)]"}`} style={{ fontSize: "clamp(2rem, 4vw, 3.35rem)", fontWeight: 760, lineHeight: 1.04 }}>{title}</h2>{children && <p className={`mt-5 text-pretty text-[1.0625rem] leading-8 ${isDark ? "text-white/72" : "text-black/66"}`}>{children}</p>}</div>;
 }
 
 function HomeFaq() {
@@ -126,7 +128,7 @@ export default function Home() {
 
     <section id="tools" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Tool-friendly support" title="Tools We Work With" /><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">{tools.map((tool) => <div key={tool} className="rounded-2xl border border-[color:var(--border)] bg-white/72 px-4 py-3 text-center text-sm font-semibold text-[color:var(--brand-charcoal)] shadow-[0_10px_30px_rgba(46,46,46,0.035)]">{tool}</div>)}</div></div></section>
 
-    <section id="proof" className="py-20 lg:py-28" style={{ background: "var(--brand-ink)" }}><div className="mx-auto max-w-[1440px] px-4 text-white sm:px-6 lg:px-8"><SectionIntro eyebrow="Proof-ready" title="Built for Busy Business Owners">SageStone is structured for business owners who need clearer workflows, responsive support, and calmer daily operations.</SectionIntro><div className="grid gap-5 md:grid-cols-3">{proofCards.map((card) => <article key={card.title} className="rounded-[26px] border border-white/10 bg-white/[0.07] p-6"><CheckCircle2 className="mb-5 h-7 w-7 text-[color:var(--brand-mint)]" aria-hidden="true" /><h3 className="text-xl font-semibold text-white">{card.title}</h3><p className="mt-3 text-sm leading-7 text-white/62">{card.description}</p></article>)}</div></div></section>
+    <section id="proof" className="py-20 lg:py-28" style={{ background: "var(--brand-ink)" }}><div className="mx-auto max-w-[1440px] px-4 text-white sm:px-6 lg:px-8"><SectionIntro eyebrow="Proof-ready" title="Built for Busy Business Owners" tone="dark">SageStone is structured for business owners who need clearer workflows, responsive support, and calmer daily operations.</SectionIntro><div className="grid gap-5 md:grid-cols-3">{proofCards.map((card) => <article key={card.title} className="rounded-[26px] border border-white/10 bg-white/[0.07] p-6"><CheckCircle2 className="mb-5 h-7 w-7 text-[color:var(--brand-mint)]" aria-hidden="true" /><h3 className="text-xl font-semibold text-white">{card.title}</h3><p className="mt-3 text-sm leading-7 text-white/62">{card.description}</p></article>)}</div></div></section>
 
     <HomeFaq />
 
