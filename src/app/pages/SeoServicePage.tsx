@@ -35,7 +35,7 @@ const serviceResourceLinks: Record<string, Array<{ label: string; path: string; 
     { label: "E-commerce customer support best practices", path: "/blog/ecommerce-customer-support-best-practices", description: "Improve order updates, returns, product inquiries, response quality, and reporting." },
     { label: "When to outsource customer support", path: "/blog/when-to-outsource-customer-support", description: "Review the signals, workflows, quality controls, and support metrics to prepare." },
   ],
-  "ecommerce-customer-support-outsourcing": [
+  "ecommerce-virtual-assistant": [
     { label: "E-commerce customer support best practices", path: "/blog/ecommerce-customer-support-best-practices", description: "Improve order updates, returns, product inquiries, response quality, and reporting." },
     { label: "What does an e-commerce virtual assistant do?", path: "/blog/what-does-an-ecommerce-virtual-assistant-do", description: "Explore order support, customer inquiries, catalog updates, returns, CRM tasks, and reporting." },
   ],
@@ -48,11 +48,11 @@ const serviceResourceLinks: Record<string, Array<{ label: string; path: string; 
     { label: "How to create SOPs for virtual assistants", path: "/blog/how-to-create-sops-for-virtual-assistants", description: "Document recurring work with steps, examples, quality standards, and escalation rules." },
     { label: "Outsourced support for small businesses", path: "/outsourced-support-for-small-businesses", description: "Review buyer-intent guidance for delegating admin, reporting, and daily operations." },
   ],
-  "web-design-maintenance-services": [
+  "web-maintenance-support": [
     { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "Connect website maintenance requests with broader operational follow-through." },
     { label: "What does an e-commerce virtual assistant do?", path: "/blog/what-does-an-ecommerce-virtual-assistant-do", description: "See where catalog, product, and site updates can support store operations." },
   ],
-  "social-media-management-services": [
+  "social-media-virtual-assistant": [
     { label: "How to hire a virtual assistant", path: "/blog/how-to-hire-a-virtual-assistant", description: "Prepare recurring marketing support tasks, approvals, and communication standards." },
     { label: "Business operations support guide", path: "/blog/business-operations-support-guide", description: "Use SOPs and reporting to make marketing coordination more repeatable." },
   ],
@@ -172,7 +172,7 @@ export default function SeoServicePage() {
               </h1>
               <p className="text-black/65 text-[1.125rem] leading-relaxed mb-8 max-w-2xl">{page.heroSummary}</p>
               <div className="flex flex-wrap gap-4">
-                <PrimaryButton to="/contact" tracking={{ event_name: "service_cta_click", location: "service_hero", service: page.slug }}>Book a Free Operations Consultation</PrimaryButton>
+                <PrimaryButton to="/contact" tracking={{ event_name: "service_cta_click", location: "service_hero", service: page.slug }}>Book a Free Consultation</PrimaryButton>
                 <SecondaryButton to="/contact" tracking={{ event_name: "service_cta_click", location: "service_hero_secondary", service: page.slug }}>Discuss Your Support Needs</SecondaryButton>
               </div>
             </div>
