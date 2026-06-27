@@ -18,9 +18,12 @@ const serviceCtaLabels: Record<string, string> = {
   "customer-support-outsourcing": "Get Customer Support Help",
   "ecommerce-customer-support-outsourcing": "Plan Your E-Commerce Support Workflow",
   "real-estate-virtual-assistant-services": "Discuss Real Estate VA Support",
+  "real-estate-virtual-assistant": "Discuss Real Estate VA Support",
   "social-media-management-services": "Plan Your Social Media Support",
+  "social-media-virtual-assistant": "Plan Your Social Media Support",
   "business-operations-support": "Improve Your Operations Workflow",
   "web-design-maintenance-services": "Discuss Website Support",
+  "web-maintenance-support": "Discuss Website Support",
 };
 
 const serviceResourceLinks: Record<string, Array<{ label: string; path: string; description: string }>> = {
@@ -237,9 +240,9 @@ export default function SeoServicePage() {
             <div className="space-y-4">
               {page.faqs.map((faq) => (
                 <article key={faq.question} className="rounded-[18px] border border-[color:var(--border)] bg-[color:var(--brand-cloud)]/70 p-6">
-                  <h2 className="text-[color:var(--brand-charcoal)] mb-2" style={{ fontSize: "1.0625rem", fontWeight: 650 }}>
+                  <h3 className="text-[color:var(--brand-charcoal)] mb-2 text-lg font-semibold">
                     {faq.question}
-                  </h2>
+                  </h3>
                   <p className="text-black/65 leading-relaxed">{faq.answer}</p>
                 </article>
               ))}
