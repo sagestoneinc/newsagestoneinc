@@ -9,7 +9,8 @@ const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
 const navLinks = [
   { label: "Services", path: "/#services" },
   { label: "How It Works", path: "/#how-it-works" },
-  { label: "Who We Help", path: "/#who-we-help" },
+  { label: "Why SageStone", path: "/#why-sagestone" },
+  { label: "Tools", path: "/#tools" },
   { label: "FAQ", path: "/#faq" },
   { label: "Contact", path: "/#contact" },
 ];
@@ -74,6 +75,8 @@ export function Header() {
               onClick={() => setMobileOpen(!mobileOpen)}
               className="xl:hidden rounded-full p-2 text-[color:var(--brand-charcoal)]/72 transition-colors hover:bg-[color:var(--brand-sage-mist)]/70 hover:text-[color:var(--brand-deep-sage)]"
               aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -84,7 +87,7 @@ export function Header() {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className="xl:hidden border-t border-[color:var(--border)] bg-[color:var(--brand-cloud)]/96 shadow-[0_24px_60px_rgba(23,28,24,0.12)] backdrop-blur-2xl">
-          <nav className="max-w-[1440px] mx-auto px-4 py-4 space-y-1">
+          <nav id="mobile-navigation" className="max-w-[1440px] mx-auto px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}

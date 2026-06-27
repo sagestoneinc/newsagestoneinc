@@ -46,3 +46,37 @@ svg {
 .pill-glow {
   box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 12px 28px rgba(35,81,59,.1);
 }
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-150%);
+  border-radius: 999px;
+  background: var(--brand-ink);
+  color: white;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid var(--brand-mint);
+  outline-offset: 3px;
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid var(--brand-olive-sage);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}

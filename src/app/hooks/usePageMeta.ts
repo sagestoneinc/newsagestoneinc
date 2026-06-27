@@ -58,7 +58,8 @@ export function usePageMeta({
   useEffect(() => {
     const pageTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
     const canonicalUrl = buildCanonicalUrl(location.pathname);
-    const robots = noindex ? "noindex, follow" : "index, follow, max-image-preview:large";
+    const isVercelPreview = typeof window !== "undefined" && window.location.hostname === "newsagestoneinc.vercel.app";
+    const robots = noindex || isVercelPreview ? "noindex, nofollow" : "index, follow, max-image-preview:large";
 
     document.title = pageTitle;
     document.documentElement.lang = "en-US";
@@ -105,6 +106,8 @@ export function usePageMeta({
       existingTwitterImage?.remove();
       existingTwitterImageAlt?.remove();
     }
+
+    ensureLink('link[rel="icon"]', { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" });
 
     ensureMeta('meta[name="twitter:card"]', { name: "twitter:card" }).setAttribute("content", "summary_large_image");
     ensureMeta('meta[name="twitter:title"]', { name: "twitter:title" }).setAttribute("content", pageTitle);

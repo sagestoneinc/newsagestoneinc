@@ -84,8 +84,9 @@ export function Layout() {
     <div className="min-h-screen flex flex-col">
       <SitewideSchema />
       <ScrollToTop />
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <Header />
-      <main className="flex-1 pt-[72px]">
+      <main id="main-content" className="flex-1 pt-[72px]">
         <Outlet />
       </main>
       <BrandFooter />
