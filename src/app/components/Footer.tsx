@@ -5,19 +5,20 @@ import { trackCtaClick, trackEvent } from "../lib/analytics";
 
 const quickLinks = [
   { label: "Home", path: "/" },
-  { label: "Services", path: "/#services" },
-  { label: "How It Works", path: "/#how-it-works" },
-  { label: "Who We Help", path: "/#who-we-help" },
+  { label: "Services", path: "/#solutions" },
+  { label: "How It Works", path: "/#process" },
+  { label: "Who We Help", path: "/#industries" },
   { label: "FAQ", path: "/#faq" },
-  { label: "Contact", path: "/#contact" },
+  { label: "Contact", path: "/contact" },
 ];
 
 const solutionLinks = [
   { label: "Virtual Assistant Services", path: "/virtual-assistant-services" },
-  { label: "Customer Support", path: "/customer-support" },
-  { label: "E-commerce Operations", path: "/ecommerce-operations-support" },
-  { label: "CRM & Admin Support", path: "/crm-admin-support" },
-  { label: "Social Media Support", path: "/social-media-support" },
+  { label: "Customer Support Outsourcing", path: "/customer-support-outsourcing" },
+  { label: "E-Commerce Virtual Assistant", path: "/ecommerce-virtual-assistant" },
+  { label: "Real Estate Virtual Assistant", path: "/real-estate-virtual-assistant" },
+  { label: "Business Operations Support", path: "/business-operations-support" },
+  { label: "Social Media Virtual Assistant", path: "/social-media-virtual-assistant" },
   { label: "Web Maintenance Support", path: "/web-maintenance-support" },
 ];
 
@@ -40,7 +41,9 @@ export function Footer() {
               <BrandLogo variant="light" />
             </Link>
             <p className="text-white/58 text-[0.9375rem] leading-relaxed mb-6 max-w-sm">
-              Reliable virtual assistant, customer support, and business operations support for growing teams.
+              SageStone Inc
+Virtual Assistant & Business Operations Support
+Newark, Delaware
             </p>
             <div className="space-y-3">
               <a href="mailto:hello@sagestoneinc.com" onClick={() => trackEvent("email_click", { location: "footer", target_url: "mailto:hello@sagestoneinc.com" })} className="flex items-center gap-3 text-white/58 hover:text-[color:var(--brand-mint)] transition-colors text-[0.875rem]">
@@ -53,8 +56,14 @@ export function Footer() {
               </a>
               <div className="flex items-center gap-3 text-white/58 text-[0.875rem]">
                 <Globe className="w-4 h-4 shrink-0" />
-                Remote / Worldwide
+                Newark, Delaware · Remote / Worldwide
               </div>
+            </div>
+            <div className="mt-5 flex flex-wrap gap-3 text-[0.8125rem]">
+              <a href="https://www.linkedin.com/company/sagestoneinc" className="text-white/58 hover:text-[color:var(--brand-mint)]">LinkedIn</a>
+              <a href="https://www.instagram.com/sagestoneinc" className="text-white/58 hover:text-[color:var(--brand-mint)]">Instagram</a>
+              <a href="https://clutch.co/profile/sagestone-inc" className="text-white/58 hover:text-[color:var(--brand-mint)]">Clutch profile</a>
+              <a href="https://www.goodfirms.co/company/sagestone-inc" className="text-white/58 hover:text-[color:var(--brand-mint)]">GoodFirms profile</a>
             </div>
           </div>
 

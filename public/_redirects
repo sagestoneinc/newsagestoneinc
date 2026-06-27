@@ -1,10 +1,6 @@
 http://sagestoneinc.com/* https://www.sagestoneinc.com/:splat 301
 http://www.sagestoneinc.com/* https://www.sagestoneinc.com/:splat 301
 https://sagestoneinc.com/* https://www.sagestoneinc.com/:splat 301
-/ecommerce-virtual-assistant /ecommerce-customer-support-outsourcing 301
-/ecommerce-virtual-assistant/ /ecommerce-customer-support-outsourcing/ 301
-/real-estate-virtual-assistant /real-estate-virtual-assistant-services 301
-/real-estate-virtual-assistant/ /real-estate-virtual-assistant-services/ 301
 /web-design-maintenance /web-design-maintenance-services 301
 /web-design-maintenance/ /web-design-maintenance-services/ 301
 /* /index.html 200
