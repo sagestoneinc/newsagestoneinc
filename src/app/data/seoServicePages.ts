@@ -187,11 +187,11 @@ export const seoServicePages: SeoServicePage[] = [
       { heading: "Why Businesses Choose SageStone", body: "Businesses choose SageStone for flexible remote marketing support that connects with admin, web maintenance, and business operations workflows. We tailor support to your tools, content process, and approval style while leaving room for testimonials, logos, case studies, industries served, and workflow examples.", bullets: ["Dedicated social media virtual assistant support", "Process-driven onboarding", "Support tailored to your content workflow", "Experience with admin, marketing, and operations coordination"] },
     ],
     faqs: [
-      { question: "Can a social media virtual assistant create strategy?", answer: "SageStone focuses on execution support, scheduling, organization, engagement tracking, and reporting based on your existing goals, approvals, and content direction." },
-      { question: "Can you schedule posts for us?", answer: "Yes. We can schedule approved posts, organize captions and assets, and help maintain your content calendar." },
-      { question: "Can you monitor comments and messages?", answer: "We can track engagement, flag comments or messages for review, and route items based on your response rules." },
-      { question: "Can you help with reporting?", answer: "Yes. We can prepare simple performance summaries, campaign status updates, and recurring task reports based on your platforms and goals." },
-      { question: "Can this connect with website updates?", answer: "Yes. Social campaigns often connect with web maintenance support for landing page updates, links, forms, and campaign assets." },
+      { question: "What social media tasks can SageStone support?", answer: "SageStone can support content calendars, approved post scheduling, caption and asset organization, engagement monitoring, reporting, and campaign coordination." },
+      { question: "Can you schedule posts and manage content calendars?", answer: "Yes. We can schedule approved posts, organize captions and assets, and help maintain your content calendar." },
+      { question: "Can you respond to comments and messages?", answer: "We can track engagement, flag comments or messages for review, and route items based on your response rules." },
+      { question: "Can you help repurpose content?", answer: "Yes. We can turn approved long-form content, offers, blog posts, and campaign assets into organized social post drafts for your review." },
+      { question: "Which social media platforms do you support?", answer: "We can support common platforms such as LinkedIn, Instagram, Facebook, TikTok, YouTube, Pinterest, and scheduling tools based on your workflow." },
     ],
     related: [
       { label: "web maintenance support", path: "/web-maintenance-support" },
@@ -216,11 +216,11 @@ export const seoServicePages: SeoServicePage[] = [
       { heading: "Why Businesses Choose SageStone", body: "Businesses choose SageStone for flexible remote support that connects website maintenance with operations, social media, customer support, and e-commerce workflows. Support is tailored to your tools and approval process, with space for testimonials, client logos, case studies, before-and-after workflow examples, and industries served.", bullets: ["Dedicated website maintenance support", "Support tailored to your CMS and workflow", "Process-driven onboarding", "Experience with web, admin, e-commerce, and operations tasks"] },
     ],
     faqs: [
-      { question: "What does website maintenance support include?", answer: "It can include content edits, image swaps, landing page updates, form checks, link checks, page QA, WordPress content support, request tracking, and publishing coordination." },
-      { question: "Do you support WordPress websites?", answer: "Yes. SageStone can support WordPress content updates and routine maintenance coordination when access, instructions, and approval rules are provided." },
-      { question: "Can you update landing pages?", answer: "Yes. We can help update landing page copy, images, CTAs, forms, links, and campaign details." },
-      { question: "Can you work with our designer or developer?", answer: "Yes. We can coordinate requests, organize updates, perform QA checks, and route technical items to your designer or developer when needed." },
-      { question: "Can this be ongoing or project-based?", answer: "Support can be scoped around a defined update backlog or recurring maintenance needs, depending on your site and priorities." },
+      { question: "What website maintenance tasks can SageStone handle?", answer: "It can include content edits, image swaps, landing page updates, form checks, link checks, page QA, WordPress content support, request tracking, and publishing coordination." },
+      { question: "Can you help with basic WordPress maintenance?", answer: "Yes. SageStone can support basic WordPress content updates and routine maintenance coordination when access, instructions, and approval rules are provided." },
+      { question: "Can you update website content?", answer: "Yes. We can help update page copy, images, CTAs, forms, links, campaign details, blog formatting, and other approved website content." },
+      { question: "Can you monitor broken links or page issues?", answer: "Yes. We can monitor broken links, form issues, formatting problems, mobile display issues, and other routine QA items." },
+      { question: "Can you coordinate with developers for larger fixes?", answer: "Yes. We can document issues, gather examples, coordinate priorities, and communicate with developers for larger fixes that require technical implementation." },
     ],
     related: [
       { label: "social media virtual assistant services", path: "/social-media-virtual-assistant" },
