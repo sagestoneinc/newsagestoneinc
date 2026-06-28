@@ -1,13 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" role="img" aria-labelledby="title desc">
-  <title id="title">SageStone Inc icon</title><desc id="desc">Sage leaf and stacked stones icon.</desc>
-<defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 190" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">SageStone Inc logo</title>
+  <desc id="desc">SageStone Inc primary logo with sage leaf mark, stacked stones, and service tagline.</desc>
+  <defs>
     <linearGradient id="leaf" x1="37" y1="8" x2="123" y2="155" gradientUnits="userSpaceOnUse"><stop stop-color="#A7B889"/><stop offset=".52" stop-color="#7B9362"/><stop offset="1" stop-color="#4F6547"/></linearGradient>
     <linearGradient id="leafDark" x1="44" y1="30" x2="113" y2="154" gradientUnits="userSpaceOnUse"><stop stop-color="#789462"/><stop offset="1" stop-color="#3F533B"/></linearGradient>
     <linearGradient id="stone" x1="24" y1="86" x2="105" y2="129" gradientUnits="userSpaceOnUse"><stop stop-color="#4F5757"/><stop offset="1" stop-color="#252B2E"/></linearGradient>
     <linearGradient id="pebble" x1="22" y1="139" x2="116" y2="160" gradientUnits="userSpaceOnUse"><stop stop-color="#C3C0B8"/><stop offset="1" stop-color="#8E8E86"/></linearGradient>
     <filter id="shadow" x="0" y="0" width="156" height="178" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feDropShadow dx="0" dy="2" stdDeviation="1.7" flood-color="#1D2323" flood-opacity=".13"/></filter>
   </defs>
-  <g filter="url(#shadow)" transform="translate(2 2) scale(1.04)">
+  <g filter="url(#shadow)" transform="translate(12 10)">
     <path d="M123.8 16.3C100.4 5.1 72.9 9.6 56.5 28.6c-19.8 23-9.8 52.9 25.8 70.6 15.8 7.9 25 17.8 26.7 28.4 1.5 9.6-3.9 18-13.9 22.9 23.3-3.2 37.8-16.3 37.4-34.3-.4-17.1-14.3-29.8-39.3-42.4C69.5 61.9 62 44.6 73.5 30.4c10-12.4 28.2-17.6 50.3-14.1Z" fill="url(#leaf)"/>
     <path d="M37.8 18.2C25.3 42.3 27.3 70 42.6 90.6c10 13.5 25.6 22.3 45.4 31 10.8 4.8 18.4 10.2 22.2 17.1-2.8-12.5-11.4-21-26.6-29.3C63.3 98.2 45.8 88.5 37.7 68 31.7 52.8 31.6 36.3 37.8 18.2Z" fill="url(#leafDark)"/>
     <path d="M55.5 31.7C46.4 48.2 47.8 64.7 59.8 78.8c8.8 10.3 22.5 17.7 39.5 25.5" stroke="#FAFAF7" stroke-width="6.5" stroke-linecap="round"/>
@@ -18,4 +19,7 @@
     <ellipse cx="58" cy="118" rx="45" ry="15" fill="url(#stone)"/>
     <ellipse cx="70" cy="145" rx="51" ry="12" fill="url(#pebble)"/>
   </g>
+  <line x1="183" y1="31" x2="183" y2="154" stroke="#789462" stroke-width="2"/>
+  <text x="218" y="112" font-family="Inter, Avenir, Helvetica, Arial, sans-serif" font-size="82" font-weight="300" letter-spacing="-4"><tspan fill="#789462" font-weight="400">Sage</tspan><tspan fill="#22272E">Stone</tspan><tspan dx="18" fill="#22272E">Inc</tspan></text>
+  <text x="220" y="153" font-family="Inter, Avenir, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="7" fill="#2A2F36">VIRTUAL ASSISTANTS <tspan fill="#789462">•</tspan> CUSTOMER SUPPORT <tspan fill="#789462">•</tspan> BUSINESS OPERATIONS</text>
 </svg>

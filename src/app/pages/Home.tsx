@@ -30,7 +30,7 @@ import { trackCtaClick } from "../lib/analytics";
 
 const SITE_URL = "https://www.sagestoneinc.com";
 const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
-const OG_IMAGE = `${SITE_URL}/logo-mark.svg`;
+const OG_IMAGE = `${SITE_URL}/logo-full-light.svg`;
 
 const ecosystem = ["Google Workspace", "Microsoft", "Slack", "ClickUp", "Asana", "HubSpot", "Yardi", "AppFolio", "QuickBooks", "Teams"];
 const workflowNodes = ["Executive Support", "Recruitment", "Property Management", "Marketing", "Customer Support", "Reporting", "Calendar", "CRM", "Operations"];
@@ -120,7 +120,7 @@ function FaqSection() {
 }
 
 export default function Home() {
-  usePageMeta({ title: "Virtual Assistant Services & Operations Support | SageStone Inc", description: "SageStone Inc provides virtual assistant services, customer support outsourcing, e-commerce support, and business operations help for growing companies.", keywords: "virtual assistant services, customer support outsourcing, ecommerce virtual assistant, real estate virtual assistant, business operations support, social media virtual assistant, web maintenance support", image: OG_IMAGE, imageAlt: "SageStone Inc logo mark" });
+  usePageMeta({ title: "Virtual Assistant Services & Operations Support | SageStone Inc", description: "SageStone Inc provides virtual assistant services, customer support outsourcing, e-commerce support, and business operations help for growing companies.", keywords: "virtual assistant services, customer support outsourcing, ecommerce virtual assistant, real estate virtual assistant, business operations support, social media virtual assistant, web maintenance support", image: OG_IMAGE, imageAlt: "SageStone Inc logo" });
 
   useEffect(() => {
     const script = document.createElement("script");

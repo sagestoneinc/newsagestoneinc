@@ -25,7 +25,7 @@ function SitewideSchema() {
       "@type": "Organization",
       name: "SageStone Inc",
       url: "https://www.sagestoneinc.com/",
-      logo: "https://www.sagestoneinc.com/logo-mark.svg",
+      logo: "https://www.sagestoneinc.com/logo-full-light.svg",
       description:
         "SageStone Inc provides virtual assistant services, customer support outsourcing, e-commerce support, website maintenance, and business operations support.",
       contactPoint: {
