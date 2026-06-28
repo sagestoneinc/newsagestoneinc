@@ -1,17 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 160 160" fill="none">
+  <rect width="160" height="160" rx="34" fill="#F8F7F3"/>
   <defs>
-    <linearGradient id="green" x1="22" y1="24" x2="101" y2="127" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#9AA081"/>
-      <stop offset="1" stop-color="#6F765C"/>
-    </linearGradient>
-    <linearGradient id="stone" x1="104" y1="42" x2="60" y2="139" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D9D0C4"/>
-      <stop offset="1" stop-color="#AFA599"/>
-    </linearGradient>
+    <linearGradient id="sage" x1="39" y1="16" x2="123" y2="125" gradientUnits="userSpaceOnUse"><stop stop-color="#9CAF80"/><stop offset="0.52" stop-color="#78905D"/><stop offset="1" stop-color="#4F6242"/></linearGradient>
+    <linearGradient id="leaf" x1="110" y1="78" x2="130" y2="116" gradientUnits="userSpaceOnUse"><stop stop-color="#9CAF80"/><stop offset="1" stop-color="#607A4E"/></linearGradient>
+    <linearGradient id="stoneDark" x1="27" y1="94" x2="92" y2="105" gradientUnits="userSpaceOnUse"><stop stop-color="#5B6364"/><stop offset="1" stop-color="#252C2E"/></linearGradient>
+    <linearGradient id="stoneWarm" x1="37" y1="129" x2="105" y2="139" gradientUnits="userSpaceOnUse"><stop stop-color="#C6C2B8"/><stop offset="1" stop-color="#979387"/></linearGradient>
+    <filter id="softShadow" x="10" y="6" width="140" height="148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#1F2524" flood-opacity="0.18"/></filter>
   </defs>
-  <rect width="160" height="160" rx="32" fill="#F5EFE7"/>
-  <path d="M29.5 128V67.7C29.5 57 34.4 46.8 42.7 40L80 9.5L128.5 43.6L116.7 58.5L80.8 33.5L55.2 54.8C49.9 59.2 46.9 65.8 46.9 72.7V128C39.8 126 34.1 126 29.5 128Z" fill="url(#green)"/>
-  <path d="M49.4 121.3C53.2 90.9 70.9 62.4 102.1 42.7V84.3C95.4 106.4 75.7 122.4 49.4 137.2V121.3Z" fill="url(#green)"/>
-  <path d="M47.8 121.4C57.8 94.4 74 72.4 96.4 55.4" stroke="#F8F5EF" stroke-width="6.5" stroke-linecap="round"/>
-  <path d="M108.2 47.7L133.2 62.9V93.6L106.8 76.4L92.8 85.5L133.5 111.7V131.3L83 150.5L48.6 130L65.7 118.3L84.8 129.8L113.9 118.6L73.5 92.3V72.6L108.2 47.7Z" fill="url(#stone)" stroke="#948C82" stroke-opacity="0.25" stroke-width="2"/>
+  <g filter="url(#softShadow)">
+    <path d="M118.6 22.6C88.7 17.8 53.2 28.4 43.9 55.7c-5.9 17.4 2.5 33 20.4 41.4 15.8 7.4 33.2 11.4 37.7 23.8 3 8.2-1.4 15.8-11.6 21.7 23.7-6.6 38-23.2 35.4-39.3-2.7-16.7-19.2-24.3-38.7-31.1-16.7-5.8-25-13.2-23.2-24.2 2.9-18.4 28.5-28.4 54.7-25.4Z" fill="url(#sage)"/>
+    <path d="M36.6 38.9C21.7 61.2 30.7 83.1 55.2 95.5c12.7 6.4 26.8 10.1 35.8 16.3 8.1 5.6 9.5 13.2 3.9 20.7 13.1-9.8 14.7-23 5.1-32.6-7.6-7.6-21.3-12-35.4-18.3C42.7 71.8 34.7 58.5 36.6 38.9Z" fill="#F8F5EF" fill-opacity="0.92"/>
+    <path d="M41.5 39.1C25.9 65.5 37.6 80.4 61.4 91.6c15.4 7.2 31.2 11.8 39 22.2 5.2 6.9 4.4 15.2-2.2 23.7 16.7-10 22.3-24.8 14-37.7-6.8-10.5-22.4-15.8-39.1-22.3C51.2 69 42.1 57.8 41.5 39.1Z" fill="url(#sage)"/>
+    <path d="M119.2 74.5c12 8.2 14.6 20.9 6.2 31.7-12.3-8.6-14.8-21.8-6.2-31.7Z" fill="url(#leaf)"/><path d="M132.2 103.8c10.2 4.1 15.3 13.3 12.3 23.2-11.5-4.8-16.8-14.2-12.3-23.2Z" fill="url(#leaf)"/><path d="M110.2 142.4C114.2 117.1 122.7 97.9 135.2 84" stroke="#5F754A" stroke-width="4" stroke-linecap="round"/><ellipse cx="57" cy="94" rx="37" ry="13.5" fill="url(#stoneDark)"/><ellipse cx="62" cy="118" rx="47" ry="16" fill="url(#stoneDark)"/><ellipse cx="73" cy="141" rx="54" ry="12" fill="url(#stoneWarm)"/>
+  </g>
 </svg>
