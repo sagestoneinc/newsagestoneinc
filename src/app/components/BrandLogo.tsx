@@ -1,82 +1,41 @@
-import { useId } from "react";
-
 type BrandLogoProps = {
   className?: string;
   variant?: "default" | "light";
 };
 
 function SageStoneMark({ className = "" }: { className?: string }) {
-  const id = useId();
-  const sageId = `${id}-sage`;
-  const leafId = `${id}-leaf`;
-  const stoneDarkId = `${id}-stone-dark`;
-  const stoneWarmId = `${id}-stone-warm`;
-  const shadowId = `${id}-shadow`;
-
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 160 160"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id={sageId} x1="39" y1="16" x2="123" y2="125" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#9CAF80" />
-          <stop offset="0.52" stopColor="#78905D" />
-          <stop offset="1" stopColor="#4F6242" />
-        </linearGradient>
-        <linearGradient id={leafId} x1="110" y1="78" x2="130" y2="116" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#9CAF80" />
-          <stop offset="1" stopColor="#607A4E" />
-        </linearGradient>
-        <linearGradient id={stoneDarkId} x1="27" y1="94" x2="92" y2="105" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#5B6364" />
-          <stop offset="1" stopColor="#252C2E" />
-        </linearGradient>
-        <linearGradient id={stoneWarmId} x1="37" y1="129" x2="105" y2="139" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#C6C2B8" />
-          <stop offset="1" stopColor="#979387" />
-        </linearGradient>
-        <filter id={shadowId} x="10" y="6" width="140" height="148" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-          <feDropShadow dx="0" dy="3" stdDeviation="2.5" floodColor="#1F2524" floodOpacity="0.18" />
-        </filter>
-      </defs>
-
-      <g filter={`url(#${shadowId})`}>
-        <path d="M118.6 22.6C88.7 17.8 53.2 28.4 43.9 55.7c-5.9 17.4 2.5 33 20.4 41.4 15.8 7.4 33.2 11.4 37.7 23.8 3 8.2-1.4 15.8-11.6 21.7 23.7-6.6 38-23.2 35.4-39.3-2.7-16.7-19.2-24.3-38.7-31.1-16.7-5.8-25-13.2-23.2-24.2 2.9-18.4 28.5-28.4 54.7-25.4Z" fill={`url(#${sageId})`} />
-        <path d="M36.6 38.9C21.7 61.2 30.7 83.1 55.2 95.5c12.7 6.4 26.8 10.1 35.8 16.3 8.1 5.6 9.5 13.2 3.9 20.7 13.1-9.8 14.7-23 5.1-32.6-7.6-7.6-21.3-12-35.4-18.3C42.7 71.8 34.7 58.5 36.6 38.9Z" fill="#F8F5EF" fillOpacity="0.92" />
-        <path d="M41.5 39.1C25.9 65.5 37.6 80.4 61.4 91.6c15.4 7.2 31.2 11.8 39 22.2 5.2 6.9 4.4 15.2-2.2 23.7 16.7-10 22.3-24.8 14-37.7-6.8-10.5-22.4-15.8-39.1-22.3C51.2 69 42.1 57.8 41.5 39.1Z" fill={`url(#${sageId})`} />
-        <path d="M119.2 74.5c12 8.2 14.6 20.9 6.2 31.7-12.3-8.6-14.8-21.8-6.2-31.7Z" fill={`url(#${leafId})`} />
-        <path d="M132.2 103.8c10.2 4.1 15.3 13.3 12.3 23.2-11.5-4.8-16.8-14.2-12.3-23.2Z" fill={`url(#${leafId})`} />
-        <path d="M110.2 142.4C114.2 117.1 122.7 97.9 135.2 84" stroke="#5F754A" strokeWidth="4" strokeLinecap="round" />
-        <ellipse cx="57" cy="94" rx="37" ry="13.5" fill={`url(#${stoneDarkId})`} />
-        <ellipse cx="62" cy="118" rx="47" ry="16" fill={`url(#${stoneDarkId})`} />
-        <ellipse cx="73" cy="141" rx="54" ry="12" fill={`url(#${stoneWarmId})`} />
-      </g>
-    </svg>
-  );
+  return <img src="/logo-mark.svg" alt="" className={className} aria-hidden="true" />;
 }
 
 export function BrandLogo({ className = "", variant = "default" }: BrandLogoProps) {
-  const sageColor = variant === "light" ? "#D8DED2" : "#78905D";
-  const stoneColor = variant === "light" ? "#F8F5EF" : "#252A2E";
-  const incColor = variant === "light" ? "#F8F5EF" : "#252A2E";
+  const sageColor = variant === "light" ? "#A7B889" : "#789462";
+  const stoneColor = variant === "light" ? "#FFFFFF" : "#262B31";
+  const incColor = variant === "light" ? "#FFFFFF" : "#262B31";
+  const dividerColor = variant === "light" ? "#A7B889" : "#789462";
+  const taglineColor = variant === "light" ? "rgba(255,255,255,0.84)" : "#3C4148";
 
   return (
-    <span className={`inline-flex items-center gap-2.5 sm:gap-3 ${className}`} aria-label="SageStone Inc">
-      <SageStoneMark className="h-9 w-9 shrink-0 sm:h-11 sm:w-11" />
-      <span
-        className="whitespace-nowrap text-[1.35rem] leading-none sm:text-[1.7rem]"
-        style={{
-          fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-          fontWeight: 400,
-        }}
-      >
-        <span style={{ color: sageColor }}>Sage</span>
-        <span style={{ color: stoneColor }}>Stone</span>
-        <span style={{ color: incColor, fontSize: "0.52em", marginLeft: "0.2rem" }}>Inc.</span>
+    <span className={`inline-flex items-center gap-3 sm:gap-4 ${className}`} aria-label="SageStone Inc">
+      <SageStoneMark className="h-10 w-10 shrink-0 sm:h-12 sm:w-12" />
+      <span aria-hidden="true" className="h-11 w-px shrink-0 sm:h-14" style={{ backgroundColor: dividerColor }} />
+      <span className="flex min-w-0 flex-col leading-none">
+        <span
+          className="whitespace-nowrap text-[1.45rem] tracking-[-0.04em] sm:text-[1.9rem]"
+          style={{
+            fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+            fontWeight: 300,
+          }}
+        >
+          <span style={{ color: sageColor, fontWeight: 400 }}>Sage</span>
+          <span style={{ color: stoneColor }}>Stone</span>
+          <span style={{ color: incColor, marginLeft: "0.35rem" }}>Inc</span>
+        </span>
+        <span
+          className="mt-1 hidden whitespace-nowrap text-[0.42rem] font-bold uppercase tracking-[0.26em] sm:block"
+          style={{ color: taglineColor }}
+        >
+          Virtual Assistants · Customer Support · Business Operations
+        </span>
       </span>
     </span>
   );
