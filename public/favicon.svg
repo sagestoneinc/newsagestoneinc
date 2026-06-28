@@ -1,17 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 160 160" fill="none">
   <defs>
-    <linearGradient id="green" x1="22" y1="24" x2="101" y2="127" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#9AA081"/>
-      <stop offset="1" stop-color="#6F765C"/>
+    <linearGradient id="leaf" x1="41" y1="12" x2="120" y2="137" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A7B889"/>
+      <stop offset="0.55" stop-color="#789462"/>
+      <stop offset="1" stop-color="#4E6547"/>
     </linearGradient>
-    <linearGradient id="stone" x1="104" y1="42" x2="60" y2="139" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D9D0C4"/>
-      <stop offset="1" stop-color="#AFA599"/>
+    <linearGradient id="leafDark" x1="55" y1="72" x2="116" y2="139" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5E754E"/>
+      <stop offset="1" stop-color="#334433"/>
     </linearGradient>
+    <linearGradient id="stoneDark" x1="35" y1="74" x2="94" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#515A5A"/>
+      <stop offset="1" stop-color="#252D2F"/>
+    </linearGradient>
+    <linearGradient id="stoneLight" x1="38" y1="126" x2="108" y2="145" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C8C5BD"/>
+      <stop offset="1" stop-color="#9B998F"/>
+    </linearGradient>
+    <filter id="softShadow" x="14" y="7" width="132" height="146" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1D2323" flood-opacity="0.18"/>
+    </filter>
   </defs>
-  <rect width="160" height="160" rx="32" fill="#F5EFE7"/>
-  <path d="M29.5 128V67.7C29.5 57 34.4 46.8 42.7 40L80 9.5L128.5 43.6L116.7 58.5L80.8 33.5L55.2 54.8C49.9 59.2 46.9 65.8 46.9 72.7V128C39.8 126 34.1 126 29.5 128Z" fill="url(#green)"/>
-  <path d="M49.4 121.3C53.2 90.9 70.9 62.4 102.1 42.7V84.3C95.4 106.4 75.7 122.4 49.4 137.2V121.3Z" fill="url(#green)"/>
-  <path d="M47.8 121.4C57.8 94.4 74 72.4 96.4 55.4" stroke="#F8F5EF" stroke-width="6.5" stroke-linecap="round"/>
-  <path d="M108.2 47.7L133.2 62.9V93.6L106.8 76.4L92.8 85.5L133.5 111.7V131.3L83 150.5L48.6 130L65.7 118.3L84.8 129.8L113.9 118.6L73.5 92.3V72.6L108.2 47.7Z" fill="url(#stone)" stroke="#948C82" stroke-opacity="0.25" stroke-width="2"/>
+  <rect x="4" y="4" width="152" height="152" rx="34" fill="#F8F7F2"/>
+  <g filter="url(#softShadow)">
+    <path d="M121.8 23.5C102.4 13.4 77.9 13.8 60.2 27.8C48.3 37.2 42.4 51.4 45.7 65.4C49 79.5 60.4 88.7 75.5 96.8C91.4 105.3 103.1 113.5 104.9 126.7C106.5 138.3 98.7 145.8 86.8 148.7C108.6 147.4 124.3 134.7 124.7 117.7C125.1 99.5 109.3 88 88.6 77.8C72.5 69.9 62.9 62.3 61.4 50.8C59.5 36.7 70.7 26.2 87.6 22.9C100.9 20.3 113.5 21.5 121.8 23.5Z" fill="url(#leaf)"/>
+    <path d="M37 19.7C28.3 37.2 26.2 58.5 34.6 77.1C41.9 93.3 56.7 104.8 75.9 111.7C89.6 116.7 100.1 121.7 104.8 130.5C102.8 121.7 96.7 115.2 86.9 109.2C74.7 101.8 59.2 96.7 49.4 85.8C32.4 66.9 30.8 42.2 37 19.7Z" fill="url(#leafDark)" opacity="0.95"/>
+    <path d="M55.8 35.7C45.3 52.2 45.5 70.4 57.9 84.5C67.5 95.4 82.9 102.2 97.3 109.3" stroke="#F8F7F2" stroke-width="7" stroke-linecap="round" opacity="0.95"/>
+    <path d="M111.3 72.4C107.6 82.7 108.1 93.1 112.7 100.8C123.4 94.7 129.1 85 127.8 73.4C120.8 75.5 115.1 75.1 111.3 72.4Z" fill="url(#leaf)"/>
+    <path d="M125.8 102.3C119.2 109.7 116.6 118.8 119 126.8C129.5 124 136.6 117.2 138.3 107.1C132.1 107.4 127.7 105.8 125.8 102.3Z" fill="url(#leaf)"/>
+    <path d="M108.5 137.7C113.2 112.4 120.2 94.8 131.6 82.1" stroke="#637B55" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="51" cy="92" rx="31" ry="12" fill="url(#stoneDark)"/>
+    <ellipse cx="61" cy="118" rx="45" ry="15" fill="url(#stoneDark)"/>
+    <ellipse cx="70" cy="143" rx="49" ry="12" fill="url(#stoneLight)"/>
+  </g>
 </svg>
