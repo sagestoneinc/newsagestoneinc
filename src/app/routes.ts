@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement, lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router";
 import { Layout } from "./components/Layout";
 import Home from "./pages/Home";
@@ -21,6 +21,9 @@ import VirtualAssistantVsInHouseAdmin from "./pages/VirtualAssistantVsInHouseAdm
 import OutsourcedSupportForSmallBusinesses from "./pages/OutsourcedSupportForSmallBusinesses";
 import IndustriesWeServe from "./pages/IndustriesWeServe";
 import WorkflowAssessment from "./pages/WorkflowAssessment";
+import { canonicalRoutes } from "./data/site";
+const JeselSeoPage = lazy(() => import("./pages/JeselSeoPage"));
+const LazyJeselSeoPage = () => createElement(Suspense, { fallback: createElement("div", { className: "min-h-screen" }) }, createElement(JeselSeoPage));
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +32,9 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "about", Component: About },
+      { path: "expertise", element: createElement(Navigate, { to: "/services", replace: true }) },
+      { path: "work/:slug", element: createElement(Navigate, { to: "/case-studies/:slug", replace: true }) },
+      ...canonicalRoutes.filter((route) => route.path !== "/" && !["/about", "/contact", "/blog", "/case-studies"].includes(route.path)).map((route) => ({ path: route.path.slice(1), Component: LazyJeselSeoPage })),
       // { path: "team", Component: Team }, // Temporarily disabled
       { path: "why-sagestone", Component: WhySageStone },
       { path: "solutions", Component: Solutions },
@@ -56,6 +62,7 @@ export const router = createBrowserRouter([
       { path: "outsourced-support-for-small-businesses", Component: OutsourcedSupportForSmallBusinesses },
       { path: "industries-we-serve", Component: IndustriesWeServe },
       { path: "faqs", Component: Faqs },
+      { path: "faq", Component: LazyJeselSeoPage },
       { path: "blog", Component: Blog },
       { path: "blog/:id", Component: BlogPost },
       { path: "case-studies", Component: CaseStudies },

@@ -1,0 +1,35 @@
+export const SITE_URL = "https://www.jeselcura.me";
+export const SITE_NAME = "Jesel Cura";
+export const HOMEPAGE_TITLE = "Fractional Customer Success Manager for SaaS & Shopify | Jesel Cura";
+export const HOMEPAGE_DESCRIPTION = "Fractional customer success manager and operations consultant helping SaaS, Shopify, and service-based teams improve onboarding, support workflows, CRM systems, SOPs, retention, and customer operations.";
+export const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
+
+export type CanonicalRoute = { path: string; title: string; description: string; kind?: "page"|"service"|"blog"|"case-study" };
+export const canonicalRoutes: CanonicalRoute[] = [
+  { path: "/", title: HOMEPAGE_TITLE, description: HOMEPAGE_DESCRIPTION, kind: "page" },
+  { path: "/services", title: "Customer Success Operations Services | Jesel Cura", description: "Services for SaaS, Shopify, and service teams that need clearer onboarding, support workflows, CRM hygiene, SOPs, retention systems, and customer operations.", kind: "page" },
+  { path: "/about", title: "About Jesel Cura | Customer Success Operations Consultant", description: "Learn about Jesel Cura, a fractional customer success manager and operations consultant helping teams improve customer workflows and retention.", kind: "page" },
+  { path: "/experience", title: "Experience | Jesel Cura", description: "Explore Jesel Cura's customer success, support operations, onboarding, SOP, CRM, SaaS, and Shopify operations experience.", kind: "page" },
+  { path: "/faq", title: "FAQ | Jesel Cura", description: "Answers to common questions about customer success operations consulting, fractional customer success support, onboarding cleanup, and operations audits.", kind: "page" },
+  { path: "/contact", title: "Contact Jesel Cura | Customer Success Operations Consultant", description: "Contact Jesel Cura to discuss customer success operations, onboarding, support workflows, Shopify operations, retention, SOPs, or an operations audit.", kind: "page" },
+  { path: "/case-studies", title: "Customer Operations Case Studies | Jesel Cura", description: "Case studies showing how customer onboarding, support operations, SOPs, and workflows can be improved for SaaS and Shopify teams.", kind: "page" },
+  { path: "/operations-audit", title: "Operations Audit for Customer Success & Support | Jesel Cura", description: "A focused operations audit for SaaS, Shopify, and service teams that need clearer onboarding, support workflows, CRM systems, SOPs, and retention opportunities.", kind: "service" },
+  { path: "/blog", title: "Customer Success Operations Blog | Jesel Cura", description: "Practical articles on SaaS onboarding, Shopify support workflows, customer operations, SOPs, CRM cleanup, retention, and support operations.", kind: "page" },
+  { path: "/fractional-customer-success-consultant", title: "Fractional Customer Success Consultant | Jesel Cura", description: "Fractional customer success consulting for teams that need better onboarding, customer health visibility, renewal workflows, retention systems, and account operations.", kind: "service" },
+  { path: "/customer-success-operations-consultant", title: "Customer Success Operations Consultant | Jesel Cura", description: "Customer success operations consulting to improve lifecycle workflows, CRM hygiene, reporting, SOPs, handoffs, onboarding, support, and retention systems.", kind: "service" },
+  { path: "/shopify-ecommerce-operations-support", title: "Shopify Ecommerce Operations Support | Jesel Cura", description: "Shopify ecommerce operations support for order workflows, support queues, SOPs, customer communication, returns, product operations, and team coordination.", kind: "service" },
+  { path: "/customer-onboarding-consultant", title: "Customer Onboarding Consultant | Jesel Cura", description: "Customer onboarding consulting for SaaS and service teams that need cleaner kickoff, implementation, handoff, education, and adoption workflows.", kind: "service" },
+  { path: "/customer-onboarding-workflow-cleanup", title: "Customer Onboarding Workflow Cleanup | Jesel Cura", description: "Cleanup support for customer onboarding workflows, handoffs, checklists, templates, CRM steps, and implementation visibility.", kind: "service" },
+  { path: "/support-operations-consultant", title: "Support Operations Consultant | Jesel Cura", description: "Support operations consulting for teams that need better ticket triage, macros, escalation paths, knowledge base processes, QA, and reporting.", kind: "service" },
+  { path: "/support-sops-crm-workflow-improvements", title: "Support SOPs & CRM Workflow Improvements | Jesel Cura", description: "Improve support SOPs, CRM workflows, documentation, customer communication, escalation paths, and recurring operational routines.", kind: "service" },
+  { path: "/sop-consultant", title: "SOP Consultant for Customer Operations | Jesel Cura", description: "SOP consulting for customer success, support, onboarding, Shopify operations, CRM maintenance, and recurring customer workflows.", kind: "service" },
+  { path: "/customer-retention-consultant", title: "Customer Retention Consultant | Jesel Cura", description: "Customer retention consulting to improve lifecycle moments, renewal readiness, health signals, customer communication, and post-onboarding workflows.", kind: "service" },
+  { path: "/shopify-operations-support", title: "Shopify Operations Support | Jesel Cura", description: "Shopify operations support for customer service workflows, order follow-up, returns, product updates, SOPs, and recurring store operations.", kind: "service" },
+  { path: "/blog/improve-saas-customer-onboarding", title: "How to Improve SaaS Customer Onboarding | Jesel Cura", description: "A practical guide to improving SaaS customer onboarding with clearer milestones, handoffs, customer education, CRM visibility, and adoption workflows.", kind: "blog" },
+  { path: "/blog/shopify-customer-support-workflow-checklist", title: "Shopify Customer Support Workflow Checklist | Jesel Cura", description: "A Shopify support workflow checklist for customer inquiries, order questions, returns, macros, escalation rules, and recurring support improvements.", kind: "blog" },
+  { path: "/case-studies/saas-onboarding-workflow-case-study", title: "SaaS Onboarding Workflow Case Study | Jesel Cura", description: "A case study showing how a SaaS onboarding workflow can be clarified with better handoffs, milestones, SOPs, and customer success visibility.", kind: "case-study" },
+  { path: "/case-studies/shopify-support-operations-case-study", title: "Shopify Support Operations Case Study | Jesel Cura", description: "A case study showing how Shopify support operations can be improved with clearer queues, SOPs, templates, and escalation workflows.", kind: "case-study" },
+];
+
+export function canonicalUrl(path: string) { return path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path.replace(/\/$/, "")}/`; }
+export function routeByPath(path: string) { return canonicalRoutes.find((route) => route.path === (path === "/" ? "/" : path.replace(/\/$/, ""))); }
