@@ -1,0 +1,32 @@
+# Jesel Cura
+
+Jesel Cura is a fractional customer success manager and operations consultant for SaaS, Shopify, and service-based teams that need clearer onboarding, support workflows, CRM systems, SOPs, retention, and customer operations.
+
+## Key URLs
+
+- https://www.jeselcura.me/
+  - Overview of Jesel Cura's fractional customer success and operations consulting services.
+- https://www.jeselcura.me/services/
+  - Service overview for customer success operations, Shopify operations, onboarding, support, SOP, retention, and audit work.
+- https://www.jeselcura.me/fractional-customer-success-consultant/
+  - Fractional CS support for onboarding, account operations, retention workflows, and customer health visibility.
+- https://www.jeselcura.me/customer-success-operations-consultant/
+  - Customer success operations consulting for CRM hygiene, reporting, lifecycle workflows, and SOPs.
+- https://www.jeselcura.me/shopify-ecommerce-operations-support/
+  - Shopify ecommerce operations support for customer inquiries, returns, order workflows, SOPs, and support queues.
+- https://www.jeselcura.me/operations-audit/
+  - Operations audit for teams that need to identify workflow gaps and prioritize customer operations improvements.
+- https://www.jeselcura.me/customer-onboarding-consultant/
+  - Customer onboarding consulting for implementation, handoffs, milestones, and adoption workflows.
+- https://www.jeselcura.me/support-operations-consultant/
+  - Support operations consulting for triage, macros, escalations, QA, knowledge base processes, and reporting.
+- https://www.jeselcura.me/sop-consultant/
+  - SOP consulting for customer success, support, onboarding, Shopify, CRM, and recurring workflows.
+- https://www.jeselcura.me/customer-retention-consultant/
+  - Retention consulting for lifecycle moments, renewal readiness, customer health signals, and post-onboarding routines.
+- https://www.jeselcura.me/blog/improve-saas-customer-onboarding/
+  - Practical guide to improving SaaS onboarding workflows.
+- https://www.jeselcura.me/blog/shopify-customer-support-workflow-checklist/
+  - Checklist for Shopify customer support workflows and escalation rules.
+- https://www.jeselcura.me/contact/
+  - Contact page for consulting inquiries.

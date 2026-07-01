@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router";
+import { SITE_NAME, SITE_URL as SITE_BASE_URL, OG_IMAGE } from "../data/site";
 
 interface PageMetaOptions {
   title: string;
@@ -11,8 +12,6 @@ interface PageMetaOptions {
   noindex?: boolean;
 }
 
-const SITE_NAME = "SageStone Inc";
-const SITE_BASE_URL = "https://www.sagestoneinc.com";
 
 function ensureMeta(selector: string, attrs: Record<string, string>) {
   let element = document.querySelector(selector) as HTMLMetaElement | null;
@@ -82,12 +81,6 @@ export function usePageMeta({
     ensureMeta('meta[property="og:title"]', { property: "og:title" }).setAttribute("content", pageTitle);
     ensureMeta('meta[property="og:description"]', { property: "og:description" }).setAttribute("content", description);
     ensureMeta('meta[property="og:site_name"]', { property: "og:site_name" }).setAttribute("content", SITE_NAME);
-    const existingOgImage = document.querySelector('meta[property="og:image"]');
-    const existingOgImageAlt = document.querySelector('meta[property="og:image:alt"]');
-    const existingOgImageWidth = document.querySelector('meta[property="og:image:width"]');
-    const existingOgImageHeight = document.querySelector('meta[property="og:image:height"]');
-    const existingTwitterImage = document.querySelector('meta[name="twitter:image"]');
-    const existingTwitterImageAlt = document.querySelector('meta[name="twitter:image:alt"]');
 
     if (image) {
       ensureMeta('meta[property="og:image"]', { property: "og:image" }).setAttribute("content", image);
@@ -99,12 +92,12 @@ export function usePageMeta({
         ensureMeta('meta[name="twitter:image:alt"]', { name: "twitter:image:alt" }).setAttribute("content", imageAlt);
       }
     } else {
-      existingOgImage?.remove();
-      existingOgImageAlt?.remove();
-      existingOgImageWidth?.remove();
-      existingOgImageHeight?.remove();
-      existingTwitterImage?.remove();
-      existingTwitterImageAlt?.remove();
+      ensureMeta('meta[property="og:image"]', { property: "og:image" }).setAttribute("content", OG_IMAGE);
+      ensureMeta('meta[property="og:image:width"]', { property: "og:image:width" }).setAttribute("content", "1200");
+      ensureMeta('meta[property="og:image:height"]', { property: "og:image:height" }).setAttribute("content", "630");
+      ensureMeta('meta[name="twitter:image"]', { name: "twitter:image" }).setAttribute("content", OG_IMAGE);
+      ensureMeta('meta[property="og:image:alt"]', { property: "og:image:alt" }).setAttribute("content", `${SITE_NAME} social preview`);
+      ensureMeta('meta[name="twitter:image:alt"]', { name: "twitter:image:alt" }).setAttribute("content", `${SITE_NAME} social preview`);
     }
 
     ensureLink('link[rel="icon"]', { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" });

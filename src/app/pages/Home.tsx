@@ -28,9 +28,9 @@ import {
 import { usePageMeta } from "../hooks/usePageMeta";
 import { trackCtaClick } from "../lib/analytics";
 
-const SITE_URL = "https://www.sagestoneinc.com";
+const SITE_URL = "https://www.jeselcura.me";
 const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
-const OG_IMAGE = `${SITE_URL}/logo-full-light.svg`;
+const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
 
 const ecosystem = ["Google Workspace", "Microsoft", "Slack", "ClickUp", "Asana", "HubSpot", "Yardi", "AppFolio", "QuickBooks", "Teams"];
 const workflowNodes = ["Executive Support", "Recruitment", "Property Management", "Marketing", "Customer Support", "Reporting", "Calendar", "CRM", "Operations"];
@@ -120,13 +120,13 @@ function FaqSection() {
 }
 
 export default function Home() {
-  usePageMeta({ title: "Virtual Assistant Services & Operations Support | SageStone Inc", description: "SageStone Inc provides virtual assistant services, customer support outsourcing, e-commerce support, and business operations help for growing companies.", keywords: "virtual assistant services, customer support outsourcing, ecommerce virtual assistant, real estate virtual assistant, business operations support, social media virtual assistant, web maintenance support", image: OG_IMAGE, imageAlt: "SageStone Inc logo" });
+  usePageMeta({ title: "Fractional Customer Success Manager for SaaS & Shopify | Jesel Cura", description: "Fractional customer success manager and operations consultant helping SaaS, Shopify, and service-based teams improve onboarding, support workflows, CRM systems, SOPs, retention, and customer operations.", keywords: "fractional customer success manager, customer success operations consultant, Shopify operations support, SaaS onboarding consultant, SOP consultant", image: OG_IMAGE, imageAlt: "Jesel Cura social preview" });
 
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.id = "home-organization-jsonld";
-    script.text = JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "SageStone Inc", url: SITE_URL, logo: OG_IMAGE, email: "hello@sagestoneinc.com", telephone: "+1-214-945-2234", address: { "@type": "PostalAddress", addressLocality: "Newark", addressRegion: "DE", addressCountry: "US" }, areaServed: "Worldwide", description: "Virtual Assistant & Business Operations Support for growing businesses, startups, agencies, real estate teams, and e-commerce brands.", sameAs: ["https://www.linkedin.com/company/sagestoneinc", "https://www.instagram.com/sagestoneinc", "https://clutch.co/profile/sagestone-inc", "https://www.goodfirms.co/company/sagestone-inc"] });
+    script.text = JSON.stringify({ "@context": "https://schema.org", "@type": "Person", name: "Jesel Cura", url: SITE_URL, image: OG_IMAGE, areaServed: "Worldwide", description: "Fractional customer success manager and operations consultant helping SaaS, Shopify, and service-based teams improve onboarding, support workflows, CRM systems, SOPs, retention, and customer operations.", sameAs: [] });
     document.head.appendChild(script);
     return () => document.getElementById("home-organization-jsonld")?.remove();
   }, []);

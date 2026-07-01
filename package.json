@@ -4,11 +4,12 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "npm run generate:og && vite build && node scripts/prerender-seo.mjs",
     "deploy": "npm run build && node -e \"if (process.env.CF_PAGES === '1') { console.log('Skipping Wrangler deploy: already running inside Cloudflare Pages build environment'); process.exit(0); } const missing = []; if (!process.env.CLOUDFLARE_API_TOKEN) missing.push('CLOUDFLARE_API_TOKEN'); if (!process.env.CLOUDFLARE_ACCOUNT_ID) missing.push('CLOUDFLARE_ACCOUNT_ID'); if (missing.length === 0) { require('child_process').execSync('npx wrangler pages deploy dist', { stdio: 'inherit' }); } else { console.log('Skipping Wrangler deploy: ' + missing.join(', ') + ' not set'); }\"",
     "start": "node server.js",
     "dev": "vite",
-    "postinstall": "node scripts/setup-run.cjs"
+    "postinstall": "node scripts/setup-run.cjs",
+    "generate:og": "node scripts/generate-og-image.mjs"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
