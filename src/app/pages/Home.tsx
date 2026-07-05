@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router";
 import {
   ArrowRight,
+  Blocks,
   BookOpen,
   CalendarDays,
   Check,
@@ -12,10 +13,12 @@ import {
   MailCheck,
   Megaphone,
   MessageSquareText,
+  PanelsTopLeft,
   ShieldCheck,
   Sparkles,
   Target,
   UsersRound,
+  Workflow,
 } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { trackCtaClick } from "../lib/analytics";
@@ -24,7 +27,18 @@ import { HOMEPAGE_DESCRIPTION, HOMEPAGE_TITLE, OG_IMAGE, SITE_NAME, SITE_URL } f
 const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
 const HERO_IMAGE = "/assets/operations-hero.webp";
 
-const tools = ["Google Workspace", "Microsoft", "Slack", "ClickUp", "Asana", "HubSpot", "Yardi", "AppFolio", "QuickBooks", "Teams"];
+const tools = [
+  { name: "Google Workspace", icon: FileText },
+  { name: "Microsoft", icon: PanelsTopLeft },
+  { name: "Slack", icon: MessageSquareText },
+  { name: "ClickUp", icon: Check },
+  { name: "Asana", icon: Target },
+  { name: "HubSpot", icon: Workflow },
+  { name: "Yardi", icon: HomeIcon },
+  { name: "AppFolio", icon: Blocks },
+  { name: "QuickBooks", icon: ClipboardCheck },
+  { name: "Teams", icon: UsersRound },
+];
 
 const solutions = [
   {
@@ -272,21 +286,37 @@ function Hero() {
 }
 
 function ToolStrip() {
+  const renderTool = (tool: (typeof tools)[number]) => {
+    const Icon = tool.icon;
+
+    return (
+      <li key={tool.name} className="tool-logo-item">
+        <span className="tool-logo-mark" aria-hidden="true">
+          <Icon className="h-4 w-4" strokeWidth={1.8} />
+        </span>
+        <span className="tool-logo-label">{tool.name}</span>
+      </li>
+    );
+  };
+
   return (
-    <section aria-labelledby="tools-heading" className="border-y border-[color:var(--border)] bg-[color:var(--brand-cloud)]/86 py-8" data-reveal="section">
-      <div className="mx-auto grid max-w-[1440px] gap-5 px-4 sm:px-6 lg:grid-cols-[0.32fr_0.68fr] lg:px-8">
+    <section aria-labelledby="tools-heading" className="border-y border-[color:var(--border)] bg-[color:var(--brand-cloud)]/86 py-7 sm:py-8" data-reveal="section">
+      <div className="mx-auto grid max-w-[1440px] gap-6 px-4 sm:px-6 lg:grid-cols-[0.34fr_0.66fr] lg:items-center lg:px-8">
         <div>
           <h2 id="tools-heading" className="text-xl font-semibold text-[color:var(--brand-charcoal)]">
             Works inside familiar systems
           </h2>
           <p className="mt-2 max-w-sm text-[0.96rem] leading-7 text-black/62">Your tools stay in place. We bring structure to the work happening inside them.</p>
         </div>
-        <div className="flex flex-wrap gap-3 lg:justify-end">
-          {tools.map((tool) => (
-            <span key={tool} className="tool-chip rounded-full border border-[color:var(--border)] bg-white/72 px-4 py-2.5 text-[0.95rem] font-semibold leading-none text-[color:var(--brand-charcoal)]/76 shadow-[0_8px_24px_rgba(23,28,24,0.04)]">
-              {tool}
-            </span>
-          ))}
+        <div className="tool-logo-rail" aria-label="Common tools SageStone can work inside">
+          <div className="tool-logo-motion">
+            <ul className="tool-logo-group" role="list">
+              {tools.map(renderTool)}
+            </ul>
+            <ul className="tool-logo-group" aria-hidden="true" role="list">
+              {tools.map(renderTool)}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
