@@ -51,7 +51,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "Operational improvements",
-        body: "The engagement created a more organized support workflow, clearer ownership for routine tickets, better visibility into recurring customer questions, and a practical cadence for reporting issues back to the internal team. These improvements are described qualitatively to avoid inventing results or implying guaranteed outcomes.",
+        body: "The engagement created a more organized support workflow, clearer ownership for routine tickets, better visibility into recurring customer questions, and a practical cadence for reporting issues back to the internal team. These improvements are described qualitatively to avoid inventing results or implying outcomes that have not been documented.",
       },
       {
         heading: "Lessons for e-commerce teams",

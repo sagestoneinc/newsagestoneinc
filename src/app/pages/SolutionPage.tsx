@@ -108,7 +108,7 @@ const solutionCoreData: Record<string, SolutionCoreData> = {
     ],
     outcomes: [
       "Consistent brand presence across all platforms",
-      "2–5x increase in engagement rates",
+      "Clearer engagement tracking",
       "Data-driven content strategy",
     ],
     image:
@@ -164,7 +164,7 @@ const solutionCoreData: Record<string, SolutionCoreData> = {
       "Spreadsheet creation & formatting",
     ],
     outcomes: [
-      "99.9% data accuracy guarantee",
+      "Documented quality checks",
       "Actionable market intelligence",
       "Clean, organized databases",
     ],
@@ -405,7 +405,7 @@ export default function SolutionPage() {
             </h2>
             <p className="text-stone-500 text-[1.0625rem] leading-relaxed mb-8">
               That's completely okay. Book a free discovery call and we'll help
-              you identify the right support for your business—no pressure, no
+              you identify the right support for your business, with no pressure and no
               commitment.
             </p>
             <Link

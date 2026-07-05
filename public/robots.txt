@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /team
 
-Sitemap: https://www.jeselcura.me/sitemap.xml
+Sitemap: https://www.sagestoneinc.com/sitemap.xml

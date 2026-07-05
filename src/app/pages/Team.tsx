@@ -123,7 +123,7 @@ export default function Team() {
           <SectionHeading
             badge="Quality Assurance"
             title="How We Maintain Excellence"
-            subtitle="Quality isn't an afterthought—it's embedded in every step of our process."
+            subtitle="Quality isn't an afterthought. It's embedded in every step of our process."
           />
           <div className="grid sm:grid-cols-2 gap-6">
             {qualityPoints.map((qp) => (

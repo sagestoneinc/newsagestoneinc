@@ -2,158 +2,567 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router";
 import {
   ArrowRight,
-  BarChart3,
   BookOpen,
-  BriefcaseBusiness,
-  Building2,
   CalendarDays,
   Check,
   ChevronDown,
   ClipboardCheck,
   FileText,
-  HeartPulse,
   HomeIcon,
-  Landmark,
   MailCheck,
   Megaphone,
   MessageSquareText,
-  Network,
-  Scale,
   ShieldCheck,
   Sparkles,
   Target,
   UsersRound,
-  Zap,
 } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { trackCtaClick } from "../lib/analytics";
+import { HOMEPAGE_DESCRIPTION, HOMEPAGE_TITLE, OG_IMAGE, SITE_NAME, SITE_URL } from "../data/site";
 
-const SITE_URL = "https://www.jeselcura.me";
 const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
-const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
+const HERO_IMAGE = "/assets/operations-hero.webp";
 
-const ecosystem = ["Google Workspace", "Microsoft", "Slack", "ClickUp", "Asana", "HubSpot", "Yardi", "AppFolio", "QuickBooks", "Teams"];
-const workflowNodes = ["Executive Support", "Recruitment", "Property Management", "Marketing", "Customer Support", "Reporting", "Calendar", "CRM", "Operations"];
-
-const problemCards = [
-  { title: "Capacity disappears into coordination.", description: "Leaders spend their best hours approving, reminding, chasing, scheduling, and repairing workflows instead of moving the business forward." },
-  { title: "Internal hiring is slower than growth.", description: "Recruiting, training, payroll, benefits, and management overhead make every new operations role a long-term commitment." },
-  { title: "Freelancers create inconsistent execution.", description: "Fragmented handoffs and undocumented context make quality dependent on the person instead of the operating system." },
-  { title: "Systems take years to mature.", description: "SOPs, reporting, tool hygiene, and accountability rhythms rarely get built while the team is already at capacity." },
-];
+const tools = ["Google Workspace", "Microsoft", "Slack", "ClickUp", "Asana", "HubSpot", "Yardi", "AppFolio", "QuickBooks", "Teams"];
 
 const solutions = [
-  { icon: CalendarDays, title: "Executive Support", path: "/virtual-assistant-services", description: "Calendar, inbox, travel, research, briefing notes, and proactive founder support." },
-  { icon: HomeIcon, title: "Real Estate Virtual Assistant Services", path: "/real-estate-virtual-assistant", description: "CRM updates, listing coordination, transaction tasks, client follow-up, and agent admin support." },
-  { icon: Megaphone, title: "Social Media Virtual Assistant", path: "/social-media-virtual-assistant", description: "Content calendars, approved post scheduling, engagement tracking, asset organization, and reporting support." },
-  { icon: UsersRound, title: "Business Operations Support", path: "/business-operations-support", description: "SOPs, CRM hygiene, reporting, meeting notes, trackers, project coordination, and back-office follow-through." },
-  { icon: FileText, title: "Web Maintenance Support", path: "/web-maintenance-support", description: "Website content updates, landing page edits, form checks, link reviews, QA, and publishing coordination." },
-  { icon: MessageSquareText, title: "Customer Support Outsourcing", path: "/customer-support-outsourcing", description: "Email, chat, ticket triage, scripted responses, escalation paths, and customer follow-through." },
-  { icon: Target, title: "E-Commerce Virtual Assistant Services", path: "/ecommerce-virtual-assistant", description: "Shopify support, orders, returns, product updates, customer inboxes, and store operations tasks." },
-  { icon: ClipboardCheck, title: "Virtual Assistant Services", path: "/virtual-assistant-services", description: "Inbox, calendar, admin, research, CRM updates, reporting, documentation, and recurring coordination." },
+  {
+    icon: CalendarDays,
+    title: "Executive Support",
+    path: "/virtual-assistant-services",
+    description: "Inbox management, calendar coordination, travel planning, briefing notes, and remote admin support for founders who need fewer daily interruptions.",
+  },
+  {
+    icon: MessageSquareText,
+    title: "Customer Support Outsourcing",
+    path: "/customer-support-outsourcing",
+    description: "Customer service virtual assistant support for inboxes, helpdesk queues, approved responses, escalation paths, and more consistent customer follow-up.",
+  },
+  {
+    icon: Target,
+    title: "E-Commerce Virtual Assistant Services",
+    path: "/ecommerce-virtual-assistant",
+    description: "Ecommerce support services for orders, returns, product updates, customer messages, store admin, and the back-office tasks that slow growth.",
+  },
+  {
+    icon: HomeIcon,
+    title: "Real Estate Virtual Assistant Services",
+    path: "/real-estate-virtual-assistant",
+    description: "CRM organization, listing coordination, transaction admin, client follow-up, and operational support for agents and real estate teams.",
+  },
+  {
+    icon: UsersRound,
+    title: "Business Operations Support",
+    path: "/business-operations-support",
+    description: "Business operations support for SOPs, CRM hygiene, reporting, meeting notes, project trackers, and recurring back-office follow-through.",
+  },
+  {
+    icon: Megaphone,
+    title: "Social Media Virtual Assistant",
+    path: "/social-media-virtual-assistant",
+    description: "Structured marketing support for content calendars, approved scheduling, asset organization, engagement tracking, and simple reporting.",
+  },
+  {
+    icon: FileText,
+    title: "Web Maintenance Support",
+    path: "/web-maintenance-support",
+    description: "Website update support for content edits, landing page changes, form checks, link reviews, QA, and publishing coordination.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Virtual Assistant Services",
+    path: "/virtual-assistant-services",
+    description: "Flexible virtual assistant support for admin work, research, documentation, CRM updates, reporting, and recurring coordination.",
+  },
 ];
 
 const industries = [
-  { icon: HomeIcon, title: "Virtual Assistant Services for Real Estate Agents", path: "/real-estate-virtual-assistant", text: "CRM updates, lead follow-up, listings, transaction tasks, and client communication support." },
-  { icon: BarChart3, title: "Virtual Assistant Services for E-Commerce Brands", path: "/ecommerce-virtual-assistant", text: "Orders, returns, product data, customer tickets, vendor coordination, and store operations reporting." },
-  { icon: Sparkles, title: "Virtual Assistant Services for Agencies", path: "/virtual-assistant-services", text: "Client operations, production tracking, reporting, inbox support, and campaign administration." },
-  { icon: Zap, title: "Virtual Assistant Services for Startups", path: "/business-operations-support", text: "Founder leverage, customer operations, documentation, CRM hygiene, and weekly metrics support." },
+  { title: "Real estate teams", path: "/real-estate-virtual-assistant", text: "Listing coordination, CRM cleanup, client communication, transaction admin, and follow-up routines that keep deals moving." },
+  { title: "E-commerce brands", path: "/ecommerce-virtual-assistant", text: "Order support, returns, product updates, customer tickets, vendor notes, and store operations reporting." },
+  { title: "Agencies", path: "/virtual-assistant-services", text: "Client operations, production tracking, reporting, inbox support, and campaign administration across active accounts." },
+  { title: "Startups", path: "/business-operations-support", text: "Founder support services for documentation, customer operations, CRM hygiene, weekly reporting, and internal coordination." },
+];
+
+const supportPath = [
+  {
+    title: "Map the work",
+    description: "We identify recurring admin, inbox, calendar, CRM, customer support, and back-office workflows that need clearer ownership.",
+  },
+  {
+    title: "Launch support",
+    description: "Your assistant begins with documented priorities, tool access, communication rhythms, and escalation rules that protect quality.",
+  },
+  {
+    title: "Refine the system",
+    description: "We improve SOPs, reporting, and handoffs as the work becomes more predictable and your support needs evolve.",
+  },
 ];
 
 const comparison = [
-  { metric: "Time to capacity", traditional: "6–12 weeks of recruiting and onboarding", sagestone: "Structured support can begin in days" },
-  { metric: "Cost profile", traditional: "Salary, benefits, tools, management time", sagestone: "Flexible capacity aligned to operational need" },
-  { metric: "Operational quality", traditional: "Depends on one hire and limited documentation", sagestone: "SOP-led execution, QA, and continuous improvement" },
-  { metric: "Flexibility", traditional: "Fixed role, fixed cost, fixed skill set", sagestone: "Adaptable team coverage across workflows" },
-  { metric: "Risk", traditional: "Turnover can erase context", sagestone: "Shared systems preserve process memory" },
+  { metric: "Time to capacity", traditional: "Recruiting, interviews, onboarding, and training before work begins", sagestone: "Structured support can begin after focused scope and access planning" },
+  { metric: "Cost profile", traditional: "Salary, benefits, tools, payroll, and internal management time", sagestone: "Flexible outsourced admin support aligned to current workload" },
+  { metric: "Operational quality", traditional: "Quality depends on one hire and the documentation already in place", sagestone: "SOP-led execution, review rhythms, and continuous workflow improvement" },
+  { metric: "Flexibility", traditional: "Fixed role, fixed cost, fixed skill set, and limited coverage range", sagestone: "Adaptable support across admin, customer support, CRM, and operations workflows" },
+  { metric: "Risk", traditional: "Turnover can interrupt context, coverage, and process memory", sagestone: "Shared systems help preserve context and support continuity" },
 ];
-
-const process = ["Discovery", "Planning", "Matching", "Training", "Launch", "Continuous Improvement"].map((title, index) => ({
-  title,
-  description: [
-    "We map the work, the business context, and the outcomes worth protecting.",
-    "We define priorities, success measures, communication rhythms, and operating standards.",
-    "We align dedicated support capacity to your tools, industry, and workflow complexity.",
-    "We document SOPs, access, escalation paths, QA expectations, and reporting cadence.",
-    "Your team begins with focused workflows, transparent ownership, and tight feedback loops.",
-    "We measure, refine, and improve capacity as your business evolves.",
-  ][index],
-}));
 
 const caseStudies = [
-  { metric: "38 hrs", label: "saved per month", title: "Founder regained strategic capacity", description: "Executive support, inbox triage, and recurring reporting removed low-leverage work from leadership." },
-  { metric: "42%", label: "faster responses", title: "Customer operations became predictable", description: "Ticket routing, response templates, and daily QA improved speed without compromising tone." },
-  { metric: "91%", label: "workflow completion", title: "Property admin stabilized at scale", description: "Work order tracking, vendor follow-up, and tenant communication reduced operational noise." },
+  { metric: "Focused", label: "leadership capacity", title: "Less founder context switching", description: "Inbox triage, calendar support, and recurring reporting give leaders more room for sales, strategy, and client work." },
+  { metric: "Clearer", label: "customer follow-up", title: "Cleaner response workflows", description: "Ticket routing, approved response guidance, and escalation rules help customer questions move with less confusion." },
+  { metric: "Steadier", label: "system follow-through", title: "More reliable operations", description: "CRM updates, vendor follow-up, and task tracking make back-office work easier to delegate and review." },
 ];
 
-const software = ["Yardi", "AppFolio", "QuickBooks", "HubSpot", "Salesforce", "ClickUp", "Asana", "Slack", "Teams", "Google Workspace", "Canva", "Figma"];
-const insights = ["Operations", "Business Growth", "Hiring", "Property Management", "Leadership", "AI", "Remote Teams"];
+const resourceLinks = [
+  { label: "Virtual assistant task planning", path: "/blog/virtual-assistant-tasks-to-delegate" },
+  { label: "Customer support outsourcing", path: "/blog/customer-support-outsourcing-checklist" },
+  { label: "Business operations guide", path: "/blog/business-operations-support-guide" },
+  { label: "SOPs for virtual assistants", path: "/blog/how-to-create-sops-for-virtual-assistants" },
+];
+
 const faqs = [
-  { q: "Is SageStone a virtual assistant agency?", a: "SageStone provides dedicated operational capacity. Assistants may be part of the model, but the offer is broader: documented workflows, communication cadence, quality standards, and continuous improvement." },
-  { q: "How quickly can support begin?", a: "After discovery and planning, focused workflows can often launch within days. More complex operating models may require a longer setup period to protect quality and access control." },
-  { q: "Can SageStone work inside our existing tools?", a: "Yes. SageStone is designed to work across common business systems including Google Workspace, Microsoft, Slack, Teams, HubSpot, Yardi, AppFolio, QuickBooks, Asana, and ClickUp." },
-  { q: "What makes this different from hiring internally?", a: "Internal hiring creates fixed capacity and management overhead. SageStone gives you flexible operational support, documented process, QA, and cross-functional coverage without growing payroll." },
-  { q: "Do you support enterprise clients?", a: "Yes. The operating model is built for professional handoffs, access discipline, consistent communication, and measurable outcomes for established and fast-growing teams." },
+  { q: "What does a virtual assistant service include?", a: "A virtual assistant service can include inbox management, calendar coordination, CRM updates, research, reporting, customer follow-up, documentation, and recurring administrative support." },
+  { q: "How can a virtual assistant support a growing business?", a: "A virtual assistant helps growing teams move repeatable work out of the founder's day so leadership can focus on customers, sales, strategy, and service delivery." },
+  { q: "Can SageStone help with customer support and operations?", a: "Yes. SageStone supports customer support outsourcing, business operations support, admin workflows, escalation paths, reporting, and follow-up routines." },
+  { q: "Do you help with inbox, calendar, and CRM management?", a: "Yes. SageStone can support inbox management services, calendar management services, CRM organization, contact updates, reminders, and routine follow-up." },
+  { q: "Is virtual assistant support better than hiring in-house?", a: "It depends on the workload. Virtual assistant support is often useful when you need flexible remote admin support before a full internal role makes sense." },
+  { q: "Can SageStone support ecommerce businesses?", a: "Yes. SageStone can help ecommerce teams with customer messages, order support, returns coordination, product updates, store admin, and reporting support." },
+  { q: "How does onboarding work?", a: "Onboarding starts by mapping workflows, access needs, priorities, communication preferences, approval rules, and the first tasks your assistant should own." },
+  { q: "What makes SageStone different from hiring a freelancer?", a: "SageStone pairs virtual assistant support with managed workflows, documentation, review rhythms, and continuity so support is less dependent on one informal handoff." },
 ];
 
-function CtaButton({ children, location, variant = "primary", href, className = "" }: { children: string; location: string; variant?: "primary" | "secondary"; href?: string; className?: string }) {
+function CtaButton({
+  children,
+  location,
+  variant = "primary",
+  href,
+  className = "",
+}: {
+  children: string;
+  location: string;
+  variant?: "primary" | "secondary";
+  href?: string;
+  className?: string;
+}) {
   const isSecondary = variant === "secondary";
   const target = href ?? (isSecondary ? "/#solutions" : CALENDLY_URL);
-  const classes = `group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-olive-sage)] focus-visible:ring-offset-2 ${isSecondary ? "border border-[color:var(--brand-deep-sage)]/18 bg-white/68 text-[color:var(--brand-charcoal)] hover:bg-white hover:shadow-[0_18px_40px_rgba(35,81,59,0.10)]" : "bg-[color:var(--brand-deep-sage)] text-white shadow-[0_18px_46px_rgba(35,81,59,0.22)] hover:-translate-y-0.5 hover:bg-[color:var(--brand-charcoal)]"} ${className}`;
-  const content = <>{children}<ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" /></>;
-  return target.startsWith("/") ? <Link to={target} className={classes} onClick={() => trackCtaClick({ location, cta_text: children, target_url: target })}>{content}</Link> : <a href={target} target="_blank" rel="noreferrer" className={classes} onClick={() => trackCtaClick({ location, cta_text: children, target_url: target })}>{content}</a>;
+  const classes = [
+    "group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-semibold leading-none transition duration-200",
+    "focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-olive-sage)] focus-visible:ring-offset-2",
+    "active:translate-y-px",
+    isSecondary
+      ? "border border-[color:var(--brand-deep-sage)]/20 bg-[color:var(--brand-cloud)]/82 text-[color:var(--brand-charcoal)] hover:-translate-y-0.5 hover:border-[color:var(--brand-deep-sage)]/34 hover:bg-white hover:shadow-[0_18px_40px_rgba(35,81,59,0.10)]"
+      : "bg-[color:var(--brand-deep-sage)] text-white shadow-[0_18px_46px_rgba(35,81,59,0.22)] hover:-translate-y-0.5 hover:bg-[color:var(--brand-charcoal)] hover:shadow-[0_22px_54px_rgba(35,81,59,0.26)]",
+    className,
+  ].join(" ");
+  const content = (
+    <>
+      {children}
+      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+    </>
+  );
+
+  if (target.startsWith("/")) {
+    return (
+      <Link to={target} className={classes} onClick={() => trackCtaClick({ location, cta_text: children, target_url: target })}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={target} target="_blank" rel="noreferrer" className={classes} onClick={() => trackCtaClick({ location, cta_text: children, target_url: target })}>
+      {content}
+    </a>
+  );
 }
 
-function SectionIntro({ eyebrow, title, children, dark = false }: { eyebrow: string; title: string; children?: string; dark?: boolean }) {
-  return <div className="mx-auto mb-12 max-w-3xl text-center"><p className={`mb-3 text-xs font-bold uppercase tracking-[0.24em] ${dark ? "text-[color:var(--brand-mint)]" : "text-[color:var(--brand-deep-sage)]"}`}>{eyebrow}</p><h2 className={`text-balance ${dark ? "text-white" : "text-[color:var(--brand-charcoal)]"}`} style={{ fontSize: "clamp(2.25rem, 4.6vw, 4.25rem)", fontWeight: 760, lineHeight: 0.98 }}>{title}</h2>{children && <p className={`mt-5 text-pretty text-lg leading-8 ${dark ? "text-white/68" : "text-black/64"}`}>{children}</p>}</div>;
+function useHomeMotion() {
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduceMotion.matches) return;
+
+    const root = document.documentElement;
+    root.classList.add("motion-ready");
+
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.06, rootMargin: "0px 0px -4% 0px" },
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    return () => {
+      observer.disconnect();
+      root.classList.remove("motion-ready");
+    };
+  }, []);
 }
 
-function OperationsDashboard() {
-  return <div className="premium-shell relative mx-auto max-w-2xl rounded-[2rem] p-4 lg:p-5" aria-label="Animated operations dashboard showing connected SageStone workflows"><div className="relative overflow-hidden rounded-[1.65rem] bg-[color:var(--brand-ink)] p-5 text-white"><div className="mb-5 flex items-center justify-between"><div><p className="text-xs uppercase tracking-[0.22em] text-white/45">SageStone operating layer</p><h2 className="mt-1 text-2xl font-semibold text-white">Connected capacity</h2></div><div className="rounded-full border border-white/10 bg-white/[0.07] px-3 py-1 text-xs text-white/62">Live workflows</div></div><div className="relative grid gap-3 sm:grid-cols-3"><div aria-hidden="true" className="operation-beam absolute left-1/2 top-1/2 h-px w-[78%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[color:var(--brand-mint)]/70 to-transparent" /><div aria-hidden="true" className="operation-beam operation-beam-delay absolute left-1/2 top-1/2 h-[72%] w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-[color:var(--brand-mint)]/70 to-transparent" />{workflowNodes.map((node, index) => <div key={node} className="float-card relative rounded-2xl border border-white/10 bg-white/[0.075] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur" style={{ animationDelay: `${index * 90}ms` }}><Network className="mb-3 h-4 w-4 text-[color:var(--brand-mint)]" aria-hidden="true" /><p className="text-sm font-semibold">{node}</p><p className="mt-1 text-xs text-white/45">Owned · measured</p></div>)}</div></div></div>;
+function SectionIntro({
+  label,
+  title,
+  children,
+  align = "center",
+}: {
+  label?: string;
+  title: string;
+  children?: string;
+  align?: "left" | "center";
+}) {
+  const centered = align === "center";
+  return (
+    <div className={`mb-11 max-w-3xl ${centered ? "mx-auto text-center" : ""}`}>
+      {label && <p className="mb-3 text-[0.84rem] font-semibold leading-5 text-[color:var(--brand-deep-sage)]">{label}</p>}
+      <h2 className="text-balance text-[color:var(--brand-charcoal)]" style={{ fontSize: "clamp(2rem, 4vw, 3.7rem)", fontWeight: 760, lineHeight: 1 }}>
+        {title}
+      </h2>
+      {children && <p className={`mt-5 text-pretty text-[1.08rem] leading-8 text-black/66 ${centered ? "mx-auto" : ""}`}>{children}</p>}
+    </div>
+  );
+}
+
+function Hero() {
+  return (
+    <section
+      className="relative isolate overflow-hidden"
+      style={{
+        background:
+          "radial-gradient(circle at 82% 8%, rgba(221,234,215,.74), transparent 29rem), radial-gradient(circle at 12% 38%, rgba(239,228,209,.7), transparent 24rem), linear-gradient(135deg, var(--brand-cloud), var(--brand-ivory) 64%, #eef4e9)",
+      }}
+    >
+      <div className="mx-auto grid max-w-[1440px] items-center gap-8 px-4 py-8 sm:px-6 md:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:px-8 lg:py-20">
+        <div className="max-w-3xl" data-reveal="hero-copy">
+          <p className="mb-5 inline-flex rounded-full border border-[color:var(--brand-deep-sage)]/16 bg-white/76 px-4 py-2 text-[0.9rem] font-semibold leading-none text-[color:var(--brand-deep-sage)] shadow-[0_12px_28px_rgba(35,81,59,.1)]">
+            Premium operations partner
+          </p>
+          <h1 className="text-balance text-[clamp(2.25rem,8.4vw,4rem)] font-[780] leading-[0.98] text-[color:var(--brand-charcoal)] lg:text-[clamp(3rem,3.35vw,3.35rem)]">
+            Virtual assistant services for calmer, more scalable operations
+          </h1>
+          <p className="mt-5 max-w-[560px] text-pretty text-base leading-7 text-black/68 lg:mt-6 lg:text-lg lg:leading-8">
+            SageStone helps founders and growing teams reduce operational drag with admin, customer support, inbox, calendar, CRM, and follow-up support built around your tools.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <CtaButton location="homepage_hero">Book a Free Consultation</CtaButton>
+            <CtaButton location="homepage_hero" variant="secondary">Explore Services</CtaButton>
+          </div>
+        </div>
+
+        <div className="relative max-w-[34rem] sm:max-w-none lg:pl-2" data-reveal="hero-image">
+          <div className="absolute -inset-4 rounded-[2.4rem] bg-[color:var(--brand-sage-mist)]/58 blur-2xl" aria-hidden="true" />
+          <figure className="relative overflow-hidden rounded-[2rem] border border-[color:var(--brand-deep-sage)]/14 bg-white/64 p-3 shadow-[0_30px_90px_rgba(23,28,24,0.14)]">
+            <img
+              src={HERO_IMAGE}
+              alt="Organized workspace with calendar, headset, and abstract workflow screen for SageStone operations support"
+              className="aspect-[16/8.5] w-full rounded-[1.45rem] object-cover sm:aspect-[16/10]"
+              loading="eager"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ToolStrip() {
+  return (
+    <section aria-labelledby="tools-heading" className="border-y border-[color:var(--border)] bg-[color:var(--brand-cloud)]/86 py-8" data-reveal="section">
+      <div className="mx-auto grid max-w-[1440px] gap-5 px-4 sm:px-6 lg:grid-cols-[0.32fr_0.68fr] lg:px-8">
+        <div>
+          <h2 id="tools-heading" className="text-xl font-semibold text-[color:var(--brand-charcoal)]">
+            Works inside familiar systems
+          </h2>
+          <p className="mt-2 max-w-sm text-[0.96rem] leading-7 text-black/62">Your tools stay in place. We bring structure to the work happening inside them.</p>
+        </div>
+        <div className="flex flex-wrap gap-3 lg:justify-end">
+          {tools.map((tool) => (
+            <span key={tool} className="tool-chip rounded-full border border-[color:var(--border)] bg-white/72 px-4 py-2.5 text-[0.95rem] font-semibold leading-none text-[color:var(--brand-charcoal)]/76 shadow-[0_8px_24px_rgba(23,28,24,0.04)]">
+              {tool}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServicesBento() {
+  return (
+    <section id="solutions" className="py-18 lg:py-24" style={{ background: "var(--brand-ivory)" }} data-reveal="section">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+        <SectionIntro label="Services" title="Support shaped around the work that slows teams down.">
+          Choose virtual assistant services, customer support outsourcing, and operations support by bottleneck, industry, or workflow.
+        </SectionIntro>
+        <div className="grid auto-rows-fr gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {solutions.map((solution, index) => {
+            const featured = index === 0 || index === 1;
+            return (
+              <article
+                key={solution.title}
+                data-reveal="card"
+                style={{ "--reveal-delay": `${Math.min(index, 5) * 55}ms` } as React.CSSProperties}
+                className={[
+                  "motion-card group relative overflow-hidden rounded-[1.75rem] border border-[color:var(--border)] p-6",
+                  featured ? "bg-[color:var(--brand-deep-sage)] text-white md:col-span-1 xl:col-span-2" : "bg-white/74 text-[color:var(--brand-charcoal)]",
+                  index === 4 ? "bg-[color:var(--brand-sage-mist)]/72" : "",
+                  index === 6 ? "bg-[color:var(--brand-soft-beige)]/62" : "",
+                ].join(" ")}
+              >
+                <div className={featured ? "absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[color:var(--brand-mint)]/18" : "absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[color:var(--brand-sage-mist)]/45"} aria-hidden="true" />
+                <div className={`relative mb-6 flex h-12 w-12 items-center justify-center rounded-2xl ${featured ? "bg-white/12 text-[color:var(--brand-mint)]" : "bg-[color:var(--brand-sage-mist)] text-[color:var(--brand-deep-sage)]"}`}>
+                  <solution.icon className="h-6 w-6" aria-hidden="true" />
+                </div>
+                <h3 className={`relative max-w-lg text-[1.45rem] font-semibold leading-tight ${featured ? "text-white" : "text-[color:var(--brand-charcoal)]"}`}>{solution.title}</h3>
+                <p className={`relative mt-4 max-w-xl text-[0.98rem] leading-7 ${featured ? "text-white/72" : "text-black/66"}`}>{solution.description}</p>
+                <Link to={solution.path} className={`relative mt-7 inline-flex items-center gap-2 text-[0.95rem] font-semibold ${featured ? "text-[color:var(--brand-mint)] hover:text-white" : "text-[color:var(--brand-deep-sage)] hover:text-[color:var(--brand-charcoal)]"}`}>
+                  Explore support
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OperatingPath() {
+  return (
+    <section className="py-18 lg:py-24" style={{ background: "var(--brand-cloud)" }} data-reveal="section">
+      <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
+        <SectionIntro title="A calm path from delegation to operating rhythm.">
+          SageStone turns loose tasks into owned workflows, then keeps improving the system as your needs change.
+        </SectionIntro>
+        <div className="grid gap-5 md:grid-cols-3">
+          {supportPath.map((item, index) => (
+            <article key={item.title} data-reveal="card" style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties} className="motion-card rounded-[1.75rem] border border-[color:var(--border)] bg-white/72 p-7 shadow-[0_16px_44px_rgba(23,28,24,0.05)]">
+              <ShieldCheck className="mb-6 h-8 w-8 text-[color:var(--brand-deep-sage)]" aria-hidden="true" />
+              <h3 className="text-2xl font-semibold text-[color:var(--brand-charcoal)]">{item.title}</h3>
+              <p className="mt-3 text-[0.98rem] leading-7 text-black/66">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function IndustriesAndComparison() {
+  return (
+    <section id="industries" className="py-18 lg:py-24" style={{ background: "var(--brand-ivory)" }} data-reveal="section">
+      <div className="mx-auto grid max-w-[1440px] gap-10 px-4 sm:px-6 lg:grid-cols-[0.42fr_0.58fr] lg:px-8">
+        <div>
+          <SectionIntro align="left" title="Built for teams with real operating pressure.">
+            SageStone supports founders, agencies, e-commerce brands, real estate teams, and growing businesses that need reliable follow-through.
+          </SectionIntro>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            {industries.map((industry, index) => (
+              <Link key={industry.title} to={industry.path} data-reveal="card" style={{ "--reveal-delay": `${index * 55}ms` } as React.CSSProperties} className="motion-card rounded-[1.4rem] border border-[color:var(--border)] bg-white/68 p-5">
+                <h3 className="text-lg font-semibold text-[color:var(--brand-charcoal)]">{industry.title}</h3>
+                <p className="mt-2 text-[0.96rem] leading-7 text-black/64">{industry.text}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-[2rem] border border-[color:var(--border)] bg-white/76 p-4 shadow-[0_24px_70px_rgba(23,28,24,0.08)] sm:p-6" data-reveal="card">
+          <div className="mb-4 rounded-[1.45rem] bg-[color:var(--brand-sage-mist)]/62 p-5">
+            <h3 className="text-2xl font-semibold text-[color:var(--brand-charcoal)]">Why not just hire internally?</h3>
+            <p className="mt-2 text-[0.96rem] leading-7 text-black/64">Hiring can be right later. SageStone helps when you need capacity before a full role makes sense.</p>
+          </div>
+          <div className="space-y-3">
+            {comparison.map((row) => (
+              <article key={row.metric} className="grid gap-3 rounded-[1.2rem] border border-[color:var(--border)] bg-[color:var(--brand-cloud)]/72 p-4 md:grid-cols-[0.74fr_1fr_1.08fr]">
+                <strong className="text-[0.96rem] text-[color:var(--brand-charcoal)]">{row.metric}</strong>
+                <span className="text-[0.94rem] leading-6 text-black/58">{row.traditional}</span>
+                <span className="flex gap-2 text-[0.94rem] font-semibold leading-6 text-[color:var(--brand-deep-sage)]">
+                  <Check className="mt-1 h-4 w-4 shrink-0" aria-hidden="true" />
+                  {row.sagestone}
+                </span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProofAndInsights() {
+  return (
+    <section className="py-18 lg:py-24" style={{ background: "var(--brand-cloud)" }} data-reveal="section">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-8 lg:grid-cols-[0.62fr_0.38fr]">
+          <div>
+            <SectionIntro align="left" label="Proof" title="Operational outcomes that compound.">
+              Representative outcomes from focused operations work: clearer ownership, faster response loops, and steadier executive capacity.
+            </SectionIntro>
+            <div className="grid gap-4 md:grid-cols-3">
+              {caseStudies.map((study, index) => (
+                <article key={study.title} data-reveal="card" style={{ "--reveal-delay": `${index * 65}ms` } as React.CSSProperties} className="motion-card rounded-[1.75rem] border border-[color:var(--border)] bg-white/76 p-6 shadow-[0_18px_54px_rgba(23,28,24,0.06)]">
+                  <p className="text-4xl font-semibold tracking-tight text-[color:var(--brand-deep-sage)]">{study.metric}</p>
+                  <p className="mt-1 text-[0.95rem] font-semibold text-black/50">{study.label}</p>
+                  <h3 className="mt-7 text-xl font-semibold text-[color:var(--brand-charcoal)]">{study.title}</h3>
+                  <p className="mt-3 text-[0.96rem] leading-7 text-black/64">{study.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+          <aside className="rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--brand-sage-mist)]/58 p-7" data-reveal="card">
+            <BookOpen className="mb-5 h-8 w-8 text-[color:var(--brand-deep-sage)]" aria-hidden="true" />
+            <h2 className="text-3xl font-semibold leading-tight text-[color:var(--brand-charcoal)]">Guides for calmer operations</h2>
+            <p className="mt-4 text-[0.98rem] leading-7 text-black/64">Explore practical resources for virtual assistant services, founder support, customer support outsourcing, and repeatable operations.</p>
+            <div className="mt-6 grid gap-2">
+              {resourceLinks.map((resource) => (
+                <Link key={resource.path} to={resource.path} className="group rounded-[1.1rem] border border-[color:var(--brand-deep-sage)]/14 bg-white/72 px-4 py-3 text-[0.95rem] font-semibold text-[color:var(--brand-charcoal)]/76 transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-[color:var(--brand-deep-sage)]">
+                  <span className="flex items-center justify-between gap-3">
+                    {resource.label}
+                    <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function FaqSection() {
   const [openIdx, setOpenIdx] = useState(0);
-  const schema = useMemo(() => ({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })) }), []);
-  useEffect(() => { const script = document.createElement("script"); script.type = "application/ld+json"; script.id = "home-faq-jsonld"; script.text = JSON.stringify(schema); document.head.appendChild(script); return () => document.getElementById("home-faq-jsonld")?.remove(); }, [schema]);
-  return <section id="faq" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="FAQ" title="Questions leaders ask before trusting us with operations" /><div className="mx-auto max-w-3xl space-y-3">{faqs.map((item, i) => <article key={item.q} className="overflow-hidden rounded-[22px] border border-[color:var(--border)] bg-white/72 shadow-[0_12px_34px_rgba(46,46,46,0.04)]"><button className="flex w-full items-center justify-between gap-6 p-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-olive-sage)]" onClick={() => setOpenIdx(openIdx === i ? -1 : i)} aria-expanded={openIdx === i} aria-controls={`home-faq-${i}`}><span className="font-semibold text-[color:var(--brand-charcoal)]">{item.q}</span><ChevronDown className={`h-5 w-5 shrink-0 text-[color:var(--brand-deep-sage)] transition-transform ${openIdx === i ? "rotate-180" : ""}`} aria-hidden="true" /></button>{openIdx === i && <p id={`home-faq-${i}`} className="px-5 pb-5 text-sm leading-7 text-black/64">{item.a}</p>}</article>)}</div></div></section>;
-}
-
-export default function Home() {
-  usePageMeta({ title: "Fractional Customer Success Manager for SaaS & Shopify | Jesel Cura", description: "Fractional customer success manager and operations consultant helping SaaS, Shopify, and service-based teams improve onboarding, support workflows, CRM systems, SOPs, retention, and customer operations.", keywords: "fractional customer success manager, customer success operations consultant, Shopify operations support, SaaS onboarding consultant, SOP consultant", image: OG_IMAGE, imageAlt: "Jesel Cura social preview" });
+  const schema = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.q,
+        acceptedAnswer: { "@type": "Answer", text: faq.a },
+      })),
+    }),
+    [],
+  );
 
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "application/ld+json";
-    script.id = "home-organization-jsonld";
-    script.text = JSON.stringify({ "@context": "https://schema.org", "@type": "Person", name: "Jesel Cura", url: SITE_URL, image: OG_IMAGE, areaServed: "Worldwide", description: "Fractional customer success manager and operations consultant helping SaaS, Shopify, and service-based teams improve onboarding, support workflows, CRM systems, SOPs, retention, and customer operations.", sameAs: [] });
+    script.id = "home-faq-jsonld";
+    script.text = JSON.stringify(schema);
     document.head.appendChild(script);
-    return () => document.getElementById("home-organization-jsonld")?.remove();
+    return () => document.getElementById("home-faq-jsonld")?.remove();
+  }, [schema]);
+
+  return (
+    <section id="faq" className="py-18 lg:py-24" style={{ background: "var(--brand-ivory)" }} data-reveal="section">
+      <div className="mx-auto grid max-w-[1180px] gap-8 px-4 sm:px-6 lg:grid-cols-[0.42fr_0.58fr] lg:px-8">
+        <SectionIntro align="left" title="Questions leaders ask before trusting us with operations." />
+        <div className="space-y-3" data-reveal="card">
+          {faqs.map((item, i) => (
+            <article key={item.q} className="overflow-hidden rounded-[1.4rem] border border-[color:var(--border)] bg-white/74 shadow-[0_12px_34px_rgba(46,46,46,0.04)]">
+              <button
+                className="flex w-full items-center justify-between gap-6 p-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-olive-sage)]"
+                onClick={() => setOpenIdx(openIdx === i ? -1 : i)}
+                aria-expanded={openIdx === i}
+                aria-controls={`home-faq-${i}`}
+              >
+                <span className="text-[1rem] font-semibold leading-6 text-[color:var(--brand-charcoal)]">{item.q}</span>
+                <ChevronDown className={`h-5 w-5 shrink-0 text-[color:var(--brand-deep-sage)] transition-transform duration-200 ${openIdx === i ? "rotate-180" : ""}`} aria-hidden="true" />
+              </button>
+              <div className={`faq-panel grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(.2,.8,.2,1)] ${openIdx === i ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                <div className="overflow-hidden">
+                  <p id={`home-faq-${i}`} className="px-5 pb-5 text-[0.98rem] leading-7 text-black/66">
+                    {item.a}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCta() {
+  return (
+    <section id="contact" className="px-4 py-14 sm:px-6 lg:px-8" style={{ background: "var(--brand-cloud)" }} data-reveal="section">
+      <div className="mx-auto grid max-w-[1180px] gap-8 overflow-hidden rounded-[2rem] border border-[color:var(--brand-stone-taupe)]/55 bg-[color:var(--brand-deep-sage)] p-8 text-white shadow-[0_28px_80px_rgba(46,46,46,0.18)] md:grid-cols-[0.7fr_0.3fr] md:p-10">
+        <div>
+          <MailCheck className="mb-5 h-10 w-10 text-[color:var(--brand-mint)]" aria-hidden="true" />
+          <h2 className="max-w-3xl text-balance text-white" style={{ fontSize: "clamp(2.15rem, 4.6vw, 4rem)", fontWeight: 760, lineHeight: 1 }}>
+            Build the operating capacity your next stage requires.
+          </h2>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-white/76">Start with a consultation. We will identify the workflows to stabilize first and the support model that fits.</p>
+        </div>
+        <div className="flex flex-col justify-end gap-3">
+          <CtaButton location="homepage_final_cta" className="bg-[color:var(--brand-mint)] text-[color:var(--brand-charcoal)] hover:bg-white">
+            Book a Free Consultation
+          </CtaButton>
+          <CtaButton location="homepage_final_cta" variant="secondary" href="/solutions" className="border-white/20 bg-white/10 text-white hover:bg-white/18">
+            Explore Services
+          </CtaButton>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function Home() {
+  useHomeMotion();
+
+  usePageMeta({
+    title: HOMEPAGE_TITLE,
+    description: HOMEPAGE_DESCRIPTION,
+    keywords:
+      "virtual assistant services, business operations support, customer support outsourcing, inbox management services, calendar management services, CRM organization, outsourced admin support",
+    image: OG_IMAGE,
+    imageAlt: `${SITE_NAME} social preview`,
+  });
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "home-service-jsonld";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      name: SITE_NAME,
+      url: SITE_URL,
+      image: OG_IMAGE,
+      areaServed: "Worldwide",
+      description: HOMEPAGE_DESCRIPTION,
+      serviceType: [
+        "Virtual Assistant Services",
+        "Customer Support Outsourcing",
+        "Business Operations Support",
+        "Inbox Management",
+        "Calendar Management",
+        "CRM Organization",
+      ],
+      provider: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    });
+    document.head.appendChild(script);
+    return () => document.getElementById("home-service-jsonld")?.remove();
   }, []);
 
-  return <>
-    <section className="relative isolate overflow-hidden pt-8" style={{ background: "radial-gradient(circle at 80% 12%, rgba(221,234,215,.82), transparent 30rem), radial-gradient(circle at 12% 42%, rgba(239,228,209,.72), transparent 26rem), linear-gradient(135deg, var(--brand-cloud), var(--brand-ivory) 58%, #eef4e9)" }}><div className="mx-auto grid max-w-[1440px] items-center gap-14 px-4 py-16 sm:px-6 md:py-18 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16 lg:px-8 lg:py-24"><div className="reveal-up"><p className="mb-6 inline-flex rounded-full pill-glow border border-[color:var(--brand-deep-sage)]/16 bg-white/72 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--brand-deep-sage)]">Premium operations partner</p><h1 className="max-w-[760px] text-balance text-[clamp(2.5rem,11vw,3.75rem)] font-[760] leading-[1.02] text-[color:var(--brand-charcoal)] lg:text-[clamp(3.5rem,5vw,4rem)] lg:leading-[0.98]">Virtual Assistant Services & Business Operations Support for Growing Teams</h1><p className="mt-7 max-w-[600px] text-pretty text-base leading-8 text-black/68 lg:text-lg">SageStone Inc helps growing businesses, startups, agencies, real estate teams, and e-commerce brands delegate administrative work, customer support, web maintenance, social media coordination, and day-to-day business operations without adding payroll.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><CtaButton location="homepage_hero">Book a Free Consultation</CtaButton><CtaButton location="homepage_hero" variant="secondary">Explore Our Services</CtaButton></div><div className="mt-8 grid max-w-xl grid-cols-3 gap-3 text-sm"><div><strong className="block text-2xl text-[color:var(--brand-charcoal)]">6</strong><span className="text-black/55">launch phases</span></div><div><strong className="block text-2xl text-[color:var(--brand-charcoal)]">8</strong><span className="text-black/55">solution teams</span></div><div><strong className="block text-2xl text-[color:var(--brand-charcoal)]">AA</strong><span className="text-black/55">accessibility mindset</span></div></div></div><OperationsDashboard /></div></section>
-
-    <section aria-labelledby="trusted-by" className="border-y border-[color:var(--border)] bg-[color:var(--brand-cloud)]/80 py-10"><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><h2 id="trusted-by" className="sr-only">Software ecosystems SageStone works with</h2><p className="mb-5 text-center text-xs font-bold uppercase tracking-[0.22em] text-[color:var(--brand-deep-sage)]/70">Trusted inside the operating systems modern teams already use</p><div className="marquee-mask overflow-hidden"><div className="trust-marquee flex min-w-max gap-3">{[...ecosystem, ...ecosystem].map((logo, index) => <span key={`${logo}-${index}`} className="rounded-full border border-[color:var(--border)] bg-white/72 px-5 py-3 text-sm font-semibold text-[color:var(--brand-charcoal)]/72 shadow-[0_8px_24px_rgba(23,28,24,0.04)]">{logo}</span>)}</div></div></div></section>
-
-    <section id="problem" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="The problem" title="Growth breaks when operations become fragmented.">Hiring internally is expensive. Managing freelancers is inconsistent. Building operational systems takes years. SageStone gives you calm, accountable capacity before the back office becomes the bottleneck.</SectionIntro><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{problemCards.map((item) => <article key={item.title} className="premium-card rounded-[28px] border border-[color:var(--border)] bg-white/70 p-6"><ShieldCheck className="mb-5 h-8 w-8 text-[color:var(--brand-deep-sage)]" aria-hidden="true" /><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{item.title}</h3><p className="mt-3 text-sm leading-7 text-black/64">{item.description}</p></article>)}</div></div></section>
-
-    <section id="solutions" className="py-20 lg:py-28" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Services We Provide" title="Virtual assistant and operations support services for growing teams.">Explore SageStone services with descriptive internal links to the support model that fits your current bottleneck.</SectionIntro><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{solutions.map((solution) => <article key={solution.title} className="premium-card group rounded-[28px] border border-[color:var(--border)] bg-white/74 p-6"><div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--brand-sage-mist)] text-[color:var(--brand-deep-sage)] transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105"><solution.icon className="h-6 w-6" aria-hidden="true" /></div><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{solution.title}</h3><p className="mt-3 min-h-[96px] text-sm leading-7 text-black/64">{solution.description}</p><Link to={solution.path} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--brand-deep-sage)] hover:text-[color:var(--brand-charcoal)]">{solution.title} <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></article>)}</div></div></section>
-
-    <section id="industries" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Industries We Support" title="Industry-focused virtual assistant support.">These long-tail service paths help buyers find support by industry and give SageStone room to build dedicated industry pages over time.</SectionIntro><div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">{industries.map((industry) => <Link key={industry.title} to={industry.path} className="premium-card rounded-[26px] border border-[color:var(--border)] bg-white/68 p-5"><industry.icon className="mb-4 h-7 w-7 text-[color:var(--brand-deep-sage)]" aria-hidden="true" /><h3 className="text-lg font-semibold text-[color:var(--brand-charcoal)]">{industry.title}</h3><p className="mt-2 text-sm leading-6 text-black/62">{industry.text}</p></Link>)}</div></div></section>
-
-    <section id="comparison" className="py-20 lg:py-28" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Why Businesses Choose SageStone" title="Flexible support with process, proof, and room to grow.">Dedicated virtual assistant support, remote capacity for growing teams, experience across admin, customer support, e-commerce, and operations, process-driven onboarding, and support tailored to your tools and workflows.</SectionIntro><div className="overflow-hidden rounded-[30px] border border-[color:var(--border)] bg-white/76 shadow-[0_24px_70px_rgba(23,28,24,0.08)]"><div className="grid grid-cols-3 bg-[color:var(--brand-ink)] px-5 py-4 text-sm font-semibold text-white"><span>Decision point</span><span>Traditional hiring</span><span>SageStone</span></div>{comparison.map((row) => <div key={row.metric} className="grid grid-cols-1 gap-3 border-t border-[color:var(--border)] px-5 py-5 text-sm md:grid-cols-3 md:gap-6"><strong className="text-[color:var(--brand-charcoal)]">{row.metric}</strong><span className="text-black/58">{row.traditional}</span><span className="flex gap-2 font-semibold text-[color:var(--brand-deep-sage)]"><Check className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />{row.sagestone}</span></div>)}</div></div></section>
-
-    <section id="process" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Process" title="A measured path from delegation to operating rhythm." /><div className="relative mx-auto max-w-3xl"><div aria-hidden="true" className="absolute bottom-0 left-6 top-0 w-px bg-[color:var(--brand-stone-taupe)]" />{process.map((step, index) => <article key={step.title} className="relative mb-5 ml-16 rounded-[26px] border border-[color:var(--border)] bg-white/72 p-6 shadow-[0_14px_40px_rgba(23,28,24,0.05)]"><div className="absolute -left-[4.55rem] top-6 flex h-12 w-12 items-center justify-center rounded-full bg-[color:var(--brand-deep-sage)] text-sm font-bold text-white shadow-[0_12px_30px_rgba(35,81,59,0.22)]">{index + 1}</div><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{step.title}</h3><p className="mt-2 text-sm leading-7 text-black/64">{step.description}</p></article>)}</div></div></section>
-
-    <section id="case-studies" className="py-20 lg:py-28" style={{ background: "var(--brand-ink)" }}><div className="mx-auto max-w-[1440px] px-4 text-white sm:px-6 lg:px-8"><SectionIntro eyebrow="Case studies" title="Operational outcomes that compound." dark>Representative outcomes from focused operations work: clearer ownership, faster response loops, and measurable executive leverage.</SectionIntro><div className="grid gap-5 md:grid-cols-3">{caseStudies.map((study) => <article key={study.title} className="rounded-[30px] border border-white/10 bg-white/[0.07] p-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"><p className="text-5xl font-semibold tracking-tight text-[color:var(--brand-mint)]">{study.metric}</p><p className="mt-1 text-sm uppercase tracking-[0.18em] text-white/42">{study.label}</p><h3 className="mt-8 text-2xl font-semibold text-white">{study.title}</h3><p className="mt-3 text-sm leading-7 text-white/62">{study.description}</p></article>)}</div></div></section>
-
-    <section id="software" className="py-20 lg:py-28" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Software expertise" title="Your tools stay in place. Your operations get stronger." /><div className="marquee-mask overflow-hidden"><div className="trust-marquee flex min-w-max gap-3">{[...software, ...software].map((tool, index) => <span key={`${tool}-${index}`} className="rounded-2xl border border-[color:var(--border)] bg-white/75 px-5 py-4 text-sm font-semibold text-[color:var(--brand-charcoal)]/72">{tool}</span>)}</div></div></div></section>
-
-    <section id="insights" className="py-20 lg:py-28" style={{ background: "var(--brand-cloud)" }}><div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8"><SectionIntro eyebrow="Insights" title="Thinking for leaders building calmer operations." /><div className="grid gap-4 md:grid-cols-3">{insights.map((topic) => <Link key={topic} to="/blog" className="premium-card rounded-[24px] border border-[color:var(--border)] bg-white/72 p-6"><BookOpen className="mb-5 h-7 w-7 text-[color:var(--brand-deep-sage)]" aria-hidden="true" /><h3 className="text-xl font-semibold text-[color:var(--brand-charcoal)]">{topic}</h3><p className="mt-2 text-sm leading-6 text-black/62">Practical guidance for improving capacity, quality, and operating cadence.</p></Link>)}</div></div></section>
-
-    <FaqSection />
-
-    <section id="contact" className="px-4 py-14 sm:px-6 lg:px-8" style={{ background: "var(--brand-ivory)" }}><div className="mx-auto max-w-[1180px] rounded-[34px] border border-[color:var(--brand-stone-taupe)]/55 bg-[color:var(--brand-ink)] p-8 text-center text-white shadow-[0_28px_80px_rgba(46,46,46,0.18)] sm:p-12"><MailCheck className="mx-auto mb-5 h-10 w-10 text-[color:var(--brand-mint)]" aria-hidden="true" /><h2 className="text-balance text-white" style={{ fontSize: "clamp(2.2rem, 4.8vw, 4.5rem)", fontWeight: 760, lineHeight: 0.98 }}>Build the operating capacity your next stage requires.</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/72">Start with a strategy call. We will identify the workflows to stabilize first, the capacity model that fits, and the operating rhythm that protects quality.</p><div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"><CtaButton location="homepage_final_cta" className="bg-[color:var(--brand-mint)] text-[color:var(--brand-charcoal)] hover:bg-white">Book a Free Consultation</CtaButton><CtaButton location="homepage_final_cta" variant="secondary" href="/solutions" className="border-white/20 bg-white/10 text-white hover:bg-white/18">Explore Our Services</CtaButton></div></div></section>
-  </>;
+  return (
+    <>
+      <Hero />
+      <ToolStrip />
+      <ServicesBento />
+      <OperatingPath />
+      <IndustriesAndComparison />
+      <ProofAndInsights />
+      <FaqSection />
+      <FinalCta />
+    </>
+  );
 }

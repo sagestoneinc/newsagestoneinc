@@ -31,7 +31,7 @@ export const solutionPagesData: SolutionPageData[] = [
     heroSubtitle:
       "Free yourself from day-to-day admin tasks so you can focus on the strategic work that grows your business.",
     introParagraph:
-      "Running a business means wearing a dozen hats — but administrative overload shouldn't slow you down. SageStone's virtual administrative assistants step in as a seamless extension of your team, handling everything from inbox management and calendar coordination to travel booking and document preparation. Our remote executive assistants are trained in the tools you already use, so onboarding is fast and disruption-free. Whether you need a few hours a week or full-time coverage, we tailor our outsourced admin support to match your workflow and keep operations running smoothly.",
+      "Running a business means wearing a dozen hats, but administrative overload should not slow you down. SageStone's virtual administrative assistants step in as a structured extension of your team, handling everything from inbox management and calendar coordination to travel booking and document preparation. Our remote executive assistants are trained in the tools you already use, so onboarding is practical and organized. Whether you need a few hours a week or fuller coverage, we tailor outsourced admin support to match your workflow and keep operations running smoothly.",
     ctaPrimary: "Get Started with Operations Support",
     ctaSecondary: "Schedule a Free Consultation",
     faqs: [
@@ -43,7 +43,7 @@ export const solutionPagesData: SolutionPageData[] = [
       {
         question: "How many hours per week can I expect to save?",
         answer:
-          "Most clients reclaim 15 to 25 hours per week once their assistant is fully onboarded. The exact number depends on the volume and complexity of delegated tasks, but even partial delegation frees significant time for revenue-generating activities.",
+          "Clients often reclaim meaningful focus once recurring administrative work is clearly delegated. The exact impact depends on the volume and complexity of delegated tasks, but even partial delegation can create more room for revenue-generating activities.",
       },
       {
         question: "What tools and platforms do your assistants use?",
@@ -73,7 +73,7 @@ export const solutionPagesData: SolutionPageData[] = [
       {
         question: "How do I get started with virtual admin support?",
         answer:
-          "Simply schedule a free consultation through our website. We'll discuss your current workload, identify the highest-impact tasks to delegate, match you with a vetted assistant, and have them onboarded within days — not weeks.",
+          "Simply schedule a free consultation through our website. We'll discuss your current workload, identify the highest-impact tasks to delegate, match you with a vetted assistant, and build a practical onboarding path.",
       },
     ],
     jsonLdServiceName: "Virtual Operations & Admin Support",
@@ -91,9 +91,9 @@ export const solutionPagesData: SolutionPageData[] = [
       "real estate virtual assistant, real estate transaction coordinator, MLS listing assistant, real estate CRM management, virtual assistant for realtors, property management virtual assistant",
     h1: "Real Estate Virtual Assistant Services",
     heroSubtitle:
-      "Spend more time with clients and less time on paperwork — our real estate VAs handle the details behind every deal.",
+      "Spend more time with clients and less time on paperwork. Our real estate VAs handle the details behind each workflow.",
     introParagraph:
-      "Real estate moves fast, and the agents who win are the ones who stay in front of clients instead of buried in back-office tasks. SageStone's real estate virtual assistants manage transaction coordination, MLS listing updates, CRM upkeep, and client follow-ups so you can focus on showings and closings. Whether you're a solo agent scaling your pipeline or a team leader managing dozens of active deals, our assistants integrate with the platforms you already use — from Dotloop and Skyslope to Follow Up Boss and kvCORE — keeping every transaction on track from contract to close.",
+      "Real estate moves fast, and strong follow-up matters. SageStone's real estate virtual assistants manage transaction coordination, MLS listing updates, CRM upkeep, and client follow-ups so you can focus on showings and closings. Whether you're a solo agent scaling your pipeline or a team leader managing active deals, our assistants integrate with the platforms you already use, from Dotloop and Skyslope to Follow Up Boss and kvCORE, keeping transaction tasks easier to see and manage.",
     ctaPrimary: "Get Started with Real Estate VA Support",
     ctaSecondary: "Schedule a Free Consultation",
     faqs: [
@@ -135,7 +135,7 @@ export const solutionPagesData: SolutionPageData[] = [
       {
         question: "How does the cost compare to hiring an in-house assistant?",
         answer:
-          "Most clients save 40 to 60 percent compared with a full-time in-house hire when you factor in salary, benefits, office space, and equipment. You also avoid the overhead of recruiting, training, and managing an employee directly.",
+          "Virtual assistant support can reduce the overhead of recruiting, training, benefits, office space, and direct employee management. The right model depends on your workload, approval needs, and preferred level of internal control.",
       },
     ],
     jsonLdServiceName: "Real Estate Virtual Assistant",
@@ -153,16 +153,16 @@ export const solutionPagesData: SolutionPageData[] = [
       "virtual bookkeeping support, outsourced bookkeeping services, QuickBooks virtual assistant, remote bookkeeping assistant, small business bookkeeping support, accounts payable virtual assistant",
     h1: "Bookkeeping Support Services",
     heroSubtitle:
-      "Accurate books, on time — every month. Our virtual bookkeeping assistants keep your finances organized so you can make informed decisions.",
+      "Accurate books, organized consistently. Our virtual bookkeeping assistants keep your records easier to review so you can make informed decisions.",
     introParagraph:
-      "Falling behind on bookkeeping creates a ripple effect: late invoices, missed tax deductions, and decisions based on stale numbers. SageStone's virtual bookkeeping assistants maintain your records in real time, handling bank reconciliations, accounts payable and receivable, expense categorization, and monthly reporting. We work inside your preferred platform — QuickBooks Online, Xero, FreshBooks, or Wave — and deliver clean, organized books you and your CPA can rely on. Please note that our services focus on bookkeeping support; we do not provide CPA, tax advisory, or certified accounting services.",
+      "Falling behind on bookkeeping creates a ripple effect: late invoices, missed deductions, and decisions based on stale numbers. SageStone's virtual bookkeeping assistants maintain your records, handling bank reconciliations, accounts payable and receivable, expense categorization, and monthly reporting. We work inside your preferred platform, including QuickBooks Online, Xero, FreshBooks, or Wave, and support clean, organized books you and your CPA can review. Please note that our services focus on bookkeeping support; we do not provide CPA, tax advisory, or certified accounting services.",
     ctaPrimary: "Get Started with Bookkeeping Support",
     ctaSecondary: "Schedule a Free Consultation",
     faqs: [
       {
         question: "Which bookkeeping platforms do you support?",
         answer:
-          "We work with QuickBooks Online, QuickBooks Desktop, Xero, FreshBooks, Wave, and Zoho Books. If you use a different platform, let us know — our team adapts quickly and can learn new tools during the onboarding process.",
+          "We work with QuickBooks Online, QuickBooks Desktop, Xero, FreshBooks, Wave, and Zoho Books. If you use a different platform, let us know. Our team can learn new tools during the onboarding process.",
       },
       {
         question: "Is this the same as hiring a CPA or accountant?",
@@ -192,7 +192,7 @@ export const solutionPagesData: SolutionPageData[] = [
       {
         question: "What does the onboarding process look like?",
         answer:
-          "We start with a discovery call to understand your chart of accounts, transaction volume, and reporting needs. Then we request platform access, review historical data, document your workflows, and begin processing transactions — typically within five to seven business days.",
+          "We start with a discovery call to understand your chart of accounts, transaction volume, and reporting needs. Then we request platform access, review historical data, document your workflows, and establish a processing cadence.",
       },
       {
         question: "How do I transition my existing books to your team?",
@@ -215,7 +215,7 @@ export const solutionPagesData: SolutionPageData[] = [
       "social media virtual assistant, social media management assistant, content creation virtual assistant, social media scheduling service, community management support, influencer outreach assistant",
     h1: "Social Media Marketing Support",
     heroSubtitle:
-      "Consistent, on-brand content across every platform — without adding another full-time role to your payroll.",
+      "Consistent, on-brand content across every platform without adding another full-time role to your payroll.",
     introParagraph:
       "A strong social media presence demands daily attention: creating scroll-stopping content, responding to comments, analyzing what's working, and adjusting strategy in real time. SageStone's social media virtual assistants handle it all so your brand stays active and engaging without consuming your calendar. From content ideation and graphic creation to scheduling, community management, and monthly analytics reporting, our team ensures every post aligns with your brand voice and business goals. We work across Instagram, Facebook, LinkedIn, TikTok, X, and Pinterest to meet your audience wherever they spend their time.",
     ctaPrimary: "Get Started with Social Media Support",
@@ -259,7 +259,7 @@ export const solutionPagesData: SolutionPageData[] = [
       {
         question: "What's the typical turnaround time for content?",
         answer:
-          "Standard content batches are delivered for review five to seven business days before the scheduled publish date. Rush requests for timely or reactive content can be turned around within 24 to 48 hours, depending on complexity and design requirements.",
+          "Standard content batches are scheduled around your review process before the publish date. Rush requests for timely or reactive content can be scoped based on complexity, approvals, and design requirements.",
       },
     ],
     jsonLdServiceName: "Social Media Marketing Support",
@@ -277,9 +277,9 @@ export const solutionPagesData: SolutionPageData[] = [
       "lead generation virtual assistant, B2B lead generation assistant, cold email outreach assistant, LinkedIn prospecting service, appointment setting virtual assistant, CRM data entry assistant",
     h1: "Lead Generation Support Services",
     heroSubtitle:
-      "A steady stream of qualified leads delivered to your calendar — so your sales team focuses only on closing.",
+      "Structured prospecting support so your sales team can spend more time on qualified conversations.",
     introParagraph:
-      "Growth stalls when your pipeline runs dry, but building it yourself pulls you away from high-value conversations. SageStone's lead generation virtual assistants take prospecting off your plate through targeted B2B outreach, LinkedIn engagement, cold email campaigns, and appointment setting. Every campaign is designed with compliance in mind — we adhere to CAN-SPAM and GDPR regulations to protect your brand reputation. Our assistants research ideal prospects, enrich contact data, craft personalized messages, and book qualified meetings directly on your calendar. Combined with disciplined CRM data entry, you always have a clear view of your pipeline.",
+      "Growth stalls when your pipeline runs dry, but building it yourself pulls you away from high-value conversations. SageStone's lead generation virtual assistants support targeted B2B outreach, LinkedIn engagement, cold email campaigns, and appointment-setting workflows. Every campaign is designed with compliance in mind, including CAN-SPAM and applicable privacy requirements. Our assistants research ideal prospects, enrich contact data, draft personalized messages, and coordinate qualified meetings based on your criteria. Combined with disciplined CRM data entry, you have clearer visibility into pipeline activity.",
     ctaPrimary: "Get Started with Lead Generation",
     ctaSecondary: "Schedule a Free Consultation",
     faqs: [
@@ -291,7 +291,7 @@ export const solutionPagesData: SolutionPageData[] = [
       {
         question: "How do you qualify leads before booking meetings?",
         answer:
-          "We work with you to define an ideal customer profile and qualification criteria — such as company size, industry, budget range, and decision-making authority. Only prospects who match those criteria move to the meeting-booking stage, so your sales team's time is well spent.",
+          "We work with you to define an ideal customer profile and qualification criteria, such as company size, industry, budget range, and decision-making authority. Prospects who match those criteria move to the meeting-booking stage, so your sales team's time is used with more intention.",
       },
       {
         question: "Which CRM tools do your assistants use?",
@@ -339,16 +339,16 @@ export const solutionPagesData: SolutionPageData[] = [
       "virtual graphic design assistant, outsourced graphic design service, social media graphics assistant, brand design virtual assistant, presentation design service, marketing collateral design",
     h1: "Graphic Design Support Services",
     heroSubtitle:
-      "Eye-catching visuals that strengthen your brand — delivered on time, on budget, and without the overhead of an in-house designer.",
+      "Polished visuals that strengthen your brand without the overhead of an in-house designer.",
     introParagraph:
-      "Great design builds trust before a single word is read. SageStone's virtual graphic design assistants produce polished visuals for every channel — social media graphics, pitch decks, email banners, trade-show materials, and brand identity assets. Each project starts with your brand guidelines, and our designers deliver files in the exact formats you need for both digital and print. Whether you have a one-off request or need ongoing creative support, our flexible plans let you scale design capacity up or down without long-term commitments. The result is a consistent, professional look that sets your business apart.",
+      "Great design builds trust before a single word is read. SageStone's virtual graphic design assistants produce polished visuals for every channel, including social media graphics, pitch decks, email banners, trade-show materials, and brand identity assets. Each project starts with your brand guidelines, and our designers deliver files in the formats you need for digital or print. Whether you have a one-off request or need ongoing creative support, our flexible plans let you scale design capacity with less long-term overhead. The result is a consistent, professional look across recurring assets.",
     ctaPrimary: "Get Started with Design Support",
     ctaSecondary: "Schedule a Free Consultation",
     faqs: [
       {
         question: "What design tools does your team use?",
         answer:
-          "Our designers work in Adobe Creative Suite (Photoshop, Illustrator, InDesign), Figma, and Canva Pro. Tool selection depends on project requirements — vector illustrations call for Illustrator, while rapid social assets may use Canva. We match the tool to the deliverable.",
+          "Our designers work in Adobe Creative Suite (Photoshop, Illustrator, InDesign), Figma, and Canva Pro. Tool selection depends on project requirements. Vector illustrations call for Illustrator, while rapid social assets may use Canva. We match the tool to the deliverable.",
       },
       {
         question: "How many revisions are included per project?",
@@ -358,7 +358,7 @@ export const solutionPagesData: SolutionPageData[] = [
       {
         question: "How do you ensure designs follow our brand guidelines?",
         answer:
-          "We request your brand kit — logos, color codes, typography, and any style guides — at the start of the engagement. Designers reference these assets for every project, and an internal review step verifies consistency before anything is sent to you for approval.",
+          "We request your brand kit, including logos, color codes, typography, and any style guides, at the start of the engagement. Designers reference these assets for every project, and an internal review step checks consistency before anything is sent to you for approval.",
       },
       {
         question: "What are your typical turnaround times?",
@@ -401,16 +401,16 @@ export const solutionPagesData: SolutionPageData[] = [
       "data entry virtual assistant, web research assistant, database management virtual assistant, data cleansing service, market research virtual assistant, competitive analysis assistant",
     h1: "Data Entry & Web Research Services",
     heroSubtitle:
-      "Clean data and actionable research — delivered with precision so your team can act on insights instead of hunting for them.",
+      "Clean data and actionable research delivered with reviewable documentation.",
     introParagraph:
-      "Decisions are only as good as the data behind them, yet data entry backlogs and shallow research slow organizations down every day. SageStone's virtual assistants specialize in high-accuracy data entry, database management, data cleansing, and structured web research. Whether you need thousands of records migrated into a new CRM, a competitive landscape report, or ongoing market intelligence, our team delivers organized, verified results on a predictable schedule. We follow strict quality-control protocols — including double-entry verification and source cross-referencing — so you can trust the information flowing into your dashboards and strategy sessions.",
+      "Decisions are only as good as the data behind them, yet data entry backlogs and shallow research slow organizations down every day. SageStone's virtual assistants support careful data entry, database management, data cleansing, and structured web research. Whether you need records migrated into a new CRM, a competitive landscape report, or ongoing market intelligence, our team delivers organized results on a predictable schedule. We use quality-control steps, including review checks and source cross-referencing, so the information flowing into your dashboards and strategy sessions is easier to trust.",
     ctaPrimary: "Get Started with Data & Research Support",
     ctaSecondary: "Schedule a Free Consultation",
     faqs: [
       {
-        question: "What accuracy rate do you guarantee for data entry?",
+        question: "How do you review data entry quality?",
         answer:
-          "We maintain a 99.9 percent accuracy rate through double-entry verification and automated validation checks. Every batch is reviewed before delivery, and we provide error logs so you have full transparency into our quality-control process.",
+          "We use double-entry verification, automated validation checks when appropriate, and manual review before delivery. We can also provide error logs so you have visibility into the quality-control process.",
       },
       {
         question: "How do you keep our data secure?",
@@ -420,7 +420,7 @@ export const solutionPagesData: SolutionPageData[] = [
       {
         question: "What types of web research do you conduct?",
         answer:
-          "Our services include market research, competitive analysis, lead list building, pricing studies, industry trend reports, and product comparisons. We deliver findings in structured formats — spreadsheets, slide decks, or written briefs — tailored to your decision-making needs.",
+          "Our services include market research, competitive analysis, lead list building, pricing studies, industry trend reports, and product comparisons. We deliver findings in structured formats such as spreadsheets, slide decks, or written briefs tailored to your decision-making needs.",
       },
       {
         question: "Which tools and databases do your researchers use?",

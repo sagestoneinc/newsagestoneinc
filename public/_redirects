@@ -4,8 +4,8 @@ https://sagestoneinc.com/* https://www.sagestoneinc.com/:splat 301
 /web-design-maintenance /web-design-maintenance-services 301
 /web-design-maintenance/ /web-design-maintenance-services/ 301
 
-http://jeselcura.me/* https://www.jeselcura.me/:splat 301
-https://jeselcura.me/* https://www.jeselcura.me/:splat 301
+http://jeselcura.me/* https://www.sagestoneinc.com/:splat 301
+https://jeselcura.me/* https://www.sagestoneinc.com/:splat 301
 /expertise /services 301
 /expertise/ /services/ 301
 /work/:slug /case-studies/:slug 301

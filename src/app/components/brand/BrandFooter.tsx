@@ -38,7 +38,7 @@ export function BrandFooter() {
             <Link to="/" className="inline-flex items-center gap-2" aria-label="SageStone Inc home">
               <BrandLogo variant="light" />
             </Link>
-            <p className="mt-5 max-w-sm text-[0.95rem] leading-7 text-white/62">
+            <p className="mt-5 max-w-sm text-[1rem] leading-7 text-white/68">
               Premium operations support for founders, agencies, property management companies, and growing teams that need scalable capacity without growing payroll.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
@@ -46,7 +46,7 @@ export function BrandFooter() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-mint)] px-5 py-2.5 text-sm font-semibold text-[color:var(--brand-ink)] transition-colors hover:bg-white"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[color:var(--brand-mint)] px-5 py-2.5 text-[0.95rem] font-semibold leading-none text-[color:var(--brand-ink)] transition duration-200 hover:-translate-y-0.5 hover:bg-white"
                 onClick={() => trackCtaClick({ location: "footer_primary", cta_text: "Schedule Strategy Call", target_url: CALENDLY_URL })}
               >
                 <CalendarCheck className="h-4 w-4" />
@@ -54,7 +54,7 @@ export function BrandFooter() {
               </a>
               <Link
                 to="/solutions"
-                className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/[0.12]"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/16 bg-white/[0.06] px-5 py-2.5 text-[0.95rem] font-semibold leading-none text-white transition duration-200 hover:-translate-y-0.5 hover:bg-white/[0.12]"
                 onClick={() => trackCtaClick({ location: "footer_secondary", cta_text: "Explore Solutions", target_url: "/solutions" })}
               >
                 Explore Solutions
@@ -64,11 +64,11 @@ export function BrandFooter() {
           </div>
 
           <div className="lg:col-span-3 lg:col-start-6">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/42">Solutions</p>
-            <ul className="grid gap-2.5">
+            <p className="mb-4 text-[0.78rem] font-bold uppercase tracking-[0.18em] text-white/48">Solutions</p>
+            <ul className="grid gap-3">
               {services.map((service) => (
                 <li key={service.path}>
-                  <Link to={service.path} className="text-sm text-white/62 transition-colors hover:text-[color:var(--brand-mint)]">
+                  <Link to={service.path} className="text-[0.95rem] leading-6 text-white/68 transition-colors hover:text-[color:var(--brand-mint)]">
                     {service.label}
                   </Link>
                 </li>
@@ -77,11 +77,11 @@ export function BrandFooter() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/42">Company</p>
-            <ul className="grid gap-2.5">
+            <p className="mb-4 text-[0.78rem] font-bold uppercase tracking-[0.18em] text-white/48">Company</p>
+            <ul className="grid gap-3">
               {navigation.map((item) => (
                 <li key={item.path}>
-                  <Link to={item.path} className="text-sm text-white/62 transition-colors hover:text-[color:var(--brand-mint)]">
+                  <Link to={item.path} className="text-[0.95rem] leading-6 text-white/68 transition-colors hover:text-[color:var(--brand-mint)]">
                     {item.label}
                   </Link>
                 </li>
@@ -90,8 +90,8 @@ export function BrandFooter() {
           </div>
 
           <div className="lg:col-span-3">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-white/42">Contact</p>
-            <div className="space-y-3 text-sm text-white/62">
+            <p className="mb-4 text-[0.78rem] font-bold uppercase tracking-[0.18em] text-white/48">Contact</p>
+            <div className="space-y-3 text-[0.95rem] leading-6 text-white/68">
               <a href="mailto:hello@sagestoneinc.com" onClick={() => trackEvent("email_click", { location: "footer", target_url: "mailto:hello@sagestoneinc.com" })} className="flex items-center gap-3 transition-colors hover:text-[color:var(--brand-mint)]">
                 <Mail className="h-4 w-4" />
                 hello@sagestoneinc.com
@@ -105,10 +105,10 @@ export function BrandFooter() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
-          <p className="text-xs text-white/42">&copy; {new Date().getFullYear()} SageStone Inc. All rights reserved.</p>
+          <p className="text-[0.82rem] text-white/50">&copy; {new Date().getFullYear()} SageStone Inc. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <Link to="/terms" className="text-xs text-white/42 transition-colors hover:text-white">Terms</Link>
-            <Link to="/privacy" className="text-xs text-white/42 transition-colors hover:text-white">Privacy Policy</Link>
+            <Link to="/terms" className="text-[0.82rem] text-white/50 transition-colors hover:text-white">Terms</Link>
+            <Link to="/privacy" className="text-[0.82rem] text-white/50 transition-colors hover:text-white">Privacy Policy</Link>
           </div>
         </div>
       </div>

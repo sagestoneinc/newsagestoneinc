@@ -1,6 +1,6 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Jesel Cura social preview</title>
-  <desc id="desc">Professional social preview for Jesel Cura, fractional customer success manager for SaaS and Shopify customer operations.</desc>
+  <title id="title">SageStone Inc social preview</title>
+  <desc id="desc">Professional social preview for SageStone Inc virtual assistant services and business operations support.</desc>
   <defs>
     <linearGradient id="background" x1="0" x2="1" y1="0" y2="1">
       <stop stop-color="#f7f2e9"/>
@@ -10,7 +10,7 @@
   <rect width="1200" height="630" fill="url(#background)"/>
   <rect x="70" y="70" width="1060" height="490" rx="44" fill="#ffffff" opacity="0.72"/>
   <circle cx="1000" cy="150" r="86" fill="#9fb592" opacity="0.32"/>
-  <text x="600" y="278" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="700" fill="#23352c">Jesel Cura</text>
-  <text x="600" y="350" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="40" fill="#4f6f5b">Fractional Customer Success Manager</text>
-  <text x="600" y="412" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="31" fill="#2f3c35">SaaS • Shopify • Customer Operations</text>
+  <text x="600" y="278" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="700" fill="#23352c">SageStone Inc</text>
+  <text x="600" y="350" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="40" fill="#4f6f5b">Virtual Assistant Services</text>
+  <text x="600" y="412" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="31" fill="#2f3c35">Customer Support • Operations • Admin</text>
 </svg>

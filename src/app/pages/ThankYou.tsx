@@ -24,7 +24,7 @@ export default function ThankYou() {
         </div>
         <p className="mb-4 text-[0.8125rem] font-semibold uppercase tracking-[0.22em] text-[color:var(--brand-olive-sage)]">Discovery call confirmation</p>
         <h1 className="mx-auto max-w-3xl text-[color:var(--brand-charcoal)]" style={{ fontSize: "clamp(2.25rem, 6vw, 4.75rem)", fontWeight: 760, lineHeight: 1 }}>
-          Thank you — we’re ready to help you build calmer operations.
+          Thank you. We’re ready to help you build calmer operations.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-[1.125rem] leading-8 text-black/66">
           If your meeting is booked, you will receive a calendar confirmation from Calendly. If you have not selected a time yet, use the booking link below to schedule your complimentary discovery call.

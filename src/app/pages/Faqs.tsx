@@ -19,7 +19,7 @@ const faqCategories: FaqCategory[] = [
     items: [
       {
         question: "How do I get started with SageStone?",
-        answer: "Simply book a free discovery call through our website. During the call, we'll discuss your business needs, the tasks you'd like to delegate, and recommend a support plan. From there, we match you with a vetted VA and begin onboarding—typically within 5–7 business days.",
+        answer: "Simply book a free discovery call through our website. During the call, we'll discuss your business needs, the tasks you'd like to delegate, and recommend a support plan. From there, we match you with a vetted VA and begin onboarding, typically within 5–7 business days.",
       },
       {
         question: "Is there a minimum commitment or contract?",
@@ -31,7 +31,7 @@ const faqCategories: FaqCategory[] = [
       },
       {
         question: "What if the VA assigned to me isn't a good fit?",
-        answer: "We offer a free replacement guarantee. If your VA isn't meeting expectations, we'll rematch you with a new assistant at no additional cost. Your satisfaction is our priority.",
+        answer: "If your VA isn't meeting expectations, we'll review the fit, clarify the support needs, and rematch you with a new assistant at no additional cost when that is the right next step.",
       },
     ],
   },
@@ -65,7 +65,7 @@ const faqCategories: FaqCategory[] = [
       },
       {
         question: "How do I communicate with my VA?",
-        answer: "You can communicate through your preferred channels—email, Slack, Microsoft Teams, Zoom, WhatsApp, or any other tool. We adapt to your existing workflow. Most clients set up a shared project management tool for task tracking.",
+        answer: "You can communicate through your preferred channels, including email, Slack, Microsoft Teams, Zoom, WhatsApp, or another tool. We adapt to your existing workflow. Most clients set up a shared project management tool for task tracking.",
       },
       {
         question: "How do you ensure quality and accountability?",
@@ -99,7 +99,7 @@ const faqCategories: FaqCategory[] = [
     items: [
       {
         question: "How much do your virtual assistant services cost?",
-        answer: "Pricing depends on the service type, hours needed, and skill level required. We offer competitive hourly and monthly packages starting from affordable rates. Contact us for a custom quote tailored to your specific needs—we're transparent with no hidden fees.",
+        answer: "Pricing depends on the service type, hours needed, and skill level required. We offer competitive hourly and monthly packages starting from accessible rates. Contact us for a custom quote tailored to your specific needs. We're transparent with no hidden fees.",
       },
       {
         question: "Are there any setup fees or hidden charges?",

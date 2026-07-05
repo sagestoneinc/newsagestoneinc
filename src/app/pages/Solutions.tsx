@@ -34,7 +34,7 @@ const solutionsData: SolutionData[] = [
     slug: "virtual-operations-admin",
     icon: ClipboardList,
     title: "Virtual Operations & Admin",
-    description: "Keep your business running like clockwork with dedicated virtual assistant services for day-to-day operations. Our operations and admin VAs manage your inbox, coordinate calendars, and track projects so nothing slips through the cracks. From travel bookings and expense reports to meeting agendas and minutes, we handle the operational heavy lifting that consumes your time. Need a workflow automation setup in tools like Zapier or Make? We do that too. By offloading outsourced administrative support to SageStone, you reclaim hours every week—time better spent on revenue-generating activities, strategic planning, and building client relationships.",
+    description: "Keep your business running with dedicated virtual assistant services for day-to-day operations. Our operations and admin VAs manage your inbox, coordinate calendars, and track projects so recurring work has clearer ownership. From travel bookings and expense reports to meeting agendas and minutes, we handle operational details that consume your time. Need a workflow automation setup in tools like Zapier or Make? We can support that too. By offloading outsourced administrative support to SageStone, you create more room for revenue work, strategic planning, and client relationships.",
     deliverables: [
       "Email & calendar management",
       "Travel & expense coordination",
@@ -55,7 +55,7 @@ const solutionsData: SolutionData[] = [
     slug: "real-estate-virtual-assistant",
     icon: HomeIcon,
     title: "Real Estate Virtual Assistant",
-    description: "Purpose-built support for agents, brokers, and property managers who need to stay ahead in a competitive market. Our real estate virtual assistant professionals understand the industry inside and out—from MLS listing updates and CRM management to transaction coordination and compliance tracking. We handle open house scheduling, showing feedback follow-ups, and comparative market analysis so you can focus on closing deals. Whether you are a solo agent or lead a brokerage team, our real estate VAs keep your pipeline organized and your clients impressed with prompt, professional communication around the clock.",
+    description: "Purpose-built support for agents, brokers, and property managers who need cleaner administrative follow-through. Our real estate virtual assistant professionals support MLS listing updates, CRM management, transaction coordination, and compliance tracking. We handle open house scheduling, showing feedback follow-ups, and comparative market analysis so you can focus on client work. Whether you are a solo agent or lead a brokerage team, our real estate VAs help keep your pipeline organized and your communication timely.",
     deliverables: [
       "Listing coordination & MLS updates",
       "CRM management & lead follow-ups",
@@ -76,7 +76,7 @@ const solutionsData: SolutionData[] = [
     slug: "bookkeeping-support",
     icon: Calculator,
     title: "Bookkeeping Support",
-    description: "Accurate, timely bookkeeping support without the overhead of a full-time hire. Our bookkeeping VAs are trained in QuickBooks, Xero, FreshBooks, and other popular platforms, delivering reliable financial record-keeping for growing businesses. We manage invoicing, expense tracking, bank and credit-card reconciliation, accounts payable and receivable, and monthly financial reports. Need payroll preparation assistance? We handle that as well. Please note that our bookkeeping support services are not a substitute for licensed CPA or accounting advisory—we focus on day-to-day transaction management and accurate record-keeping so you are always tax-season ready.",
+    description: "Accurate, timely bookkeeping support without the overhead of a full-time hire. Our bookkeeping VAs are trained in QuickBooks, Xero, FreshBooks, and other popular platforms, delivering reliable financial record-keeping for growing businesses. We manage invoicing, expense tracking, bank and credit-card reconciliation, accounts payable and receivable, and monthly financial reports. Need payroll preparation assistance? We can support the administrative side. Please note that our bookkeeping support services are not a substitute for licensed CPA or accounting advisory. We focus on day-to-day transaction management and organized record-keeping.",
     deliverables: [
       "Invoice creation & management",
       "Expense tracking & categorization",
@@ -97,7 +97,7 @@ const solutionsData: SolutionData[] = [
     slug: "social-media-marketing-support",
     icon: Share2,
     title: "Social Media Marketing Support",
-    description: "Build your brand presence and engage your audience with a dedicated social media virtual assistant from SageStone. We plan content calendars, design eye-catching posts, write compelling copy, and schedule across every major platform—Instagram, LinkedIn, Facebook, X, and TikTok. Our social media marketing support extends to community management, hashtag research, analytics reporting, and influencer outreach coordination. Instead of scrambling to post consistently, you get a data-driven strategy executed by professionals who understand algorithms and engagement. The result? A cohesive brand voice, a growing follower base, and more time for you to run your business.",
+    description: "Build your brand presence with a dedicated social media virtual assistant from SageStone. We plan content calendars, design posts, write copy, and schedule across major platforms such as Instagram, LinkedIn, Facebook, X, and TikTok. Our social media marketing support can extend to community monitoring, hashtag research, analytics reporting, and influencer outreach coordination. Instead of scrambling to post consistently, you get an organized publishing workflow and more time to run your business.",
     deliverables: [
       "Content calendar creation",
       "Post design, copywriting & scheduling",
@@ -108,7 +108,7 @@ const solutionsData: SolutionData[] = [
     ],
     outcomes: [
       "Consistent brand presence across all platforms",
-      "2–5x increase in engagement rates",
+      "Clearer engagement tracking",
       "Data-driven content strategy",
     ],
     image: "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NpYWwlMjBtZWRpYSUyMG1hcmtldGluZyUyMGRpZ2l0YWx8ZW58MXx8fHwxNzcxNjMxOTIxfDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -118,7 +118,7 @@ const solutionsData: SolutionData[] = [
     slug: "lead-generation-support",
     icon: Target,
     title: "Lead Generation Support",
-    description: "Fill your sales pipeline with qualified prospects through systematic outreach powered by a lead generation virtual assistant. Our lead gen VAs combine technology with a personal touch—conducting prospect research, building targeted lists, managing cold email campaigns, and executing LinkedIn outreach. We enter data into your CRM, maintain pipeline hygiene, score and qualify leads, and set appointments directly on your calendar. All outreach is conducted in compliance with CAN-SPAM and applicable data-privacy regulations. By outsourcing lead generation support to SageStone, you reduce cost-per-lead compared to paid advertising while keeping your sales team focused on closing.",
+    description: "Support your sales pipeline with systematic outreach powered by a lead generation virtual assistant. Our lead gen VAs combine technology with a personal touch by conducting prospect research, building targeted lists, managing cold email campaigns, and executing LinkedIn outreach. We enter data into your CRM, maintain pipeline hygiene, score and qualify leads based on your criteria, and coordinate appointment-setting workflows. All outreach is conducted in compliance with CAN-SPAM and applicable data-privacy regulations.",
     deliverables: [
       "Prospect research & list building",
       "Cold email campaign management",
@@ -139,7 +139,7 @@ const solutionsData: SolutionData[] = [
     slug: "graphic-design-support",
     icon: Palette,
     title: "Graphic Design Support",
-    description: "Professional visual content that elevates your brand—delivered by a graphic design support team that works as an extension of yours. Our design VAs create social media graphics, branded templates, pitch decks, infographics, data visualizations, and email newsletter layouts. Need print-ready marketing collateral? We produce that too. Every asset follows your brand guidelines for fonts, colors, and tone, ensuring a cohesive visual identity across all channels. Unlike agencies with long turnaround times, our designers deliver fast iterations with unlimited revisions until you are satisfied. Elevate your brand without the agency price tag.",
+    description: "Professional visual content delivered by a graphic design support team that works as an extension of yours. Our design VAs create social media graphics, branded templates, pitch decks, infographics, data visualizations, and email newsletter layouts. Need print-ready marketing collateral? We can coordinate that too. Every asset follows your brand guidelines for fonts, colors, and tone, helping maintain a cohesive visual identity across channels. Flexible support gives your team more creative capacity without adding a full-time design role.",
     deliverables: [
       "Social media graphics & templates",
       "Presentation & pitch deck design",
@@ -151,7 +151,7 @@ const solutionsData: SolutionData[] = [
     outcomes: [
       "Cohesive, professional visual identity",
       "Faster turnaround than agencies",
-      "Unlimited revisions until you're satisfied",
+      "Structured revision rounds",
     ],
     image: "https://images.unsplash.com/photo-1512645592367-97ba8a9d4035?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFwaGljJTIwZGVzaWduJTIwY3JlYXRpdmUlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzcxNjAwMzgxfDA&ixlib=rb-4.1.0&q=80&w=1080",
   },
@@ -160,7 +160,7 @@ const solutionsData: SolutionData[] = [
     slug: "data-entry-web-research",
     icon: Database,
     title: "Data Entry & Web Research",
-    description: "Accurate, efficient data management and research that powers better business decisions. Our data entry virtual assistant professionals are meticulous with details and fast with delivery—handling everything from database management and data cleansing to deduplication and spreadsheet formatting. On the research side, we conduct market analysis, competitive intelligence gathering, product research, pricing comparisons, and web scraping for data compilation. Whether you need a one-time data migration or ongoing research support, our VAs deliver 99.9 percent accuracy with clear documentation. Clean data and actionable insights give your team the confidence to make informed, strategic choices.",
+    description: "Accurate, efficient data management and research that supports better business decisions. Our data entry virtual assistant professionals are meticulous with details, handling database management, data cleansing, deduplication, and spreadsheet formatting. On the research side, we conduct market analysis, competitive intelligence gathering, product research, pricing comparisons, and structured data compilation. Whether you need a one-time data migration or ongoing research support, our VAs provide organized documentation and review steps.",
     deliverables: [
       "Data entry & database management",
       "Data cleansing & deduplication",
@@ -170,7 +170,7 @@ const solutionsData: SolutionData[] = [
       "Spreadsheet creation & formatting",
     ],
     outcomes: [
-      "99.9% data accuracy guarantee",
+      "Documented quality checks",
       "Actionable market intelligence",
       "Clean, organized databases",
     ],
@@ -181,7 +181,7 @@ const solutionsData: SolutionData[] = [
 const faqItems = [
   {
     question: "How much do virtual assistant services cost?",
-    answer: "Pricing depends on the service type, hours required, and skill level. We offer flexible hourly and monthly packages with no hidden fees. Contact us for a custom quote tailored to your needs—most clients start with a part-time plan and scale as they see results.",
+    answer: "Pricing depends on the service type, hours required, and skill level. We offer flexible hourly and monthly packages with no hidden fees. Contact us for a custom quote tailored to your needs. Many clients start with a focused part-time plan and scale as the workflow becomes clear.",
   },
   {
     question: "How does the onboarding process work?",
@@ -189,7 +189,7 @@ const faqItems = [
   },
   {
     question: "Can your virtual assistants work in my time zone?",
-    answer: "Yes. Our VAs are flexible across all major time zones including EST, CST, PST, and international hours. Schedules are agreed upon during onboarding so your assistant is available when you need them—including evenings or weekends for specific tasks.",
+    answer: "Yes. Our VAs are flexible across major time zones including EST, CST, PST, and international hours. Schedules are agreed upon during onboarding so your assistant is available when you need them, including evenings or weekends for specific tasks when scoped in advance.",
   },
   {
     question: "What tools and software do your VAs use?",
@@ -271,7 +271,7 @@ export default function Solutions() {
             Virtual Assistant Services <span className="text-sage-500">for Growing Businesses</span>
           </h1>
           <p className="text-stone-500 text-[1.0625rem] max-w-2xl mx-auto leading-relaxed">
-            SageStone Inc provides professional virtual assistant services designed to help growing businesses scale without the overhead of full-time hires. Whether you need outsourced administrative support, a dedicated real estate virtual assistant, bookkeeping support, or a social media virtual assistant, our trained remote professionals integrate seamlessly into your workflow. We serve startups, SMBs, and enterprises across every time zone—delivering reliable, high-quality work so you can focus on strategy and growth. Explore our seven core solutions below and discover how the right virtual assistant partner can transform the way you operate.
+            SageStone Inc provides professional virtual assistant services designed to help growing businesses scale without the overhead of full-time hires. Whether you need outsourced administrative support, a dedicated real estate virtual assistant, bookkeeping support, or a social media virtual assistant, our trained remote professionals integrate into your workflow. We serve startups, SMBs, and enterprises across time zones with reliable, high-quality support so you can focus on strategy and growth. Explore our seven core solutions below and discover how the right virtual assistant partner can improve the way you operate.
           </p>
         </div>
       </section>
@@ -387,7 +387,7 @@ export default function Solutions() {
             </h2>
             <p className="text-stone-500 text-[1.0625rem] leading-relaxed mb-8">
               That's completely okay. Book a free discovery call and we'll help you identify the right support
-              for your business—no pressure, no commitment.
+              for your business, with no pressure and no commitment.
             </p>
             <Link
               to="/contact"

@@ -7,6 +7,8 @@
     "build": "npm run generate:og && vite build && node scripts/prerender-seo.mjs",
     "deploy": "npm run build && node -e \"if (process.env.CF_PAGES === '1') { console.log('Skipping Wrangler deploy: already running inside Cloudflare Pages build environment'); process.exit(0); } const missing = []; if (!process.env.CLOUDFLARE_API_TOKEN) missing.push('CLOUDFLARE_API_TOKEN'); if (!process.env.CLOUDFLARE_ACCOUNT_ID) missing.push('CLOUDFLARE_ACCOUNT_ID'); if (missing.length === 0) { require('child_process').execSync('npx wrangler pages deploy dist', { stdio: 'inherit' }); } else { console.log('Skipping Wrangler deploy: ' + missing.join(', ') + ' not set'); }\"",
     "start": "node server.js",
+    "test": "node scripts/seo-invariants.mjs",
+    "test:seo": "node scripts/seo-invariants.mjs",
     "dev": "vite",
     "postinstall": "node scripts/setup-run.cjs",
     "generate:og": "node scripts/generate-og-image.mjs"
@@ -66,6 +68,7 @@
     "react-router": "7.13.0",
     "react-slick": "0.31.0",
     "recharts": "2.15.2",
+    "sharp": "^0.35.3",
     "sonner": "2.0.3",
     "tailwind-merge": "3.2.0",
     "tw-animate-css": "1.3.8",

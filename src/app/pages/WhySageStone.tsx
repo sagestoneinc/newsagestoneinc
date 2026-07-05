@@ -21,7 +21,7 @@ const advantages = [
   {
     icon: Users,
     title: "Dedicated, Not Shared",
-    desc: "Your VA works exclusively on your account—building deep knowledge of your business, preferences, and processes.",
+    desc: "Your VA works exclusively on your account, building deep knowledge of your business, preferences, and processes.",
   },
   {
     icon: Shield,
@@ -46,7 +46,7 @@ const advantages = [
   {
     icon: Cog,
     title: "Tool Agnostic",
-    desc: "Our VAs are proficient in 50+ tools—from Monday and Asana to HubSpot and QuickBooks. We adapt to your stack.",
+    desc: "Our VAs are proficient in common tools including Monday, Asana, HubSpot, and QuickBooks. We adapt to your stack.",
   },
 ];
 
@@ -58,14 +58,14 @@ const comparisons = [
   { feature: "Industry-specific training", sagestone: true, others: false },
   { feature: "Regular quality audits & KPI tracking", sagestone: true, others: false },
   { feature: "Transparent, all-inclusive pricing", sagestone: true, others: false },
-  { feature: "Free VA replacement if not a fit", sagestone: true, others: false },
+  { feature: "Thoughtful rematching process if support is not a fit", sagestone: true, others: false },
 ];
 
 const results = [
-  { icon: TrendingUp, stat: "40%", label: "Average increase in productivity reported by clients" },
-  { icon: Clock, stat: "20+ hrs", label: "Saved per week on average per client" },
-  { icon: DollarSign, stat: "60%", label: "Cost savings vs. hiring a full-time employee" },
-  { icon: Sparkles, stat: "98%", label: "Client satisfaction rate across all engagements" },
+  { icon: TrendingUp, stat: "Focused", label: "More time directed toward high-value owner and team work" },
+  { icon: Clock, stat: "Steady", label: "Recurring admin routines handled with clearer ownership" },
+  { icon: DollarSign, stat: "Flexible", label: "Support plans shaped around actual operating needs" },
+  { icon: Sparkles, stat: "Clear", label: "Cleaner processes, handoffs, and communication rhythms" },
 ];
 
 export default function WhySageStone() {
@@ -87,7 +87,7 @@ export default function WhySageStone() {
             Not All Virtual Assistants Are <span className="text-sage-500">Created Equal</span>
           </h1>
           <p className="text-stone-500 text-[1.0625rem] max-w-2xl mx-auto leading-relaxed mb-8">
-            SageStone delivers dedicated, U.S.-managed virtual support that goes beyond task completion—we become a true extension of your team.
+            SageStone delivers dedicated, U.S.-managed virtual support that goes beyond task completion. We become a true extension of your team.
           </p>
           <Link
             to="/contact"
@@ -165,8 +165,8 @@ export default function WhySageStone() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             badge="Results"
-            title="Real Impact, Measurable Outcomes"
-            subtitle="Our clients consistently report significant improvements in efficiency, cost, and growth."
+            title="Real Impact, Practical Outcomes"
+            subtitle="Our work is designed to make daily operations feel calmer, clearer, and easier to manage."
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {results.map((r) => (

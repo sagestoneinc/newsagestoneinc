@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Header } from "./Header";
 import { BrandFooter } from "./brand/BrandFooter";
 import { trackCtaClick } from "../lib/analytics";
@@ -58,16 +58,45 @@ function SitewideSchema() {
 const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
 
 function FloatingMobileCta() {
+  const [visible, setVisible] = useState(false);
+  const { pathname } = useLocation();
+  const markerRef = useRef<HTMLSpanElement>(null);
+
+  const showOnRoute = pathname !== "/";
+
+  useEffect(() => {
+    if (!showOnRoute) {
+      setVisible(false);
+      return;
+    }
+
+    const marker = markerRef.current;
+    if (!marker) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setVisible(!entry.isIntersecting);
+    });
+
+    observer.observe(marker);
+    return () => observer.disconnect();
+  }, [showOnRoute]);
+
+  if (!showOnRoute) return null;
+
   return (
-    <a
-      href={CALENDLY_URL}
-      target="_blank"
-      rel="noreferrer"
-      onClick={() => trackCtaClick({ location: "mobile_floating_cta", cta_text: "Book a Call", target_url: CALENDLY_URL })}
-      className="fixed bottom-4 left-4 right-4 z-40 inline-flex items-center justify-center rounded-full bg-[color:var(--brand-olive-sage)] px-6 py-3.5 text-[0.9375rem] font-semibold text-white shadow-[0_16px_38px_rgba(46,46,46,0.22)] sm:hidden"
-    >
-      Book a Call
-    </a>
+    <>
+      <span ref={markerRef} className="pointer-events-none absolute left-0 top-0 h-px w-px" aria-hidden="true" />
+      <a
+        href={CALENDLY_URL}
+        target="_blank"
+        rel="noreferrer"
+        onClick={() => trackCtaClick({ location: "mobile_floating_cta", cta_text: "Book a Call", target_url: CALENDLY_URL })}
+        aria-label="Book a discovery call"
+        className={`fixed bottom-4 left-4 right-4 z-40 inline-flex items-center justify-center rounded-full bg-[color:var(--brand-olive-sage)] px-6 py-3.5 text-[0.9375rem] font-semibold text-white shadow-[0_16px_38px_rgba(46,46,46,0.22)] transition duration-200 sm:hidden ${visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0 pointer-events-none"}`}
+      >
+        Book a Call
+      </a>
+    </>
   );
 }
 

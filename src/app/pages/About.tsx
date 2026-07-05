@@ -11,14 +11,14 @@ const values = [
   { icon: Heart, title: "Client-First", desc: "Your goals become our goals. We adapt to your workflow, not the other way around." },
   { icon: Globe, title: "Accessibility", desc: "Remote-first means we serve businesses anywhere, anytime." },
   { icon: Zap, title: "Efficiency", desc: "Streamlined processes that save you time and reduce operational friction." },
-  { icon: Users, title: "Partnership", desc: "We're not just a vendor—we're an extension of your team." },
+  { icon: Users, title: "Partnership", desc: "We work as a structured extension of your team." },
 ];
 
 const stats = [
-  { value: "150+", label: "Businesses Served" },
-  { value: "50+", label: "Virtual Assistants" },
-  { value: "10+", label: "Industries Covered" },
-  { value: "98%", label: "Client Retention Rate" },
+  { value: "Remote", label: "Support Model" },
+  { value: "Vetted", label: "Support Team" },
+  { value: "Multi-Industry", label: "Operating Context" },
+  { value: "Process-Led", label: "Delivery Rhythm" },
 ];
 
 export default function About() {
@@ -42,10 +42,10 @@ export default function About() {
                 Your Business Deserves <span className="text-sage-500">Dedicated</span> Support
               </h1>
               <p className="text-stone-500 text-[1.0625rem] leading-relaxed mb-6">
-                SageStone Inc was founded with a simple conviction: every business—whether a solo entrepreneur or a growing company—deserves access to reliable, skilled, and affordable operational support.
+                SageStone Inc was founded with a simple conviction: every business, whether a solo entrepreneur or a growing company, deserves access to reliable, skilled, and affordable operational support.
               </p>
               <p className="text-stone-500 text-[1.0625rem] leading-relaxed mb-8">
-                We're a U.S.-managed, remote-first virtual assistant company that matches businesses with dedicated VAs who integrate seamlessly into existing workflows. No revolving doors, no impersonal call centers—just consistent, quality support.
+                We're a U.S.-managed, remote-first virtual assistant company that matches businesses with dedicated VAs who integrate into existing workflows. No revolving doors, no impersonal call centers, just consistent, quality support.
               </p>
               <Link
                 to="/contact"
@@ -78,7 +78,7 @@ export default function About() {
               </div>
               <h3 className="text-stone-900 mb-3" style={{ fontSize: '1.25rem', fontWeight: 700 }}>Our Mission</h3>
               <p className="text-stone-600 text-[0.9375rem] leading-relaxed">
-                To empower businesses of all sizes with affordable, reliable virtual assistant services that free up time, reduce overhead, and accelerate growth—delivered by dedicated professionals who truly care.
+                To empower businesses of all sizes with affordable, reliable virtual assistant services that free up time, reduce overhead, and support steady growth through dedicated professionals who truly care.
               </p>
             </div>
             <div className="p-8 lg:p-10 rounded-2xl bg-stone-50 border border-stone-200">
@@ -87,7 +87,7 @@ export default function About() {
               </div>
               <h3 className="text-stone-900 mb-3" style={{ fontSize: '1.25rem', fontWeight: 700 }}>Our Vision</h3>
               <p className="text-stone-600 text-[0.9375rem] leading-relaxed">
-                To be the most trusted name in virtual assistance—known for quality, consistency, and genuine partnership with every client we serve, no matter their size or industry.
+                To be a trusted name in virtual assistance, known for quality, consistency, and genuine partnership with every client we serve, no matter their size or industry.
               </p>
             </div>
           </div>
