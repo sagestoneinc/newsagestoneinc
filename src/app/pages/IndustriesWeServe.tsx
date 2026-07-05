@@ -17,19 +17,19 @@ const industries = [
     name: "E-commerce brands",
     pain: "Order questions, returns, product updates, and customer messages can pile up during busy periods.",
     tasks: ["Order and customer inquiry support", "Catalog update assistance", "Support queue organization"],
-    links: [{ label: "E-commerce virtual assistant services", path: "/ecommerce-customer-support-outsourcing/" }, { label: "Customer support outsourcing", path: "/customer-support-outsourcing/" }],
+    links: [{ label: "E-commerce virtual assistant services", path: "/ecommerce-virtual-assistant/" }, { label: "Ecommerce customer support outsourcing", path: "/ecommerce-customer-support-outsourcing/" }],
   },
   {
     name: "Real estate teams",
     pain: "Lead follow-up, CRM hygiene, scheduling, and listing coordination require timely administrative follow-through.",
     tasks: ["CRM updates", "Listing coordination", "Calendar and client communication support"],
-    links: [{ label: "Real estate virtual assistant support", path: "/real-estate-virtual-assistant-services/" }],
+    links: [{ label: "Real estate virtual assistant support", path: "/real-estate-virtual-assistant/" }],
   },
   {
     name: "Agencies",
     pain: "Client delivery teams need support with recurring admin, reporting, content coordination, and task tracking.",
     tasks: ["Project coordination", "Reporting support", "Content scheduling assistance"],
-    links: [{ label: "Business operations support", path: "/business-operations-support/" }, { label: "Social media management services", path: "/social-media-management-services/" }],
+    links: [{ label: "Business operations support", path: "/business-operations-support/" }, { label: "Social media virtual assistant", path: "/social-media-virtual-assistant/" }],
   },
   {
     name: "Startups",

@@ -84,6 +84,35 @@ export const seoServicePages: SeoServicePage[] = [
     ],
   },
   {
+    slug: "ecommerce-customer-support-outsourcing",
+    title: "Ecommerce Customer Support Outsourcing | SageStone Inc",
+    metaDescription: "Outsource ecommerce customer support for order questions, returns, tickets, approved replies, escalation paths, and consistent customer follow-up.",
+    h1: "Ecommerce Customer Support Outsourcing",
+    eyebrow: "E-Commerce Customer Support",
+    heroSummary: "Customer support coverage for online brands that need faster responses, cleaner ticket handling, and more consistent follow-through.",
+    intro: "SageStone Inc helps ecommerce teams outsource the customer service work that slows internal momentum. When support is scattered across inboxes, helpdesk queues, social messages, and order-related threads, it becomes harder to maintain response quality and easier for small issues to snowball. We build support workflows around your policies, tone, templates, and escalation rules so customer conversations stay organized and reviewable. This service is a strong fit when you need customer support outsourcing that is specific to ecommerce operations rather than a general admin resource.",
+    highlights: ["Email, chat, and helpdesk support", "Order questions and return routing", "Approved responses and escalation paths", "Recurrence tracking and support summaries"],
+    sections: [
+      { heading: "Who this service is for", body: "This service is for Shopify stores, DTC brands, marketplace sellers, and ecommerce teams that receive enough customer questions to need structured support, but not yet a full internal customer service department. It is especially helpful during launches, seasonal spikes, or periods when the support inbox is affecting the rest of the team.", bullets: ["Online stores with rising ticket volume", "Teams that need support coverage without adding payroll", "Brands that want better response consistency", "Operators who need clearer queue ownership"] },
+      { heading: "Tasks included", body: "Ecommerce customer support outsourcing can include inbox triage, ticket labeling, response drafting from approved templates, order status checks, return and exchange routing, customer record updates, review requests, and escalation handoffs. When the work overlaps with store admin, it can connect with ecommerce virtual assistant support.", bullets: ["Order, shipping, and return follow-up", "Customer ticket organization and routing", "Response drafting from approved guidance", "Reporting on recurring customer issues"] },
+      { heading: "Operational problems this solves", body: "Support bottlenecks often show up as slower replies, inconsistent answers, missed follow-ups, and repeated questions that never make it back to leadership. A structured support workflow helps protect response quality while making recurring issues easier to spot and improve.", bullets: ["Less backlog and fewer missed messages", "Clearer escalation rules", "More consistent customer communication", "Better visibility into recurring issues"] },
+      { heading: "How onboarding works", body: "We start by reviewing channels, policies, common questions, tone, and access needs. Then we define what the assistant can answer directly, what should be drafted for review, what needs escalation, and how support should be summarized back to the team. A focused launch helps keep the process calm and controlled.", bullets: ["Support channel and policy review", "Template, macro, and tone setup", "Escalation rules and QA expectations", "Ongoing review and refinement"] },
+      { heading: "Why Businesses Choose SageStone", body: "Businesses choose SageStone for managed support that keeps customer communication organized without sounding robotic or generic. We pair process discipline with practical ecommerce awareness so the workflow reflects how your store actually operates.", bullets: ["Managed support with clear workflow ownership", "Tailored to ecommerce tools and policies", "Support that keeps brand voice intact", "Built for steady operations, not noise"] },
+    ],
+    faqs: [
+      { question: "What does ecommerce customer support outsourcing include?", answer: "It can include inbox and helpdesk triage, order questions, return routing, approved reply drafting, escalation handling, and support reporting." },
+      { question: "Can SageStone support Shopify customer service?", answer: "Yes. We can support Shopify customer communication when the store provides access, policies, examples, and escalation rules." },
+      { question: "Can you help with returns and exchanges?", answer: "Yes. We can route return and exchange requests according to your policy and prepare the right follow-up for approval or action." },
+      { question: "How does this differ from ecommerce virtual assistant services?", answer: "Ecommerce virtual assistant services usually focus on store operations and admin support, while this page is centered on customer communication, tickets, and service workflows." },
+      { question: "Can the support workflow scale during busy seasons?", answer: "Yes. Support can be structured around seasonal demand, launches, and periods where response volume increases." },
+    ],
+    related: [
+      { label: "e-commerce virtual assistant services", path: "/ecommerce-virtual-assistant" },
+      { label: "customer support outsourcing", path: "/customer-support-outsourcing" },
+      { label: "business operations support", path: "/business-operations-support" },
+    ],
+  },
+  {
     slug: "ecommerce-virtual-assistant",
     title: "E-Commerce Virtual Assistant Services | SageStone Inc",
     metaDescription: "Get e-commerce virtual assistant help for Shopify support, product updates, orders, returns, inboxes, and store operations.",
@@ -233,7 +262,6 @@ export const seoServicePages: SeoServicePage[] = [
 const servicePageAliases: Array<{ from: string; to: string; title?: string; metaDescription?: string; h1?: string; eyebrow?: string }> = [
   { from: "customer-support", to: "customer-support-outsourcing", title: "Customer Support Services | SageStone Inc", h1: "Customer Support Services for Growing Teams", eyebrow: "Customer Support" },
   { from: "customer-support-virtual-assistant", to: "customer-support-outsourcing", title: "Customer Support Virtual Assistant Services | SageStone Inc", h1: "Customer Support Virtual Assistant Services", eyebrow: "Customer Support VA" },
-  { from: "ecommerce-customer-support-outsourcing", to: "ecommerce-virtual-assistant", title: "Ecommerce Customer Support Outsourcing | SageStone Inc", h1: "Ecommerce Customer Support Outsourcing", eyebrow: "E-Commerce Support" },
   { from: "ecommerce-operations-support", to: "ecommerce-virtual-assistant", title: "E-Commerce Operations Support | SageStone Inc", h1: "E-Commerce Operations Support", eyebrow: "E-Commerce Operations" },
   { from: "real-estate-virtual-assistant-services", to: "real-estate-virtual-assistant" },
   { from: "crm-admin-support", to: "business-operations-support", title: "CRM & Admin Support | SageStone Inc", h1: "CRM & Admin Support", eyebrow: "CRM & Admin" },

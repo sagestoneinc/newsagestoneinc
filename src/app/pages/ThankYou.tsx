@@ -10,6 +10,7 @@ export default function ThankYou() {
     title: "Thank You | SageStone Inc",
     description: "Your SageStone discovery call has been requested. Review next steps and prepare for a productive operations support conversation.",
     keywords: "SageStone thank you, discovery call confirmation, workflow assessment next steps",
+    noindex: true,
   });
 
   return (

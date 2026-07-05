@@ -6,7 +6,6 @@ import About from "./pages/About";
 import WhySageStone from "./pages/WhySageStone";
 import Solutions from "./pages/Solutions";
 import SolutionPage from "./pages/SolutionPage";
-import Faqs from "./pages/Faqs";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import CaseStudies from "./pages/CaseStudies";
@@ -34,6 +33,17 @@ export const router = createBrowserRouter([
       { path: "about", Component: About },
       { path: "expertise", element: createElement(Navigate, { to: "/services", replace: true }) },
       { path: "work/:slug", element: createElement(Navigate, { to: "/case-studies/:slug", replace: true }) },
+      { path: "faqs", element: createElement(Navigate, { to: "/faq", replace: true }) },
+      { path: "customer-support", element: createElement(Navigate, { to: "/customer-support-outsourcing", replace: true }) },
+      { path: "customer-support-virtual-assistant", element: createElement(Navigate, { to: "/customer-support-outsourcing", replace: true }) },
+      { path: "ecommerce-operations-support", element: createElement(Navigate, { to: "/ecommerce-virtual-assistant", replace: true }) },
+      { path: "real-estate-virtual-assistant-services", element: createElement(Navigate, { to: "/real-estate-virtual-assistant", replace: true }) },
+      { path: "social-media-management-services", element: createElement(Navigate, { to: "/social-media-virtual-assistant", replace: true }) },
+      { path: "social-media-support", element: createElement(Navigate, { to: "/social-media-virtual-assistant", replace: true }) },
+      { path: "web-design-maintenance-services", element: createElement(Navigate, { to: "/web-maintenance-support", replace: true }) },
+      { path: "web-maintenance-services", element: createElement(Navigate, { to: "/web-maintenance-support", replace: true }) },
+      { path: "crm-admin-support", element: createElement(Navigate, { to: "/business-operations-support", replace: true }) },
+      { path: "gohighlevel-virtual-assistant", element: createElement(Navigate, { to: "/business-operations-support", replace: true }) },
       ...canonicalRoutes.filter((route) => route.path !== "/" && !["/about", "/contact", "/blog", "/case-studies"].includes(route.path)).map((route) => ({ path: route.path.slice(1), Component: LazyJeselSeoPage })),
       // { path: "team", Component: Team }, // Temporarily disabled
       { path: "why-sagestone", Component: WhySageStone },
@@ -41,28 +51,16 @@ export const router = createBrowserRouter([
       { path: "solutions/:slug", Component: SolutionPage },
       { path: "virtual-assistant-services", Component: SeoServicePage },
       { path: "customer-support-outsourcing", Component: SeoServicePage },
-      { path: "customer-support", Component: SeoServicePage },
-      { path: "customer-support-virtual-assistant", Component: SeoServicePage },
       { path: "ecommerce-customer-support-outsourcing", Component: SeoServicePage },
-      { path: "ecommerce-operations-support", Component: SeoServicePage },
       { path: "ecommerce-virtual-assistant", Component: SeoServicePage },
-      { path: "real-estate-virtual-assistant-services", Component: SeoServicePage },
       { path: "real-estate-virtual-assistant", Component: SeoServicePage },
-      { path: "social-media-management-services", Component: SeoServicePage },
-      { path: "social-media-support", Component: SeoServicePage },
       { path: "social-media-virtual-assistant", Component: SeoServicePage },
       { path: "business-operations-support", Component: SeoServicePage },
-      { path: "crm-admin-support", Component: SeoServicePage },
-      { path: "gohighlevel-virtual-assistant", Component: SeoServicePage },
-      { path: "web-design-maintenance-services", Component: SeoServicePage },
       { path: "web-maintenance-support", Component: SeoServicePage },
-      { path: "web-maintenance-services", Component: SeoServicePage },
-      { path: "web-design-maintenance", element: createElement(Navigate, { to: "/web-design-maintenance-services", replace: true }) },
+      { path: "web-design-maintenance", element: createElement(Navigate, { to: "/web-maintenance-support", replace: true }) },
       { path: "virtual-assistant-vs-in-house-admin", Component: VirtualAssistantVsInHouseAdmin },
       { path: "outsourced-support-for-small-businesses", Component: OutsourcedSupportForSmallBusinesses },
       { path: "industries-we-serve", Component: IndustriesWeServe },
-      { path: "faqs", Component: Faqs },
-      { path: "faq", Component: LazyJeselSeoPage },
       { path: "blog", Component: Blog },
       { path: "blog/:id", Component: BlogPost },
       { path: "case-studies", Component: CaseStudies },

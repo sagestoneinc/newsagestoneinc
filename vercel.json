@@ -1,18 +1,63 @@
 {
   "redirects": [
     {
-      "source": "/ecommerce-virtual-assistant",
-      "destination": "/ecommerce-customer-support-outsourcing",
+      "source": "/faqs",
+      "destination": "/faq",
       "permanent": true
     },
     {
-      "source": "/real-estate-virtual-assistant",
-      "destination": "/real-estate-virtual-assistant-services",
+      "source": "/customer-support",
+      "destination": "/customer-support-outsourcing",
+      "permanent": true
+    },
+    {
+      "source": "/customer-support-virtual-assistant",
+      "destination": "/customer-support-outsourcing",
+      "permanent": true
+    },
+    {
+      "source": "/ecommerce-operations-support",
+      "destination": "/ecommerce-virtual-assistant",
+      "permanent": true
+    },
+    {
+      "source": "/real-estate-virtual-assistant-services",
+      "destination": "/real-estate-virtual-assistant",
+      "permanent": true
+    },
+    {
+      "source": "/social-media-management-services",
+      "destination": "/social-media-virtual-assistant",
+      "permanent": true
+    },
+    {
+      "source": "/social-media-support",
+      "destination": "/social-media-virtual-assistant",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-maintenance-services",
+      "destination": "/web-maintenance-support",
+      "permanent": true
+    },
+    {
+      "source": "/web-maintenance-services",
+      "destination": "/web-maintenance-support",
+      "permanent": true
+    },
+    {
+      "source": "/crm-admin-support",
+      "destination": "/business-operations-support",
+      "permanent": true
+    },
+    {
+      "source": "/gohighlevel-virtual-assistant",
+      "destination": "/business-operations-support",
       "permanent": true
     },
     {
       "source": "/web-design-maintenance",
-      "destination": "/web-design-maintenance-services",
+      "destination": "/web-maintenance-support",
       "permanent": true
     }
   ],

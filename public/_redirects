@@ -1,8 +1,37 @@
 http://sagestoneinc.com/* https://www.sagestoneinc.com/:splat 301
 http://www.sagestoneinc.com/* https://www.sagestoneinc.com/:splat 301
 https://sagestoneinc.com/* https://www.sagestoneinc.com/:splat 301
-/web-design-maintenance /web-design-maintenance-services 301
-/web-design-maintenance/ /web-design-maintenance-services/ 301
+/web-design-maintenance /web-maintenance-support 301
+/web-design-maintenance/ /web-maintenance-support/ 301
+
+/faqs /faq 301
+/faqs/ /faq/ 301
+
+/customer-support /customer-support-outsourcing 301
+/customer-support/ /customer-support-outsourcing/ 301
+/customer-support-virtual-assistant /customer-support-outsourcing 301
+/customer-support-virtual-assistant/ /customer-support-outsourcing/ 301
+
+/ecommerce-operations-support /ecommerce-virtual-assistant 301
+/ecommerce-operations-support/ /ecommerce-virtual-assistant/ 301
+
+/real-estate-virtual-assistant-services /real-estate-virtual-assistant 301
+/real-estate-virtual-assistant-services/ /real-estate-virtual-assistant/ 301
+
+/social-media-management-services /social-media-virtual-assistant 301
+/social-media-management-services/ /social-media-virtual-assistant/ 301
+/social-media-support /social-media-virtual-assistant 301
+/social-media-support/ /social-media-virtual-assistant/ 301
+
+/web-design-maintenance-services /web-maintenance-support 301
+/web-design-maintenance-services/ /web-maintenance-support/ 301
+/web-maintenance-services /web-maintenance-support 301
+/web-maintenance-services/ /web-maintenance-support/ 301
+
+/crm-admin-support /business-operations-support 301
+/crm-admin-support/ /business-operations-support/ 301
+/gohighlevel-virtual-assistant /business-operations-support 301
+/gohighlevel-virtual-assistant/ /business-operations-support/ 301
 
 http://jeselcura.me/* https://www.sagestoneinc.com/:splat 301
 https://jeselcura.me/* https://www.sagestoneinc.com/:splat 301

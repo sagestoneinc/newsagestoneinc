@@ -7,12 +7,12 @@ const CALENDLY_URL = "https://calendly.com/d/cym9-q4q-pnm";
 
 const services = [
   { label: "Virtual Assistant Services", path: "/virtual-assistant-services" },
-  { label: "Customer Support", path: "/customer-support-virtual-assistant" },
+  { label: "Customer Support", path: "/customer-support-outsourcing" },
   { label: "E-commerce Operations", path: "/ecommerce-virtual-assistant" },
   { label: "Real Estate Admin", path: "/real-estate-virtual-assistant" },
-  { label: "GoHighLevel Support", path: "/gohighlevel-virtual-assistant" },
+  { label: "GoHighLevel Support", path: "/business-operations-support" },
   { label: "Social Media Support", path: "/social-media-virtual-assistant" },
-  { label: "Web Maintenance", path: "/web-maintenance-services" },
+  { label: "Web Maintenance", path: "/web-maintenance-support" },
   { label: "Business Operations", path: "/business-operations-support" },
 ];
 
