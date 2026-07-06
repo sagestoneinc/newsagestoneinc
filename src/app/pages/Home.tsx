@@ -113,6 +113,8 @@ const supportPath = [
   },
 ];
 
+const heroSignals = ["Inbox support", "Calendar coordination", "CRM organization", "Customer replies", "Workflow follow-up"];
+
 const comparison = [
   { metric: "Time to capacity", traditional: "Recruiting, interviews, onboarding, and training before work begins", sagestone: "Structured support can begin after focused scope and access planning" },
   { metric: "Cost profile", traditional: "Salary, benefits, tools, payroll, and internal management time", sagestone: "Flexible outsourced admin support aligned to current workload" },
@@ -252,32 +254,48 @@ function Hero() {
           "radial-gradient(circle at 82% 8%, rgba(221,234,215,.74), transparent 29rem), radial-gradient(circle at 12% 38%, rgba(239,228,209,.7), transparent 24rem), linear-gradient(135deg, var(--brand-cloud), var(--brand-ivory) 64%, #eef4e9)",
       }}
     >
-      <div className="mx-auto grid max-w-[1440px] items-center gap-8 px-4 py-8 sm:px-6 md:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:px-8 lg:py-20">
+      <div className="mx-auto grid max-w-[1440px] items-center gap-10 px-4 pb-12 pt-24 sm:px-6 md:pb-16 lg:grid-cols-[1.03fr_0.97fr] lg:gap-14 lg:px-8 lg:pb-20 lg:pt-24">
         <div className="max-w-3xl" data-reveal="hero-copy">
           <p className="mb-5 inline-flex rounded-full border border-[color:var(--brand-deep-sage)]/16 bg-white/76 px-4 py-2 text-[0.9rem] font-semibold leading-none text-[color:var(--brand-deep-sage)] shadow-[0_12px_28px_rgba(35,81,59,.1)]">
             Premium operations partner
           </p>
-          <h1 className="text-balance text-[clamp(2.25rem,8.4vw,4rem)] font-[780] leading-[0.98] text-[color:var(--brand-charcoal)] lg:text-[clamp(3rem,3.35vw,3.35rem)]">
+          <h1 className="max-w-[760px] text-balance text-[clamp(2.35rem,8vw,4.15rem)] font-[780] leading-[0.98] text-[color:var(--brand-charcoal)] lg:text-[clamp(3.05rem,3.55vw,3.75rem)]">
             Virtual assistant services for calmer, more scalable operations
           </h1>
-          <p className="mt-5 max-w-[560px] text-pretty text-base leading-7 text-black/68 lg:mt-6 lg:text-lg lg:leading-8">
-            SageStone helps founders and growing teams reduce operational drag with admin, customer support, inbox, calendar, CRM, and follow-up support built around your tools.
+          <p className="mt-5 max-w-[590px] text-pretty text-base leading-7 text-black/68 lg:mt-6 lg:text-lg lg:leading-8">
+            SageStone provides business operations support for founders and growing teams through virtual assistant services covering customer support, inbox, calendar, CRM, and follow-up work.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CtaButton location="homepage_hero">Book a Free Consultation</CtaButton>
-            <CtaButton location="homepage_hero" variant="secondary">Explore Services</CtaButton>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <CtaButton location="homepage_hero" className="sm:min-w-[13.25rem]">Book a Free Consultation</CtaButton>
+            <CtaButton location="homepage_hero" variant="secondary" className="sm:min-w-[11.25rem]">Explore Services</CtaButton>
           </div>
+          <ul className="mt-7 flex max-w-2xl flex-wrap gap-2" aria-label="Operational support capabilities">
+            {heroSignals.map((signal) => (
+              <li key={signal} className="rounded-full border border-[color:var(--brand-deep-sage)]/12 bg-white/64 px-3.5 py-2 text-[0.86rem] font-semibold leading-none text-[color:var(--brand-charcoal)]/72 shadow-[0_8px_22px_rgba(35,81,59,0.06)]">
+                {signal}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="relative max-w-[34rem] sm:max-w-none lg:pl-2" data-reveal="hero-image">
+        <div className="relative max-w-[35rem] sm:max-w-none lg:pl-2" data-reveal="hero-image">
           <div className="absolute -inset-4 rounded-[2.4rem] bg-[color:var(--brand-sage-mist)]/58 blur-2xl" aria-hidden="true" />
-          <figure className="relative overflow-hidden rounded-[2rem] border border-[color:var(--brand-deep-sage)]/14 bg-white/64 p-3 shadow-[0_30px_90px_rgba(23,28,24,0.14)]">
+          <div className="absolute right-3 top-8 z-10 hidden w-44 rounded-[1.25rem] border border-[color:var(--brand-deep-sage)]/12 bg-white/86 p-4 shadow-[0_18px_46px_rgba(23,28,24,0.12)] backdrop-blur lg:block xl:right-6" aria-hidden="true">
+            <MailCheck className="mb-3 h-5 w-5 text-[color:var(--brand-deep-sage)]" />
+            <p className="text-sm font-semibold leading-5 text-[color:var(--brand-charcoal)]">Inbox and customer replies</p>
+          </div>
+          <div className="absolute -bottom-5 left-6 z-10 hidden w-48 rounded-[1.25rem] border border-[color:var(--brand-deep-sage)]/12 bg-[color:var(--brand-cloud)]/90 p-4 shadow-[0_18px_46px_rgba(23,28,24,0.12)] backdrop-blur lg:block" aria-hidden="true">
+            <Workflow className="mb-3 h-5 w-5 text-[color:var(--brand-deep-sage)]" />
+            <p className="text-sm font-semibold leading-5 text-[color:var(--brand-charcoal)]">CRM and workflow follow-up</p>
+          </div>
+          <figure className="relative overflow-hidden rounded-[2rem] border border-[color:var(--brand-deep-sage)]/14 bg-white/70 p-3 shadow-[0_32px_96px_rgba(23,28,24,0.15)]">
             <img
               src={HERO_IMAGE}
-              alt="Organized workspace with calendar, headset, and abstract workflow screen for SageStone operations support"
-              className="aspect-[16/8.5] w-full rounded-[1.45rem] object-cover sm:aspect-[16/10]"
+              alt="Organized operations workspace with calendar, headset, and workflow screen for SageStone virtual assistant support"
+              className="aspect-[16/9] w-full rounded-[1.45rem] object-cover sm:aspect-[16/10]"
               loading="eager"
             />
+            <figcaption className="sr-only">SageStone supports daily business operations across inbox, calendar, CRM, customer replies, and follow-up workflows.</figcaption>
           </figure>
         </div>
       </div>
