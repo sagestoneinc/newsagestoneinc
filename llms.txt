@@ -1,0 +1,30 @@
+# Jesel Cura
+
+Fractional customer success and operations consulting for SaaS, Shopify, and ecommerce teams.
+
+Canonical pages:
+- https://www.jeselcura.me/
+- https://www.jeselcura.me/services
+- https://www.jeselcura.me/operations-audit
+- https://www.jeselcura.me/case-studies
+- https://www.jeselcura.me/experience
+- https://www.jeselcura.me/about
+- https://www.jeselcura.me/faq
+- https://www.jeselcura.me/contact
+- https://www.jeselcura.me/blog
+- https://www.jeselcura.me/fractional-customer-success-manager
+- https://www.jeselcura.me/customer-success-operations-consultant
+- https://www.jeselcura.me/shopify-operations-support
+- https://www.jeselcura.me/customer-onboarding-workflows
+- https://www.jeselcura.me/sop-consulting
+- https://www.jeselcura.me/crm-workflow-cleanup
+- https://www.jeselcura.me/support-operations-consulting
+- https://www.jeselcura.me/ecommerce-operations-consultant
+- https://www.jeselcura.me/blog/build-sops-that-help-your-team-scale
+- https://www.jeselcura.me/blog/operating-rhythms-for-remote-teams
+- https://www.jeselcura.me/blog/real-estate-operations-reduce-friction
+- https://www.jeselcura.me/blog/ecommerce-back-office-operations
+- https://www.jeselcura.me/blog/improve-saas-customer-onboarding
+- https://www.jeselcura.me/blog/shopify-customer-support-workflow-checklist
+- https://www.jeselcura.me/case-studies/saas-onboarding-workflow-case-study
+- https://www.jeselcura.me/case-studies/shopify-support-operations-case-study

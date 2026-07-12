@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 180" role="img" aria-labelledby="title desc">
+  <title id="title">Jesel Cura official logo</title>
+  <desc id="desc">Official Jesel Cura logo with JC monogram and Fractional Customer Success Operations tagline.</desc>
+  <g transform="translate(10 10) scale(.62)">
+    <path d="M152 61c26 6 48 26 57 52" fill="none" stroke="#c7b299" stroke-width="12" stroke-linecap="butt"/>
+    <path d="M210 145c-8 32-37 56-72 56-27 0-51-15-64-37" fill="none" stroke="#c7b299" stroke-width="12" stroke-linecap="butt"/>
+    <path d="M74 164c-15 24-48 21-62 0" fill="none" stroke="#111111" stroke-width="9" stroke-linecap="round"/>
+    <path d="M99 43c0-14-11-21-29-22h78c-18 1-29 8-29 22v104c0 37-22 58-54 58-23 0-43-12-53-31 11 14 26 21 44 21 26 0 43-18 43-50V43Z" fill="#111111"/>
+  </g>
+  <line x1="182" y1="25" x2="182" y2="155" stroke="#d6c9b8" stroke-width="2"/>
+  <text x="235" y="80" fill="#111111" font-family="Poppins, Manrope, Arial, sans-serif" font-size="48" letter-spacing="22">JESEL CURA</text>
+  <line x1="338" y1="112" x2="440" y2="112" stroke="#b08d57" stroke-width="2"/>
+  <circle cx="462" cy="112" r="4" fill="#b08d57"/>
+  <line x1="485" y1="112" x2="590" y2="112" stroke="#b08d57" stroke-width="2"/>
+  <text x="250" y="145" fill="#111111" font-family="Poppins, Manrope, Arial, sans-serif" font-size="12" letter-spacing="4">FRACTIONAL CUSTOMER SUCCESS OPERATIONS</text>
+</svg>

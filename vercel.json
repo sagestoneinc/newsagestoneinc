@@ -1,70 +1,104 @@
 {
-  "redirects": [
-    {
-      "source": "/faqs",
-      "destination": "/faq",
-      "permanent": true
-    },
-    {
-      "source": "/customer-support",
-      "destination": "/customer-support-outsourcing",
-      "permanent": true
-    },
-    {
-      "source": "/customer-support-virtual-assistant",
-      "destination": "/customer-support-outsourcing",
-      "permanent": true
-    },
-    {
-      "source": "/ecommerce-operations-support",
-      "destination": "/ecommerce-virtual-assistant",
-      "permanent": true
-    },
-    {
-      "source": "/real-estate-virtual-assistant-services",
-      "destination": "/real-estate-virtual-assistant",
-      "permanent": true
-    },
-    {
-      "source": "/social-media-management-services",
-      "destination": "/social-media-virtual-assistant",
-      "permanent": true
-    },
-    {
-      "source": "/social-media-support",
-      "destination": "/social-media-virtual-assistant",
-      "permanent": true
-    },
-    {
-      "source": "/web-design-maintenance-services",
-      "destination": "/web-maintenance-support",
-      "permanent": true
-    },
-    {
-      "source": "/web-maintenance-services",
-      "destination": "/web-maintenance-support",
-      "permanent": true
-    },
-    {
-      "source": "/crm-admin-support",
-      "destination": "/business-operations-support",
-      "permanent": true
-    },
-    {
-      "source": "/gohighlevel-virtual-assistant",
-      "destination": "/business-operations-support",
-      "permanent": true
-    },
-    {
-      "source": "/web-design-maintenance",
-      "destination": "/web-maintenance-support",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/"
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/services/fractional-customer-success-consulting",
+      "destination": "/fractional-customer-success-manager",
+      "permanent": true
+    },
+    {
+      "source": "/services/shopify-ecommerce-operations-support",
+      "destination": "/shopify-operations-support",
+      "permanent": true
+    },
+    {
+      "source": "/services/operations-audit",
+      "destination": "/operations-audit",
+      "permanent": true
+    },
+    {
+      "source": "/services/support-operations-consulting",
+      "destination": "/support-operations-consulting",
+      "permanent": true
+    },
+    {
+      "source": "/services/sop-consulting",
+      "destination": "/sop-consulting",
+      "permanent": true
+    },
+    {
+      "source": "/services/customer-onboarding-consulting",
+      "destination": "/customer-onboarding-workflows",
+      "permanent": true
+    },
+    {
+      "source": "/services/customer-retention-consulting",
+      "destination": "/fractional-customer-success-manager",
+      "permanent": true
+    },
+    {
+      "source": "/fractional-customer-success-consultant",
+      "destination": "/fractional-customer-success-manager",
+      "permanent": true
+    },
+    {
+      "source": "/shopify-ecommerce-operations-support",
+      "destination": "/shopify-operations-support",
+      "permanent": true
+    },
+    {
+      "source": "/resources",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/services/virtual-assistant-services",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/operations-support-services",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/customer-support-services",
+      "destination": "/support-operations-consulting",
+      "permanent": true
+    },
+    {
+      "source": "/services/real-estate-property-management-support",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/lead-generation-sales-support",
+      "destination": "/services",
+      "permanent": true
     }
   ]
 }
